@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "dogwood-baton-337220",
+  "private_key_id": "67913ae0b98714a14e1e8c3441607f607cbad424",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDP94sEaAFJpy9Q\nmDTdZ7ZVwmcOM5OHpQ8sqc3GEUqVJ3Uza4z7DH/DNzBAQ+H/yhEea2qalgQJl3nj\nZkIL5ShtQd3M5GOPsZ32nyK28QyTlH2+aqCHvlXPEsbMeYq3uInMDmHN6km9ivyK\nXWHuRnOM9XqMubEqNhKPdV09/pvg0jTq9i1Vi/DFMq4oFZINSSS2D4wQDiwVbjWW\nemWT6EyMDeXe02+N2H+FCo3LOV2AoMKZh4ad34Yy0ksxn5y9d3089jgLkcWTG9cd\nAlHDsXelx7Mog/9eSYpgAo/Z27UFTwGbYUaljcwhafQrDEv54oddb2obJjnJi7eM\nvIMdeRvdAgMBAAECggEAG22fCJw8+z1RCLSiWEca7bGfjOhxfzTeTPoyOPrD1usm\n0nrPU7cAzLrlIryxPF6mplftbej2LFutiDfO4ym8jLhgq+q9VNDMsB+p4O3mxjoR\n4YDHnk+UmqRz0rj++h8dEWweKx3IzvZbO1Z4mYfyKnefy5qcCqCqDwCgJRKE9YAW\n5CEdILBZBZQ6ySJehyPDE0nWOQpF4EbbmpBbpKMlo1xcCBcpEIsHaCN1Frmwzk4L\nwxiX0jZr9PamQZ/Jb5cHurM/ZWHzWMsvkHkfoYP+f8R6AuWj5yvWh/15I+zQktn3\nWdlrRw+Z77pa8pNtdPJlrNWR2aR/m/LGSqoUg5I8wQKBgQD0BicpFlUgdT0a2oMG\nOrarSLGsaeTApXo4dJ5l+aisg2GZg1PFmUVO9buWVqVguajRHn5IPibJTPsYTthq\nfVOBsZTgBMbK2hKsAoeeq4OFo42vBZiDiosRbTEBHDdEbXQ7bjRMmce3NDdAubYo\n+DnUG9CgHf8WS86iRo9S06b5YQKBgQDaLGEoPPqM55+saHIjwr9tcgTuefFbIZ9Q\nxleOnIU/frbUnWRpPB0TeGc7Rjum4t9q+5S3LNidwh5dCdetPc1Asd55ukAraC3A\nFxjp9P1yL6GUrJfKSjFPDzjFav7kYN5HH06ACWhuTYVQaw+s6O6+B8FF9kVx4DSz\nnJ6PRIMH/QKBgFXw6M/OnrJst9WCSYzjFrxiQLjRHpA+dzn00GhnseD38GKpXtKD\ntWYmoydCYsIbAPqNO7pjsTNKGlCoTA3ND6Dokt8Gr6B3hwXvaiYWj558SITwepMx\nMuMzSoPylQBTcBESMfccXbsG98Ki5SWurmcmWKZbiiAnGKIMKaPpCLBhAoGBAJgC\nX9dHVVKjd28KfqxH3lSFIsZ9lBpovLXs28hzaaupv/03hGSGC8QrGdIExz8px3yk\nuSM/TdXtEHbGis0byEyRIW8yw876kRXLggJQPd43LZ+G+WNqehyZgHaca+f3TifD\nulAfPfHMdVxom81fpiglAxaZ1hzXmCCkuR0dISaJAoGASHr3Txoak+CXjlmNFbMb\nNDq92TIwDJLQbDBToOut0W2Al7IPYUnBVDkoOX97vANffzJT2Im73nKi1fXJfRFJ\ni98gz1iIN+c6/wM3DpPY8AjN4P7LW8ocwvB7mSlA3zkExIH8cxgJbbNhstXXn98w\nJTOUVl3nzl2ClMU4aEmAIY4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "sendemail@dogwood-baton-337220.iam.gserviceaccount.com",
+  "client_id": "100185168490672198071",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sendemail%40dogwood-baton-337220.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

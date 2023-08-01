@@ -1,0 +1,1383 @@
+{
+  "info": {
+    "_postman_id": "8a9c0636-2fd7-4f91-96d5-92d18f203593",
+    "name": "Xness",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19434752"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "forget password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"AuthToken\", pm.response.json().data.token);\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "deviceToken",
+                "value": "{{DeviceToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"teasdasdstuser@yopmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{2}}auth/forgetpassword",
+              "host": ["{{2}}auth"],
+              "path": ["forgetpassword"]
+            }
+          },
+          "response": [
+            {
+              "name": "forget password",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "deviceToken",
+                    "value": "{{DeviceToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"abc@yopmail.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/forgetpassword",
+                  "host": ["{{1}}auth"],
+                  "path": ["forgetpassword"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "749"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2ed-DebSTb1BDX7JSrEWm9dm8QV/gQU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:02:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Email has been sent to the registered account\",\n    \"data\": {\n        \"OTP\": 877146,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.lqyB0AjZT0_HJ_bYxN0k-lLUWMyQddsclM77CqqbPX8hMtjWQb9i9rxkwivNJ3hI7r8UfwXHz8ZAfq0heXCCOUlrWXTRfcqANImNaJYBUstxCIC-a_dx3XPx2ikKYJ2gOiOc-ojMlJ2P8jttcZIdelj-oolZr_LgCyvGSvDuTiNyq4I4_wv3GNliTEKFUUd2h-M3N1E8GB14ekUX9DIzZosqpV5sjtqhyyl-UN0S90FqWXLACVLAMUtp4nk3eH63y4lgNKD6pZ8YjmJ3hRoahzAQL-VpFpKT1w0ijuuJWZJOAS63GQHptlROJtvebMTa_FzexcxFowAPfB1r4WQ91g.QEkPyEe0Any7NsuM.JP2ROfqdh720MPuVjNzdE_ZOsS8i_QC6gTioduzDLZnPFUoCZo8l0mM4aMw7RJUTay2nxirBJdvKUisOJSmll2YnWkJwcX0z-v2RzSPqTa1IPs8gU53gQf6xuNGQSYztipYjjId-k1AlYLOn7UJVZ2uvSXuO5PajG_zQaP1XA7HxDyRgZ2ArjWNasohOHjtj43E-RG-tiy9RBJou.MpuTKIwAXDPrreHkYF9rug\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "verifyotp",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"AuthToken\", pm.response.json().data.token);\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \r\n    \"otp\": \"877146\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}auth/verifyotp",
+              "host": ["{{1}}auth"],
+              "path": ["verifyotp"]
+            }
+          },
+          "response": [
+            {
+              "name": "verifyotp",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \r\n    \"otp\": \"877146\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/verifyotp",
+                  "host": ["{{1}}auth"],
+                  "path": ["verifyotp"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "893"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"37d-Z9S3tPOln2IgJLPzF7wXY2VEBS4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:03:10 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"OTP verified successfully\",\n    \"data\": {\n        \"_id\": \"64b5c7325c7b6a74df032319\",\n        \"fullName\": \"Test\",\n        \"createdAt\": \"2023-07-17T22:56:50.303Z\",\n        \"updatedAt\": \"2023-07-17T22:56:50.303Z\",\n        \"__v\": 0,\n        \"userType\": \"User\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.i6AeCaxTEF_WyVyeqqJ78xwej1xPVX4QQvFrehMnf-Hj1TsNgV3S46rq4MMe3DO-h8kpzx29IisMYWz8W-fcevfInEh0HMHx_9_q0WQKeG2LFZhTUywknlaUVfUgSlmKs0mQu-sttQEBJAhCLwlc2eQc1KX1852rZSGU9xVoP3B8dHQfg32IJzMjm-gkEKYt86p5ibUHCxnmdt9LV3nMxA8m4us9j8eWrNx5SlBgC8yL6WDaBg5JEcm8AMaZqMzQdWQNdODUaBsisAX7USYzo4U2aR1qRckugfTMF1W8PD6wxHVZKLg4zbVsRyv_Mb8DmoAaoMtlgEaFaHGZg6hJYA.GHymNJ4PjRnI6oTl.63YHiqMVhhjGSa-uplRyVZr7ylckDRQsZ7JtTb-wdW6kbfUF8usVUyvxK3ogu6N7ltyq-9xZEDpELW7ozSEZae5JADpZi2qEedHMo3jwlhw6Ql1SghICdOZdU5nCBFnwPTkpVXKN1MaMqagT3yb9HmiLNeYyhfFpTE1-1zF1jce99RCd0BbDoYY-rZE1ow1fBZlkKHonDLtU5QzBR7TdajUQVYT48ZfpCzqOgA.xhAgcb4MdxLwWYkT1jifcw\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "resetpassword",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              },
+              {
+                "key": "deviceToken",
+                "value": "abc",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\": \"12341234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}auth/resetpassword",
+              "host": ["{{1}}auth"],
+              "path": ["resetpassword"]
+            }
+          },
+          "response": [
+            {
+              "name": "resetpassword",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "deviceToken",
+                    "value": "abc",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"password\": \"12341234\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/resetpassword",
+                  "host": ["{{1}}auth"],
+                  "path": ["resetpassword"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "859"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"35b-uyX390RBMa0lkeGoAcaXCjaFcno\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:04:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"password reset succesfully\",\n    \"data\": {\n        \"_id\": \"64b5c7325c7b6a74df032319\",\n        \"fullName\": \"Test\",\n        \"createdAt\": \"2023-07-17T22:56:50.303Z\",\n        \"updatedAt\": \"2023-07-17T22:56:50.303Z\",\n        \"__v\": 0,\n        \"userType\": \"User\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.L3m9XYKl-It_I-0kS0W5a7WvY3O2LOBj_gAdJDj-viEdkpV174TA0EBs4GR-G2y4nd2JPABuvO9vdyt5f0CLm_NsLuMyiZWs2vGNc2wCmW9guYPUU-MwVOt3eYCbyR66LOk28Diykf095Hpb3ypCXe5Fj4METTfG-WMCYzEJQ9ljAKlI6X5NRSG8Y5RgSXRm3-SJST61nUXv0x7K65zvSebGAS6v-rcm1ki98EEYxbxlrcdYLAOgdd7MUIfkob9rfdkVx9d38lhLC6BYybHzNbsmTy05OgVoNAce5vzNswj1ms8qeKu7DM7O2rbZBTAZ4qv1CjB-EpvEYlTMgANF1w.3Vcwyv2ggJ4Jdf1K.RmcIA2IdDQDOK9nXjoqIlqAi1xBYJdy6d2PfRwWeIThP958WAMOA0TCYI46qGgAyeJ2my0zahJrpWvW9DFhK8i0vWjAInwlToWp5cbY5IvD47U4FA8ahNFQxlu4ENx7tK9Vv7Op4SpwhqydCXbDpolu5Yp0glgLDyh2ROd-TK0bw6G8FMZhkrk6ybIW6wSDHgp0.GNh0g1W8JeYH51kfg9eVnw\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"AuthToken\", pm.response.json().data.token);\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\":\"teasdasdstUser@yopmail.com\",\r\n    \"password\": \"123456\",   \r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"android\",\r\n    \"accType\":\"demo\" //real in case of real account\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{2}}auth/signup",
+              "host": ["{{2}}auth"],
+              "path": ["signup"]
+            }
+          },
+          "response": [
+            {
+              "name": "register",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\":\"teasdasdstUser@yopmail.com\",\r\n    \"password\": \"123456\",   \r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"android\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{2}}auth/signup",
+                  "host": ["{{2}}auth"],
+                  "path": ["signup"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Cowboy"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "880"
+                },
+                {
+                  "key": "Etag",
+                  "value": "W/\"370-SfFKGpQx1X52uu2Ty5Rge5cVfJM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 24 Jul 2023 23:06:34 GMT"
+                },
+                {
+                  "key": "Via",
+                  "value": "1.1 vegur"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"User register succesfully\",\n    \"data\": {\n        \"_id\": \"64bf03fa9693817ea1560d0a\",\n        \"fullName\": \"Test\",\n        \"userType\": \"User\",\n        \"image\": {\n            \"file\": \"\"\n        },\n        \"otp\": 381381,\n        \"isCompleteProfile\": false,\n        \"notificationOn\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.ZifYos_OC-dZgqbjsq75dgpCoW6V_89MIlNOtUSJkH-j-rpnbu68oFB6_a5EMAN86q6B6ixqCzetx25MEAtMVX2KNU288x2Imtk8mPXuFIVa6w9lZabLqF0OP2rArxYGlHoTNLBPyQfyN0WSG5D5AEWOSR6eAEN00s-G2m2uexMVTA-XaBDPjMq7mIyPSM7ijEjJyAKj5UYfBXSMqKg5z9gBQaVjNcsymCURiOK3OO6ZNeCcVWiKAnpqDZBI5otxkCyhCPrhQvwCxvTwCROuuXCQgFawKYo3kV0ArgTGTdHzTcNz5Qgt6HmBFcfqBtjCiZZqu9aOwJao82lm7WwlEw.pTdQ3BDmxAqbhaxm.0KqB7mfx7WI979RNFuYnsbW0nEhihoy430qRlC6O1dy_iwcra8zoBE_ZO_y4P3cgU6O6hh8TP5Oz-V7NYXBDDVwiLZnyEYnA-p93u2uuf8D34lq-0yIpzC5nkS8CG4US62rLVIg0j57NfD_-DNx6H-k0BIbhQJDxcq8p6OfMZJogrxtfelEhjA1e55bSX0XFcbo2sIyCEB1cxpQvAcaSLHqP3PAYtw.sGel9J1XTZPqGud4wS3RCA\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.collectionVariables.set(\"AuthToken\", pm.response.json().data.token);\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "deviceToken",
+                "value": "abc",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"teasdasdstuser@yopmail.com\",\r\n    \"password\": \"123456\",\r\n    \"deviceToken\": \"abcd\",\r\n    \"deviceType\": \"postman\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}auth/login",
+              "host": ["{{1}}auth"],
+              "path": ["login"]
+            }
+          },
+          "response": [
+            {
+              "name": "login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "deviceToken",
+                    "value": "abc",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n   \"email\":\"abc@yopmail.com\",\r\n    \"password\": \"123456\",   \r\n    \"deviceToken\": \"abcd\",\r\n    \"deviceType\": \"postman\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/login",
+                  "host": ["{{1}}auth"],
+                  "path": ["login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "857"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"359-1zwD+KqiKraEfLq3D9Zwr9o+bXA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:01:19 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"64b5c7325c7b6a74df032319\",\n        \"fullName\": \"Test\",\n        \"userType\": \"User\",\n        \"image\": null,\n        \"isCompleteProfile\": true,\n        \"notificationOn\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.bkg41kQBEWcZfLkE4yFkpHRlnBybU5IdZiWct3OeYVwhypouYcow54rPluw8lmdFVPRxu36CC3FiSF3QLYEfAlrlS7laurGOWorcm3a8W6nV6zPYYfBlzh2kQMVSWzKzHl99fGRXp3x1MqxVXSZvKXfcPrX5I87aPKVDnx3WtNlaK0z4k02OqdN-H_wmiABkCxE0qiz40YxvzlBVIYfRdYicUfnrsTFH9yzkOHKb91ago7esTENCsfbQRmhzNNg37gO22lelrbDlYPKiDwppHWfadz9YTtDotBM-S69dshnGBq1_9WrThmLv9wITabNuEJATZvgEy8eJcK-xQByN5w.FGPSlCZHsiTR33c-.B_Ztj08NHTG81cey0SOpSWAgufcBTcgHJFxyl82VqSYxcN0MmLCJnbqKhd-5QY6wqxyrjYBLXZUWsCgaM-5WGP1ufdRkCTecfzLFHIsuq_VUA982xIxsnySIXXD3n_yTxL4cr9XIl2sYKxHXkf08-Mp6bL7Mxbo-y3F3WfNhKcX_JijSvnw1NjpbvZeFLmvT9BGU8EeUsJ1uVo1lc4KsDufdLspuABY.fOETNehrsPYnZwRE1Ka3Hw\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              },
+              {
+                "key": "devicetoken",
+                "value": "abcd",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{1}}auth/logout",
+              "host": ["{{1}}auth"],
+              "path": ["logout"]
+            }
+          },
+          "response": [
+            {
+              "name": "logout",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "devicetoken",
+                    "value": "abcd",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{1}}auth/logout",
+                  "host": ["{{1}}auth"],
+                  "path": ["logout"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "61"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3d-k37bPRA5S7iREYydwmH15jid3OE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:05:03 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"user logout succesfully\",\n    \"data\": {},\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "get profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{1}}auth/profile",
+              "host": ["{{1}}auth"],
+              "path": ["profile"]
+            }
+          },
+          "response": [
+            {
+              "name": "get profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{1}}auth/profile",
+                  "host": ["{{1}}auth"],
+                  "path": ["profile"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "810"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"32a-Fy84JqZ5T8k/TSmYS2NKexomMnk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:06:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"profile get sucessfully\",\n    \"data\": {\n        \"_id\": \"64b5c7325c7b6a74df032319\",\n        \"fullName\": \"Test\",\n        \"image\": {},\n        \"isCompleteProfile\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.ZMr0fymljBjYsrYMP0FYcAap_DHdbPKVxOyVOmKmmJP6yEvPEM725MDA04XHa6Y3fQTYP-dVAIyw9RycQLDrcDDMBdNoCUH1PJTSs_-o0_fVPSiad7RhRDjXd-HN-JVnCMLPHWtT4POhiGUz1cQ_KPWJnhqzsUk1rESyNEyzQ-h1ckWW9BfMQ9svQo5byiVQpEm4Zd0jJt1Ys1BWp7KDrLYOaBepXPy5XZZs6PHbSzjGPskO8TKPHpC0ADVDKGhNXGJ0Pe5wYXa1lQ0DWLC1zmNXO3gv0y8j_JRg5qHW7Lj1MEnWWttIwym6IPloqFdzblJYR6mW6oRO2nLzejyscQ.yXZsteJtHxL5rHVr.jhaAbl_degqoKWA8mqwDvuI8VOhY314SmTcJWJekfumk9v-RZ4cwBo_7vw21LWvLEK5f0T6hPFWS-auD0IkehlJuHHtQEMSQEzoxHPp6Nq-0gE_M9OE3KvqR5DUgbfuxBK0riq-vicR5YicOAdNm7R765SFw2i8j-zanNDmEgpXhnvCCd-kNysHZddvLw_Xe5pw.lOBfh3cvKP2muZ96S4rtsQ\",\n        \"notificationOn\": true\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "change password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"oldPassword\": \"12341234\",\r\n    \"newPassword\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}auth/changePassword",
+              "host": ["{{1}}auth"],
+              "path": ["changePassword"]
+            }
+          },
+          "response": [
+            {
+              "name": "change password",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"oldPassword\": \"12341234\",\r\n    \"newPassword\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/changePassword",
+                  "host": ["{{1}}auth"],
+                  "path": ["changePassword"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "67"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"43-BPgUjqYM8SK1VRwRAoG1YRIuDkA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:07:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Password Changed Successfully\",\n    \"data\": {},\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "notification update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{2}}auth/notificationUpdate",
+              "host": ["{{2}}auth"],
+              "path": ["notificationUpdate"]
+            }
+          },
+          "response": [
+            {
+              "name": "notification update",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{1}}auth/notificationUpdate",
+                  "host": ["{{1}}auth"],
+                  "path": ["notificationUpdate"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "646"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"286-s8H3vFlSggW1tFYaW46CZlSoZp8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 23:10:30 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"User get sucessfully\",\n    \"data\": {\n        \"_id\": \"64b5c7315c7b6a74df032315\",\n        \"identifier\": \"abc@yopmail.com\",\n        \"password\": \"$2b$12$OSHUicJPx99s9FVWucVZKu3J.7zWvh.SacbrmT4zXuTabXX11KtOu\",\n        \"userType\": \"User\",\n        \"devices\": [\n            \"64b5c5e97995d929b64a3b7c\",\n            \"64b5c74c7995d929b64a3cde\"\n        ],\n        \"loggedOutDevices\": [],\n        \"notificationOn\": true,\n        \"isDeleted\": false,\n        \"isCompleteProfile\": true,\n        \"createdAt\": \"2023-07-17T22:56:49.539Z\",\n        \"updatedAt\": \"2023-07-17T23:10:12.824Z\",\n        \"__v\": 0,\n        \"OTP\": null,\n        \"profile\": {\n            \"_id\": \"64b5c7325c7b6a74df032319\",\n            \"fullName\": \"Test\",\n            \"auth\": \"64b5c7315c7b6a74df032315\",\n            \"createdAt\": \"2023-07-17T22:56:50.303Z\",\n            \"updatedAt\": \"2023-07-17T22:56:50.303Z\",\n            \"__v\": 0\n        }\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "verify user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"teasdasdstUser@yopmail.com\",\r\n    \"otp\":\"381381\",\r\n     \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{2}}auth/VerifyUser",
+              "host": ["{{2}}auth"],
+              "path": ["VerifyUser"]
+            }
+          },
+          "response": [
+            {
+              "name": "verify user",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n      \"email\":\"abc@yopmail.com\",\r\n    \"otp\":\"734211\",\r\n     \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/VerifyUser",
+                  "host": ["{{1}}auth"],
+                  "path": ["VerifyUser"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "974"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3ce-iT7vAF8eHcPLPgDhdsCvILBNHRw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 17 Jul 2023 22:54:58 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"User verified successfully\",\n    \"data\": {\n        \"_id\": \"64b5c5e9b1c52548cec7f016\",\n        \"fullName\": \"Test\",\n        \"image\": \"https://gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y\",\n        \"createdAt\": \"2023-07-17T22:51:21.008Z\",\n        \"updatedAt\": \"2023-07-17T22:51:21.008Z\",\n        \"__v\": 0,\n        \"userType\": \"User\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.ZD9PhkbG491QoPOGQggTsgT86QZvMJANBbvuSGiAWzHombKKoS_dlnH17X9MjrcWQwGcBlE09OuBHrMfllMg7xiSnRIlNzz7rIXSOjS2aRqUXhCiQ6vPA-AF3bU9fSCSoJJE53wr3EioDMnyzWvVlEOCaWSQxowXH2sRfRFWW9FPI7naXOwME4MENPk2Uas1eN8qJt-dNxikaqBa3PK-56o2dC2QzjlMP1HQut8LDbszEWt5tVDlaE7OPfsCsbl9M3yv4a38-T5XBVOHHtCmDJxonzQ52_MX9DeGsomaZFuK_S2oJ8C0Gbt6DVkFM0HuUviAcipS_RftbYO59TpGBA.qzsNxDy1rzRpNc82.6Q9NdrjSavJRI7nc4H91iglS7jqXtJvuz1aLj1alULw_olxneSN2LRR9CMfbe0GoWPdlOFUYaWfHr6XMZOVgQ0TyyaIGEwwer2PIggPawI-lgkX9V26SP7YwxfIr-C5dNu-7smDhxW4HPA4snIp632y_9HGzsunKVwBxdiKmEqcwpIOq4Szrsmx8lIVKBfTCQm7n_gTsQBIwn243cQZLf_VLYVG-G4paySnTFQ.KHU7bmx6hmmv66yXz4r9QQ\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "resend OTP",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"email\":\"testUser@yopmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}auth/resend",
+              "host": ["{{1}}auth"],
+              "path": ["resend"]
+            }
+          },
+          "response": [
+            {
+              "name": "resend OTP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n \"email\":\"testUser@yopmail.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}auth/resend",
+                  "host": ["{{1}}auth"],
+                  "path": ["resend"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "65"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"41-1t44IbFnjcaVfqTb+8oSdU8oL1U\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 24 Jul 2023 23:06:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"OTP resend Successfully\",\n    \"data\": 203452,\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "update profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\":\"User123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}/auth/profile",
+              "host": ["{{1}}"],
+              "path": ["auth", "profile"]
+            }
+          },
+          "response": [
+            {
+              "name": "update profile",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"fullName\":\"User123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{1}}/auth/profile",
+                  "host": ["{{1}}"],
+                  "path": ["auth", "profile"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "860"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"35c-fw7LtygrO2VY9AvLEE63t7sHEPU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 27 Jul 2023 00:05:48 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"profile update sucessfully\",\n    \"data\": {\n        \"_id\": \"64bf03fa9693817ea1560d0a\",\n        \"email\": \"teasdasdstuser@yopmail.com\",\n        \"fullName\": \"User123\",\n        \"userType\": \"User\",\n        \"isCompleteProfile\": true,\n        \"notificationOn\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.ke9JVXebz6bKvtt6umM6oLNUZAXfxWfo9KsQoYlVEwYChEVZO8YT8Vw4fvsPps6P62Us4Wfe3gNUYewOIrVX6OrJTaFvtpxgX0ZS167bev5v6nKCJSdsBiGUfgx4SBtMJo-eKHycs8NUPrNe7ZpWZSVD71Gk4tEfGKT5eVTEmprv8855lG0cUPAyRctUv4o-KWmfYADU0vKk7hM2jU8zSsCq7ddYZ9-iKnr4r5cyROhxrgQv8a5-iRjeOQtV6upP3sGzIsQSYw61E0RmriNYmAC-yoIkKvUioic2cPYK-0zyUdK4BSgi-WORWejbIoeCQhfmY-fk9QbRFEUy6UPfqw.ai9N3XB1mveC6Z53.p3FT10MJaeMnCynspoFUK0c6id2mBscRCaIKBDawlx-3i1DLsaK8TAR-T4CMb4cC23GjOHS1tJwIvTeMQu2VctSh_RnWustaT3daD6h1M63a2q64lfIH_gsEXKB22Qs6hIB1l8okYR0syoPfHm-2F3qiMmnUmTDMz9Fe9dQMwPSxMNvgr59WGZsLdtFAGQ7saDY.CEhyITxyq-5ApJkUa78KFg\"\n    },\n    \"status\": true\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete account",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{1}}/user/delete",
+              "host": ["{{1}}"],
+              "path": ["user", "delete"]
+            }
+          },
+          "response": [
+            {
+              "name": "delete account",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{AuthToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{1}}/user/delete",
+                  "host": ["{{1}}"],
+                  "path": ["user", "delete"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "71"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"47-wJ87dP2Sb5LHOuubDnqov/zPxLw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 27 Jul 2023 00:07:24 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"User Account deleted Successfully\",\n    \"data\": {},\n    \"status\": true\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "item": [
+        {
+          "name": "New Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"authId\": \"64c83bf6f8b09396d73864de\",\n    \"price\": 15,\n    \"accountTag\": \"demo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}transaction/buyCoin",
+              "host": ["{{1}}transaction"],
+              "path": ["buyCoin"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "forex data",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{1}}forex?startDate=2023-07-01&endDate=2023-08-01",
+          "host": ["{{1}}forex"],
+          "query": [
+            {
+              "key": "startDate",
+              "value": "2023-07-01"
+            },
+            {
+              "key": "endDate",
+              "value": "2023-08-01"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "forex data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{1}}forex?startDate=2023-07-01&endDate=2023-08-01",
+              "host": ["{{1}}forex"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2023-07-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2023-08-01"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3348"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"d14-5KtpMkkbPoC0Y5lTPQW99suAgGA\""
+            },
+            {
+              "key": "Date",
+              "value": "Tue, 25 Jul 2023 00:31:13 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"data\": {\n        \"ticker\": \"AAPL\",\n        \"queryCount\": 14,\n        \"resultsCount\": 14,\n        \"adjusted\": true,\n        \"results\": [\n            {\n                \"v\": 31458198,\n                \"vw\": 192.6624,\n                \"o\": 193.78,\n                \"c\": 192.46,\n                \"h\": 193.88,\n                \"l\": 191.76,\n                \"t\": 1688356800000,\n                \"n\": 500175,\n                \"volume\": 31458198,\n                \"open\": 193.78,\n                \"close\": 192.46,\n                \"high\": 193.88,\n                \"low\": 191.76,\n                \"timestamp\": 1688356800000,\n                \"numberOfItems\": 500175\n            },\n            {\n                \"v\": 46896861,\n                \"vw\": 191.5803,\n                \"o\": 191.565,\n                \"c\": 191.33,\n                \"h\": 192.98,\n                \"l\": 190.62,\n                \"t\": 1688529600000,\n                \"n\": 560170,\n                \"volume\": 46896861,\n                \"open\": 191.565,\n                \"close\": 191.33,\n                \"high\": 192.98,\n                \"low\": 190.62,\n                \"timestamp\": 1688529600000,\n                \"numberOfItems\": 560170\n            },\n            {\n                \"v\": 45155523,\n                \"vw\": 190.8214,\n                \"o\": 189.84,\n                \"c\": 191.81,\n                \"h\": 192.02,\n                \"l\": 189.2,\n                \"t\": 1688616000000,\n                \"n\": 562755,\n                \"volume\": 45155523,\n                \"open\": 189.84,\n                \"close\": 191.81,\n                \"high\": 192.02,\n                \"low\": 189.2,\n                \"timestamp\": 1688616000000,\n                \"numberOfItems\": 562755\n            },\n            {\n                \"v\": 46757498,\n                \"vw\": 191.4218,\n                \"o\": 191.41,\n                \"c\": 190.68,\n                \"h\": 192.67,\n                \"l\": 190.24,\n                \"t\": 1688702400000,\n                \"n\": 538826,\n                \"volume\": 46757498,\n                \"open\": 191.41,\n                \"close\": 190.68,\n                \"high\": 192.67,\n                \"low\": 190.24,\n                \"timestamp\": 1688702400000,\n                \"numberOfItems\": 538826\n            },\n            {\n                \"v\": 59912163,\n                \"vw\": 188.3628,\n                \"o\": 189.26,\n                \"c\": 188.61,\n                \"h\": 189.99,\n                \"l\": 187.035,\n                \"t\": 1688961600000,\n                \"n\": 736912,\n                \"volume\": 59912163,\n                \"open\": 189.26,\n                \"close\": 188.61,\n                \"high\": 189.99,\n                \"low\": 187.035,\n                \"timestamp\": 1688961600000,\n                \"numberOfItems\": 736912\n            },\n            {\n                \"v\": 46638119,\n                \"vw\": 187.8219,\n                \"o\": 189.16,\n                \"c\": 188.08,\n                \"h\": 189.3,\n                \"l\": 186.6,\n                \"t\": 1689048000000,\n                \"n\": 577717,\n                \"volume\": 46638119,\n                \"open\": 189.16,\n                \"close\": 188.08,\n                \"high\": 189.3,\n                \"low\": 186.6,\n                \"timestamp\": 1689048000000,\n                \"numberOfItems\": 577717\n            },\n            {\n                \"v\": 60750218,\n                \"vw\": 189.9586,\n                \"o\": 189.68,\n                \"c\": 189.77,\n                \"h\": 191.7,\n                \"l\": 188.47,\n                \"t\": 1689134400000,\n                \"n\": 652126,\n                \"volume\": 60750218,\n                \"open\": 189.68,\n                \"close\": 189.77,\n                \"high\": 191.7,\n                \"low\": 188.47,\n                \"timestamp\": 1689134400000,\n                \"numberOfItems\": 652126\n            },\n            {\n                \"v\": 41337338,\n                \"vw\": 190.565,\n                \"o\": 190.5,\n                \"c\": 190.54,\n                \"h\": 191.19,\n                \"l\": 189.78,\n                \"t\": 1689220800000,\n                \"n\": 467952,\n                \"volume\": 41337338,\n                \"open\": 190.5,\n                \"close\": 190.54,\n                \"high\": 191.19,\n                \"low\": 189.78,\n                \"timestamp\": 1689220800000,\n                \"numberOfItems\": 467952\n            },\n            {\n                \"v\": 41616242,\n                \"vw\": 190.4662,\n                \"o\": 190.23,\n                \"c\": 190.69,\n                \"h\": 191.1799,\n                \"l\": 189.63,\n                \"t\": 1689307200000,\n                \"n\": 513233,\n                \"volume\": 41616242,\n                \"open\": 190.23,\n                \"close\": 190.69,\n                \"high\": 191.1799,\n                \"low\": 189.63,\n                \"timestamp\": 1689307200000,\n                \"numberOfItems\": 513233\n            },\n            {\n                \"v\": 50520159,\n                \"vw\": 193.2997,\n                \"o\": 191.9,\n                \"c\": 193.99,\n                \"h\": 194.32,\n                \"l\": 191.81,\n                \"t\": 1689566400000,\n                \"n\": 602852,\n                \"volume\": 50520159,\n                \"open\": 191.9,\n                \"close\": 193.99,\n                \"high\": 194.32,\n                \"low\": 191.81,\n                \"timestamp\": 1689566400000,\n                \"numberOfItems\": 602852\n            },\n            {\n                \"v\": 48153774,\n                \"vw\": 193.3846,\n                \"o\": 193.35,\n                \"c\": 193.73,\n                \"h\": 194.33,\n                \"l\": 192.415,\n                \"t\": 1689652800000,\n                \"n\": 544605,\n                \"volume\": 48153774,\n                \"open\": 193.35,\n                \"close\": 193.73,\n                \"high\": 194.33,\n                \"low\": 192.415,\n                \"timestamp\": 1689652800000,\n                \"numberOfItems\": 544605\n            },\n            {\n                \"v\": 80492323,\n                \"vw\": 194.9188,\n                \"o\": 193.1,\n                \"c\": 195.1,\n                \"h\": 198.23,\n                \"l\": 192.65,\n                \"t\": 1689739200000,\n                \"n\": 776766,\n                \"volume\": 80492323,\n                \"open\": 193.1,\n                \"close\": 195.1,\n                \"high\": 198.23,\n                \"low\": 192.65,\n                \"timestamp\": 1689739200000,\n                \"numberOfItems\": 776766\n            },\n            {\n                \"v\": 59581196,\n                \"vw\": 194.276,\n                \"o\": 195.09,\n                \"c\": 193.13,\n                \"h\": 196.47,\n                \"l\": 192.495,\n                \"t\": 1689825600000,\n                \"n\": 639817,\n                \"volume\": 59581196,\n                \"open\": 195.09,\n                \"close\": 193.13,\n                \"high\": 196.47,\n                \"low\": 192.495,\n                \"timestamp\": 1689825600000,\n                \"numberOfItems\": 639817\n            },\n            {\n                \"v\": 71451683,\n                \"vw\": 192.5948,\n                \"o\": 194.1,\n                \"c\": 191.94,\n                \"h\": 194.97,\n                \"l\": 191.23,\n                \"t\": 1689912000000,\n                \"n\": 580360,\n                \"volume\": 71451683,\n                \"open\": 194.1,\n                \"close\": 191.94,\n                \"high\": 194.97,\n                \"low\": 191.23,\n                \"timestamp\": 1689912000000,\n                \"numberOfItems\": 580360\n            }\n        ],\n        \"status\": \"DELAYED\",\n        \"request_id\": \"ed288402c979e089db25dd6daf82c516\",\n        \"count\": 14\n    },\n    \"meessga\": \"Forex Data send successfuly\"\n}"
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "1",
+      "value": "http://localhost:9000/api/v1/",
+      "type": "string"
+    },
+    {
+      "key": "AdminAuth",
+      "value": "eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.pw8nIKdnSBWX8Xiv72YfxgF0123ViBFr5hqJ5qm97SnNkQbjFDPTDWmPzaskzLY8iRcEQ33hh-E3RkxxDdIMOCVWfT959cbBShnN4uSN2DQcPZg3R7aFZ571QYZqMurVlUoQLtGfFEqXY9-ENo6bc0msSVUua5om1bAG2tbMDNZ7VEd7tVSWy70yoD-n5jNRVaitUK2IdubDnpczjMesamxRRcZpP59PBR0uROVdV8zHoOGyhrBFjX8dsbpmNOQXD49rXUCeWnRWKoAeVhrodisfyLOYOiL9fzL2TXDoNbRwS_DS_erbVb00OS9y2tV84U8DuKZ9840fAXLBZuOIlg.gtSiDZ2BCvnbFlWl.8nRfnJvUCysla6abI6p__76LzAWzFrtJwnOLHAjohXHglvNARIWxV9GQvXQKroW6YhcKdd0REnwBH0kZMggYlgYP0VuCu-8FlHgZrDkVOaapzZuqsCIPlZcrD9L_Pj7AGWE-RYtdkMiYrxZmOQYk7kBj8LHI5tCaPF8JiMrC_N_LcZs5MPFd-c6rqYeFpsf7b1BIxIHsr_HYhn9vvJJx5J4F4FfPCRLomwRPIMoutRRRA-WoNKi3pzjYE360V2rKLvf--vlQsYXMqXeHtR7SW_-qvuQWUMOkdFJ7daXKagckoC_KUUVoCPI0YhTAEAumfTLqNlsZnDattQkTkA75qeLNJjPx9tyBMzp5yU29HUcqrMFsbntAUCQpBN7d7pM0hqETfxzVXKFWT0cARsAAjoB5j2L8imxo-LmbMg2XLNKO5dbv9-Q7VCS5vgGSlSaDBEQfIGTRL4DuCga2js4GywlL-EnDj3leSz4OMdsuhdfSr2lRP93jq0CELOEcnpWbQDAsGJi_s1xoXKQ5C3pQNrE310la7M5p4xrkstwztbeow5_Dqj_FCMxYnMXwiExTl9-AmcsSyAPoqQ-iwFG7JUA26R6SFCVzInf9tqQ2TtahAXQQTY5N79oA5_nD-xZ2J8Ys-It_SYhH-laur9d3Wep9xBHDFTv0dKkoJe2Tn0x_kb8xZyE6A9USHLxwlw_QFh2CRYH5qT5LntPxeUBXs6XdE34nzTqoAkFJlvs_7jmwdghATbyLq2XBap1ELzy4YG8gM54qUqMgrXfH7n4Ke10jgmwayC2s4UvLptdvNKjYtBZ6guCbwzQ-4mqo6BedOc9pp25JpkpWJreBYfhQnBIjTEiPONFfss2jfcGzWa-HefydZn9kvCmoXofejbY3SxZUTvIkZWENF6JH7cW1nD_dmMvDEcp8LbHKjTcwCyVmKJ3Z1X57Bc3LUkKyniEaztgDLbOn1qTX6YB4yOCwD13JodZvFbLL40L2UxCgIBrvSTjLLLdLizFMH68mL6VhiVerWLvSp5SmQw8gwlQwnafzt08TV4ZPr0bCRW_hPU3s0leIU5wrWtGm4pYStUvwNehbPMVPi6IhhS1bTxUpAPMqYngfJzIqF32aa4_Axw-vSmS0237eka2yaHw4yyj4WYmVWxoB41QjiNy_xTgDC1EkcG0zDZ6dM7a3xnOt-a3-dqQHLtUnrAMy5vACj7nK0vRH8_MewgVblxtH41XHnrEdvBXSsftB9TsHP5Q8mloe4rsaVT643nwyc4dPpmCcVpXdy13tpeGCr2i413OgvByTvvLuAGGSucLjl0UDdBRcSscl0tUn7EplgJl25gcpYSLSlWy2hyh2joRRjFg_1YcXvcNMdck103NOJ7bdiOaXfCa53-uGjsSbEUTnR2IL0s7h-GZlT6GIHp49ml71DJ7OR7t-K1w1wyAGNNsidNS7xzFc--TvI7JhAhrUE4xXH-gzuCwGqRxqw_7ajngYyPGCP_QHzRsI_g-BJpTtmTeibHwMXgDSxy8oxbXPtYD4dptbQHm_WlD7sHdfWJT9kjHZ6CYNDPzA6_2iuXFJk8iZyc3beA3Q3HVRp200f1CdVGRhGGhq7b1Vl7LVGFHA-NgIlb3fa_J0URDFiv9cmBe_xjVMzUQKHQ4jTBWSsl4cGdwDoCaKAYM1pFyQoMNySaE3ZcB9bpdWY0_Nk1WA5hHEYLTYQBkJttXsLuUI4EgD3M8tMVC2-zkI9sfPsbg-inJBTjkE8rE-fFEDdxrXwfRuj36bQ084sT7YuMnKEhAVT_HKQYLGxCM9EnXYIqclx7lx5sqhi44PxcOE0im_zwZtxMSWVy-zZuYiBygOLq7Qj31OFjkoQQvmTjB-5qWwSfGZHFgEAtEQyjApRTKJCzf9MnQ4WuoxQtje6UofU0GVrppLMbiHxMB3hJJahdTGvuPCzIcvh0sEXKl4tI6Zpm-rO_KznNxJW0QNiMMcAuRyVeRqSjqzVt2ub3pe4bnb8D6vI-feDqVCI89nKb_cOLdL7URPKNrSWOs3MVr0zA0FjqmkNwqVk68m-Ki3Fcfix_NcgWRoGsLEFFsn9SCa_Z8S12mvbES21TvMT2A-XUjI_KJcREHlld7JjNM0CR9PhYf-2T-kBqgzcKNM0v2ejNtxpLp3DlSzpp8eie005k_pzZClYzk8ylfGgNHy8L6UovxrzlGdxMmdpFMWifjyzNEC-Gy9fs6DqsiPtqtxUtmO9DaGUm6gOLBUShfJKiVOyswTOLDdoKfXiIotsw.53FcNwtP_kN3K8hLvIEYGw",
+      "type": "string",
+      "disabled": true
+    },
+    {
+      "key": "AuthToken",
+      "value": "eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.lAif3wyOG5-lXpMU9qD90AYGySMPmS4qRNyOjZCSIsvls9ESzkyIjIkLjzQVkpUsld_Cz1JJTyzS0J9GyZlfTLBYKnUVdx2PO6kI6uPsm4fDCbe283oXbAbgjozORyxhSmaFcgmoA7ZfTYPSYRB1n-6hQAXR2h99jsQnob63SPbn_x0SmVxufIk0lYvy-vTUQkk6fO394uqV5Rik5MqfmoV6Qwxy2xedZj_CW1YeHo_O5yMB6xfDhpPgxPsbSnlr9-D7vm_6pYam0h4neiTLrhprPZKQpCn4dc-JQkZ9S8AF6oBN2enX8cWus-MEJ1_ebCRmNXH46gtdiDKRAl49AQ.02ISGgOukZG80dLS.iDg0YVQXwavI0A5OxBvgwBPbCwfSYvsIZ1HK9syqUANmeFZODmHdFbwOpfsdSQnldJUsyT6O4_48_vd2LD1yV4QMy4aBmBoOZPbe0KXMgDJlVLNvOKPNyZAxPcwVv2C7izxIjc-LlVkvnmM_ClwU7V9qW-QzSYShN6nireCaIbD-8OXvb-UObHAWpYpoCe0kcOr4ri-IFIU3orHrBaXunO3kPVZS3A.ZSLRdpd-_qCwGbRDydE7iw",
+      "type": "string"
+    },
+    {
+      "key": "DeviceToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "2",
+      "value": "https://fx-hexa-96f4247d1b37.herokuapp.com/api/v1/",
+      "type": "string"
+    },
+    {
+      "key": "InsToken",
+      "value": "eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.eIgDvkHd8thWEvNVPfeH00V_5pn08HpQeVSumV6a8K4S8ouWBJJCh9CeOihupihL5U854UGRWzYPybsE8XzcYfWFpKmVaKA6c4Be_-5OF-eDBwawefjZvJMHbIxHhjJLhazfEtL5tCgDHZxXWDSTq1lnAIifL2acX30eyX_b7qhJTJD898Ry_Wq45fZci5-wCo2P3eHDt7a16DlhyuFK5rBPBi6MFF7AknbfItgBry_dqUtMLL1T3jkP4wl_LQLbo5vyOU1tCCJWjtYPckEFk86tiTnhWaKwUp4GnUQhIEDr4mHwc5tOz1157PfDlqVCywWmEhViO70D6PuOZlFpwA.QHjZzFbBLFjXpBUS.gOJH_uuyxQpQRbPLycT20_3zR7aH_VphaEteyGsnw9bfpdTTXRKcP3ZKe4BnMPcWjpEVsYwe3FlH8OhaJv8dMFqd0AVijY5UF5xutXZ2W5VoX_mOMzLgmK3ZTuPSlOTYFxDk4eOV9BH12duTcoRuT4WGEXYGRUPZ1naNZsF0z1CAUMq25jg69Qe-2_-G7TxGW4fgJVrpGIYcrjQrhkAWB2Y-ZjuOBzQU9TA5sTSWhp8213W2GFWvy6asbsTqSrhV2V0DljorRL2ndcNMfmc3OvWgVvqzoNmrtiqNEsGsB4hHILRILLVXAlDMckeCNjiEOj0lHV43zFdlzNVvgYaBHM1dYh_T8JcXLgg98jRWyir6QXNlnqRYCjlPlNlT8-4ljMfI2CMn4qfnrYnmr8_ptX5D5errUDlaD9xWX--qSLS6In0JPhMDHYzWxIdjx8ltQPtBegQPQno53ihoN1RSVKCwePsihhwUm0zqVLuoF9eV1U-AowKRxA_h35cg52TKaSSyXmWvNmlgVjoKkmBSRyTPkni7dNznKZi7qIbopJeVpZnE9hQntsMcqQ3DuNBnlQ-k90_X-JR7WUuzi1PIwU6sEMkbbECupW0HA4VY3EeHZomLieLw0-VxKbQcGbruy3WbL7IT-E_Zr4E2RdWxcg4_Epj-TRcFN7yW-Wrj38xOAufQkFK4gWQP3n70F8xnN0oKUCn7h2WtukZiV5AWS3fjBAzP3vGa-S13CaGxuSbpQ1EgQHBiXwvFPHx3MDkC6Kue8fkLo9SEDC7FdjGXdD7YFtInhlDfFXaZVqkrNXhAK6EwT6Uga-kQXttfJQPJ6U4TB8B7Vz7geVB4Jvdci9nMJ8tKOymou3XkGUdh3Hbvo01TePvWvpY7h40jNRY8A77va23WB5x953oAZzSg9fw6BkW3VRaMMM4KKqD-1rqpsNiX7Qc5gu7YnaBeSduEsQ6EZ3spSXvtrF5lNs3jKnJp2TmhH5MPqaJ08Qi_v7-FK_Ankk_r-Ye-2DuWJyap9chFZEhp-M02QD8pF7Rr8Lcug63bTTIfo-J3kV-ICDL9mH8_2ohzeD1s8fHpNzBkSLXiZC9zH1RewgSBjFr4Yj9JHkWAJCBkCl7Y47zfHZdJxwhAvyWeiUmb2LQnHk-o-hBAmZp8Bww-8azgBsIJNM6XzaT_WWsFcz8XqV67kVFw04yyxE45XyhjCU8be4i1MEClxepkMdjNOavttpW1j2xjWOeJ5oJOd3ODp8z9eJNOLIuar3o5Gd3glw1jdxeKJA-n_JzmOtVl2a2slechf2apz5FywOotlI0Sd3CxvhrKcP292TrFoZYQqd7eOXLfCznhLLYDbAJ9EsV-q8BqSHCYqjFLtOrpwveUUGs4WT9QhLuzPKjQ-3VBhcfvp2rs0CZ8ZD_7wNgBuv7lK4ETAu-Jk56zvZm2vO4f2MYk1Yzvy3D6ySJLPAjBaRlYd8AhMV99ml6wGfxwr1S1U0zO4p5qsRxpMSxcRUIKWelGsFr3YSmHyxoWgz4rubU1gg9J-9VKLr-Dc4or1W4V2GIE-T_w788C6W9q5nVUxr7TDlv2U7HpUUOwx2RtR2T7SnUeQiQ5nzM6ZC543xRt-71t4zpnNzPIkR6j8D6wSPknN3-lxCFYp9WDY6_SHZ7soYNK9cWc-kQo4LL9UL8YeZdMZZPwn-oU-ttl1ISaUOLXfYarPzfq81JpFE9fW_jXgACV85CoJXtRkbjBU-_grNYJEU5ekiFXv0jUzlGGvdY-C_2UzBxIzP-nIBoAMQAPida_GMFBITBt_MZg-_Hr7SDjNa4NhO4_0ZLlg5HfY6Q0rrUdsFw9JyTNkgl6LxwH3fjD63Ve8OPCnJ5SvOeoCsnZ5NIXFVQR_G6FrQrhcOVlCkMZxwv5OIwZgh7ufgox1ir8wzi5LzNcG21O3SgnOBZJWa2pZwzGV0au2y8QE2EWTiHZ9Yvxs5vIjXWTXCljXYX7kE8tW5t8CuCw1vpb18MbAlTdTEaMiD0dn9KQC7U0ntV_KqkBdfIQ60s6N4KDRRZN4GlCQEZBkN15c9VcZCCbiI74KVNIp_rfii1R958smQZ7JpunpeVsYNp0kBv24MXmRIgOxuQirlo7ftS_ONIBxj3X3KBughhplmU2AHFuOSsN-uKrMaGcMQLdyCxzOKfLQSWWJpa3BOOhd1-4Drw7kgTE7Q_a9oghGi6v0Pl2qtPR4pkDQrcsJxankR-uQy6fTTnSz6sD9srfZoxsaHG3AiKqUt1cWtFSMPH8FQlOyT7rXbhVCyztlG1nbxx8fuKu31C9KhjRaOQFN9s6iXV2c34t_Rk5w9L7kbIRVP-BRJxB_XbCArGZ2sfTsBqNrR1AFXOGC7IJN66_OeII786WEMmcAdoLi1Z7pAsh_OFxhABd2ho-Gz6k_zvrETBf9E2_Ot86EJ7vVH6s4zSWpilbNgR1MJ3otULQuvKHvrX69Qga9oWGPkvX5SY80w2PyvjpWHoklW3AaVDAJt0tr0XMeIkFk3AepXFROi1Rf9XLoO4PsJa32G_q4Er7ssVjHzzVzK56r04_tjP_qEF80HojMpWn9bOSE6DfV4rw12nvI5_qZvxc9hPLZoC43a9AzGYDqoE22hEH5zt-VkMDbp7aUPU7F9ngpF3Qu5uE7ceHPZ9x72KrhT9-2c4pIOooFvCAj0WpLp7RLmJLSRrRMOuKMSuSTyoMWuZJVFWset0Cn6WKRZBKHNVsD0U6XvGrhgDNMQd3qFPR8xCO-0IDhnSHo1TBJoTdfttJoG_U9QRMd4aFbPeLWZl9s_wdTHZsfHuAz287a3O6RnyqeN3ZVzPExnX_giva29MyfIX4yDoyxu0hiEjz6A5fRQ7aBYjrRF5tNKRSrk9DWNtDT6EKLacPC6HNzWaKuQ5sr0LrxKTtWjnIasMv2uiNjpsLJAlS3gMj323ilEA26zQPSttmeL9t6ruAc3S4KL02-qDOuY4Z07cRoZgOr5Udfg.g9ptovrY97Dd2y9gX0G2VQ",
+      "type": "string",
+      "disabled": true
+    },
+    {
+      "key": "adminToken",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
