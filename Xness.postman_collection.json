@@ -1218,7 +1218,7 @@
       "name": "Transaction",
       "item": [
         {
-          "name": "New Request",
+          "name": "buyCoin",
           "request": {
             "method": "POST",
             "header": [],
@@ -1235,6 +1235,65 @@
               "raw": "{{1}}transaction/buyCoin",
               "host": ["{{1}}transaction"],
               "path": ["buyCoin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "sellCoin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"64c83bf7f8b09396d73864e2\",\n    \"price\": 10,\n    \"accountTag\": \"demo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{1}}transaction/sellCoin",
+              "host": ["{{1}}transaction"],
+              "path": ["sellCoin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getTransactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{1}}transaction/getTransactions/64c83bf7f8b09396d73864e2?transactionType=buy&month=08&year=2023",
+              "host": ["{{1}}transaction"],
+              "path": ["getTransactions", "64c83bf7f8b09396d73864e2"],
+              "query": [
+                {
+                  "key": "transactionType",
+                  "value": "buy"
+                },
+                {
+                  "key": "month",
+                  "value": "08"
+                },
+                {
+                  "key": "date",
+                  "value": "02",
+                  "disabled": true
+                },
+                {
+                  "key": "year",
+                  "value": "2023"
+                },
+                {
+                  "key": "time",
+                  "value": "20:10:05",
+                  "disabled": true
+                }
+              ]
             }
           },
           "response": []

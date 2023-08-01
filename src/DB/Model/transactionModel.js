@@ -2,6 +2,9 @@ import { Schema, model } from "mongoose";
 
 const TransactionSchema = new Schema(
   {
+    userId: {
+      type: String,
+    },
     previousBalance: {
       type: Number,
       required: true,
