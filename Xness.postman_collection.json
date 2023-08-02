@@ -350,7 +350,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\":\"teasdasdstUser@yopmail.com\",\r\n    \"password\": \"123456\",   \r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"android\",\r\n    \"accType\":\"demo\" //real in case of real account\r\n}",
+              "raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\":\"new165835@gmail.com\",\r\n    \"password\": \"12345678\",   \r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"accType\":\"demo\" //real in case of real account\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -358,8 +358,8 @@
               }
             },
             "url": {
-              "raw": "{{2}}auth/signup",
-              "host": ["{{2}}auth"],
+              "raw": "{{1}}auth/signup",
+              "host": ["{{1}}auth"],
               "path": ["signup"]
             }
           },
@@ -1224,7 +1224,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"authId\": \"64c83bf6f8b09396d73864de\",\n    \"price\": 15,\n    \"accountTag\": \"demo\"\n}",
+              "raw": "{\n    \"userId\": \"64c83bf7f8b09396d73864e2\",\n    \"price\": 10,\n    \"accountTag\": \"demo\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1267,7 +1267,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{1}}transaction/getTransactions/64c83bf7f8b09396d73864e2?transactionType=buy&month=08&year=2023",
+              "raw": "{{1}}transaction/getTransactions/64c83bf7f8b09396d73864e2?transactionType=buy&date=02&month=08&year=2023&page=1&limit=10",
               "host": ["{{1}}transaction"],
               "path": ["getTransactions", "64c83bf7f8b09396d73864e2"],
               "query": [
@@ -1276,22 +1276,24 @@
                   "value": "buy"
                 },
                 {
-                  "key": "month",
-                  "value": "08"
+                  "key": "date",
+                  "value": "02"
                 },
                 {
-                  "key": "date",
-                  "value": "02",
-                  "disabled": true
+                  "key": "month",
+                  "value": "08"
                 },
                 {
                   "key": "year",
                   "value": "2023"
                 },
                 {
-                  "key": "time",
-                  "value": "20:10:05",
-                  "disabled": true
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
                 }
               ]
             }

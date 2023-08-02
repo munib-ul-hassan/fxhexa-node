@@ -114,7 +114,7 @@ const sellCoin = async (req, res, next) => {
 
 const getTransactions = async (req, res, next) => {
   try {
-    const { transactionType, month, date, year, time } = req.query;
+    const { transactionType, month, date, year, time, page, limit } = req.query;
     const query = { userId: req.params.userId };
 
     // Filter based on transaction type (buy or sell)
@@ -150,8 +150,15 @@ const getTransactions = async (req, res, next) => {
       query.createdAt = { $gte: new Date(`${year}-${month}-${date}T${time}`) };
     }
 
-    // Fetch transactions from the database based on the constructed query
-    const transactions = await TransactionModel.find(query);
+    // Pagination
+    const pageNumber = parseInt(page) || 1;
+    const itemsPerPage = parseInt(limit) || 10;
+    const skipCount = (pageNumber - 1) * itemsPerPage;
+
+    // Fetch transactions from the database based on the constructed query and pagination
+    const transactions = await TransactionModel.find(query)
+      .skip(skipCount)
+      .limit(itemsPerPage);
 
     // Send the transactions data as a JSON response
     return res.json({
