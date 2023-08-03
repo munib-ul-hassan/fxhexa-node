@@ -114,12 +114,25 @@ const sellCoin = async (req, res, next) => {
 
 const getTransactions = async (req, res, next) => {
   try {
-    const { transactionType, month, date, year, time, page, limit } = req.query;
+    const {
+      transactionType,
+      month,
+      date,
+      year,
+      time,
+      page,
+      limit,
+      accountTag,
+    } = req.query;
     const query = { userId: req.params.userId };
 
     // Filter based on transaction type (buy or sell)
     if (transactionType) {
       query.transactionType = transactionType;
+    }
+    // Filter based on accountTag type (demo or real)
+    if (accountTag) {
+      query.accountTag = accountTag;
     }
 
     // Filter based on the specified month
