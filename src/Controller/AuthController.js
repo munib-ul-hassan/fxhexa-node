@@ -152,6 +152,9 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         image: { file: "" },
         otp,
+        demoBalance:user.demoBalance,
+        realBalance:user.realBalance,
+
 
         isCompleteProfile: user.isCompleteProfile,
         notificationOn: user.notificationOn,
@@ -305,7 +308,8 @@ const LoginUser = async (req, res, next) => {
         { _id: profile.image },
         { file: 1, _id: 0 }
       ),
-
+      demoBalance:user._doc.demoBalance,
+      realBalance:user._doc.realBalance,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -495,6 +499,8 @@ const VerifyUser = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
+    user.profile._doc.demoBalance= user.demoBalance
+    user.profile._doc.realBalance=user.realBalance
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -578,6 +584,8 @@ const VerifyOtp = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
+    user.profile._doc.demoBalance= user.demoBalance
+    user.profile._doc.realBalance=user.realBalance
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -630,7 +638,8 @@ const ResetPassword = async (req, res, next) => {
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-
+    user.profile._doc.demoBalance= user.demoBalance
+    user.profile._doc.realBalance=user.realBalance
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -746,7 +755,8 @@ const getprofile = async (req, res, next) => {
       image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
-
+      demoBalance: data.demoBalance,
+      realBalance:data.realBalance,
       notificationOn: data.notificationOn,
     };
 
@@ -794,7 +804,7 @@ const changePassword = async (req, res, next) => {
       }
     }
   } catch (error) {
-    console.error(error, "Error in Change Password");
+    
     return next(CustomError.badRequest(error.message));
   }
 };
@@ -814,13 +824,17 @@ const notificationUpdate = async (req, res, next) => {
     await AuthModel.findByIdAndUpdate(req.user._id, {
       notificationOn: !user.notificationOn,
     });
-    const profile = user._doc.profile._doc;
+    const profile = user._doc.profile._doc,
+    demoBalance= user.demoBalance,
+    realBalance=user.realBalance;
+
     const respdata = {
       _id: profile._id,
       fullName: profile.fullName,
       email: user._doc.identifier,
 
       image: { file: profile.image?.file },
+      demoBalance,realBalance,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -873,11 +887,14 @@ const updateProfile = async (req, res, next) => {
       "auth",
       user.devices[user.devices.length - 1]?.deviceToken
     );
+    const demoBalance= user.demoBalance,
+    realBalance=user.realBalance;
     const respdata = {
       _id: user.profile._doc._id,
       email: user.identifier,
       fullName: user.profile._doc.fullName,
       userType: "User",
+      demoBalance,realBalance,
       isCompleteProfile: user.isCompleteProfile,
       notificationOn: user.notificationOn,
     };
