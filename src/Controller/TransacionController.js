@@ -182,7 +182,7 @@ const getTransactions = async (req, res, next) => {
     const skipCount = (pageNumber - 1) * itemsPerPage;
 
     // Fetch transactions from the database based on the constructed query and pagination
-    const transactions = await TransactionModel.find(query)
+    const transactions = await TransactionModel.find(query).populate("user")
       .skip(skipCount)
       .limit(itemsPerPage);
 
