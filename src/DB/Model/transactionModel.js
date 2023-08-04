@@ -2,8 +2,9 @@ import { Schema, model } from "mongoose";
 
 const TransactionSchema = new Schema(
   {
-    userId: {
-      type: String,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
     previousBalance: {
       type: Number,
@@ -17,8 +18,14 @@ const TransactionSchema = new Schema(
       type: Number,
       required: true,
     },
+    coin: {
+      type: String,
+      required: true,
+    },
     accountTag: {
       type: String,
+      enum: ["demo", "real"],
+      required: true,
     },
     transactionType: {
       type: String,
