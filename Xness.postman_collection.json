@@ -1338,7 +1338,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"coin\":\"ETHERIUM\",\n    \"transactionType\":\"buy\"\n}",
+							"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"from\":\"ETHERIUM\",\n    \"to\":\"BTC\",\n    \"transactionType\":\"buy\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1369,7 +1369,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"coin\":\"ETHERIUM\",\n    \"transactionType\":\"buy\"\n}",
+									"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"from\":\"ETHERIUM\",\n    \"to\":\"BTC\",\n    \"transactionType\":\"buy\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1404,15 +1404,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "501"
+									"value": "512"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"1f5-Q3n108+Gaky0a4820vUvkQnWJxA\""
+									"value": "W/\"200-wgGLjePsrrgNSYdTyeHvJSC5/Ag\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 04 Aug 2023 21:04:25 GMT"
+									"value": "Sat, 05 Aug 2023 20:17:47 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1424,7 +1424,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Transaction completed successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"64bf03fa9693817ea1560d0a\",\n            \"fullName\": \"User123\",\n            \"auth\": \"64bf03fa9693817ea1560d06\",\n            \"createdAt\": \"2023-07-24T23:06:34.557Z\",\n            \"updatedAt\": \"2023-07-27T00:05:47.824Z\",\n            \"__v\": 0\n        },\n        \"previousBalance\": 9980,\n        \"newBalance\": 10132,\n        \"transactionAmount\": 152,\n        \"coin\": \"ETHERIUM\",\n        \"accountTag\": \"demo\",\n        \"transactionType\": \"buy\",\n        \"_id\": \"64cd67d9c520e3e40a8f3559\",\n        \"createdAt\": \"2023-08-04T21:04:25.196Z\",\n        \"updatedAt\": \"2023-08-04T21:04:25.196Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Transaction completed successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"64bf03fa9693817ea1560d0a\",\n            \"fullName\": \"User123\",\n            \"auth\": \"64bf03fa9693817ea1560d06\",\n            \"createdAt\": \"2023-07-24T23:06:34.557Z\",\n            \"updatedAt\": \"2023-07-27T00:05:47.824Z\",\n            \"__v\": 0\n        },\n        \"previousBalance\": 9980,\n        \"newBalance\": 10132,\n        \"transactionAmount\": 152,\n        \"from\": \"ETHERIUM\",\n        \"to\": \"BTC\",\n        \"accountTag\": \"demo\",\n        \"transactionType\": \"buy\",\n        \"_id\": \"64ceae6a3dd00d134afb9259\",\n        \"createdAt\": \"2023-08-05T20:17:46.642Z\",\n        \"updatedAt\": \"2023-08-05T20:17:46.642Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -1441,7 +1441,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"coin\":\"ETHERIUM\",\n    \"transactionType\":\"sell\"\n}",
+							"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"from\":\"BTC\",\n    \"to\":\"ETHERIUM\",\n    \"transactionType\":\"sell\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1472,7 +1472,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"coin\":\"ETHERIUM\",\n    \"transactionType\":\"sell\"\n}",
+									"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"from\":\"BTC\",\n    \"to\":\"ETHERIUM\",\n    \"transactionType\":\"sell\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1507,15 +1507,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "502"
+									"value": "513"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"1f6-+/1l99SkI/NoOeBoYSfxNlMiOCI\""
+									"value": "W/\"201-bNCql7tBOxH29GA+oj3j0YM6jiY\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 04 Aug 2023 21:04:50 GMT"
+									"value": "Sat, 05 Aug 2023 20:18:14 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1527,7 +1527,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Transaction completed successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"64bf03fa9693817ea1560d0a\",\n            \"fullName\": \"User123\",\n            \"auth\": \"64bf03fa9693817ea1560d06\",\n            \"createdAt\": \"2023-07-24T23:06:34.557Z\",\n            \"updatedAt\": \"2023-07-27T00:05:47.824Z\",\n            \"__v\": 0\n        },\n        \"previousBalance\": 10132,\n        \"newBalance\": 9980,\n        \"transactionAmount\": 152,\n        \"coin\": \"ETHERIUM\",\n        \"accountTag\": \"demo\",\n        \"transactionType\": \"sell\",\n        \"_id\": \"64cd67f2c520e3e40a8f355f\",\n        \"createdAt\": \"2023-08-04T21:04:50.059Z\",\n        \"updatedAt\": \"2023-08-04T21:04:50.059Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Transaction completed successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"64bf03fa9693817ea1560d0a\",\n            \"fullName\": \"User123\",\n            \"auth\": \"64bf03fa9693817ea1560d06\",\n            \"createdAt\": \"2023-07-24T23:06:34.557Z\",\n            \"updatedAt\": \"2023-07-27T00:05:47.824Z\",\n            \"__v\": 0\n        },\n        \"previousBalance\": 10132,\n        \"newBalance\": 9980,\n        \"transactionAmount\": 152,\n        \"from\": \"BTC\",\n        \"to\": \"ETHERIUM\",\n        \"accountTag\": \"demo\",\n        \"transactionType\": \"sell\",\n        \"_id\": \"64ceae863dd00d134afb925f\",\n        \"createdAt\": \"2023-08-05T20:18:14.400Z\",\n        \"updatedAt\": \"2023-08-05T20:18:14.400Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -1652,15 +1652,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "912"
+									"value": "509"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"390-aFhKgZxVE0GUBxM9C7iaNoRd8j8\""
+									"value": "W/\"1fd-uqP6waAPBJlPjru+tBStAocOqlk\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 04 Aug 2023 21:05:24 GMT"
+									"value": "Sat, 05 Aug 2023 20:19:30 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1672,7 +1672,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Transactions get successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64cd678e91b3bfa0a7bfb1ed\",\n            \"user\": \"64bf03fa9693817ea1560d0a\",\n            \"previousBalance\": 10000,\n            \"newBalance\": 9990,\n            \"transactionAmount\": 10,\n            \"coin\": \"ETHERIUM\",\n            \"accountTag\": \"demo\",\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-08-04T21:03:10.430Z\",\n            \"updatedAt\": \"2023-08-04T21:03:10.430Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64cd679f91b3bfa0a7bfb1f3\",\n            \"user\": \"64bf03fa9693817ea1560d0a\",\n            \"previousBalance\": 9990,\n            \"newBalance\": 9980,\n            \"transactionAmount\": 10,\n            \"coin\": \"ETHERIUM\",\n            \"accountTag\": \"demo\",\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-08-04T21:03:27.217Z\",\n            \"updatedAt\": \"2023-08-04T21:03:27.217Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64cd67d9c520e3e40a8f3559\",\n            \"user\": \"64bf03fa9693817ea1560d0a\",\n            \"previousBalance\": 9980,\n            \"newBalance\": 10132,\n            \"transactionAmount\": 152,\n            \"coin\": \"ETHERIUM\",\n            \"accountTag\": \"demo\",\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-08-04T21:04:25.196Z\",\n            \"updatedAt\": \"2023-08-04T21:04:25.196Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Transactions get successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64ceae6a3dd00d134afb9259\",\n            \"user\": {\n                \"_id\": \"64bf03fa9693817ea1560d0a\",\n                \"fullName\": \"User123\",\n                \"auth\": \"64bf03fa9693817ea1560d06\",\n                \"createdAt\": \"2023-07-24T23:06:34.557Z\",\n                \"updatedAt\": \"2023-07-27T00:05:47.824Z\",\n                \"__v\": 0\n            },\n            \"previousBalance\": 9980,\n            \"newBalance\": 10132,\n            \"transactionAmount\": 152,\n            \"from\": \"ETHERIUM\",\n            \"to\": \"BTC\",\n            \"accountTag\": \"demo\",\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-08-05T20:17:46.642Z\",\n            \"updatedAt\": \"2023-08-05T20:17:46.642Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
 						}
 					]
 				}

@@ -3,8 +3,8 @@ import TransactionModel from "../DB/Model/transactionModel.js";
 import AuthModel from "../DB/Model/authModel.js";
 import UserModel from "../DB/Model/userModel.js";
 import {
-  buyCoinValidator,
-  sellCoinValidator,
+  buyCoinValidator
+  
 } from "../Utils/Validator/transactionValidation.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
@@ -18,7 +18,7 @@ const buyCoin = async (req, res, next) => {
       return next(CustomError.badRequest(error.details[0].message));
     }
 
-    const { transactionAmount, accountTag, coin, transactionType } = req.body;
+    const { transactionAmount, accountTag, from,to, transactionType } = req.body;
 
     let previousBalance, newBalance = 0;
 
@@ -41,7 +41,7 @@ const buyCoin = async (req, res, next) => {
       const transaction = new TransactionModel({
         user: req.user._doc.profile,
         previousBalance,
-        newBalance, coin,
+        newBalance, from,to,
         transactionAmount,
         accountTag, // Add your account tag if applicable
         transactionType,

@@ -18,7 +18,11 @@ const TransactionSchema = new Schema(
       type: Number,
       required: true,
     },
-    coin: {
+    from: {
+      type: String,
+      required: true,
+    },
+    to: {
       type: String,
       required: true,
     },
