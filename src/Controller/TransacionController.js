@@ -1,56 +1,52 @@
-
 import TransactionModel from "../DB/Model/transactionModel.js";
 import AuthModel from "../DB/Model/authModel.js";
 import UserModel from "../DB/Model/userModel.js";
-import {
-  buyCoinValidator
-  
-} from "../Utils/Validator/transactionValidation.js";
+import { buyCoinValidator } from "../Utils/Validator/transactionValidation.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 // Buy Coin API
 const buyCoin = async (req, res, next) => {
   try {
-
-
     const { error } = buyCoinValidator.validate(req.body);
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
 
-    const { transactionAmount, accountTag, from,to, transactionType } = req.body;
+    const { transactionAmount, accountTag, from, to, transactionType } =
+      req.body;
 
-    let previousBalance, newBalance = 0;
-
-
+    let previousBalance,
+      newBalance = 0;
 
     if (accountTag === "demo") {
       previousBalance = req.user._doc.demoBalance;
     } else {
       previousBalance = req.user._doc.realBalance;
     }
-    if ((transactionType == "sell" && transactionAmount <= previousBalance) || (transactionType == "buy" && transactionAmount > 0)) {
+    if (
+      (transactionType == "sell" && transactionAmount <= previousBalance) ||
+      (transactionType == "buy" && transactionAmount > 0)
+    ) {
       // Perform the buy transaction
       if (transactionType == "buy") {
-        newBalance = previousBalance + transactionAmount
+        newBalance = previousBalance - transactionAmount;
       } else {
-        newBalance = previousBalance - transactionAmount
-
+        newBalance = previousBalance + transactionAmount;
       }
 
       const transaction = new TransactionModel({
         user: req.user._doc.profile,
         previousBalance,
-        newBalance, from,to,
+        newBalance,
+        from,
+        to,
         transactionAmount,
         accountTag, // Add your account tag if applicable
         transactionType,
       });
       await transaction.save();
 
-
       // Store the transaction data
-
 
       // Update the balance
       const updateData =
@@ -65,16 +61,14 @@ const buyCoin = async (req, res, next) => {
           200
         )
       );
-
     } else {
-      return next(CustomError.createError("Insufficient balance to buy the coin", 200));
-
+      return next(
+        CustomError.createError("Insufficient balance to buy the coin", 200)
+      );
     }
-
   } catch (error) {
     next(CustomError.createError(error.message, 500));
   }
-
 };
 
 /// SEll Coin API
@@ -182,7 +176,8 @@ const getTransactions = async (req, res, next) => {
     const skipCount = (pageNumber - 1) * itemsPerPage;
 
     // Fetch transactions from the database based on the constructed query and pagination
-    const transactions = await TransactionModel.find(query).populate("user")
+    const transactions = await TransactionModel.find(query)
+      .populate("user")
       .skip(skipCount)
       .limit(itemsPerPage);
 
@@ -193,8 +188,8 @@ const getTransactions = async (req, res, next) => {
         transactions,
         "Transactions get successfully",
         200
-      ))
-
+      )
+    );
   } catch (error) {
     next(CustomError.createError(error.message, 500));
   }
