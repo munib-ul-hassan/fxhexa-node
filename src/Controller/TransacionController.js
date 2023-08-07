@@ -160,7 +160,7 @@ const getTransactions = async (req, res, next) => {
       if (!isNaN(parsedDate) && !isNaN(parsedYear)) {
         query.createdAt = {
           $gte: new Date(`${year}-${month}-${date}`),
-          $lt: new Date(`${year}-${month}-${date + 1}`),
+          $lt: new Date(`${year}-${month}-${parseInt(date) + 1}`),
         };
       }
     }
@@ -169,6 +169,7 @@ const getTransactions = async (req, res, next) => {
     if (time) {
       query.createdAt = { $gte: new Date(`${year}-${month}-${date}T${time}`) };
     }
+
 
     // Pagination
     const pageNumber = parseInt(page) || 1;

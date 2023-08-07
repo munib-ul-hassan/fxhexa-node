@@ -1679,6 +1679,144 @@
 			]
 		},
 		{
+			"name": "coins",
+			"item": [
+				{
+					"name": "create coins",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coin\":\"QTUMBTC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{1}}coins",
+							"host": [
+								"{{1}}coins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getcoin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{1}}coins",
+							"host": [
+								"{{1}}coins"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getcoin",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{1}}coins",
+									"host": [
+										"{{1}}coins"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "773"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"305-90pZw0c76ggxquFUFSja7xmXaak\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 07 Aug 2023 20:38:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"coins found successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64d154ba4c1986b8a40943ec\",\n            \"coin\": \"ETHBTC\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d154c04c1986b8a40943ee\",\n            \"coin\": \"LTCBTC\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d154f14c1986b8a40943f3\",\n            \"coin\": \"BNBBTC\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d154f84c1986b8a40943f5\",\n            \"coin\": \"NEOBTC\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155094c1986b8a40943f7\",\n            \"coin\": \"QTUMETH\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155124c1986b8a40943f9\",\n            \"coin\": \"EOSETH\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155194c1986b8a40943fb\",\n            \"coin\": \"GASBTC\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155214c1986b8a40943fd\",\n            \"coin\": \"BNBETH\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d1552b4c1986b8a40943ff\",\n            \"coin\": \"BTCUSDT\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155364c1986b8a4094401\",\n            \"coin\": \"ETHUSDT\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155404c1986b8a4094403\",\n            \"coin\": \"LRCBTC\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64d155644c1986b8a4094405\",\n            \"coin\": \"QTUMBTC\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "delete coin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{1}}coins/64d1542d6bb5974830fc7b7a",
+							"host": [
+								"{{1}}coins"
+							],
+							"path": [
+								"64d1542d6bb5974830fc7b7a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update coin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coin\":\"LTCBTCC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{1}}coins/64d1542d6bb5974830fc7b7a",
+							"host": [
+								"{{1}}coins"
+							],
+							"path": [
+								"64d1542d6bb5974830fc7b7a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "forex data",
 			"request": {
 				"method": "GET",

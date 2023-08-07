@@ -130,7 +130,7 @@ const registerUser = async (req, res, next) => {
           demo: [{
             coin: democoin?._id, ammount: 1000
           }],
-          real:[]
+          real: []
         },
         {
           new: true,
@@ -150,7 +150,7 @@ const registerUser = async (req, res, next) => {
       if (error) {
         return next(CustomError.createError(error, 200));
       }
-      const user = await AuthModel.findById(auth._id).populate("profile");
+      const user = await AuthModel.findById(auth._id).populate(["profile", "demo.coin", "real.coin"]);
 
       const respdata = {
         _id: user.profile._doc._id,
@@ -159,8 +159,12 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         image: { file: "" },
         otp,
-        demo: user.demo,
-        real: user.real?user.real:[],
+        demo: user.demo? user.demo.map((item) => {
+          return { coin: item.coin.coin, ammount: item.ammount }
+        }):[],
+        real: user.real ? user.real.map((item) => {
+          return { coin: item.coin.coin, ammount: item.ammount }
+        }) : [],
 
 
         isCompleteProfile: user.isCompleteProfile,
@@ -315,8 +319,12 @@ const LoginUser = async (req, res, next) => {
         { _id: profile.image },
         { file: 1, _id: 0 }
       ),
-      demo: user._doc.demo,
-      real: user._doc.real?user._doc.real:[],
+      demo: user._doc.demo ?  user._doc.demo.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[],
+      real: user._doc.real?  user._doc.real.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[],
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -506,8 +514,12 @@ const VerifyUser = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demo = user.demo
-    user.profile._doc.real = user.real?user.real:[]
+    user.profile._doc.demo = user.demo?  user.demo.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[],
+    user.profile._doc.real = user.real ?   user.real.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[]
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -543,6 +555,8 @@ const VerifyOtp = async (req, res, next) => {
     const user = await AuthModel.findOne({ identifier }).populate([
       "profile",
       "OTP",
+      "demo.coin",
+      "real.coin"
     ]);
     if (!user) {
       return next(CustomError.createError("User not found", 200));
@@ -591,8 +605,12 @@ const VerifyOtp = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demo = user.demo
-    user.profile._doc.real = user.real?user.real:[]
+    user.profile._doc.demo = user.demo?  user.demo.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[];
+    user.profile._doc.real = user.real ?  user.real.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[];
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -645,8 +663,12 @@ const ResetPassword = async (req, res, next) => {
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demo = user.demo
-    user.profile._doc.real = user.real?user.real:[]
+    user.profile._doc.demo = user.demo?  user.demo.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[];
+    user.profile._doc.real = user.real ?  user.real.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[]
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -762,8 +784,12 @@ const getprofile = async (req, res, next) => {
       image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
-      demo: data.demo,
-      real: data.real?data.real:[],
+      demo: data.demo?  data.demo.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[],
+      real: data.real ?  data.demo.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[],
       notificationOn: data.notificationOn,
     };
 
@@ -832,8 +858,12 @@ const notificationUpdate = async (req, res, next) => {
       notificationOn: !user.notificationOn,
     });
     const profile = user._doc.profile._doc,
-      demo = user.demo,
-      real = user.real?user.real:[];
+      demo = user.demo?  user.demo.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[],
+      real = user.real ?  user.real.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[];
 
     const respdata = {
       _id: profile._id,
@@ -894,8 +924,12 @@ const updateProfile = async (req, res, next) => {
       "auth",
       user.devices[user.devices.length - 1]?.deviceToken
     );
-    const demo = user.demo,
-      real = user.real?user.real:[];
+    const demo = user.demo?  user.demo.map((item) => {
+      return { coin: item.coin.coin, ammount: item.ammount }
+    }):[],
+      real = user.real ?  user.real.map((item) => {
+        return { coin: item.coin.coin, ammount: item.ammount }
+      }):[]
     const respdata = {
       _id: user.profile._doc._id,
       email: user.identifier,
