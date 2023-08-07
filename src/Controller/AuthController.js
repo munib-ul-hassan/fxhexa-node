@@ -24,6 +24,7 @@ import { randomInt } from "crypto";
 import fileUploadModel from "../DB/Model/fileUploadModel.js";
 // import { handleMultipartData } from "../Utils/MultipartData.js";
 import AuthModel from "../DB/Model/authModel.js";
+import coinModel from "../DB/Model/coinsModel.js";
 
 // import AdminModel from "../DB/Model/adminModel.js";
 
@@ -119,11 +120,17 @@ const registerUser = async (req, res, next) => {
       return next(CustomError.createError("error creating user profile", 200));
     } else {
       const profile = usermodel._id;
+
+      const democoin = await coinModel.findOne({ coin: "BTCUSDT" })
       const updatedAuth = await AuthModel.findByIdAndUpdate(
         { _id: auth._id },
         {
           profile,
           OTP: OTP._id,
+          demo: [{
+            coin: democoin?._id, ammount: 1000
+          }],
+          real:[]
         },
         {
           new: true,
@@ -152,8 +159,8 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         image: { file: "" },
         otp,
-        demoBalance:user.demoBalance,
-        realBalance:user.realBalance,
+        demo: user.demo,
+        real: user.real?user.real:[],
 
 
         isCompleteProfile: user.isCompleteProfile,
@@ -308,8 +315,8 @@ const LoginUser = async (req, res, next) => {
         { _id: profile.image },
         { file: 1, _id: 0 }
       ),
-      demoBalance:user._doc.demoBalance,
-      realBalance:user._doc.realBalance,
+      demo: user._doc.demo,
+      real: user._doc.real?user._doc.real:[],
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -499,8 +506,8 @@ const VerifyUser = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demoBalance= user.demoBalance
-    user.profile._doc.realBalance=user.realBalance
+    user.profile._doc.demo = user.demo
+    user.profile._doc.real = user.real?user.real:[]
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -584,8 +591,8 @@ const VerifyOtp = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demoBalance= user.demoBalance
-    user.profile._doc.realBalance=user.realBalance
+    user.profile._doc.demo = user.demo
+    user.profile._doc.real = user.real?user.real:[]
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -638,8 +645,8 @@ const ResetPassword = async (req, res, next) => {
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demoBalance= user.demoBalance
-    user.profile._doc.realBalance=user.realBalance
+    user.profile._doc.demo = user.demo
+    user.profile._doc.real = user.real?user.real:[]
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -755,8 +762,8 @@ const getprofile = async (req, res, next) => {
       image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
-      demoBalance: data.demoBalance,
-      realBalance:data.realBalance,
+      demo: data.demo,
+      real: data.real?data.real:[],
       notificationOn: data.notificationOn,
     };
 
@@ -804,7 +811,7 @@ const changePassword = async (req, res, next) => {
       }
     }
   } catch (error) {
-    
+
     return next(CustomError.badRequest(error.message));
   }
 };
@@ -825,8 +832,8 @@ const notificationUpdate = async (req, res, next) => {
       notificationOn: !user.notificationOn,
     });
     const profile = user._doc.profile._doc,
-    demoBalance= user.demoBalance,
-    realBalance=user.realBalance;
+      demo = user.demo,
+      real = user.real?user.real:[];
 
     const respdata = {
       _id: profile._id,
@@ -834,7 +841,7 @@ const notificationUpdate = async (req, res, next) => {
       email: user._doc.identifier,
 
       image: { file: profile.image?.file },
-      demoBalance,realBalance,
+      demo, real,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -887,14 +894,14 @@ const updateProfile = async (req, res, next) => {
       "auth",
       user.devices[user.devices.length - 1]?.deviceToken
     );
-    const demoBalance= user.demoBalance,
-    realBalance=user.realBalance;
+    const demo = user.demo,
+      real = user.real?user.real:[];
     const respdata = {
       _id: user.profile._doc._id,
       email: user.identifier,
       fullName: user.profile._doc.fullName,
       userType: "User",
-      demoBalance,realBalance,
+      demo, real,
       isCompleteProfile: user.isCompleteProfile,
       notificationOn: user.notificationOn,
     };

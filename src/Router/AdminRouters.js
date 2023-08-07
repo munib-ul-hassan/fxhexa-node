@@ -18,6 +18,12 @@ AdminRouters.route("/admin/login").post(AdminController.Adminlogin);
 AdminRouters.route("/user").get(AdminController.getUsers);
 
 
+AdminRouters.route("/coins").post(AdminController.createcoins);
+AdminRouters.route("/coins").get(AdminController.getcoins);
+AdminRouters.route("/coins/:id").put(AdminController.updatecoins);
+AdminRouters.route("/coins/:id").delete(AdminController.deletecoins);
+
+
 AdminRouters.prefix("/admin", AdminMiddleware, async function () {
 
   // AdminRouters.route("/sendNotification").post(AdminController.sendNotification);
@@ -33,9 +39,6 @@ AdminRouters.prefix("/admin", AdminMiddleware, async function () {
   AdminRouters.route("/terms/:id").delete(AdminController.deleteTerms);
   AdminRouters.route("/deleteuser/:id").post(AdminController.deleteUser);
   AdminRouters.route("/dashboard").get(AdminController.getdashboard);
-
-
-
 
 
 
