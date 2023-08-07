@@ -59,28 +59,31 @@ const AuthSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Otp",
     },
-    demo: [{
-      coin: {
-        type: Schema.Types.ObjectId,
-        ref: "coin",
+    demo: [
+      {
+        coin: {
+          type: Schema.Types.ObjectId,
+          ref: "coin",
+        },
+        ammount: {
+          type: Number,
+          default: 0,
+        },
       },
-      ammount: {
-        type: Number,
-        default: 0,
-      }
-    }]
+    ],
 
-    ,
-    real: [{
-      coin: {
-        type: Schema.Types.ObjectId,
-        ref: "coin",
+    real: [
+      {
+        coin: {
+          type: Schema.Types.ObjectId,
+          ref: "coin",
+        },
+        ammount: {
+          type: Number,
+          default: 0,
+        },
       },
-      ammount: {
-        type: Number,
-        default: 0,
-      }
-    }],
+    ],
     // isVerified: { not in the scope
     //   type: Boolean,
     //   default: false,
