@@ -15,9 +15,9 @@ TransactionRouters.prefix("/transaction", AuthMiddleware, async function () {
     TransactionController.buyCoin
   );
   
-  // TransactionRouters.route("/sellCoin").post(
-  //   TransactionController.sellCoin
-  // );
+  TransactionRouters.route("/sellCoin").post(
+    TransactionController.sellCoin
+  );
   
   TransactionRouters.route("/getTransactions").get(
     TransactionController.getTransactions

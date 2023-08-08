@@ -4,25 +4,25 @@ const TransactionSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
-    previousBalance: {
-      type: Number,
-      required: true,
-    },
-    newBalance: {
-      type: Number,
-      required: true,
-    },
+    // previousBalance: {
+    //   type: Number,
+    //   required: true,
+    // },
+    // newBalance: {
+    //   type: Number,
+    //   required: true,
+    // },
     transactionAmount: {
       type: Number,
       required: true,
     },
-    from: {
-      type: String,
-      required: true,
-    },
-    to: {
+    // from: {
+    //   type: String,
+    //   required: true,
+    // },
+    coin: {
       type: String,
       required: true,
     },

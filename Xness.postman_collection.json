@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ff427c37-4679-49b5-98e5-8fe1d1814b3d",
+		"_postman_id": "7b0f0740-afe3-4c2f-9cd6-5b566b81ed18",
 		"name": "Xness",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "13608973"
+		"_exporter_id": "19434752"
 	},
 	"item": [
 		{
@@ -151,7 +151,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \r\n    \"otp\": \"877146\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+							"raw": "{\r\n  \r\n    \"otp\":\"212658\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,7 +488,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"teasdasdstuser@yopmail.com\",\r\n    \"password\": \"123456\",\r\n    \"deviceToken\": \"abcd\",\r\n    \"deviceType\": \"postman\"\r\n}",
+							"raw": "{\r\n    \"email\": \"new165835@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -953,7 +953,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"teasdasdstUser@yopmail.com\",\r\n    \"otp\":\"381381\",\r\n     \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+							"raw": "{\r\n    \"email\":\"new165835@gmail.com\",\r\n    \"otp\":\"629014\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -961,9 +961,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{2}}auth/VerifyUser",
+							"raw": "{{1}}auth/VerifyUser",
 							"host": [
-								"{{2}}auth"
+								"{{1}}auth"
 							],
 							"path": [
 								"VerifyUser"
@@ -1044,7 +1044,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"email\":\"testUser@yopmail.com\"\r\n}",
+							"raw": "{\r\n \"email\":\"new165835@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1338,7 +1338,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"from\":\"ETHERIUM\",\n    \"to\":\"BTC\",\n    \"transactionType\":\"buy\"\n}",
+							"raw": "{\n    \"transactionAmount\": 100,\n    \"accountTag\": \"demo\",\n    \"coinBuy\":\"QTUMBTC\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1441,7 +1441,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \n    \"transactionAmount\": 152,\n    \"accountTag\": \"demo\",\n    \"from\":\"BTC\",\n    \"to\":\"ETHERIUM\",\n    \"transactionType\":\"sell\"\n}",
+							"raw": "{\n    \"transactionAmount\": 100,\n    \"accountTag\": \"demo\",\n    \"coinSell\":\"QTUMBTC\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1449,12 +1449,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{1}}transaction/Coin",
+							"raw": "{{1}}transaction/sellCoin",
 							"host": [
 								"{{1}}transaction"
 							],
 							"path": [
-								"Coin"
+								"sellCoin"
 							]
 						}
 					},
