@@ -18,6 +18,7 @@ import { UserRouters } from "./Router/UserRouter.js";
 import { AdminRouters } from "./Router/AdminRouters.js";
 import { getForexData } from "./Config/forexConfig.js";
 import {TransactionRouters} from "./Router/TransactionRouter.js";
+import { StockRouters } from "./Router/StockRouters.js";
 
 
 
@@ -79,10 +80,6 @@ app.use(API_Prefix, AuthRouters);
 app.use(API_Prefix, UserRouters);
 app.use(API_Prefix, AdminRouters);
 app.use(API_Prefix, TransactionRouters)
-
-
-
-
-
+app.use(API_Prefix, StockRouters)
 app.use(ResHandler);
 
