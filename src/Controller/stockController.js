@@ -32,6 +32,9 @@ const getStocks =async (req,res)=>{
         return next(CustomError.badRequest(error.message));
       }
 }
+
+
+
 const StockController = {
 
     getrealTimeData,

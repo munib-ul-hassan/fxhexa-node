@@ -8,17 +8,13 @@ application.prefix = Router.prefix = function (path, middleware, configure) {
   this.use(path, middleware, TransactionRouters);
   return TransactionRouters;
 };
-
-
 TransactionRouters.prefix("/transaction", AuthMiddleware, async function () {
   TransactionRouters.route("/Coin").post(
     TransactionController.buyCoin
-  );
-  
+  );  
   TransactionRouters.route("/sellCoin").post(
     TransactionController.sellCoin
-  );
-  
+  );  
   TransactionRouters.route("/getTransactions").get(
     TransactionController.getTransactions
   );

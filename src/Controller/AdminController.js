@@ -5,7 +5,7 @@ import { genSalt } from "../Utils/saltGen.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 import {
-  AdminloginValidator,  
+  AdminloginValidator,
 } from "../Utils/Validator/UserValidator.js";
 
 import AuthModel from "../DB/Model/authModel.js";
@@ -15,6 +15,25 @@ import { tokenGen } from "../Utils/jwt.js";
 // import push_notifications from "../Config/push_notification.js";
 import { connectDB } from "../DB/index.js";
 import coinModel from "../DB/Model/coinsModel.js";
+import AdminModel from "../DB/Model/adminModel.js";
+const registerAdmin = async () => {
+
+  const auth = await new AuthModel({
+    identifier: "admin@admin.com",
+    password: "123123",
+    userType: "Admin",
+  }).save();
+
+
+
+  const admindata = await new AdminModel({
+    auth: auth._id,
+    fullName: "admin",
+  }).save();
+}
+
+// registerAdmin()
+
 
 const Adminlogin = async (req, res, next) => {
   try {
@@ -22,14 +41,14 @@ const Adminlogin = async (req, res, next) => {
 
     if (error) {
       error.details.map((err) => {
-        
+
         next(CustomError.createError(err.message, 200));
       });
     }
-    const { email, password, deviceToken, deviceType } = req.body;
+    const { email, password } = req.body;
 
     const user = await AuthModel.findOne({
-      identifier: await bcrypt.hash(email, genSalt),
+      identifier: email
     }).populate({
       path: "profile",
     });
@@ -309,8 +328,8 @@ const deleteUser = async (req, res, next) => {
 };
 const getdashboard = async (req, res, next) => {
   try {
-    const users = await AuthModel.find({userType:{$ne:"Admin"}}).populate(["profile", "devices"]);
-    
+    const users = await AuthModel.find({ userType: { $ne: "Admin" } }).populate(["profile", "devices"]);
+
 
     const groupByKeys = (data, keys) => {
       let finalResult = keys.map((key) => {
@@ -337,12 +356,12 @@ const getdashboard = async (req, res, next) => {
           web: users.filter((item) => {
             return item.devices[item.devices.length - 1]?.deviceType == "web";
           }).length,
-        
+
           social: groupByKeys(users, ["socialType"])[0],
-          users:users.length,
-          
+          users: users.length,
+
         },
-         
+
         "Dashboard data found",
         200,
       ),
@@ -363,7 +382,7 @@ const createcoins = async (req, res, next) => {
     if (!coin) {
       return next(CustomError.badRequest("coin is required"));
     }
-    
+
 
     const createcoins = new coinModel({
       coin: req.body.coin,
@@ -442,7 +461,7 @@ const updatecoins = async (req, res, next) => {
 const AdminController = {
   Adminlogin,
   // sendNotification,
- 
+
   getUsers,
   createPrivacy,
   getPrivacy,

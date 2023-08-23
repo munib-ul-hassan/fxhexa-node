@@ -21,7 +21,7 @@ import OtpModel from "../DB/Model/otpModel.js";
 import UserModel from "../DB/Model/userModel.js";
 import { linkUserDevice } from "../Utils/linkUserDevice.js";
 import { randomInt } from "crypto";
-import fileUploadModel from "../DB/Model/fileUploadModel.js";
+
 // import { handleMultipartData } from "../Utils/MultipartData.js";
 import AuthModel from "../DB/Model/authModel.js";
 import coinModel from "../DB/Model/coinsModel.js";
@@ -157,7 +157,7 @@ const registerUser = async (req, res, next) => {
         email: user.identifier,
         fullName: user.profile._doc.fullName,
         userType: "User",
-        image: { file: "" },
+        // image: { file: "" },
         otp,
         demo: user.demo? user.demo.map((item) => {
           return { coin: item.coin.coin, ammount: item.ammount }
@@ -315,10 +315,7 @@ const LoginUser = async (req, res, next) => {
       fullName: profile.fullName,
       email: user.identifier,
       userType: user.userType,
-      image: await fileUploadModel.findOne(
-        { _id: profile.image },
-        { file: 1, _id: 0 }
-      ),
+      // image:  profile.image,
       demo: user._doc.demo ?  user._doc.demo.map((item) => {
         return { coin: item.coin.coin, ammount: item.ammount }
       }):[],
@@ -781,7 +778,7 @@ const getprofile = async (req, res, next) => {
       fullName: data.profile.fullName,
       email: data.identifier,
 
-      image: { file: data.profile.image?.file },
+      // image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
       demo: data.demo?  data.demo.map((item) => {
@@ -846,11 +843,11 @@ const notificationUpdate = async (req, res, next) => {
   try {
     const user = await AuthModel.findById(req.user._id).populate([
       {
-        path: "profile",
-        populate: {
-          select: { file: 1 },
-          path: "image",
-        },
+        path: "profile"
+        // populate: {
+        //   select: { file: 1 },
+        //   path: "image",
+        // },
       },
     ]);
 
@@ -870,7 +867,7 @@ const notificationUpdate = async (req, res, next) => {
       fullName: profile.fullName,
       email: user._doc.identifier,
 
-      image: { file: profile.image?.file },
+      // image: { file: profile.image?.file },
       demo, real,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,

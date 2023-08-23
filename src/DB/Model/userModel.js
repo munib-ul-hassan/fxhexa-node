@@ -10,8 +10,7 @@ const UserSchema = new Schema(
     },
 
     image: {
-      type: Schema.Types.String,
-      ref: "Fileupload"     
+      type: String      
     },
 
   },

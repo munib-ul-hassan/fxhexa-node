@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7b0f0740-afe3-4c2f-9cd6-5b566b81ed18",
+		"_postman_id": "186c8e2d-cc76-4eb1-9b6a-672345d95d7d",
 		"name": "Xness",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19434752"
+		"_exporter_id": "13608973"
 	},
 	"item": [
 		{
@@ -1817,6 +1817,574 @@
 			]
 		},
 		{
+			"name": "request for transaction",
+			"item": [
+				{
+					"name": "get my request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{1}}user/request?page=1&limit=10&status=accepted",
+							"host": [
+								"{{1}}user"
+							],
+							"path": [
+								"request"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "accepted"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get my request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{1}}user/request?page=1&limit=10&status=pending",
+									"host": [
+										"{{1}}user"
+									],
+									"path": [
+										"request"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "320"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"140-GFVUlxpRw2gIcQIkbvetpZKOtRw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 19 Aug 2023 22:31:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Request get Successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64e1423594afcd2dd438bd60\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"image\": \"1images-1692484149293.jpg\",\n            \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n            \"updatedAt\": \"2023-08-19T22:29:09.621Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "create request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "AML",
+									"type": "text"
+								},
+								{
+									"key": "requestType",
+									"value": "Buy",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/E:/1images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{1}}user/request",
+							"host": [
+								"{{1}}user"
+							],
+							"path": [
+								"request"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "amount",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": "AML",
+											"type": "text"
+										},
+										{
+											"key": "requestType",
+											"value": "Buy",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/E:/1images.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{1}}user/request",
+									"host": [
+										"{{1}}user"
+									],
+									"path": [
+										"request"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "324"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"144-LV35tJy75fHUNuK1Oxp0Zk38RRM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 19 Aug 2023 22:29:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Request generated Successfully\",\n    \"data\": {\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"pending\",\n        \"amount\": 100,\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"image\": \"1images-1692484149293.jpg\",\n        \"_id\": \"64e1423594afcd2dd438bd60\",\n        \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n        \"updatedAt\": \"2023-08-19T22:29:09.621Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "transaction request",
+					"item": [
+						{
+							"name": "delete request",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{1}}admin/request/64e14c27442c5c91b263d658",
+									"host": [
+										"{{1}}admin"
+									],
+									"path": [
+										"request",
+										"64e14c27442c5c91b263d658"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete request",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{AdminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{1}}admin/request/64e14c27442c5c91b263d658",
+											"host": [
+												"{{1}}admin"
+											],
+											"path": [
+												"request",
+												"64e14c27442c5c91b263d658"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "66"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"42-dq9tBt3WC5syccr/EE0ZO7kw7rQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Aug 2023 23:11:59 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Request deleted successfully\",\n    \"data\": {},\n    \"status\": true\n}"
+								}
+							]
+						},
+						{
+							"name": "update request",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"accepted\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{1}}admin/request/64e1423594afcd2dd438bd60",
+									"host": [
+										"{{1}}admin"
+									],
+									"path": [
+										"request",
+										"64e1423594afcd2dd438bd60"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "update request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{AdminToken}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"status\":\"accepted\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{1}}admin/request/64e1423594afcd2dd438bd60",
+											"host": [
+												"{{1}}admin"
+											],
+											"path": [
+												"request",
+												"64e1423594afcd2dd438bd60"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "323"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"143-x8OZft0oHWCbwj+Gv/oKFHbezF8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Aug 2023 23:07:48 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Request updated successfully\",\n    \"data\": {\n        \"_id\": \"64e1423594afcd2dd438bd60\",\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"accepted\",\n        \"amount\": 100,\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"image\": \"1images-1692484149293.jpg\",\n        \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n        \"updatedAt\": \"2023-08-19T23:07:48.129Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+								}
+							]
+						},
+						{
+							"name": "get admin request",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{1}}admin/request?page=1&limit=10&status=pending",
+									"host": [
+										"{{1}}admin"
+									],
+									"path": [
+										"request"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get admin request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{AdminToken}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{1}}admin/request?page=1&limit=10&status=pending",
+											"host": [
+												"{{1}}admin"
+											],
+											"path": [
+												"request"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												},
+												{
+													"key": "status",
+													"value": "pending"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "320"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"140-GFVUlxpRw2gIcQIkbvetpZKOtRw\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 19 Aug 2023 22:34:57 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Request get Successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64e1423594afcd2dd438bd60\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"image\": \"1images-1692484149293.jpg\",\n            \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n            \"updatedAt\": \"2023-08-19T22:29:09.621Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "forex data",
 			"request": {
 				"method": "GET",
@@ -1902,6 +2470,303 @@
 					"body": "{\n    \"data\": {\n        \"ticker\": \"AAPL\",\n        \"queryCount\": 14,\n        \"resultsCount\": 14,\n        \"adjusted\": true,\n        \"results\": [\n            {\n                \"v\": 31458198,\n                \"vw\": 192.6624,\n                \"o\": 193.78,\n                \"c\": 192.46,\n                \"h\": 193.88,\n                \"l\": 191.76,\n                \"t\": 1688356800000,\n                \"n\": 500175,\n                \"volume\": 31458198,\n                \"open\": 193.78,\n                \"close\": 192.46,\n                \"high\": 193.88,\n                \"low\": 191.76,\n                \"timestamp\": 1688356800000,\n                \"numberOfItems\": 500175\n            },\n            {\n                \"v\": 46896861,\n                \"vw\": 191.5803,\n                \"o\": 191.565,\n                \"c\": 191.33,\n                \"h\": 192.98,\n                \"l\": 190.62,\n                \"t\": 1688529600000,\n                \"n\": 560170,\n                \"volume\": 46896861,\n                \"open\": 191.565,\n                \"close\": 191.33,\n                \"high\": 192.98,\n                \"low\": 190.62,\n                \"timestamp\": 1688529600000,\n                \"numberOfItems\": 560170\n            },\n            {\n                \"v\": 45155523,\n                \"vw\": 190.8214,\n                \"o\": 189.84,\n                \"c\": 191.81,\n                \"h\": 192.02,\n                \"l\": 189.2,\n                \"t\": 1688616000000,\n                \"n\": 562755,\n                \"volume\": 45155523,\n                \"open\": 189.84,\n                \"close\": 191.81,\n                \"high\": 192.02,\n                \"low\": 189.2,\n                \"timestamp\": 1688616000000,\n                \"numberOfItems\": 562755\n            },\n            {\n                \"v\": 46757498,\n                \"vw\": 191.4218,\n                \"o\": 191.41,\n                \"c\": 190.68,\n                \"h\": 192.67,\n                \"l\": 190.24,\n                \"t\": 1688702400000,\n                \"n\": 538826,\n                \"volume\": 46757498,\n                \"open\": 191.41,\n                \"close\": 190.68,\n                \"high\": 192.67,\n                \"low\": 190.24,\n                \"timestamp\": 1688702400000,\n                \"numberOfItems\": 538826\n            },\n            {\n                \"v\": 59912163,\n                \"vw\": 188.3628,\n                \"o\": 189.26,\n                \"c\": 188.61,\n                \"h\": 189.99,\n                \"l\": 187.035,\n                \"t\": 1688961600000,\n                \"n\": 736912,\n                \"volume\": 59912163,\n                \"open\": 189.26,\n                \"close\": 188.61,\n                \"high\": 189.99,\n                \"low\": 187.035,\n                \"timestamp\": 1688961600000,\n                \"numberOfItems\": 736912\n            },\n            {\n                \"v\": 46638119,\n                \"vw\": 187.8219,\n                \"o\": 189.16,\n                \"c\": 188.08,\n                \"h\": 189.3,\n                \"l\": 186.6,\n                \"t\": 1689048000000,\n                \"n\": 577717,\n                \"volume\": 46638119,\n                \"open\": 189.16,\n                \"close\": 188.08,\n                \"high\": 189.3,\n                \"low\": 186.6,\n                \"timestamp\": 1689048000000,\n                \"numberOfItems\": 577717\n            },\n            {\n                \"v\": 60750218,\n                \"vw\": 189.9586,\n                \"o\": 189.68,\n                \"c\": 189.77,\n                \"h\": 191.7,\n                \"l\": 188.47,\n                \"t\": 1689134400000,\n                \"n\": 652126,\n                \"volume\": 60750218,\n                \"open\": 189.68,\n                \"close\": 189.77,\n                \"high\": 191.7,\n                \"low\": 188.47,\n                \"timestamp\": 1689134400000,\n                \"numberOfItems\": 652126\n            },\n            {\n                \"v\": 41337338,\n                \"vw\": 190.565,\n                \"o\": 190.5,\n                \"c\": 190.54,\n                \"h\": 191.19,\n                \"l\": 189.78,\n                \"t\": 1689220800000,\n                \"n\": 467952,\n                \"volume\": 41337338,\n                \"open\": 190.5,\n                \"close\": 190.54,\n                \"high\": 191.19,\n                \"low\": 189.78,\n                \"timestamp\": 1689220800000,\n                \"numberOfItems\": 467952\n            },\n            {\n                \"v\": 41616242,\n                \"vw\": 190.4662,\n                \"o\": 190.23,\n                \"c\": 190.69,\n                \"h\": 191.1799,\n                \"l\": 189.63,\n                \"t\": 1689307200000,\n                \"n\": 513233,\n                \"volume\": 41616242,\n                \"open\": 190.23,\n                \"close\": 190.69,\n                \"high\": 191.1799,\n                \"low\": 189.63,\n                \"timestamp\": 1689307200000,\n                \"numberOfItems\": 513233\n            },\n            {\n                \"v\": 50520159,\n                \"vw\": 193.2997,\n                \"o\": 191.9,\n                \"c\": 193.99,\n                \"h\": 194.32,\n                \"l\": 191.81,\n                \"t\": 1689566400000,\n                \"n\": 602852,\n                \"volume\": 50520159,\n                \"open\": 191.9,\n                \"close\": 193.99,\n                \"high\": 194.32,\n                \"low\": 191.81,\n                \"timestamp\": 1689566400000,\n                \"numberOfItems\": 602852\n            },\n            {\n                \"v\": 48153774,\n                \"vw\": 193.3846,\n                \"o\": 193.35,\n                \"c\": 193.73,\n                \"h\": 194.33,\n                \"l\": 192.415,\n                \"t\": 1689652800000,\n                \"n\": 544605,\n                \"volume\": 48153774,\n                \"open\": 193.35,\n                \"close\": 193.73,\n                \"high\": 194.33,\n                \"low\": 192.415,\n                \"timestamp\": 1689652800000,\n                \"numberOfItems\": 544605\n            },\n            {\n                \"v\": 80492323,\n                \"vw\": 194.9188,\n                \"o\": 193.1,\n                \"c\": 195.1,\n                \"h\": 198.23,\n                \"l\": 192.65,\n                \"t\": 1689739200000,\n                \"n\": 776766,\n                \"volume\": 80492323,\n                \"open\": 193.1,\n                \"close\": 195.1,\n                \"high\": 198.23,\n                \"low\": 192.65,\n                \"timestamp\": 1689739200000,\n                \"numberOfItems\": 776766\n            },\n            {\n                \"v\": 59581196,\n                \"vw\": 194.276,\n                \"o\": 195.09,\n                \"c\": 193.13,\n                \"h\": 196.47,\n                \"l\": 192.495,\n                \"t\": 1689825600000,\n                \"n\": 639817,\n                \"volume\": 59581196,\n                \"open\": 195.09,\n                \"close\": 193.13,\n                \"high\": 196.47,\n                \"low\": 192.495,\n                \"timestamp\": 1689825600000,\n                \"numberOfItems\": 639817\n            },\n            {\n                \"v\": 71451683,\n                \"vw\": 192.5948,\n                \"o\": 194.1,\n                \"c\": 191.94,\n                \"h\": 194.97,\n                \"l\": 191.23,\n                \"t\": 1689912000000,\n                \"n\": 580360,\n                \"volume\": 71451683,\n                \"open\": 194.1,\n                \"close\": 191.94,\n                \"high\": 194.97,\n                \"low\": 191.23,\n                \"timestamp\": 1689912000000,\n                \"numberOfItems\": 580360\n            }\n        ],\n        \"status\": \"DELAYED\",\n        \"request_id\": \"ed288402c979e089db25dd6daf82c516\",\n        \"count\": 14\n    },\n    \"meessga\": \"Forex Data send successfuly\"\n}"
 				}
 			]
+		},
+		{
+			"name": "get stock data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{2}}stock?series=TIME_SERIES_DAILY&min=1&ticket=GOOG",
+					"host": [
+						"{{2}}stock"
+					],
+					"query": [
+						{
+							"key": "series",
+							"value": "TIME_SERIES_DAILY"
+						},
+						{
+							"key": "min",
+							"value": "1"
+						},
+						{
+							"key": "ticket",
+							"value": "GOOG"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get stocksa",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{1}}stock?series=TIME_SERIES_DAILY&min=1&ticket=AAPL",
+							"host": [
+								"{{1}}stock"
+							],
+							"query": [
+								{
+									"key": "series",
+									"value": "TIME_SERIES_DAILY"
+								},
+								{
+									"key": "min",
+									"value": "1"
+								},
+								{
+									"key": "ticket",
+									"value": "AAPL"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "12462"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"30ae-/fkG9tiqiylc8q36Y+c4L2sYKTQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Aug 2023 22:46:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"Meta Data\": {\n            \"1. Information\": \"Daily Prices (open, high, low, close) and Volumes\",\n            \"2. Symbol\": \"AAPL\",\n            \"3. Last Refreshed\": \"2023-08-18\",\n            \"4. Output Size\": \"Compact\",\n            \"5. Time Zone\": \"US/Eastern\"\n        },\n        \"Time Series (Daily)\": {\n            \"2023-08-18\": {\n                \"1. open\": \"172.3000\",\n                \"2. high\": \"175.1000\",\n                \"3. low\": \"171.9600\",\n                \"4. close\": \"174.4900\",\n                \"5. volume\": \"57974528\"\n            },\n            \"2023-08-17\": {\n                \"1. open\": \"177.1400\",\n                \"2. high\": \"177.5054\",\n                \"3. low\": \"173.4800\",\n                \"4. close\": \"174.0000\",\n                \"5. volume\": \"66062882\"\n            },\n            \"2023-08-16\": {\n                \"1. open\": \"177.1300\",\n                \"2. high\": \"178.5400\",\n                \"3. low\": \"176.5000\",\n                \"4. close\": \"176.5700\",\n                \"5. volume\": \"46964857\"\n            },\n            \"2023-08-15\": {\n                \"1. open\": \"178.8800\",\n                \"2. high\": \"179.4800\",\n                \"3. low\": \"177.0500\",\n                \"4. close\": \"177.4500\",\n                \"5. volume\": \"43622593\"\n            },\n            \"2023-08-14\": {\n                \"1. open\": \"177.9700\",\n                \"2. high\": \"179.6900\",\n                \"3. low\": \"177.3050\",\n                \"4. close\": \"179.4600\",\n                \"5. volume\": \"43675627\"\n            },\n            \"2023-08-11\": {\n                \"1. open\": \"177.3200\",\n                \"2. high\": \"178.6200\",\n                \"3. low\": \"176.5500\",\n                \"4. close\": \"177.7900\",\n                \"5. volume\": \"52036672\"\n            },\n            \"2023-08-10\": {\n                \"1. open\": \"179.4800\",\n                \"2. high\": \"180.7500\",\n                \"3. low\": \"177.6000\",\n                \"4. close\": \"177.9700\",\n                \"5. volume\": \"54686851\"\n            },\n            \"2023-08-09\": {\n                \"1. open\": \"180.8700\",\n                \"2. high\": \"180.9300\",\n                \"3. low\": \"177.0100\",\n                \"4. close\": \"178.1900\",\n                \"5. volume\": \"60378492\"\n            },\n            \"2023-08-08\": {\n                \"1. open\": \"179.6900\",\n                \"2. high\": \"180.2700\",\n                \"3. low\": \"177.5800\",\n                \"4. close\": \"179.8000\",\n                \"5. volume\": \"67823003\"\n            },\n            \"2023-08-07\": {\n                \"1. open\": \"182.1300\",\n                \"2. high\": \"183.1300\",\n                \"3. low\": \"177.3500\",\n                \"4. close\": \"178.8500\",\n                \"5. volume\": \"97576069\"\n            },\n            \"2023-08-04\": {\n                \"1. open\": \"185.5200\",\n                \"2. high\": \"187.3800\",\n                \"3. low\": \"181.9200\",\n                \"4. close\": \"181.9900\",\n                \"5. volume\": \"115956841\"\n            },\n            \"2023-08-03\": {\n                \"1. open\": \"191.5700\",\n                \"2. high\": \"192.3700\",\n                \"3. low\": \"190.6900\",\n                \"4. close\": \"191.1700\",\n                \"5. volume\": \"62243282\"\n            },\n            \"2023-08-02\": {\n                \"1. open\": \"195.0400\",\n                \"2. high\": \"195.1800\",\n                \"3. low\": \"191.8507\",\n                \"4. close\": \"192.5800\",\n                \"5. volume\": \"50389327\"\n            },\n            \"2023-08-01\": {\n                \"1. open\": \"196.2350\",\n                \"2. high\": \"196.7300\",\n                \"3. low\": \"195.2800\",\n                \"4. close\": \"195.6050\",\n                \"5. volume\": \"35281426\"\n            },\n            \"2023-07-31\": {\n                \"1. open\": \"196.0600\",\n                \"2. high\": \"196.4900\",\n                \"3. low\": \"195.2600\",\n                \"4. close\": \"196.4500\",\n                \"5. volume\": \"38824113\"\n            },\n            \"2023-07-28\": {\n                \"1. open\": \"194.6700\",\n                \"2. high\": \"196.6260\",\n                \"3. low\": \"194.1400\",\n                \"4. close\": \"195.8300\",\n                \"5. volume\": \"48291443\"\n            },\n            \"2023-07-27\": {\n                \"1. open\": \"196.0200\",\n                \"2. high\": \"197.2000\",\n                \"3. low\": \"192.5500\",\n                \"4. close\": \"193.2200\",\n                \"5. volume\": \"47460180\"\n            },\n            \"2023-07-26\": {\n                \"1. open\": \"193.6700\",\n                \"2. high\": \"195.6400\",\n                \"3. low\": \"193.3200\",\n                \"4. close\": \"194.5000\",\n                \"5. volume\": \"47471868\"\n            },\n            \"2023-07-25\": {\n                \"1. open\": \"193.3300\",\n                \"2. high\": \"194.4400\",\n                \"3. low\": \"192.9150\",\n                \"4. close\": \"193.6200\",\n                \"5. volume\": \"37283201\"\n            },\n            \"2023-07-24\": {\n                \"1. open\": \"193.4100\",\n                \"2. high\": \"194.9100\",\n                \"3. low\": \"192.2500\",\n                \"4. close\": \"192.7500\",\n                \"5. volume\": \"45505097\"\n            },\n            \"2023-07-21\": {\n                \"1. open\": \"194.1000\",\n                \"2. high\": \"194.9700\",\n                \"3. low\": \"191.2300\",\n                \"4. close\": \"191.9400\",\n                \"5. volume\": \"71951683\"\n            },\n            \"2023-07-20\": {\n                \"1. open\": \"195.0900\",\n                \"2. high\": \"196.4700\",\n                \"3. low\": \"192.4950\",\n                \"4. close\": \"193.1300\",\n                \"5. volume\": \"59581196\"\n            },\n            \"2023-07-19\": {\n                \"1. open\": \"193.1000\",\n                \"2. high\": \"198.2300\",\n                \"3. low\": \"192.6500\",\n                \"4. close\": \"195.1000\",\n                \"5. volume\": \"80507323\"\n            },\n            \"2023-07-18\": {\n                \"1. open\": \"193.3500\",\n                \"2. high\": \"194.3300\",\n                \"3. low\": \"192.4150\",\n                \"4. close\": \"193.7300\",\n                \"5. volume\": \"48353774\"\n            },\n            \"2023-07-17\": {\n                \"1. open\": \"191.9000\",\n                \"2. high\": \"194.3200\",\n                \"3. low\": \"191.8100\",\n                \"4. close\": \"193.9900\",\n                \"5. volume\": \"50520159\"\n            },\n            \"2023-07-14\": {\n                \"1. open\": \"190.2300\",\n                \"2. high\": \"191.1799\",\n                \"3. low\": \"189.6300\",\n                \"4. close\": \"190.6900\",\n                \"5. volume\": \"41616242\"\n            },\n            \"2023-07-13\": {\n                \"1. open\": \"190.5000\",\n                \"2. high\": \"191.1900\",\n                \"3. low\": \"189.7800\",\n                \"4. close\": \"190.5400\",\n                \"5. volume\": \"41342338\"\n            },\n            \"2023-07-12\": {\n                \"1. open\": \"189.6800\",\n                \"2. high\": \"191.7000\",\n                \"3. low\": \"188.4700\",\n                \"4. close\": \"189.7700\",\n                \"5. volume\": \"60750248\"\n            },\n            \"2023-07-11\": {\n                \"1. open\": \"189.1600\",\n                \"2. high\": \"189.3000\",\n                \"3. low\": \"186.6000\",\n                \"4. close\": \"188.0800\",\n                \"5. volume\": \"46638119\"\n            },\n            \"2023-07-10\": {\n                \"1. open\": \"189.2600\",\n                \"2. high\": \"189.9900\",\n                \"3. low\": \"187.0350\",\n                \"4. close\": \"188.6100\",\n                \"5. volume\": \"59922163\"\n            },\n            \"2023-07-07\": {\n                \"1. open\": \"191.4100\",\n                \"2. high\": \"192.6700\",\n                \"3. low\": \"190.2400\",\n                \"4. close\": \"190.6800\",\n                \"5. volume\": \"46814998\"\n            },\n            \"2023-07-06\": {\n                \"1. open\": \"189.8400\",\n                \"2. high\": \"192.0200\",\n                \"3. low\": \"189.2000\",\n                \"4. close\": \"191.8100\",\n                \"5. volume\": \"45156009\"\n            },\n            \"2023-07-05\": {\n                \"1. open\": \"191.5650\",\n                \"2. high\": \"192.9800\",\n                \"3. low\": \"190.6200\",\n                \"4. close\": \"191.3300\",\n                \"5. volume\": \"46920261\"\n            },\n            \"2023-07-03\": {\n                \"1. open\": \"193.7800\",\n                \"2. high\": \"193.8800\",\n                \"3. low\": \"191.7600\",\n                \"4. close\": \"192.4600\",\n                \"5. volume\": \"31458198\"\n            },\n            \"2023-06-30\": {\n                \"1. open\": \"191.6300\",\n                \"2. high\": \"194.4800\",\n                \"3. low\": \"191.2600\",\n                \"4. close\": \"193.9700\",\n                \"5. volume\": \"85213216\"\n            },\n            \"2023-06-29\": {\n                \"1. open\": \"189.0800\",\n                \"2. high\": \"190.0700\",\n                \"3. low\": \"188.9400\",\n                \"4. close\": \"189.5900\",\n                \"5. volume\": \"46347308\"\n            },\n            \"2023-06-28\": {\n                \"1. open\": \"187.9300\",\n                \"2. high\": \"189.9000\",\n                \"3. low\": \"187.6000\",\n                \"4. close\": \"189.2500\",\n                \"5. volume\": \"51216801\"\n            },\n            \"2023-06-27\": {\n                \"1. open\": \"185.8900\",\n                \"2. high\": \"188.3900\",\n                \"3. low\": \"185.6700\",\n                \"4. close\": \"188.0600\",\n                \"5. volume\": \"50730846\"\n            },\n            \"2023-06-26\": {\n                \"1. open\": \"186.8300\",\n                \"2. high\": \"188.0500\",\n                \"3. low\": \"185.2300\",\n                \"4. close\": \"185.2700\",\n                \"5. volume\": \"48088661\"\n            },\n            \"2023-06-23\": {\n                \"1. open\": \"185.5500\",\n                \"2. high\": \"187.5600\",\n                \"3. low\": \"185.0100\",\n                \"4. close\": \"186.6800\",\n                \"5. volume\": \"53116996\"\n            },\n            \"2023-06-22\": {\n                \"1. open\": \"183.7400\",\n                \"2. high\": \"187.0450\",\n                \"3. low\": \"183.6700\",\n                \"4. close\": \"187.0000\",\n                \"5. volume\": \"51245327\"\n            },\n            \"2023-06-21\": {\n                \"1. open\": \"184.9000\",\n                \"2. high\": \"185.4100\",\n                \"3. low\": \"182.5901\",\n                \"4. close\": \"183.9600\",\n                \"5. volume\": \"49515697\"\n            },\n            \"2023-06-20\": {\n                \"1. open\": \"184.4100\",\n                \"2. high\": \"186.1000\",\n                \"3. low\": \"184.4100\",\n                \"4. close\": \"185.0100\",\n                \"5. volume\": \"49799092\"\n            },\n            \"2023-06-16\": {\n                \"1. open\": \"186.7300\",\n                \"2. high\": \"186.9900\",\n                \"3. low\": \"184.2700\",\n                \"4. close\": \"184.9200\",\n                \"5. volume\": \"101256225\"\n            },\n            \"2023-06-15\": {\n                \"1. open\": \"183.9600\",\n                \"2. high\": \"186.5200\",\n                \"3. low\": \"183.7800\",\n                \"4. close\": \"186.0100\",\n                \"5. volume\": \"65433166\"\n            },\n            \"2023-06-14\": {\n                \"1. open\": \"183.3700\",\n                \"2. high\": \"184.3900\",\n                \"3. low\": \"182.0200\",\n                \"4. close\": \"183.9500\",\n                \"5. volume\": \"57462882\"\n            },\n            \"2023-06-13\": {\n                \"1. open\": \"182.8000\",\n                \"2. high\": \"184.1500\",\n                \"3. low\": \"182.4400\",\n                \"4. close\": \"183.3100\",\n                \"5. volume\": \"54929129\"\n            },\n            \"2023-06-12\": {\n                \"1. open\": \"181.2700\",\n                \"2. high\": \"183.8900\",\n                \"3. low\": \"180.9700\",\n                \"4. close\": \"183.7900\",\n                \"5. volume\": \"54754995\"\n            },\n            \"2023-06-09\": {\n                \"1. open\": \"181.5000\",\n                \"2. high\": \"182.2300\",\n                \"3. low\": \"180.6300\",\n                \"4. close\": \"180.9600\",\n                \"5. volume\": \"48899973\"\n            },\n            \"2023-06-08\": {\n                \"1. open\": \"177.8950\",\n                \"2. high\": \"180.8400\",\n                \"3. low\": \"177.4600\",\n                \"4. close\": \"180.5700\",\n                \"5. volume\": \"50214881\"\n            },\n            \"2023-06-07\": {\n                \"1. open\": \"178.4400\",\n                \"2. high\": \"181.2100\",\n                \"3. low\": \"177.3200\",\n                \"4. close\": \"177.8200\",\n                \"5. volume\": \"61944615\"\n            },\n            \"2023-06-06\": {\n                \"1. open\": \"179.9650\",\n                \"2. high\": \"180.1200\",\n                \"3. low\": \"177.4300\",\n                \"4. close\": \"179.2100\",\n                \"5. volume\": \"64848374\"\n            },\n            \"2023-06-05\": {\n                \"1. open\": \"182.6300\",\n                \"2. high\": \"184.9510\",\n                \"3. low\": \"178.0350\",\n                \"4. close\": \"179.5800\",\n                \"5. volume\": \"121946497\"\n            },\n            \"2023-06-02\": {\n                \"1. open\": \"181.0300\",\n                \"2. high\": \"181.7800\",\n                \"3. low\": \"179.2600\",\n                \"4. close\": \"180.9500\",\n                \"5. volume\": \"61996913\"\n            },\n            \"2023-06-01\": {\n                \"1. open\": \"177.7000\",\n                \"2. high\": \"180.1200\",\n                \"3. low\": \"176.9306\",\n                \"4. close\": \"180.0900\",\n                \"5. volume\": \"68901809\"\n            },\n            \"2023-05-31\": {\n                \"1. open\": \"177.3250\",\n                \"2. high\": \"179.3500\",\n                \"3. low\": \"176.7600\",\n                \"4. close\": \"177.2500\",\n                \"5. volume\": \"99313268\"\n            },\n            \"2023-05-30\": {\n                \"1. open\": \"176.9600\",\n                \"2. high\": \"178.9900\",\n                \"3. low\": \"176.5700\",\n                \"4. close\": \"177.3000\",\n                \"5. volume\": \"55964401\"\n            },\n            \"2023-05-26\": {\n                \"1. open\": \"173.3200\",\n                \"2. high\": \"175.7700\",\n                \"3. low\": \"173.1100\",\n                \"4. close\": \"175.4300\",\n                \"5. volume\": \"54834975\"\n            },\n            \"2023-05-25\": {\n                \"1. open\": \"172.4100\",\n                \"2. high\": \"173.8950\",\n                \"3. low\": \"171.6900\",\n                \"4. close\": \"172.9900\",\n                \"5. volume\": \"56058258\"\n            },\n            \"2023-05-24\": {\n                \"1. open\": \"171.0900\",\n                \"2. high\": \"172.4183\",\n                \"3. low\": \"170.5200\",\n                \"4. close\": \"171.8400\",\n                \"5. volume\": \"45143488\"\n            },\n            \"2023-05-23\": {\n                \"1. open\": \"173.1300\",\n                \"2. high\": \"173.3794\",\n                \"3. low\": \"171.2750\",\n                \"4. close\": \"171.5600\",\n                \"5. volume\": \"50747263\"\n            },\n            \"2023-05-22\": {\n                \"1. open\": \"173.9800\",\n                \"2. high\": \"174.7100\",\n                \"3. low\": \"173.4500\",\n                \"4. close\": \"174.2000\",\n                \"5. volume\": \"43570932\"\n            },\n            \"2023-05-19\": {\n                \"1. open\": \"176.3900\",\n                \"2. high\": \"176.3900\",\n                \"3. low\": \"174.9400\",\n                \"4. close\": \"175.1600\",\n                \"5. volume\": \"55809475\"\n            },\n            \"2023-05-18\": {\n                \"1. open\": \"173.0000\",\n                \"2. high\": \"175.2400\",\n                \"3. low\": \"172.5800\",\n                \"4. close\": \"175.0500\",\n                \"5. volume\": \"65496657\"\n            },\n            \"2023-05-17\": {\n                \"1. open\": \"171.7100\",\n                \"2. high\": \"172.9250\",\n                \"3. low\": \"170.4201\",\n                \"4. close\": \"172.6900\",\n                \"5. volume\": \"57951604\"\n            },\n            \"2023-05-16\": {\n                \"1. open\": \"171.9900\",\n                \"2. high\": \"173.1383\",\n                \"3. low\": \"171.7991\",\n                \"4. close\": \"172.0700\",\n                \"5. volume\": \"42110293\"\n            },\n            \"2023-05-15\": {\n                \"1. open\": \"173.1600\",\n                \"2. high\": \"173.2100\",\n                \"3. low\": \"171.4700\",\n                \"4. close\": \"172.0700\",\n                \"5. volume\": \"37266659\"\n            },\n            \"2023-05-12\": {\n                \"1. open\": \"173.6200\",\n                \"2. high\": \"174.0600\",\n                \"3. low\": \"171.0000\",\n                \"4. close\": \"172.5700\",\n                \"5. volume\": \"45533138\"\n            },\n            \"2023-05-11\": {\n                \"1. open\": \"173.8500\",\n                \"2. high\": \"174.5900\",\n                \"3. low\": \"172.1700\",\n                \"4. close\": \"173.7500\",\n                \"5. volume\": \"49514676\"\n            },\n            \"2023-05-10\": {\n                \"1. open\": \"173.0200\",\n                \"2. high\": \"174.0300\",\n                \"3. low\": \"171.9000\",\n                \"4. close\": \"173.5550\",\n                \"5. volume\": \"53724501\"\n            },\n            \"2023-05-09\": {\n                \"1. open\": \"173.0500\",\n                \"2. high\": \"173.5400\",\n                \"3. low\": \"171.6000\",\n                \"4. close\": \"171.7700\",\n                \"5. volume\": \"45326874\"\n            },\n            \"2023-05-08\": {\n                \"1. open\": \"172.4800\",\n                \"2. high\": \"173.8500\",\n                \"3. low\": \"172.1100\",\n                \"4. close\": \"173.5000\",\n                \"5. volume\": \"55962793\"\n            },\n            \"2023-05-05\": {\n                \"1. open\": \"170.9750\",\n                \"2. high\": \"174.3000\",\n                \"3. low\": \"170.7600\",\n                \"4. close\": \"173.5700\",\n                \"5. volume\": \"113453171\"\n            },\n            \"2023-05-04\": {\n                \"1. open\": \"164.8900\",\n                \"2. high\": \"167.0400\",\n                \"3. low\": \"164.3100\",\n                \"4. close\": \"165.7900\",\n                \"5. volume\": \"81235427\"\n            },\n            \"2023-05-03\": {\n                \"1. open\": \"169.5000\",\n                \"2. high\": \"170.9200\",\n                \"3. low\": \"167.1600\",\n                \"4. close\": \"167.4500\",\n                \"5. volume\": \"65136018\"\n            },\n            \"2023-05-02\": {\n                \"1. open\": \"170.0900\",\n                \"2. high\": \"170.3500\",\n                \"3. low\": \"167.5400\",\n                \"4. close\": \"168.5400\",\n                \"5. volume\": \"48425696\"\n            },\n            \"2023-05-01\": {\n                \"1. open\": \"169.2800\",\n                \"2. high\": \"170.4500\",\n                \"3. low\": \"168.6400\",\n                \"4. close\": \"169.5900\",\n                \"5. volume\": \"52472936\"\n            },\n            \"2023-04-28\": {\n                \"1. open\": \"168.4900\",\n                \"2. high\": \"169.8500\",\n                \"3. low\": \"167.8801\",\n                \"4. close\": \"169.6800\",\n                \"5. volume\": \"55275851\"\n            },\n            \"2023-04-27\": {\n                \"1. open\": \"165.1900\",\n                \"2. high\": \"168.5600\",\n                \"3. low\": \"165.1900\",\n                \"4. close\": \"168.4100\",\n                \"5. volume\": \"64902329\"\n            },\n            \"2023-04-26\": {\n                \"1. open\": \"163.0550\",\n                \"2. high\": \"165.2800\",\n                \"3. low\": \"162.8000\",\n                \"4. close\": \"163.7600\",\n                \"5. volume\": \"44105745\"\n            },\n            \"2023-04-25\": {\n                \"1. open\": \"165.1900\",\n                \"2. high\": \"166.3050\",\n                \"3. low\": \"163.7300\",\n                \"4. close\": \"163.7700\",\n                \"5. volume\": \"48714063\"\n            },\n            \"2023-04-24\": {\n                \"1. open\": \"165.0000\",\n                \"2. high\": \"165.6000\",\n                \"3. low\": \"163.8900\",\n                \"4. close\": \"165.3300\",\n                \"5. volume\": \"41949581\"\n            },\n            \"2023-04-21\": {\n                \"1. open\": \"165.0500\",\n                \"2. high\": \"166.4521\",\n                \"3. low\": \"164.4900\",\n                \"4. close\": \"165.0200\",\n                \"5. volume\": \"58337341\"\n            },\n            \"2023-04-20\": {\n                \"1. open\": \"166.0900\",\n                \"2. high\": \"167.8700\",\n                \"3. low\": \"165.5600\",\n                \"4. close\": \"166.6500\",\n                \"5. volume\": \"52456377\"\n            },\n            \"2023-04-19\": {\n                \"1. open\": \"165.8000\",\n                \"2. high\": \"168.1600\",\n                \"3. low\": \"165.5400\",\n                \"4. close\": \"167.6300\",\n                \"5. volume\": \"47720166\"\n            },\n            \"2023-04-18\": {\n                \"1. open\": \"166.1000\",\n                \"2. high\": \"167.4100\",\n                \"3. low\": \"165.6500\",\n                \"4. close\": \"166.4700\",\n                \"5. volume\": \"49923008\"\n            },\n            \"2023-04-17\": {\n                \"1. open\": \"165.0900\",\n                \"2. high\": \"165.3900\",\n                \"3. low\": \"164.0300\",\n                \"4. close\": \"165.2300\",\n                \"5. volume\": \"40713618\"\n            },\n            \"2023-04-14\": {\n                \"1. open\": \"164.5900\",\n                \"2. high\": \"166.3200\",\n                \"3. low\": \"163.8200\",\n                \"4. close\": \"165.2100\",\n                \"5. volume\": \"49386480\"\n            },\n            \"2023-04-13\": {\n                \"1. open\": \"161.6300\",\n                \"2. high\": \"165.8000\",\n                \"3. low\": \"161.4200\",\n                \"4. close\": \"165.5600\",\n                \"5. volume\": \"68445649\"\n            },\n            \"2023-04-12\": {\n                \"1. open\": \"161.2200\",\n                \"2. high\": \"162.0600\",\n                \"3. low\": \"159.7800\",\n                \"4. close\": \"160.1000\",\n                \"5. volume\": \"50133062\"\n            },\n            \"2023-04-11\": {\n                \"1. open\": \"162.3500\",\n                \"2. high\": \"162.3600\",\n                \"3. low\": \"160.5100\",\n                \"4. close\": \"160.8000\",\n                \"5. volume\": \"47644217\"\n            },\n            \"2023-04-10\": {\n                \"1. open\": \"161.4200\",\n                \"2. high\": \"162.0300\",\n                \"3. low\": \"160.0800\",\n                \"4. close\": \"162.0300\",\n                \"5. volume\": \"47716882\"\n            },\n            \"2023-04-06\": {\n                \"1. open\": \"162.4300\",\n                \"2. high\": \"164.9584\",\n                \"3. low\": \"162.0000\",\n                \"4. close\": \"164.6600\",\n                \"5. volume\": \"45390123\"\n            },\n            \"2023-04-05\": {\n                \"1. open\": \"164.7400\",\n                \"2. high\": \"165.0500\",\n                \"3. low\": \"161.8000\",\n                \"4. close\": \"163.7600\",\n                \"5. volume\": \"51511744\"\n            },\n            \"2023-04-04\": {\n                \"1. open\": \"166.5950\",\n                \"2. high\": \"166.8400\",\n                \"3. low\": \"165.1100\",\n                \"4. close\": \"165.6300\",\n                \"5. volume\": \"46278295\"\n            },\n            \"2023-04-03\": {\n                \"1. open\": \"164.2700\",\n                \"2. high\": \"166.2900\",\n                \"3. low\": \"164.2200\",\n                \"4. close\": \"166.1700\",\n                \"5. volume\": \"56976187\"\n            },\n            \"2023-03-31\": {\n                \"1. open\": \"162.4400\",\n                \"2. high\": \"165.0000\",\n                \"3. low\": \"161.9100\",\n                \"4. close\": \"164.9000\",\n                \"5. volume\": \"68749792\"\n            },\n            \"2023-03-30\": {\n                \"1. open\": \"161.5300\",\n                \"2. high\": \"162.4700\",\n                \"3. low\": \"161.2710\",\n                \"4. close\": \"162.3600\",\n                \"5. volume\": \"49501689\"\n            },\n            \"2023-03-29\": {\n                \"1. open\": \"159.3700\",\n                \"2. high\": \"161.0500\",\n                \"3. low\": \"159.3500\",\n                \"4. close\": \"160.7700\",\n                \"5. volume\": \"51305691\"\n            },\n            \"2023-03-28\": {\n                \"1. open\": \"157.9700\",\n                \"2. high\": \"158.4900\",\n                \"3. low\": \"155.9800\",\n                \"4. close\": \"157.6500\",\n                \"5. volume\": \"45992152\"\n            }\n        }\n    },\n    \"message\": \"data get successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get ticket list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{1}}stocklist?keyword=gold",
+					"host": [
+						"{{1}}stocklist"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "gold"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get ticket list",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{1}}stocklist?keyword=gold",
+							"host": [
+								"{{1}}stocklist"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "gold"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2388"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"954-LMRGE0UvytQkbvfKw/GECxOLRQQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Aug 2023 22:57:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"bestMatches\": [\n            {\n                \"1. symbol\": \"GOLD\",\n                \"2. name\": \"Barrick Gold Corp\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"United States\",\n                \"5. marketOpen\": \"09:30\",\n                \"6. marketClose\": \"16:00\",\n                \"7. timezone\": \"UTC-04\",\n                \"8. currency\": \"USD\",\n                \"9. matchScore\": \"1.0000\"\n            },\n            {\n                \"1. symbol\": \"GOLDD\",\n                \"2. name\": \"Pele Mountain Resources Inc\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"United States\",\n                \"5. marketOpen\": \"09:30\",\n                \"6. marketClose\": \"16:00\",\n                \"7. timezone\": \"UTC-04\",\n                \"8. currency\": \"USD\",\n                \"9. matchScore\": \"0.8889\"\n            },\n            {\n                \"1. symbol\": \"GOLD.PAR\",\n                \"2. name\": \"Amundi Physical Gold ETC C EUR\",\n                \"3. type\": \"ETF\",\n                \"4. region\": \"Paris\",\n                \"5. marketOpen\": \"09:00\",\n                \"6. marketClose\": \"17:30\",\n                \"7. timezone\": \"UTC+02\",\n                \"8. currency\": \"EUR\",\n                \"9. matchScore\": \"0.7273\"\n            },\n            {\n                \"1. symbol\": \"GOLD.TRT\",\n                \"2. name\": \"GoldMining Inc\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"Toronto\",\n                \"5. marketOpen\": \"09:30\",\n                \"6. marketClose\": \"16:00\",\n                \"7. timezone\": \"UTC-05\",\n                \"8. currency\": \"CAD\",\n                \"9. matchScore\": \"0.7273\"\n            },\n            {\n                \"1. symbol\": \"GOLD11.SAO\",\n                \"2. name\": \"Trend Etf Lbma Ouro Fundo Investimento Cotas De Fundo De Andice Investimento Exterior\",\n                \"3. type\": \"ETF\",\n                \"4. region\": \"Brazil/Sao Paolo\",\n                \"5. marketOpen\": \"10:00\",\n                \"6. marketClose\": \"17:30\",\n                \"7. timezone\": \"UTC-03\",\n                \"8. currency\": \"BRL\",\n                \"9. matchScore\": \"0.6154\"\n            },\n            {\n                \"1. symbol\": \"GOLDIAM.BSE\",\n                \"2. name\": \"GOLDIAM INTERNATIONAL LTD.\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"India/Bombay\",\n                \"5. marketOpen\": \"09:15\",\n                \"6. marketClose\": \"15:30\",\n                \"7. timezone\": \"UTC+5.5\",\n                \"8. currency\": \"INR\",\n                \"9. matchScore\": \"0.5714\"\n            },\n            {\n                \"1. symbol\": \"GOLDBEES.BSE\",\n                \"2. name\": \"Nippon India ETF Gold BeES\",\n                \"3. type\": \"ETF\",\n                \"4. region\": \"India/Bombay\",\n                \"5. marketOpen\": \"09:15\",\n                \"6. marketClose\": \"15:30\",\n                \"7. timezone\": \"UTC+5.5\",\n                \"8. currency\": \"INR\",\n                \"9. matchScore\": \"0.5333\"\n            },\n            {\n                \"1. symbol\": \"GOLDCOINHF.BSE\",\n                \"2. name\": \"Gold Coin Health Foods Ltd\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"India/Bombay\",\n                \"5. marketOpen\": \"09:15\",\n                \"6. marketClose\": \"15:30\",\n                \"7. timezone\": \"UTC+5.5\",\n                \"8. currency\": \"INR\",\n                \"9. matchScore\": \"0.4706\"\n            },\n            {\n                \"1. symbol\": \"GOLDENTOBC.BSE\",\n                \"2. name\": \"GOLDEN TOBACCO LTD.\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"India/Bombay\",\n                \"5. marketOpen\": \"09:15\",\n                \"6. marketClose\": \"15:30\",\n                \"7. timezone\": \"UTC+5.5\",\n                \"8. currency\": \"INR\",\n                \"9. matchScore\": \"0.4706\"\n            },\n            {\n                \"1. symbol\": \"GOLDENCREST.BSE\",\n                \"2. name\": \"Golden Crest Education & Services Ltd\",\n                \"3. type\": \"Equity\",\n                \"4. region\": \"India/Bombay\",\n                \"5. marketOpen\": \"09:15\",\n                \"6. marketClose\": \"15:30\",\n                \"7. timezone\": \"UTC+5.5\",\n                \"8. currency\": \"INR\",\n                \"9. matchScore\": \"0.4444\"\n            }\n        ]\n    },\n    \"message\": \"data get successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "admin login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"AdminToken\", pm.response.json().data.token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"123123\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{1}}admin/login",
+					"host": [
+						"{{1}}admin"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "admin login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"123123\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{1}}admin/login",
+							"host": [
+								"{{1}}admin"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "756"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2f4-XsysDEpjnLTSexQhpcU0Jf7wbds\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 19 Aug 2023 21:49:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"64e13633d3b9439cc603362b\",\n        \"fullName\": \"admin\",\n        \"userType\": \"Admin\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.fg2S12Ri4sulqlmiR24dSaxNw0xoECq7yLqYnfQlgXbZ3piC8KJtOwdGDcbaF9zeNgv3Z98bjsfM_5iq2KpPBpH3TR03b4dUo3dk4etp33DK5e7Ls_N39K65trOZkULVeZnY1qfLspDlGn4MhOH8nut9cByNrE5XzAa0TDP_VLKgFdqzxPaPl_elr9GgA8FT9zS2f7qzFsB5AVUygVeMjqi0ONuk8vinCKsfzhcKnO6G5fGjBaCZ-T9wAz55u6XhAy0CaSGemxpauCIr87Kb2JewAd-JYMm25XPGZ-O2kUc8A3CqaUiJV2-YKEMIl8FLSCgezgyMvu-DZQlJ8Lz8gw.BWZAnagGOQg-nX0i.IaY96UtRtvqDCg1_0yGR05AewbVOx2fKBKiIQmHDqIkSmfxpV6KuAs37XQvxk4SYDTqpMf3Kg-acr_I8-ws7qQdkTj536nzymZgRGiJc3epf8easEvyfi0OhSlJlLJqiTOP-JjJOaxbpv5tpdj-sZOusab0pvkCMBLbISR9bddPi73ACWjM1.dG3ASkhL9qOXajp-g2f-UQ\"\n    },\n    \"status\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "get image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/1images-1692484149293.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"1images-1692484149293.jpg"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -1961,6 +2826,10 @@
 			"key": "adminToken",
 			"value": "",
 			"type": "string"
+		},
+		{
+			"key": "AdminToken",
+			"value": ""
 		}
 	]
 }

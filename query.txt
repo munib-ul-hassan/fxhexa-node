@@ -1,0 +1,12 @@
+series=enum["TIME_SERIES_DAILY","TIME_SERIES_WEEKLY","TIME_SERIES_MONTHLY"]
+min= 1-10
+tickets
+	ibm=IBM
+	APPLE=AAPL
+	TESLA=TSLA 
+	GOOGLE=GOOG
+	FACEBOOK=0QZI.LON
+	AMAZON=AMZN
+	gold= GOLD
+	silver=SILVERPRL.BSE
+for more ticket symbol use API of get ticket list in postman collection

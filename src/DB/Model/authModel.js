@@ -74,9 +74,8 @@ const AuthSchema = new Schema(
 
     real: [
       {
-        coin: {
-          type: Schema.Types.ObjectId,
-          ref: "coin",
+        stock: {
+          type: String,
         },
         ammount: {
           type: Number,

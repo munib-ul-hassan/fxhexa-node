@@ -16,9 +16,10 @@ import { AuthRouters } from "./Router/AuthRouter.js";
 // import { ChatRouters } from "./Router/ChatRouters.js";
 import { UserRouters } from "./Router/UserRouter.js";
 import { AdminRouters } from "./Router/AdminRouters.js";
-import { getForexData } from "./Config/forexConfig.js";
+
 import {TransactionRouters} from "./Router/TransactionRouter.js";
 import { StockRouters } from "./Router/StockRouters.js";
+import { RequestRouters } from "./Router/requestRoutes.js";
 
 
 
@@ -57,29 +58,13 @@ morganBody(app, {
 await connectDB();
 // Running Seeder
 // RunSeeder();
-app.get("/api/v1/forex", async (req, res) => {
-  try {
 
-    const { startDate,endDate } = req.query
-    console.log(startDate,endDate)
-    const data= await getForexData(startDate,endDate)
-    console.log(data)
-    return res.status(200).json({
-      data, meessga: "Forex Data send successfuly"
-    })
-  } catch (err) {
-    return res.status(400).json({
-      meessga: err.meessga
-    })
-  }
-
-});
 // Routes
 app.use(API_Prefix, AuthRouters);
-
 app.use(API_Prefix, UserRouters);
 app.use(API_Prefix, AdminRouters);
 app.use(API_Prefix, TransactionRouters)
+app.use(API_Prefix, RequestRouters)
 app.use(API_Prefix, StockRouters)
 app.use(ResHandler);
 
