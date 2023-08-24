@@ -34,7 +34,7 @@ const registerUser = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { fullName, email, password, deviceType, deviceToken, accType } =
+    const { fullName, email, password, deviceType, deviceToken, accType,currency } =
       req.body;
 
     const IsUser = await AuthModel.findOne({ identifier: email });
@@ -108,6 +108,7 @@ const registerUser = async (req, res, next) => {
     const usermodel = await new UserModel({
       auth: auth._id,
       fullName,
+      currency
     }).save();
     // if(userType == "Admin"){
     //   UserModel = await new AdminModel({
@@ -159,6 +160,7 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         // image: { file: "" },
         otp,
+        currency:user.profile._doc.currency,
         demo: user.demo? user.demo.map((item) => {
           return { coin: item.coin.coin, ammount: item.ammount }
         }):[],
@@ -315,6 +317,7 @@ const LoginUser = async (req, res, next) => {
       fullName: profile.fullName,
       email: user.identifier,
       userType: user.userType,
+      currency:profile.currency,
       // image:  profile.image,
       demo: user._doc.demo ?  user._doc.demo.map((item) => {
         return { coin: item.coin.coin, ammount: item.ammount }
@@ -781,6 +784,7 @@ const getprofile = async (req, res, next) => {
       // image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
+      currency:data.profile.currency,
       demo: data.demo?  data.demo.map((item) => {
         return { coin: item.coin.coin, ammount: item.ammount }
       }):[],
@@ -866,7 +870,7 @@ const notificationUpdate = async (req, res, next) => {
       _id: profile._id,
       fullName: profile.fullName,
       email: user._doc.identifier,
-
+      currency:profile.currency,
       // image: { file: profile.image?.file },
       demo, real,
       isCompleteProfile: user._doc.isCompleteProfile,
@@ -910,6 +914,11 @@ const updateProfile = async (req, res, next) => {
         accType: body.accType,
       });
     }
+    if (body.currency) {
+      await UserModel.findByIdAndUpdate(req.user._id, {
+        currency: body.currency,
+      });
+    }
 
     const user = await AuthModel.findById(req.user._id).populate([
       "profile",
@@ -931,6 +940,9 @@ const updateProfile = async (req, res, next) => {
       _id: user.profile._doc._id,
       email: user.identifier,
       fullName: user.profile._doc.fullName,
+      currency: user.profile._doc.currency,
+
+
       userType: "User",
       demo, real,
       isCompleteProfile: user.isCompleteProfile,

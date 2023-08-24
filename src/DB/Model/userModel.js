@@ -8,9 +8,11 @@ const UserSchema = new Schema(
       ref: "Auth",
       required: true,
     },
-
+    currency: {
+      type: String
+    },
     image: {
-      type: String      
+      type: String
     },
 
   },

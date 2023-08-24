@@ -24,6 +24,7 @@ const Requestschema = new Schema({
         type: String,
         enum: ["Buy", "Sell"]
     },
+    exchangeAmmount: { type: Number },
     image: {
         type: String
     },

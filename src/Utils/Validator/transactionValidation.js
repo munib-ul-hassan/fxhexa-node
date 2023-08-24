@@ -15,3 +15,16 @@ export const sellCoinValidator = joi.object({
   coinSell: joi.string().required(),
   // transactionType: joi.string().valid("buy", "sell"),
 });
+
+export const RequestValidator = joi.object({
+  amount: joi.number(),
+  stock: joi.string(),
+  requestType: joi.string().valid("Buy", "Sell"),
+  exchangeAmmount: joi.number()
+})
+export const updaterequestValidator = joi.object({
+
+  status: joi.string().valid("cancelled", "accepted").required(),
+  comment: joi.string(),
+
+})

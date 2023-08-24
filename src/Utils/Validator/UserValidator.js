@@ -74,7 +74,7 @@ export const changePasswordValidator = joi.object({
 export const ProfileValidator = joi.object({
   fullName: joi.string(),  
   accType: joi.string(), 
-  
+  currency:joi.string(), 
 });
 
 //logout validator

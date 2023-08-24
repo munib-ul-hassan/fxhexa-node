@@ -77,7 +77,7 @@ const AuthSchema = new Schema(
         stock: {
           type: String,
         },
-        ammount: {
+        amount: {
           type: Number,
           default: 0,
         },
