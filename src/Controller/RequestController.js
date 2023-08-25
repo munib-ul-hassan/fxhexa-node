@@ -52,6 +52,7 @@ const postRequest = async (req, res, next) => {
 
 
     } catch (error) {
+        console.log(error.message)
         if (req.file) {
             fs.unlink("public/uploads/" + req.file?.filename, (err) => {
                 console.log(err)
