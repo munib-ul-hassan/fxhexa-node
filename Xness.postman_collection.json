@@ -374,7 +374,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\":\"new165835@gmail.com\",\r\n    \"password\": \"12345678\",   \r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"accType\":\"demo\" //real in case of real account\r\n}",
+							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new165835@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"accType\": \"demo\",\r\n    \"currency\": \"pkr\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1831,7 +1831,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}user/request?page=1&limit=10&status=accepted",
+							"raw": "{{1}}user/request?page=1&limit=10&status=pending",
 							"host": [
 								"{{1}}user"
 							],
@@ -1849,7 +1849,7 @@
 								},
 								{
 									"key": "status",
-									"value": "accepted"
+									"value": "pending"
 								}
 							]
 						}
@@ -1965,6 +1965,11 @@
 									"key": "file",
 									"type": "file",
 									"src": "/E:/1images.jpg"
+								},
+								{
+									"key": "exchangeAmmount",
+									"value": "12312",
+									"type": "text"
 								}
 							]
 						},
@@ -2183,13 +2188,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{1}}admin/request/64e1423594afcd2dd438bd60",
+									"raw": "{{1}}admin/request/64e6747aa3058fb7cfeb77b4",
 									"host": [
 										"{{1}}admin"
 									],
 									"path": [
 										"request",
-										"64e1423594afcd2dd438bd60"
+										"64e6747aa3058fb7cfeb77b4"
 									]
 								}
 							},
@@ -2215,13 +2220,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{1}}admin/request/64e1423594afcd2dd438bd60",
+											"raw": "{{1}}admin/request/64e6747aa3058fb7cfeb77b4",
 											"host": [
 												"{{1}}admin"
 											],
 											"path": [
 												"request",
-												"64e1423594afcd2dd438bd60"
+												"64e6747aa3058fb7cfeb77b4"
 											]
 										}
 									},
@@ -2243,15 +2248,15 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "323"
+											"value": "287"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"143-x8OZft0oHWCbwj+Gv/oKFHbezF8\""
+											"value": "W/\"11f-3MsBA5JDaCXcOHQgWhdlgeA2b3g\""
 										},
 										{
 											"key": "Date",
-											"value": "Sat, 19 Aug 2023 23:07:48 GMT"
+											"value": "Thu, 24 Aug 2023 21:40:47 GMT"
 										},
 										{
 											"key": "Connection",
@@ -2263,7 +2268,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"message\": \"Request updated successfully\",\n    \"data\": {\n        \"_id\": \"64e1423594afcd2dd438bd60\",\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"accepted\",\n        \"amount\": 100,\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"image\": \"1images-1692484149293.jpg\",\n        \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n        \"updatedAt\": \"2023-08-19T23:07:48.129Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+									"body": "{\n    \"message\": \"Request updated successfully\",\n    \"data\": {\n        \"_id\": \"64e6747aa3058fb7cfeb77b4\",\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"accepted\",\n        \"amount\": 100,\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"createdAt\": \"2023-08-23T21:04:58.118Z\",\n        \"updatedAt\": \"2023-08-24T21:40:47.334Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 								}
 							]
 						},

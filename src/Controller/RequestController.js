@@ -31,7 +31,7 @@ const postRequest = async (req, res, next) => {
 
         }
         if (req.file) {
-            req.body.image = req.file.filename
+            req.body.image = req.file?.filename
         }
         const requestData = await (new RequestModel({
             userId, amount, stock, requestType, image: req.body.image, exchangeAmmount
@@ -53,7 +53,7 @@ const postRequest = async (req, res, next) => {
 
     } catch (error) {
         if (req.file) {
-            fs.unlink("public/uploads/" + req.file.filename, (err) => {
+            fs.unlink("public/uploads/" + req.file?.filename, (err) => {
                 console.log(err)
             })
         }
@@ -90,6 +90,7 @@ const getRequestByAdmin = async (req, res, next) => {
         return next(CustomError.badRequest(error.message));
     }
 }
+
 const updateRequest = async (req, res, next) => {
     try {
         const { id } = req.params;
