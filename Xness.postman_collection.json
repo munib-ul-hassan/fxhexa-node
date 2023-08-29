@@ -1967,7 +1967,7 @@
 									"src": "/E:/1images.jpg"
 								},
 								{
-									"key": "exchangeAmmount",
+									"key": "exchangeAmount",
 									"value": "200",
 									"type": "text"
 								}
@@ -2019,7 +2019,7 @@
 											"src": "/E:/1images.jpg"
 										},
 										{
-											"key": "exchangeAmmount",
+											"key": "exchangeAmount",
 											"value": "",
 											"type": "text",
 											"disabled": true
@@ -2112,7 +2112,7 @@
 											"disabled": true
 										},
 										{
-											"key": "exchangeAmmount",
+											"key": "exchangeAmount",
 											"value": "3000",
 											"type": "text"
 										}
@@ -2166,7 +2166,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Request generated Successfully\",\n    \"data\": {\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"pending\",\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"exchangeAmmount\": 3000,\n        \"amount\": 100,\n        \"_id\": \"64ee6effc74e530a79e430db\",\n        \"createdAt\": \"2023-08-29T22:19:43.709Z\",\n        \"updatedAt\": \"2023-08-29T22:19:43.709Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Request generated Successfully\",\n    \"data\": {\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"pending\",\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"exchangeAmount\": 3000,\n        \"amount\": 100,\n        \"_id\": \"64ee6effc74e530a79e430db\",\n        \"createdAt\": \"2023-08-29T22:19:43.709Z\",\n        \"updatedAt\": \"2023-08-29T22:19:43.709Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				}

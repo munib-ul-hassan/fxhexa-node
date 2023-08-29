@@ -24,7 +24,11 @@ const Requestschema = new Schema({
         type: String,
         enum: ["Buy", "Sell", "Deposit"]
     },
-    exchangeAmmount: { type: Number },
+    paymentType: {
+        type: String,
+        enum: ["perfect","bank","bitcoin"]
+    },
+    exchangeAmount: { type: Number },
     amount: {
         type: Number
     },

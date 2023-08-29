@@ -113,7 +113,7 @@ const updateRequest = async (req, res, next) => {
                         new: true,
                     });
                     await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
-                        balance:requestData.userId.auth.balance-requestData?.exchangeAmmount
+                        balance:requestData.userId.auth.balance-requestData?.exchangeAmount
                     })
 
                     return next(
@@ -138,7 +138,7 @@ const updateRequest = async (req, res, next) => {
                         new: true,
                     });
                     await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
-                        balance:requestData.userId.auth.balance-requestData?.exchangeAmmount
+                        balance:requestData.userId.auth.balance-requestData?.exchangeAmount
                     })
                     return next(
                         CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
@@ -161,7 +161,7 @@ const updateRequest = async (req, res, next) => {
                     new: true,
                 });
                 await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
-                    balance:requestData.userId.auth.balance+requestData?.exchangeAmmount
+                    balance:requestData.userId.auth.balance+requestData?.exchangeAmount
                 })
                 return next(
                     CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
