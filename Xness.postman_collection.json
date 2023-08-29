@@ -1831,7 +1831,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}user/request?page=1&limit=10&status=pending",
+							"raw": "{{1}}user/request?page=1&limit=20&status=pending",
 							"host": [
 								"{{1}}user"
 							],
@@ -1845,7 +1845,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "20"
 								},
 								{
 									"key": "status",
@@ -1867,7 +1867,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{1}}user/request?page=1&limit=10&status=pending",
+									"raw": "{{1}}user/request?page=1&limit=20&status=pending",
 									"host": [
 										"{{1}}user"
 									],
@@ -1881,7 +1881,7 @@
 										},
 										{
 											"key": "limit",
-											"value": "10"
+											"value": "20"
 										},
 										{
 											"key": "status",
@@ -1908,15 +1908,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "320"
+									"value": "2291"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"140-GFVUlxpRw2gIcQIkbvetpZKOtRw\""
+									"value": "W/\"8f3-I2+f/T8uFF3nui2G69TYeQqjHDo\""
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 19 Aug 2023 22:31:26 GMT"
+									"value": "Tue, 29 Aug 2023 22:19:58 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1928,7 +1928,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Request get Successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64e1423594afcd2dd438bd60\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"image\": \"1images-1692484149293.jpg\",\n            \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n            \"updatedAt\": \"2023-08-19T22:29:09.621Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Request get Successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64e67ebd5b4cd4da44e4a019\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-23T21:48:45.930Z\",\n            \"updatedAt\": \"2023-08-23T21:48:45.930Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e692425b4cd4da44e4a078\",7\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-23T23:12:02.842Z\",\n            \"updatedAt\": \"2023-08-23T23:12:02.842Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6a34f5b4cd4da44e4a0c7\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:24:47.279Z\",\n            \"updatedAt\": \"2023-08-24T00:24:47.279Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6a7ae5b4cd4da44e4a0d8\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:43:26.615Z\",\n            \"updatedAt\": \"2023-08-24T00:43:26.615Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6a7b75b4cd4da44e4a0e4\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 150,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:43:35.977Z\",\n            \"updatedAt\": \"2023-08-24T00:43:35.977Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6a7be5b4cd4da44e4a0f0\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 150,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:43:42.044Z\",\n            \"updatedAt\": \"2023-08-24T00:43:42.044Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6a7d25b4cd4da44e4a11a\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 150,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:44:02.589Z\",\n            \"updatedAt\": \"2023-08-24T00:44:02.589Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6a7d55b4cd4da44e4a126\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 150,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:44:05.671Z\",\n            \"updatedAt\": \"2023-08-24T00:44:05.671Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6ab775b4cd4da44e4a159\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 150,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T00:59:35.444Z\",\n            \"updatedAt\": \"2023-08-24T00:59:35.444Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64e6ab945b4cd4da44e4a165\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 150,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"createdAt\": \"2023-08-24T01:00:04.535Z\",\n            \"updatedAt\": \"2023-08-24T01:00:04.535Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -1958,7 +1958,7 @@
 								},
 								{
 									"key": "requestType",
-									"value": "Buy",
+									"value": "Sell",
 									"type": "text"
 								},
 								{
@@ -1968,7 +1968,7 @@
 								},
 								{
 									"key": "exchangeAmmount",
-									"value": "12312",
+									"value": "200",
 									"type": "text"
 								}
 							]
@@ -1985,7 +1985,7 @@
 					},
 					"response": [
 						{
-							"name": "create request",
+							"name": "deposit",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -2010,13 +2010,19 @@
 										},
 										{
 											"key": "requestType",
-											"value": "Buy",
+											"value": "Deposit",
 											"type": "text"
 										},
 										{
 											"key": "file",
 											"type": "file",
 											"src": "/E:/1images.jpg"
+										},
+										{
+											"key": "exchangeAmmount",
+											"value": "",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -2048,15 +2054,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "324"
+									"value": "292"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"144-LV35tJy75fHUNuK1Oxp0Zk38RRM\""
+									"value": "W/\"124-zuCdXXbss3pejER1/qOTSTQ0Eec\""
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 19 Aug 2023 22:29:09 GMT"
+									"value": "Tue, 29 Aug 2023 22:19:11 GMT"
 								},
 								{
 									"key": "Connection",
@@ -2068,7 +2074,99 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Request generated Successfully\",\n    \"data\": {\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"pending\",\n        \"amount\": 100,\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"image\": \"1images-1692484149293.jpg\",\n        \"_id\": \"64e1423594afcd2dd438bd60\",\n        \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n        \"updatedAt\": \"2023-08-19T22:29:09.621Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Request generated Successfully\",\n    \"data\": {\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"pending\",\n        \"stock\": \"AML\",\n        \"requestType\": \"Deposit\",\n        \"amount\": 100,\n        \"_id\": \"64ee6edec74e530a79e430c1\",\n        \"createdAt\": \"2023-08-29T22:19:10.892Z\",\n        \"updatedAt\": \"2023-08-29T22:19:10.892Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+						},
+						{
+							"name": "buy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "amount",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": "AML",
+											"type": "text"
+										},
+										{
+											"key": "requestType",
+											"value": "Buy",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/E:/1images.jpg",
+											"disabled": true
+										},
+										{
+											"key": "exchangeAmmount",
+											"value": "3000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{1}}user/request",
+									"host": [
+										"{{1}}user"
+									],
+									"path": [
+										"request"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "311"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"137-DEkf/DEaFXtgwrfBnOhhTZgUEi4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Aug 2023 22:19:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Request generated Successfully\",\n    \"data\": {\n        \"userId\": \"64d28fccb6bffbb1787205fd\",\n        \"status\": \"pending\",\n        \"stock\": \"AML\",\n        \"requestType\": \"Buy\",\n        \"exchangeAmmount\": 3000,\n        \"amount\": 100,\n        \"_id\": \"64ee6effc74e530a79e430db\",\n        \"createdAt\": \"2023-08-29T22:19:43.709Z\",\n        \"updatedAt\": \"2023-08-29T22:19:43.709Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				}
@@ -2188,13 +2286,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{1}}admin/request/64e6747aa3058fb7cfeb77b4",
+									"raw": "{{1}}admin/request/64ee72a13dfdbbc12d5e36a0",
 									"host": [
 										"{{1}}admin"
 									],
 									"path": [
 										"request",
-										"64e6747aa3058fb7cfeb77b4"
+										"64ee72a13dfdbbc12d5e36a0"
 									]
 								}
 							},

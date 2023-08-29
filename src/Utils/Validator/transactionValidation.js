@@ -19,8 +19,9 @@ export const sellCoinValidator = joi.object({
 export const RequestValidator = joi.object({
   amount: joi.number(),
   stock: joi.string(),
-  requestType: joi.string().valid("Buy", "Sell"),
-  exchangeAmmount: joi.number()
+  requestType: joi.valid("Buy", "Sell", "Deposit"),
+  exchangeAmmount: joi.number(),
+  transactionID: joi.string(),
 })
 export const updaterequestValidator = joi.object({
 

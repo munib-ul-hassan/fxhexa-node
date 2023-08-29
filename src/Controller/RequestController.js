@@ -14,28 +14,14 @@ const postRequest = async (req, res, next) => {
         }
         req.body.userId = req.user.profile._id
 
-        const { userId, amount, stock, requestType, exchangeAmmount } = req.body
-        if (requestType == "Sell") {
-            const i = req.user.real.findIndex((ele) => ele.stock == stock)
-            if (i != -1) {
-                if (req.user.real[i].amount < amount) {
-                    return next(
-                        CustomError.createError("you have less credits than the requested amount", 200)
-                    );
-                }
-            } else {
-                return next(
-                    CustomError.createError("You have no any unit of this stock", 200)
-                );
-            }
 
-        }
         if (req.file) {
             req.body.image = req.file?.filename
         }
-        const requestData = await (new RequestModel({
-            userId, amount, stock, requestType, image: req.body.image, exchangeAmmount
-        })).save()
+
+        const requestData = await (new RequestModel(
+            req.body
+        )).save()
         if (requestData) {
             return next(
                 CustomSuccess.createSuccess(
@@ -52,7 +38,7 @@ const postRequest = async (req, res, next) => {
 
 
     } catch (error) {
-        console.log(error.message)
+
         if (req.file) {
             fs.unlink("public/uploads/" + req.file?.filename, (err) => {
                 console.log(err)
@@ -64,12 +50,12 @@ const postRequest = async (req, res, next) => {
 }
 const getRequestByAdmin = async (req, res, next) => {
     try {
-        console.log(req.query)
+
         const { page, limit } = req.query
         delete req.query.page
         delete req.query.limit
         const data = await RequestModel.find(req.query).limit(limit).skip((page - 1) * limit)
-        console.log(data);
+
         if (data.length > 0) {
             return next(
                 CustomSuccess.createSuccess(
@@ -105,21 +91,19 @@ const updateRequest = async (req, res, next) => {
             return next(CustomError.badRequest("Invalid Id or request already updated"));
         }
         const { error } = updaterequestValidator.validate(req.body)
-        console.log(error)
+
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
 
         if (req.body.status == "accepted") {
             if (requestData.requestType == "Buy") {
-
-                const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)
-                console.log(coinExist)
+                const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)                
                 if (coinExist != -1) {
                     const real = [...requestData.userId.auth.real]
                     real[coinExist].amount += requestData.amount
 
-                    await AuthModel.updateOne({ _id: requestData.userId.auth }, {
+                    await AuthModel.updateOne({ _id: requestData.userId.auth._id }, {
                         real
                     })
                     const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
@@ -128,6 +112,10 @@ const updateRequest = async (req, res, next) => {
                         }, {
                         new: true,
                     });
+                    await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
+                        balance:requestData.userId.auth.balance-requestData?.exchangeAmmount
+                    })
+
                     return next(
                         CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
                     );
@@ -149,6 +137,9 @@ const updateRequest = async (req, res, next) => {
                         }, {
                         new: true,
                     });
+                    await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
+                        balance:requestData.userId.auth.balance-requestData?.exchangeAmmount
+                    })
                     return next(
                         CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
                     );
@@ -169,10 +160,30 @@ const updateRequest = async (req, res, next) => {
                     }, {
                     new: true,
                 });
+                await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
+                    balance:requestData.userId.auth.balance+requestData?.exchangeAmmount
+                })
                 return next(
                     CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
                 );
             }
+            if (requestData.requestType == "Deposit") {
+
+                requestData.userId.auth.balance += requestData.amount
+                await AuthModel.updateOne({ _id: requestData.userId.auth }, {
+                    balance: requestData.userId.auth.balance
+                })
+                const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
+                    {
+                        status: "accepted"
+                    }, {
+                    new: true,
+                });
+                return next(
+                    CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
+                );
+            }
+
         }
         if (req.body.status == "cancelled") {
             const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
@@ -190,7 +201,7 @@ const updateRequest = async (req, res, next) => {
 
 
     } catch (error) {
-        console.log(error)
+        
 
         return next(CustomError.badRequest(error.message));
     }

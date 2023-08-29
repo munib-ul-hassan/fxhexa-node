@@ -6,6 +6,7 @@ export const RegisterValidator = joi.object({
   email: joi.string().email().required(),
   password: joi.string().required(), 
   accType: joi.string(),
+  
   ...deviceRequired,
 });
 
@@ -74,7 +75,7 @@ export const changePasswordValidator = joi.object({
 export const ProfileValidator = joi.object({
   fullName: joi.string(),  
   accType: joi.string(), 
-  currency:joi.string(), 
+  
 });
 
 //logout validator

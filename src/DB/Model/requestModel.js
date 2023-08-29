@@ -14,17 +14,21 @@ const Requestschema = new Schema({
     comment: {
         type: String
     },
-    amount: {
-        type: Number
-    },
     stock: {
+        type: String
+    },
+    transactionID: {
         type: String
     },
     requestType: {
         type: String,
-        enum: ["Buy", "Sell"]
+        enum: ["Buy", "Sell", "Deposit"]
     },
     exchangeAmmount: { type: Number },
+    amount: {
+        type: Number
+    },
+
     image: {
         type: String
     },
