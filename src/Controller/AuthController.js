@@ -518,7 +518,7 @@ const VerifyUser = async (req, res, next) => {
 
     user.profile._doc.email = user.identifier;
     user.profile._doc.demo = user.demo.length > 0 ? user.demo : [],
-    user.profile._doc.real = user.real.length > 0 ? user.real : []
+      user.profile._doc.real = user.real.length > 0 ? user.real : []
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -605,8 +605,8 @@ const VerifyOtp = async (req, res, next) => {
     user.profile._doc.email = user.identifier;
     user.profile._doc.balance = user.balance;
 
-    user.profile._doc.demo = user.demo.length>0 ? user.demo : [];
-    user.profile._doc.real = user.real.length>0 ? user.real: [];
+    user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
+    user.profile._doc.real = user.real.length > 0 ? user.real : [];
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -661,8 +661,8 @@ const ResetPassword = async (req, res, next) => {
     user.profile._doc.email = user.identifier;
     user.profile._doc.balance = user.balance;
 
-    user.profile._doc.demo = user.demo.length>0 ? user.demo : [];
-    user.profile._doc.real = user.real.length>0 ? user.real : []
+    user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
+    user.profile._doc.real = user.real.length > 0 ? user.real : []
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -781,14 +781,8 @@ const getprofile = async (req, res, next) => {
 
       balance: data.balance,
 
-      demo: data.demo ? data.demo.map((item) => {
-        return { stock: item.stock, amount: item.amount }
-
-      }) : [],
-      real: data.real ? data.demo.map((item) => {
-        return { stock: item.stock, amount: item.amount }
-
-      }) : [],
+      demo: data.demo.length > 0 ? data.demo : [],
+      real: data.real.length > 0 ? data.real : [],
       notificationOn: data.notificationOn,
     };
 
@@ -857,9 +851,9 @@ const notificationUpdate = async (req, res, next) => {
       notificationOn: !user.notificationOn,
     });
     const profile = user._doc.profile._doc,
-      demo = user.demo.length>0 ? user.demo : [],
-      real = user.real.length>0
-       ? user.real: [];
+      demo = user.demo.length > 0 ? user.demo : [],
+      real = user.real.length > 0
+        ? user.real : [];
 
     const respdata = {
       _id: profile._id,
@@ -922,8 +916,8 @@ const updateProfile = async (req, res, next) => {
       "auth",
       user.devices[user.devices.length - 1]?.deviceToken
     );
-    const demo = user.demo.length>0 ? user.demo : [],
-      real = user.real.length>0 ? user.real : []
+    const demo = user.demo.length > 0 ? user.demo : [],
+      real = user.real.length > 0 ? user.real : []
     const respdata = {
       _id: user.profile._doc._id,
       email: user.identifier,
