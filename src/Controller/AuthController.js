@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { genSalt } from "../Utils/saltGen.js";
 import DeviceModel from "../DB/Model/deviceModel.js";
-
 import { tokenGen } from "../Utils/AccessTokenManagement/Tokens.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
@@ -21,12 +20,8 @@ import OtpModel from "../DB/Model/otpModel.js";
 import UserModel from "../DB/Model/userModel.js";
 import { linkUserDevice } from "../Utils/linkUserDevice.js";
 import { randomInt } from "crypto";
-
-// import { handleMultipartData } from "../Utils/MultipartData.js";
 import AuthModel from "../DB/Model/authModel.js";
-import coinModel from "../DB/Model/coinsModel.js";
 
-// import AdminModel from "../DB/Model/adminModel.js";
 
 const registerUser = async (req, res, next) => {
   try {
@@ -122,16 +117,16 @@ const registerUser = async (req, res, next) => {
     } else {
       const profile = usermodel._id;
 
-      const democoin = await coinModel.findOne({ coin: "BTCUSDT" })
+      // const democoin = await coinModel.findOne({ coin: "BTCUSDT" })
       const updatedAuth = await AuthModel.findByIdAndUpdate(
         { _id: auth._id },
         {
           profile,
           OTP: OTP._id,
-          demo: [{
-            coin: democoin?._id, ammount: 1000
-          }],
-          real: []
+          demo: [],
+          real: [],
+          demobalance:10000,
+          realbalance:0
         },
         {
           new: true,
@@ -160,13 +155,10 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         // image: { file: "" },
         otp,
-        balance: user.balance,
-
+        demobalance: user.demobalance,
+        realbalance: user.realbalance,
         demo: user.demo.length > 0 ? user.demo : [],
         real: user.real.length > 0 ? user.real : [],
-
-
-
         isCompleteProfile: user.isCompleteProfile,
         notificationOn: user.notificationOn,
       };
@@ -316,7 +308,8 @@ const LoginUser = async (req, res, next) => {
       email: user.identifier,
       userType: user.userType,
 
-      balance: user.balance,
+      demobalance: user.demobalance,
+      realbalance: user.realbalance,
       // image:  profile.image,
       demo: user._doc.demo.length > 0 ? user._doc.demo.map((item) => {
         return { stock: item.stock, amount: item.amount }
@@ -514,7 +507,10 @@ const VerifyUser = async (req, res, next) => {
     OtpModel.bulkWrite(bulkOps);
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
-    user.profile._doc.balance = user.balance;
+    user.profile._doc.demobalance = user.demobalance;
+    user.profile._doc.realbalance = user.realbalance;
+
+
 
     user.profile._doc.email = user.identifier;
     user.profile._doc.demo = user.demo.length > 0 ? user.demo : [],
@@ -603,7 +599,8 @@ const VerifyOtp = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.balance = user.balance;
+    user.profile._doc.demobalance = user.demobalance;
+    user.profile._doc.realbalance = user.realbalance;
 
     user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
     user.profile._doc.real = user.real.length > 0 ? user.real : [];
@@ -659,7 +656,8 @@ const ResetPassword = async (req, res, next) => {
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.balance = user.balance;
+    user.profile._doc.demobalance = user.demobalance;
+    user.profile._doc.realbalance = user.realbalance;
 
     user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
     user.profile._doc.real = user.real.length > 0 ? user.real : []
@@ -778,9 +776,8 @@ const getprofile = async (req, res, next) => {
       // image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
-
-      balance: data.balance,
-
+      demobalance: data.demobalance,
+      realbalance: data.realbalance,
       demo: data.demo.length > 0 ? data.demo : [],
       real: data.real.length > 0 ? data.real : [],
       notificationOn: data.notificationOn,
@@ -860,7 +857,9 @@ const notificationUpdate = async (req, res, next) => {
       fullName: profile.fullName,
       email: user._doc.identifier,
 
-      balance: user._doc.balance,
+      demobalance: user._doc.demobalance,
+      realbalance: user._doc.realbalance,
+
       // image: { file: profile.image?.file },
       demo, real,
       isCompleteProfile: user._doc.isCompleteProfile,

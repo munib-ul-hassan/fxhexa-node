@@ -18,7 +18,7 @@ import { UserRouters } from "./Router/UserRouter.js";
 import { AdminRouters } from "./Router/AdminRouters.js";
 
 import {TransactionRouters} from "./Router/TransactionRouter.js";
-import { StockRouters } from "./Router/StockRouters.js";
+
 import { RequestRouters } from "./Router/requestRoutes.js";
 
 
@@ -65,6 +65,6 @@ app.use(API_Prefix, UserRouters);
 app.use(API_Prefix, AdminRouters);
 app.use(API_Prefix, TransactionRouters)
 app.use(API_Prefix, RequestRouters)
-app.use(API_Prefix, StockRouters)
+
 app.use(ResHandler);
 

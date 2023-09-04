@@ -1,20 +1,12 @@
 import joi from "joi";
 
-export const buyCoinValidator = joi.object({
-  transactionAmount: joi.number().required(),
-  accountTag: joi.string().valid("demo", "real"),
-  // from: joi.string().required(),
-  coinBuy: joi.string().required(),
-  // transactionType: joi.string().valid("buy", "sell"),
+export const transactionValidator = joi.object({
+  amount: joi.number().required(),
+  stock: joi.string(),
+  exchangeAmount:  joi.number().required(), 
 });
 
-export const sellCoinValidator = joi.object({
-  transactionAmount: joi.number().required(),
-  accountTag: joi.string().valid("demo", "real"),
-  // from: joi.string().required(),
-  coinSell: joi.string().required(),
-  // transactionType: joi.string().valid("buy", "sell"),
-});
+
 
 export const RequestValidator = joi.object({
   amount: joi.number(),

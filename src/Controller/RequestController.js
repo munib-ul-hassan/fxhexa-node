@@ -81,7 +81,6 @@ const getRequestByAdmin = async (req, res, next) => {
 const updateRequest = async (req, res, next) => {
     try {
         const { id } = req.params;
-
         if (!id) {
             return next(CustomError.badRequest("id is required"));
         }
@@ -98,7 +97,7 @@ const updateRequest = async (req, res, next) => {
 
         if (req.body.status == "accepted") {
             if (requestData.requestType == "Buy") {
-                const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)                
+                const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)
                 if (coinExist != -1) {
                     const real = [...requestData.userId.auth.real]
                     real[coinExist].amount += requestData.amount
@@ -112,8 +111,8 @@ const updateRequest = async (req, res, next) => {
                         }, {
                         new: true,
                     });
-                    await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
-                        balance:requestData.userId.auth.balance-requestData?.exchangeAmount
+                    await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
+                        realbalance: requestData.userId.auth.realbalance - requestData?.exchangeAmount
                     })
 
                     return next(
@@ -137,8 +136,8 @@ const updateRequest = async (req, res, next) => {
                         }, {
                         new: true,
                     });
-                    await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
-                        balance:requestData.userId.auth.balance-requestData?.exchangeAmount
+                    await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
+                        realbalance: requestData.userId.auth.realbalance - requestData?.exchangeAmount
                     })
                     return next(
                         CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
@@ -160,8 +159,8 @@ const updateRequest = async (req, res, next) => {
                     }, {
                     new: true,
                 });
-                await AuthModel.findOneAndUpdate({_id:requestData.userId.auth._id},{
-                    balance:requestData.userId.auth.balance+requestData?.exchangeAmount
+                await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
+                    realbalance: requestData.userId.auth.realbalance + requestData?.exchangeAmount
                 })
                 return next(
                     CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
@@ -169,9 +168,9 @@ const updateRequest = async (req, res, next) => {
             }
             if (requestData.requestType == "Deposit") {
 
-                requestData.userId.auth.balance += requestData.amount
+                requestData.userId.auth.realbalance += requestData.amount
                 await AuthModel.updateOne({ _id: requestData.userId.auth }, {
-                    balance: requestData.userId.auth.balance
+                    realbalance: requestData.userId.auth.realbalance
                 })
                 const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
                     {
@@ -201,7 +200,7 @@ const updateRequest = async (req, res, next) => {
 
 
     } catch (error) {
-        
+
 
         return next(CustomError.badRequest(error.message));
     }

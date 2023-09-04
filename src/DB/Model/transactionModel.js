@@ -1,3 +1,4 @@
+
 import { Schema, model } from "mongoose";
 
 const TransactionSchema = new Schema(
@@ -6,31 +7,25 @@ const TransactionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    // previousBalance: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // newBalance: {
-    //   type: Number,
-    //   required: true,
-    // },
-    transactionAmount: {
+
+    amount: {
       type: Number,
       required: true,
     },
-    // from: {
-    //   type: String,
-    //   required: true,
-    // },
-    coin: {
-      type: String,
-      required: true,
+    exchangeAmount: {
+      type: Number
     },
-    accountTag: {
-      type: String,
-      enum: ["demo", "real"],
-      required: true,
+    stock:{
+      type:String
     },
+    prevBalance: {
+      type: Number
+    },
+    newBalance: {
+      type: Number
+
+    },
+
     transactionType: {
       type: String,
       enum: ["buy", "sell"],

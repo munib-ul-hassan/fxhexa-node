@@ -70,7 +70,11 @@ const AuthSchema = new Schema(
         },
       },
     ],
-    balance: {
+    realbalance: {
+      type: Number,
+      default: 0
+    },
+    demobalance: {
       type: Number,
       default: 0
     },
