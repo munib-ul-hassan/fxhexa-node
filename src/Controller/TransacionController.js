@@ -3,10 +3,10 @@ import AuthModel from "../DB/Model/authModel.js";
 
 import {
   transactionValidator
-
 } from "../Utils/Validator/transactionValidation.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
+import subAccountModel from "../DB/Model/subAccountModel.js";
 // Buy Coin API
 
 const purchase = async (req, res, next) => {
@@ -15,20 +15,26 @@ const purchase = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
+    const { amount, exchangeAmount, stock, subAccId } = req.body;
 
-    const { amount, exchangeAmount, stock } = req.body;
-    if (req.user.demobalance < exchangeAmount) {
-      return next(CustomError.badRequest("You have insufficient balance"));
+    const accData = await subAccountModel.findById(subAccId,{password:0})
+    if (!accData) {
+      return next(CustomError.badRequest("invalid Sub-Account Id"));
+
+    }
+    if (accData.balance < exchangeAmount) {
+      return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
 
     }
     const transaction = new TransactionModel({
       user: req.user._doc.profile._id,
-      prevBalance: req.user.demobalance, amount, stock,
-      newBalance: parseInt(req.user.demobalance) - parseInt(exchangeAmount), exchangeAmount, transactionType: "buy"
+      accountref: accData._id,
+      prevBalance: accData.balance, amount, stock, subAccId,
+      newBalance: parseInt(accData.balance) - parseInt(exchangeAmount), exchangeAmount, transactionType: "buy"
     })
     await transaction.save()
-    const i = req.user.demo.findIndex((element) => element.stock == stock)
-    let stockdemodata = req.user.demo;
+    const i = accData.stockData.findIndex((element) => element.stock == stock)
+    let stockdemodata = accData.stockData;
 
 
     if (i != -1) {
@@ -41,12 +47,12 @@ const purchase = async (req, res, next) => {
       }]
     }
 
-    const updatedAuth = await AuthModel.findOneAndUpdate({
-      _id: req.user._id
+    const updatedAuth = await subAccountModel.findOneAndUpdate({
+      _id: subAccId
     },
       {
-        $inc: { demobalance: -exchangeAmount },
-        demo: stockdemodata
+        $inc: { balance: -exchangeAmount },
+        stockData: stockdemodata
 
 
       }, { new: true });
@@ -59,6 +65,7 @@ const purchase = async (req, res, next) => {
       )
     );
   } catch (error) {
+    console.log(error);
     next(CustomError.createError(error.message, 500));
   }
 };
@@ -70,33 +77,40 @@ const sell = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
+    const { amount, exchangeAmount, stock, subAccId } = req.body;
 
-    const { amount, exchangeAmount, stock } = req.body;
-    const i = req.user.demo.findIndex((element) => element.stock == stock)
+    const accData = await subAccountModel.findById(subAccId,{password:0})
+    if (!accData) {
+      return next(CustomError.badRequest("invalid Sub-Account Id"));
+    }
+  
+    
+    const i = accData.stockData.findIndex((element) => element.stock == stock)
 
     if (i == -1) {
       return next(CustomError.badRequest("You have No any unit of this stock"));
 
     }
-    if (amount > req.user.demo[i].amount) {
+    if (amount > accData.stockData[i].amount) {
       return next(CustomError.badRequest("You have insufficient stock"));
     }
 
     const transaction = new TransactionModel({
       user: req.user._doc.profile._id,
-      prevBalance: req.user.demobalance, amount, stock,
-      newBalance: parseInt(req.user.demobalance) + parseInt(exchangeAmount), exchangeAmount, transactionType: "sell"
+      prevBalance: accData.balance, amount, stock,
+      accountref:subAccId,
+      newBalance: parseInt(accData.balance) + parseInt(exchangeAmount), exchangeAmount, transactionType: "sell"
     })
     await transaction.save()
-    let stockdemodata = req.user.demo;
+    let stockdemodata = accData.stockData;
     stockdemodata[i].amount = stockdemodata[i].amount - amount
 
-    const updatedAuth = await AuthModel.findOneAndUpdate({
-      _id: req.user._id
+    const updatedAuth = await subAccountModel.findOneAndUpdate({
+      _id: subAccId
     },
       {
-        $inc: { demobalance: exchangeAmount },
-        demo: stockdemodata
+        $inc: { balance: exchangeAmount },
+        stockData: stockdemodata
 
       }, { new: true });
 
@@ -121,6 +135,7 @@ const getTransaction = async (req, res, next) => {
       time,
       page,
       limit,
+      subAccId
 
     } = req.query;
     const query = { user: req.user._doc.profile._id };

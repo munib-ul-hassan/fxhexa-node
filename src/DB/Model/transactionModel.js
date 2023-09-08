@@ -7,14 +7,10 @@ const TransactionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    accountType: {
-      type: String,
-      enum: ["real", "demo"],
-      required:true
-    },
+
     accountref: {
       type: Schema.Types.ObjectId,
-      refPath: "accountType"
+      ref: "subAcc"
     },
     amount: {
       type: Number,

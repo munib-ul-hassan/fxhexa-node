@@ -4,15 +4,14 @@ export const transactionValidator = joi.object({
   amount: joi.number().required(),
   stock: joi.string(),
   exchangeAmount:  joi.number().required(), 
+  subAccId:  joi.string().required()
 });
 
 
 
 export const RequestValidator = joi.object({
-  amount: joi.number(),
-  stock: joi.string(),
-  requestType: joi.valid("Buy", "Sell", "Deposit"),
-  exchangeAmount: joi.number(),
+  amount: joi.number(),  
+  accountref:joi.string().required(),
   transactionID: joi.string(),
   paymentType:joi.valid("perfect","bank","bitcoin")
 })

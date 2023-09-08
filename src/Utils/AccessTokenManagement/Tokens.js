@@ -6,7 +6,7 @@ const endpoint = envConfig ? envConfig["ENDPOINT"] : "localhost";
 const { publicKey, privateKey } = keyGen;
 
 export const tokenGen = async (user, tokenType,deviceToken,isTemporary) => {
-  const profile={...user.profile,userType:user.userType}
+  
   return await new jose.EncryptJWT({
     uid: user._id,    
     

@@ -6,6 +6,7 @@ import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 import fs from "fs"
 import { RequestValidator, updaterequestValidator } from "../Utils/Validator/transactionValidation.js";
+import subAccountModel from "../DB/Model/subAccountModel.js";
 const postRequest = async (req, res, next) => {
     try {
         const { error } = RequestValidator.validate(req.body);
@@ -14,6 +15,13 @@ const postRequest = async (req, res, next) => {
         }
         req.body.userId = req.user.profile._id
 
+        const accData = await subAccountModel.findById(req.body.accountref)
+        if (!accData) {
+            return next(CustomError.badRequest("invalid Sub-Account Id"));
+        }
+        if (accData.type != "real") {
+            return next(CustomError.badRequest("Deposit only valid for real account"));
+        }
 
         if (req.file) {
             req.body.image = req.file?.filename
@@ -48,6 +56,7 @@ const postRequest = async (req, res, next) => {
         return next(CustomError.badRequest(error.message));
     }
 }
+
 const getRequestByAdmin = async (req, res, next) => {
     try {
 
@@ -84,7 +93,7 @@ const updateRequest = async (req, res, next) => {
         if (!id) {
             return next(CustomError.badRequest("id is required"));
         }
-        const requestData = await RequestModel.findOne({ _id: id, status: "pending" }).populate({ path: "userId", populate: { path: "auth" } });
+        const requestData = await RequestModel.findOne({ _id: id, status: "pending" }).populate("accountref");
 
         if (!requestData) {
             return next(CustomError.badRequest("Invalid Id or request already updated"));
@@ -96,92 +105,105 @@ const updateRequest = async (req, res, next) => {
         }
 
         if (req.body.status == "accepted") {
-            if (requestData.requestType == "Buy") {
-                const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)
-                if (coinExist != -1) {
-                    const real = [...requestData.userId.auth.real]
-                    real[coinExist].amount += requestData.amount
 
-                    await AuthModel.updateOne({ _id: requestData.userId.auth._id }, {
-                        real
-                    })
-                    const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
-                        {
-                            status: "accepted"
-                        }, {
-                        new: true,
-                    });
-                    await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
-                        realbalance: requestData.userId.auth.realbalance - requestData?.exchangeAmount
-                    })
+            await subAccountModel.findByIdAndUpdate(requestData.accountref, {
+                $inc: { balance: requestData.amount }
+            })
+            const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
+                {
+                    status: "accepted"
+                }, {
+                new: true,
+            });
+            return next(
+                CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
+            );
+            // if (requestData.requestType == "Buy") {
+            //     const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)
+            //     if (coinExist != -1) {
+            //         const real = [...requestData.userId.auth.real]
+            //         real[coinExist].amount += requestData.amount
 
-                    return next(
-                        CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
-                    );
+            //         await AuthModel.updateOne({ _id: requestData.userId.auth._id }, {
+            //             real
+            //         })
+            //         const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
+            //             {
+            //                 status: "accepted"
+            //             }, {
+            //             new: true,
+            //         });
+            //         await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
+            //             realbalance: requestData.userId.auth.realbalance - requestData?.exchangeAmount
+            //         })
 
-                } else {
-                    const real = [...requestData.userId.auth.real]
-                    real.push({
-                        amount: requestData.amount,
-                        stock: requestData.stock
+            //         return next(
+            //             CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
+            //         );
 
-                    })
+            //     } else {
+            //         const real = [...requestData.userId.auth.real]
+            //         real.push({
+            //             amount: requestData.amount,
+            //             stock: requestData.stock
 
-                    await AuthModel.updateOne({ _id: requestData.userId.auth }, {
-                        real
-                    })
-                    const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
-                        {
-                            status: "accepted"
-                        }, {
-                        new: true,
-                    });
-                    await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
-                        realbalance: requestData.userId.auth.realbalance - requestData?.exchangeAmount
-                    })
-                    return next(
-                        CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
-                    );
+            //         })
 
-                }
-            }
-            if (requestData.requestType == "Sell") {
-                const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)
-                const real = [...requestData.userId.auth.real]
-                real[coinExist].amount -= requestData.amount
+            //         await AuthModel.updateOne({ _id: requestData.userId.auth }, {
+            //             real
+            //         })
+            //         const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
+            //             {
+            //                 status: "accepted"
+            //             }, {
+            //             new: true,
+            //         });
+            //         await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
+            //             realbalance: requestData.userId.auth.realbalance - requestData?.exchangeAmount
+            //         })
+            //         return next(
+            //             CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
+            //         );
 
-                await AuthModel.updateOne({ _id: requestData.userId.auth }, {
-                    real
-                })
-                const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
-                    {
-                        status: "accepted"
-                    }, {
-                    new: true,
-                });
-                await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
-                    realbalance: requestData.userId.auth.realbalance + requestData?.exchangeAmount
-                })
-                return next(
-                    CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
-                );
-            }
-            if (requestData.requestType == "Deposit") {
+            //     }
+            // }
+            // if (requestData.requestType == "Sell") {
+            //     const coinExist = requestData.userId.auth.real.findIndex((element) => element.stock == requestData.stock)
+            //     const real = [...requestData.userId.auth.real]
+            //     real[coinExist].amount -= requestData.amount
 
-                requestData.userId.auth.realbalance += requestData.amount
-                await AuthModel.updateOne({ _id: requestData.userId.auth }, {
-                    realbalance: requestData.userId.auth.realbalance
-                })
-                const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
-                    {
-                        status: "accepted"
-                    }, {
-                    new: true,
-                });
-                return next(
-                    CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
-                );
-            }
+            //     await AuthModel.updateOne({ _id: requestData.userId.auth }, {
+            //         real
+            //     })
+            //     const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
+            //         {
+            //             status: "accepted"
+            //         }, {
+            //         new: true,
+            //     });
+            //     await AuthModel.findOneAndUpdate({ _id: requestData.userId.auth._id }, {
+            //         realbalance: requestData.userId.auth.realbalance + requestData?.exchangeAmount
+            //     })
+            //     return next(
+            //         CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
+            //     );
+            // }
+            // if (requestData.requestType == "Deposit") {
+
+            //     requestData.userId.auth.realbalance += requestData.amount
+            //     await AuthModel.updateOne({ _id: requestData.userId.auth }, {
+            //         realbalance: requestData.userId.auth.realbalance
+            //     })
+            //     const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
+            //         {
+            //             status: "accepted"
+            //         }, {
+            //         new: true,
+            //     });
+            //     return next(
+            //         CustomSuccess.createSuccess(updateRequest, "Request updated successfully", 200),
+            //     );
+            // }
 
         }
         if (req.body.status == "cancelled") {

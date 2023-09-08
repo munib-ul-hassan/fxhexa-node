@@ -146,7 +146,7 @@ const registerUser = async (req, res, next) => {
       if (error) {
         return next(CustomError.createError(error, 200));
       }
-      const user = await AuthModel.findById(auth._id).populate(["profile", "demo", "subAccounts"]);
+      const user = await AuthModel.findById(auth._id).populate(["profile", "subAccounts"]);
 
       const respdata = {
         _id: user.profile._doc._id,
@@ -181,7 +181,7 @@ const resendOTP = async (req, res, next) => {
     const { email } = req.body;
     const auth = await AuthModel.findOne({
       identifier: email,
-    }).populate(["profile", "demo", "subAccounts"]);
+    }).populate(["profile", "subAccounts"]);
 
 
     if (!auth) {
@@ -333,7 +333,7 @@ const ForgetPassword = async (req, res, next) => {
     }
     const identifier = req.body.email;
     // var UserDetail;
-    const isUser = await AuthModel.findOne({ identifier }).populate(["profile", "demo", "subAccounts"]);
+    const isUser = await AuthModel.findOne({ identifier }).populate(["profile", "subAccounts"]);
     if (!isUser) {
       next(CustomError.createError("Invalid Email", 200));
     }
@@ -641,7 +641,7 @@ const ResetPassword = async (req, res, next) => {
     //   return next(CustomError.createError("password not reset", 200));
     // }
 
-    const user = await AuthModel.findOne({ identifier }).populate(["profile", "demo", "subAccounts"]);
+    const user = await AuthModel.findOne({ identifier }).populate(["profile", "subAccounts"]);
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
@@ -937,10 +937,17 @@ const addSubAcc = async (req, res, next) => {
         return next(CustomError.createError(err.message, 200));
       });
     }
-    const { type, name, password, leverage, currency } = req.body
+    if (req.body.type == "demo") {
+      req.body.balance = 10000
+    } else {
+      req.body.balance = 0
+
+    }
+    const { type, name, password, leverage, currency, balance } = req.body
+
     const data = new subAccountModel({
       auth: req.user._id,
-      type, name, password, leverage, currency
+      type, name, password, leverage, currency, balance
     })
     data.save()
     await AuthModel.findByIdAndUpdate(req.user._id, {
@@ -957,7 +964,15 @@ const addSubAcc = async (req, res, next) => {
         200
       )
     );
-  } catch (err) { return next(CustomError.createError(err.message, 500)) }
+  } catch (err) {
+    console.log(err.code)
+    if (err.code == 11000) {
+
+      return next(CustomError.createError("Nick name must be unique, user different one ", 200))
+    }
+
+    return next(CustomError.createError(err.message, 500))
+  }
 }
 const getSubAcc = async (req, res, next) => {
   try {
@@ -1034,7 +1049,7 @@ const deleteSubAc = async (req, res, next) => {
 
 const loginSub = async (req, res, next) => {
   try {
-    
+
     const { error } = loginsubAccValidator.validate(req.body)
 
     if (error) {
@@ -1043,9 +1058,10 @@ const loginSub = async (req, res, next) => {
       });
     }
 
-    var dataExist = await subAccountModel.findOne({ name: req.body.name }).populate({ path: "auth", populate: { path: "profile" } })
+    const dataExist = await subAccountModel.findOne({ name: req.body.name })
+    // .populate({ path: "auth", populate: { path: "profile" } })
 
-   
+
     if (!dataExist) {
 
       return next(CustomError.createError("Invalid username of sub-Account", 200));
@@ -1056,19 +1072,19 @@ const loginSub = async (req, res, next) => {
     // dataExist.auth.subAccont=dataExist
     // delete dataExist.auth.subAccont.auth
     // delete dataExist.auth.subAccont.auth.profile
+delete dataExist.auth
+    // var auth = dataExist.auth._doc.profile._doc
 
-    var auth = dataExist.auth._doc.profile._doc
+    // dataExist._doc.email = dataExist.auth._doc.identifier,
+    //   dataExist._doc.userType = dataExist.auth._doc.userType,
 
-    dataExist._doc.email= dataExist.auth._doc.identifier,
-    dataExist._doc.userType= dataExist.auth._doc.userType,
-    
-    dataExist._doc.isCompleteProfile= dataExist.auth._doc.isCompleteProfile,
-    dataExist._doc.notificationOn= dataExist.auth._doc.notificationOn,
-    delete dataExist._doc.auth
-    delete auth.auth
+    //   dataExist._doc.isCompleteProfile = dataExist.auth._doc.isCompleteProfile,
+    //   dataExist._doc.notificationOn = dataExist.auth._doc.notificationOn,
+    //   delete dataExist._doc.auth
+    // delete auth.auth
 
-    dataExist._doc.token = await tokenGen(dataExist, "auth", "");
-    dataExist = {...dataExist._doc,...auth}
+
+    // dataExist = { ...dataExist._doc, ...auth }
     return next(
       CustomSuccess.createSuccess(
         dataExist,

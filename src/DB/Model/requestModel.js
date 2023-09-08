@@ -4,16 +4,12 @@ const Requestschema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-      },
-      accountType: {
-        type: String,
-        enum: ["real", "demo"],
-        required:true
-      },
-      accountref: {
+    },
+
+    accountref: {
         type: Schema.Types.ObjectId,
-        refPath: "accountType"
-      },
+        ref: "subAcc"
+    },
     status: {
         type: String,
         enum: ["pending", "accepted", "cancelled"],
@@ -22,21 +18,15 @@ const Requestschema = new Schema({
     comment: {
         type: String
     },
-    stock: {
-        type: String
-    },
+
     transactionID: {
         type: String
     },
-    requestType: {
-        type: String,
-        enum: ["Buy", "Sell", "Deposit"]
-    },
+
     paymentType: {
         type: String,
-        enum: ["perfect","bank","bitcoin"]
+        enum: ["perfect", "bank", "bitcoin"]
     },
-    exchangeAmount: { type: Number },
     amount: {
         type: Number
     },
