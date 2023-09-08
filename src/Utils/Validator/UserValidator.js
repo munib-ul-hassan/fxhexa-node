@@ -120,3 +120,29 @@ export const routinevalidator = joi.object({
   creatorType: joi.string(),
   totalCal:joi.number().required(),
 });
+export const subAccValidator= joi.object({
+  type:joi.string().equal("demo","real").required(),
+  name:joi.string().required(),
+  password:joi.string().required(),
+  leverage:joi.number().required(),
+  currency:joi.string().required(),
+
+})
+
+export const subAccupdateValidator =  joi.object({
+  
+  name:joi.string(),
+  password:joi.string(),
+  leverage:joi.number(),
+  currency:joi.string(),
+
+})
+
+
+export const loginsubAccValidator =  joi.object({
+  
+  name:joi.string().required(),
+  password:joi.string().required(),
+  
+
+})

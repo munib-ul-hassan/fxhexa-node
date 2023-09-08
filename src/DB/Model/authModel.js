@@ -59,35 +59,13 @@ const AuthSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Otp",
     },
-    demo: [
+    
+   
+   subAccounts: [
       {
-        stock: {
-          type: String,
-        },
-        amount: {
-          type: Number,
-          default: 0,
-        },
-      },
-    ],
-    realbalance: {
-      type: Number,
-      default: 0
-    },
-    demobalance: {
-      type: Number,
-      default: 0
-    },
-    real: [
-      {
-        stock: {
-          type: String,
-        },
-        amount: {
-          type: Number,
-          default: 0,
-        },
-      },
+        type: Schema.Types.ObjectId,
+        ref: "subaccount",
+      }
     ],
     // isVerified: { not in the scope
     //   type: Boolean,

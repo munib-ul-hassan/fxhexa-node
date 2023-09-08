@@ -1,11 +1,19 @@
 import { Schema, model } from "mongoose";
 
 const Requestschema = new Schema({
-    userId: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: true,
-    },
+      },
+      accountType: {
+        type: String,
+        enum: ["real", "demo"],
+        required:true
+      },
+      accountref: {
+        type: Schema.Types.ObjectId,
+        refPath: "accountType"
+      },
     status: {
         type: String,
         enum: ["pending", "accepted", "cancelled"],

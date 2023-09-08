@@ -7,7 +7,15 @@ const TransactionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-
+    accountType: {
+      type: String,
+      enum: ["real", "demo"],
+      required:true
+    },
+    accountref: {
+      type: Schema.Types.ObjectId,
+      refPath: "accountType"
+    },
     amount: {
       type: Number,
       required: true,
@@ -15,8 +23,8 @@ const TransactionSchema = new Schema(
     exchangeAmount: {
       type: Number
     },
-    stock:{
-      type:String
+    stock: {
+      type: String
     },
     prevBalance: {
       type: Number
@@ -25,7 +33,6 @@ const TransactionSchema = new Schema(
       type: Number
 
     },
-
     transactionType: {
       type: String,
       enum: ["buy", "sell"],

@@ -14,7 +14,7 @@ import TermsConditions from "../DB/Model/termscondition.js";
 import { tokenGen } from "../Utils/jwt.js";
 // import push_notifications from "../Config/push_notification.js";
 import { connectDB } from "../DB/index.js";
-import coinModel from "../DB/Model/coinsModel.js";
+
 import AdminModel from "../DB/Model/adminModel.js";
 const registerAdmin = async () => {
 
@@ -372,94 +372,9 @@ const getdashboard = async (req, res, next) => {
 
 
 
-//coin
-
-// const createcoins = async (req, res, next) => {
-//   try {
-//     const { coin } = req.body;
-//     if (!coin) {
-//       return next(CustomError.badRequest("coin is required"));
-//     }
-
-
-//     const createcoins = new coinModel({
-//       coin: req.body.coin,
-//     });
-
-//     const savecoins = await createcoins.save();
-
-//     if (!savecoins) {
-//       return next(CustomError.badRequest("coin not save"));
-//     }
-
-//     return next(CustomSuccess.createSuccess(savecoins, "coin is created successfully", 200));
-//   } catch (error) {
-//     return next(CustomError.badRequest(error.message));
-//   }
-// };
-
-// //get coins
-
-// const getcoins = async (req, res, next) => {
-//   try {
-//     const getcoins = await coinModel.find();
-
-//     if (!getcoins || getcoins.length == 0) {
-//       return next(CustomError.badRequest("coins not found"));
-//     } else {
-//       return next(CustomSuccess.createSuccess(getcoins, "coins found successfully", 200));
-//     }
-//   } catch (error) {
-//     return next(CustomError.badRequest(error.message));
-//   }
-// };
-
-// const deletecoins = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     if (!id) {
-//       return next(CustomError.badRequest("id is required"));
-//     }
-//     const getcoins = await coinModel.findById(id);
-//     if (!getcoins) {
-//       return next(CustomError.badRequest("Invalid Id"));
-//     } else {
-//       await coinModel.deleteOne(
-//         { _id: id },
-
-//         { new: true },
-//       );
-//       return next(CustomSuccess.createSuccess({}, "coin delete successfully", 200));
-//     }
-//   } catch (error) {
-//     return next(CustomError.badRequest(error.message));
-//   }
-// };
-// const updatecoins = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     if (!id) {
-//       return next(CustomError.badRequest("id is required"));
-//     }
-//     const getcoins = await coinModel.findById(id);
-//     if (!getcoins) {
-//       return next(CustomError.badRequest("Invalid Id"));
-//     } else {
-//       const updatecoins = await coinModel.findOneAndUpdate({ _id: id }, req.body, {
-//         new: true,
-//       });
-//       return next(CustomSuccess.createSuccess({ updatecoins }, "coins updated successfully", 200));
-//     }
-//   } catch (error) {
-//     return next(CustomError.badRequest(error.message));
-//   }
-// };
-// //coin
 
 const AdminController = {
   Adminlogin,
-  // sendNotification,
-
   getUsers,
   createPrivacy,
   getPrivacy,
@@ -469,10 +384,7 @@ const AdminController = {
   getTerms,
   deleteTerms,
   updateTerms,
-  // createcoins,
-  // getcoins,
-  // deletecoins,
-  // updatecoins,
+ 
   deleteUser,
   getdashboard
 

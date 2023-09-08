@@ -15,12 +15,16 @@ import {
   LogoutValidator,
   verifyuserValidator,
   ProfileValidator,
+  subAccValidator,
+  subAccupdateValidator,
+  loginsubAccValidator,
 } from "../Utils/Validator/UserValidator.js";
 import OtpModel from "../DB/Model/otpModel.js";
 import UserModel from "../DB/Model/userModel.js";
 import { linkUserDevice } from "../Utils/linkUserDevice.js";
 import { randomInt } from "crypto";
 import AuthModel from "../DB/Model/authModel.js";
+import subAccountModel from "../DB/Model/subAccountModel.js";
 
 
 const registerUser = async (req, res, next) => {
@@ -117,16 +121,12 @@ const registerUser = async (req, res, next) => {
     } else {
       const profile = usermodel._id;
 
-      // const democoin = await coinModel.findOne({ coin: "BTCUSDT" })
+
       const updatedAuth = await AuthModel.findByIdAndUpdate(
         { _id: auth._id },
         {
           profile,
           OTP: OTP._id,
-          demo: [],
-          real: [],
-          demobalance:10000,
-          realbalance:0
         },
         {
           new: true,
@@ -146,7 +146,7 @@ const registerUser = async (req, res, next) => {
       if (error) {
         return next(CustomError.createError(error, 200));
       }
-      const user = await AuthModel.findById(auth._id).populate(["profile"]);
+      const user = await AuthModel.findById(auth._id).populate(["profile", "demo", "subAccounts"]);
 
       const respdata = {
         _id: user.profile._doc._id,
@@ -155,10 +155,8 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         // image: { file: "" },
         otp,
-        demobalance: user.demobalance,
-        realbalance: user.realbalance,
-        demo: user.demo.length > 0 ? user.demo : [],
-        real: user.real.length > 0 ? user.real : [],
+
+        subAccounts: user.subAccounts,
         isCompleteProfile: user.isCompleteProfile,
         notificationOn: user.notificationOn,
       };
@@ -183,7 +181,8 @@ const resendOTP = async (req, res, next) => {
     const { email } = req.body;
     const auth = await AuthModel.findOne({
       identifier: email,
-    }).populate("profile");
+    }).populate(["profile", "demo", "subAccounts"]);
+
 
     if (!auth) {
       return next(CustomError.createError("Invalid user", 200));
@@ -300,6 +299,8 @@ const LoginUser = async (req, res, next) => {
 
     const token = await tokenGen(user, "auth", deviceToken);
 
+
+
     const profile = user._doc.profile._doc;
 
     const respdata = {
@@ -307,18 +308,7 @@ const LoginUser = async (req, res, next) => {
       fullName: profile.fullName,
       email: user.identifier,
       userType: user.userType,
-
-      demobalance: user.demobalance,
-      realbalance: user.realbalance,
-      // image:  profile.image,
-      demo: user._doc.demo.length > 0 ? user._doc.demo.map((item) => {
-        return { stock: item.stock, amount: item.amount }
-
-      }) : [],
-      real: user._doc.real.length > 0 ? user._doc.real.map((item) => {
-        return { stock: item.stock, amount: item.amount }
-
-      }) : [],
+      subAccounts: user.subAccounts,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -343,7 +333,7 @@ const ForgetPassword = async (req, res, next) => {
     }
     const identifier = req.body.email;
     // var UserDetail;
-    const isUser = await AuthModel.findOne({ identifier }).populate("profile");
+    const isUser = await AuthModel.findOne({ identifier }).populate(["profile", "demo", "subAccounts"]);
     if (!isUser) {
       next(CustomError.createError("Invalid Email", 200));
     }
@@ -507,14 +497,13 @@ const VerifyUser = async (req, res, next) => {
     OtpModel.bulkWrite(bulkOps);
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
-    user.profile._doc.demobalance = user.demobalance;
-    user.profile._doc.realbalance = user.realbalance;
 
 
 
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demo = user.demo.length > 0 ? user.demo : [],
-      user.profile._doc.real = user.real.length > 0 ? user.real : []
+    // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [],
+    //   user.profile._doc.real = user.real.length > 0 ? user.real : []
+    user.profile._doc.subAccounts = user.subAccounts
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -599,11 +588,11 @@ const VerifyOtp = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demobalance = user.demobalance;
-    user.profile._doc.realbalance = user.realbalance;
+    user.profile._doc.subAccounts = user.subAccounts
 
-    user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
-    user.profile._doc.real = user.real.length > 0 ? user.real : [];
+
+    // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
+    // user.profile._doc.real = user.real.length > 0 ? user.real : [];
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -652,15 +641,15 @@ const ResetPassword = async (req, res, next) => {
     //   return next(CustomError.createError("password not reset", 200));
     // }
 
-    const user = await AuthModel.findOne({ identifier }).populate("profile");
+    const user = await AuthModel.findOne({ identifier }).populate(["profile", "demo", "subAccounts"]);
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.demobalance = user.demobalance;
-    user.profile._doc.realbalance = user.realbalance;
 
-    user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
-    user.profile._doc.real = user.real.length > 0 ? user.real : []
+    // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
+    // user.profile._doc.real = user.real.length > 0 ? user.real : []
+    user.profile._doc.subAccounts = user.subAccounts
+
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -776,10 +765,10 @@ const getprofile = async (req, res, next) => {
       // image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
-      demobalance: data.demobalance,
-      realbalance: data.realbalance,
-      demo: data.demo.length > 0 ? data.demo : [],
-      real: data.real.length > 0 ? data.real : [],
+      subAccounts: data.subAccounts,
+
+      // demo: data.demo.length > 0 ? data.demo : [],
+      // real: data.real.length > 0 ? data.real : [],
       notificationOn: data.notificationOn,
     };
 
@@ -848,20 +837,18 @@ const notificationUpdate = async (req, res, next) => {
       notificationOn: !user.notificationOn,
     });
     const profile = user._doc.profile._doc,
-      demo = user.demo.length > 0 ? user.demo : [],
-      real = user.real.length > 0
-        ? user.real : [];
-
+      // demo = user.demo.length > 0 ? user.demo : [],
+      // real = user.real.length > 0
+      //   ? user.real : [];
+      subAccounts = user._doc.subAccounts
     const respdata = {
       _id: profile._id,
       fullName: profile.fullName,
       email: user._doc.identifier,
-
-      demobalance: user._doc.demobalance,
-      realbalance: user._doc.realbalance,
+      subAccounts,
 
       // image: { file: profile.image?.file },
-      demo, real,
+      // demo, real,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
     };
@@ -886,7 +873,7 @@ const updateProfile = async (req, res, next) => {
     const { error } = ProfileValidator.validate(body);
     if (error) {
       error.details.map((err) => {
-        next(CustomError.createError(err.message, 200));
+        return next(CustomError.createError(err.message, 200));
       });
     }
     if (body.fullName) {
@@ -915,17 +902,17 @@ const updateProfile = async (req, res, next) => {
       "auth",
       user.devices[user.devices.length - 1]?.deviceToken
     );
-    const demo = user.demo.length > 0 ? user.demo : [],
-      real = user.real.length > 0 ? user.real : []
+    // const demo = user.demo.length > 0 ? user.demo : [],
+    //   real = user.real.length > 0 ? user.real : []
     const respdata = {
       _id: user.profile._doc._id,
       email: user.identifier,
       fullName: user.profile._doc.fullName,
 
-
+      subAccounts: user.subAccounts,
 
       userType: "User",
-      demo, real,
+      // demo, real,
       isCompleteProfile: user.isCompleteProfile,
       notificationOn: user.notificationOn,
     };
@@ -941,6 +928,160 @@ const updateProfile = async (req, res, next) => {
     return next(CustomError.createError(error.message, 500));
   }
 };
+
+const addSubAcc = async (req, res, next) => {
+  try {
+    const { error } = subAccValidator.validate(req.body)
+    if (error) {
+      error.details.map((err) => {
+        return next(CustomError.createError(err.message, 200));
+      });
+    }
+    const { type, name, password, leverage, currency } = req.body
+    const data = new subAccountModel({
+      auth: req.user._id,
+      type, name, password, leverage, currency
+    })
+    data.save()
+    await AuthModel.findByIdAndUpdate(req.user._id, {
+      $push: { subAccounts: data._id }
+    })
+    if (!data) {
+      return next(CustomError.createError("Sub-Account creation failed", 200));
+
+    }
+    return next(
+      CustomSuccess.createSuccess(
+        data,
+        "Sub Account created sucessfully",
+        200
+      )
+    );
+  } catch (err) { return next(CustomError.createError(err.message, 500)) }
+}
+const getSubAcc = async (req, res, next) => {
+  try {
+    const data = await subAccountModel.find({ auth: req.user._id }, { password: 0 })
+    if (data.length == 0) {
+      return next(CustomError.createError("No any sub-Account Exist", 200));
+    }
+    return next(
+      CustomSuccess.createSuccess(
+        data,
+        "Sub Account get sucessfully",
+        200
+      )
+    );
+
+  } catch (err) { return next(CustomError.createError(err.message, 500)) }
+}
+const updateSubAcc = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const { error } = subAccupdateValidator.validate(req.body)
+    if (error) {
+      error.details.map((err) => {
+        return next(CustomError.createError(err.message, 200));
+      });
+    }
+    const dataExist = await subAccountModel.findOne({ _id: id, auth: req.user._id })
+    if (!dataExist) {
+
+      return next(CustomError.createError("Invalid id of sub-Account", 200));
+    }
+    const updatedData = await subAccountModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
+    if (updatedData) {
+
+      return next(
+        CustomSuccess.createSuccess(
+          updatedData,
+          "Sub Account updated sucessfully",
+          200
+        )
+      );
+    }
+    return next(CustomError.createError("Updation failed of sub-Account", 200));
+
+
+  } catch (err) { return next(CustomError.createError(err.message, 500)) }
+}
+const deleteSubAc = async (req, res, next) => {
+  try {
+    const { id } = req.params
+
+    const dataExist = await subAccountModel.findOne({ _id: id, auth: req.user._id })
+    if (!dataExist) {
+
+      return next(CustomError.createError("Invalid id of sub-Account", 200));
+    }
+    const deletedData = await subAccountModel.findOneAndDelete({ _id: id })
+    if (deletedData) {
+
+      return next(
+        CustomSuccess.createSuccess(
+          deletedData,
+          "Sub Account deleted sucessfully",
+          200
+        )
+      );
+    }
+
+    return next(CustomError.createError("Deletion failed", 200));
+
+  } catch (err) { return next(CustomError.createError(err.message, 500)) }
+}
+
+
+const loginSub = async (req, res, next) => {
+  try {
+    
+    const { error } = loginsubAccValidator.validate(req.body)
+
+    if (error) {
+      error.details.map((err) => {
+        return next(CustomError.createError(err.message, 200));
+      });
+    }
+
+    var dataExist = await subAccountModel.findOne({ name: req.body.name }).populate({ path: "auth", populate: { path: "profile" } })
+
+   
+    if (!dataExist) {
+
+      return next(CustomError.createError("Invalid username of sub-Account", 200));
+    }
+    if (dataExist.password != req.body.password) {
+      return next(CustomError.createError("Invalid password of sub-Account", 200));
+    }
+    // dataExist.auth.subAccont=dataExist
+    // delete dataExist.auth.subAccont.auth
+    // delete dataExist.auth.subAccont.auth.profile
+
+    var auth = dataExist.auth._doc.profile._doc
+
+    dataExist._doc.email= dataExist.auth._doc.identifier,
+    dataExist._doc.userType= dataExist.auth._doc.userType,
+    
+    dataExist._doc.isCompleteProfile= dataExist.auth._doc.isCompleteProfile,
+    dataExist._doc.notificationOn= dataExist.auth._doc.notificationOn,
+    delete dataExist._doc.auth
+    delete auth.auth
+
+    dataExist._doc.token = await tokenGen(dataExist, "auth", "");
+    dataExist = {...dataExist._doc,...auth}
+    return next(
+      CustomSuccess.createSuccess(
+        dataExist,
+        "Sub Account login sucessfully",
+        200
+      )
+    );
+
+
+
+  } catch (err) { return next(CustomError.createError(err.message, 500)) }
+}
+
 const AuthController = {
   registerUser,
   resendOTP,
@@ -970,6 +1111,11 @@ const AuthController = {
   notificationUpdate,
   VerifyUser,
   updateProfile,
+  addSubAcc,
+  getSubAcc,
+  updateSubAcc,
+  deleteSubAc,
+  loginSub
 };
 
 export default AuthController;

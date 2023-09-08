@@ -12,6 +12,7 @@ AuthRouters.route("/auth/forgetpassword").post(AuthController.ForgetPassword);
 AuthRouters.route("/auth/verifyuser").post(AuthController.VerifyUser);
 
 AuthRouters.route("/auth/resend").post(AuthController.resendOTP);
+AuthRouters.route("/auth/subacc/login").post(AuthController.loginSub);
 
 application.prefix = Router.prefix = function (path, middleware, configure) {
   configure(AuthRouters);
@@ -22,6 +23,12 @@ application.prefix = Router.prefix = function (path, middleware, configure) {
 AuthRouters.prefix("/auth", AuthMiddleware, async function () {
   AuthRouters.route("/resetpassword").post(AuthController.ResetPassword);
   AuthRouters.route("/verifyotp").post(AuthController.VerifyOtp);
+  
+  AuthRouters.route("/subacc").post(AuthController.addSubAcc);
+  AuthRouters.route("/subacc").get(AuthController.getSubAcc);
+  AuthRouters.route("/subacc/:id").put(AuthController.updateSubAcc);
+  AuthRouters.route("/subacc/:id").delete(AuthController.deleteSubAc);
+
 
   // AuthRouters.route("/updateprofile").post(AuthController.UpdateProfile);
   AuthRouters.route("/logout").post(AuthController.LogoutUser);
