@@ -1,5 +1,5 @@
 
-import AuthModel from "../DB/Model/authModel.js";
+
 import RequestModel from "../DB/Model/requestModel.js";
 import { handleMultipartData } from "../Utils/MultipartData.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
@@ -26,29 +26,29 @@ const postRequest = async (req, res, next) => {
         if (req.file) {
             req.body.image = req.file?.filename
         }
-if(req.body.paymentType=="perfect"){
-    await subAccountModel.findByIdAndUpdate(req.body.accountref, {
-        $inc: { balance: req.body.amount }
-    })
-    req.body.status=="accepted"
-    const requestData = await (new RequestModel(
-        req.body
-    )).save()
-    if (requestData) {
-        return next(
-            CustomSuccess.createSuccess(
-                requestData,
-                "Ammount deposti Successfully",
-                200
-            )
-        );
-    } else {
-        return next(
-            CustomError.createError("Error Occured", 200)
-        );
-    }
+        if (req.body.paymentType == "perfect" && req.body.requestType == "deposit") {
+            await subAccountModel.findByIdAndUpdate(req.body.accountref, {
+                $inc: { balance: req.body.amount }
+            })
+            req.body.status == "accepted"
+            const requestData = await (new RequestModel(
+                req.body
+            )).save()
+            if (requestData) {
+                return next(
+                    CustomSuccess.createSuccess(
+                        requestData,
+                        "Ammount deposti Successfully",
+                        200
+                    )
+                );
+            } else {
+                return next(
+                    CustomError.createError("Error Occured", 200)
+                );
+            }
 
-}
+        }
         const requestData = await (new RequestModel(
             req.body
         )).save()
@@ -127,10 +127,16 @@ const updateRequest = async (req, res, next) => {
         }
 
         if (req.body.status == "accepted") {
+            if (requestData.requestType == "deposit") {
 
-            await subAccountModel.findByIdAndUpdate(requestData.accountref, {
-                $inc: { balance: requestData.amount }
-            })
+                await subAccountModel.findByIdAndUpdate(requestData.accountref, {
+                    $inc: { balance: requestData.amount }
+                })
+            } else {
+                await subAccountModel.findByIdAndUpdate(requestData.accountref, {
+                    $inc: { balance: -requestData.amount }
+                })
+            }
             const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
                 {
                     status: "accepted"

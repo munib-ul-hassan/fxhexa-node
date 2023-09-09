@@ -27,6 +27,10 @@ const Requestschema = new Schema({
         type: String,
         enum: ["perfect", "bank", "bitcoin"]
     },
+    requestType: {
+        type: String,
+        enum: ["deposit", "withdraw"]
+    },
     amount: {
         type: Number
     },

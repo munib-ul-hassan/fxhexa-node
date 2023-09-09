@@ -2300,13 +2300,14 @@
 							"formdata": [
 								{
 									"key": "amount",
-									"value": "100",
+									"value": "5000",
 									"type": "text"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/E:/1images.jpg"
+									"src": "/E:/1images.jpg",
+									"disabled": true
 								},
 								{
 									"key": "accountref",
@@ -2321,6 +2322,11 @@
 								{
 									"key": "paymentType",
 									"value": "bank",
+									"type": "text"
+								},
+								{
+									"key": "requestType",
+									"value": "withdraw",
 									"type": "text"
 								}
 							]
@@ -2545,13 +2551,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{1}}admin/request/64fbafc72e57190e9f1486b0",
+									"raw": "{{1}}admin/request/64fbc1d27e69a58fff0e519b",
 									"host": [
 										"{{1}}admin"
 									],
 									"path": [
 										"request",
-										"64fbafc72e57190e9f1486b0"
+										"64fbc1d27e69a58fff0e519b"
 									]
 								}
 							},
