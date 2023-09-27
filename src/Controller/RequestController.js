@@ -9,6 +9,7 @@ import { RequestValidator, updaterequestValidator } from "../Utils/Validator/tra
 import subAccountModel from "../DB/Model/subAccountModel.js";
 const postRequest = async (req, res, next) => {
     try {
+        console.log(req.body)
         const { error } = RequestValidator.validate(req.body);
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
