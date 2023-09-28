@@ -7,7 +7,7 @@ const subAccSchema = new Schema({
     },
     name: { type: String, unique: true },
     type: { type: String, enum: ["demo", "real"] },
-    leverage: { type: Number },
+    leverage: { type: String },
     currency: { type: String },
     password: { type: String },
 
