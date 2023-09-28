@@ -124,7 +124,7 @@ export const subAccValidator= joi.object({
   type:joi.string().equal("demo","real").required(),
   name:joi.string().required(),
   password:joi.string().required(),
-  leverage:joi.number().required(),
+  leverage:joi.string().required(),
   currency:joi.string().required(),
 
 })
@@ -133,7 +133,7 @@ export const subAccupdateValidator =  joi.object({
   
   name:joi.string(),
   password:joi.string(),
-  leverage:joi.number(),
+  leverage:joi.string(),
   currency:joi.string(),
 
 })
