@@ -10,8 +10,7 @@ const subAccSchema = new Schema({
     leverage: { type: Number },
     currency: { type: String },
     password: { type: String },
-
-    balance: { type: Number ,default:0},
+    balance: { type: Number, default: 0 },
     stockData: [{
         stock: String,
         amount: Number

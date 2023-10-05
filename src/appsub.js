@@ -17,7 +17,7 @@ import { AuthRouters } from "./Router/AuthRouter.js";
 import { UserRouters } from "./Router/UserRouter.js";
 import { AdminRouters } from "./Router/AdminRouters.js";
 
-import {TransactionRouters} from "./Router/TransactionRouter.js";
+import {OrderRouters} from "./Router/OrderRouter.js";
 
 import { RequestRouters } from "./Router/requestRoutes.js";
 
@@ -87,7 +87,7 @@ await connectDB();
 app.use(API_Prefix, AuthRouters);
 app.use(API_Prefix, UserRouters);
 app.use(API_Prefix, AdminRouters);
-app.use(API_Prefix, TransactionRouters)
+app.use(API_Prefix, OrderRouters)
 app.use(API_Prefix, RequestRouters)
 
 app.use(ResHandler);

@@ -1,35 +1,44 @@
 
 import { Schema, model } from "mongoose";
 
-const TransactionSchema = new Schema(
+const OrderSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-
     accountref: {
       type: Schema.Types.ObjectId,
       ref: "subAcc"
     },
-    amount: {
-      type: Number,
-      required: true,
+    unit: {
+      type: Number
     },
-    exchangeAmount: {
+    openAmount: {
+      type: Number
+    },
+    closeAmount: {
       type: Number
     },
     stock: {
       type: String
     },
+
     prevBalance: {
       type: Number
     },
     newBalance: {
       type: Number
-
     },
-    transactionType: {
+    status: {
+      type: String,
+      enum: ["open", "close"],
+      default: "open"
+    },
+    stopLoss:{type:Number},
+    profitLimit:{type:Number},
+
+    orderType: {
       type: String,
       enum: ["buy", "sell"],
       required: true,
@@ -41,6 +50,6 @@ const TransactionSchema = new Schema(
   }
 );
 
-const TransactionModel = model("transaction", TransactionSchema);
+const OrderModel = model("Order", OrderSchema);
 
-export default TransactionModel;
+export default OrderModel;

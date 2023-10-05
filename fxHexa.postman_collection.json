@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "186c8e2d-cc76-4eb1-9b6a-672345d95d7d",
+		"_postman_id": "62a3d030-acf6-499b-b7b0-12e7dd0e8205",
 		"name": "fxHexa",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13608973"
@@ -1801,10 +1801,10 @@
 			]
 		},
 		{
-			"name": "Transaction (demo)",
+			"name": "order",
 			"item": [
 				{
-					"name": "buy",
+					"name": "open order",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1816,7 +1816,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"amount\": 10,\n    \"stock\": \"Google\",\n    \"exchangeAmount\":\"1000\",\n    \"subAccId\":\"64fba9d765f8bb2ac4a68df3\"\n    }",
+							"raw": "{\n    \"subAccId\": \"651766c258010fb0e6928e77\",\n    \"unit\": 10,\n    \"stock\": \"Google\",\n    \"openAmount\": \"1000\",\n    \"orderType\": \"buy\",\n    \"stopLoss\":0.00025,\n    \"profitLimit\":0.35698\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1824,12 +1824,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{1}}transaction/buy",
+							"raw": "{{1}}order/open",
 							"host": [
-								"{{1}}transaction"
+								"{{1}}order"
 							],
 							"path": [
-								"buy"
+								"open"
 							]
 						}
 					},
@@ -1907,7 +1907,7 @@
 					]
 				},
 				{
-					"name": "sell",
+					"name": "close order",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1919,7 +1919,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"amount\": 20,\n    \"stock\": \"Google\",\n    \"exchangeAmount\":\"2000\",\n    \"subAccId\":\"64fba9d765f8bb2ac4a68df3\"\n    }",
+							"raw": "{\n    \"closeAmount\": \"1300\",\n    \"subAccId\": \"651766c258010fb0e6928e77\",\n    \"orderId\": \"651ed858e20f69d98cd2e3ce\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1927,12 +1927,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{1}}transaction/sell",
+							"raw": "{{1}}order/close",
 							"host": [
-								"{{1}}transaction"
+								"{{1}}order"
 							],
 							"path": [
-								"sell"
+								"close"
 							]
 						}
 					},
@@ -2010,7 +2010,7 @@
 					]
 				},
 				{
-					"name": "getTransaction",
+					"name": "getorders",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2021,12 +2021,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}transaction/getTransaction?month=09&year=2023&page=1&limit=10&subAccId=64fba9d765f8bb2ac4a68df3",
+							"raw": "{{1}}order/getOrder?month=09&year=2023&page=1&limit=10&subAccId=64fba9d765f8bb2ac4a68df3",
 							"host": [
-								"{{1}}transaction"
+								"{{1}}order"
 							],
 							"path": [
-								"getTransaction"
+								"getOrder"
 							],
 							"query": [
 								{

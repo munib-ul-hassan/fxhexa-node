@@ -5,7 +5,7 @@ import { handleMultipartData } from "../Utils/MultipartData.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 import fs from "fs"
-import { RequestValidator, updaterequestValidator } from "../Utils/Validator/transactionValidation.js";
+import { RequestValidator, updaterequestValidator } from "../Utils/Validator/orderValidation.js";
 import subAccountModel from "../DB/Model/subAccountModel.js";
 const postRequest = async (req, res, next) => {
     try {
