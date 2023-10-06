@@ -70,6 +70,7 @@ export const changePasswordValidator = joi.object({
   oldPassword: joi.string().required(),
   newPassword: joi.string().required(),
 });
+
 //profile validator
 
 export const ProfileValidator = joi.object({
@@ -82,44 +83,8 @@ export const ProfileValidator = joi.object({
 export const LogoutValidator = joi.object({
   user: joi.object(),
 });
-const mealvalidator = joi.object({
-  meal: joi.string().required(),
-  qty: joi.number().required(),
-  diet: joi.string().required(),
-  kcal: joi.number().required(),
-  day: joi.number().required(),
-  title: joi.string().required(),
-});
 
-export const dietvalidator = joi.object({
-  startDate: joi.string().required(),
-  endDate: joi.string().required(),
-  dietEntries: joi.array(),
-  createdFor: joi.string(),
-  creatorType: joi.string(),
-  total: joi.number(),
-});
 
-export const nutritionvalidator = joi.object({
-  startDate: joi.string().required(),
-  endDate: joi.string().required(),
-  nutritionEntries: joi.array(),
-  createdFor: joi.string(),
-  creatorType: joi.string(),
-  total: joi.number(),
-
-});
-
-export const routinevalidator = joi.object({
-  startDate: joi.string().required(),
-  endDate: joi.string().required(),
-  startTime: joi.string().required(),
-  endTime: joi.string().required(),
-  routineEntries: joi.array(),
-  createdFor: joi.string(),
-  creatorType: joi.string(),
-  totalCal:joi.number().required(),
-});
 export const subAccValidator= joi.object({
   type:joi.string().equal("demo","real").required(),
   name:joi.string().required(),

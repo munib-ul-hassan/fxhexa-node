@@ -2,17 +2,14 @@
 
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
-import {
-  dietvalidator,
-  nutritionvalidator,
-  routinevalidator,
-} from "../Utils/Validator/UserValidator.js";
+
 
 
 import NotificationModel from "../DB/Model/notificationModel.js";
 import AuthModel from "../DB/Model/authModel.js";
 import UserModel from "../DB/Model/userModel.js";
 import mongoose from "mongoose";
+import subAccountModel from "../DB/Model/subAccountModel.js";
 
 const getNotification = async (req, res, next) => {
   try {
@@ -28,7 +25,7 @@ const deleteaccount = async (req, res, next) => {
   try {
     const { user } = req
 
-    await AuthModel.findOneAndUpdate({ user: user._doc.profile },{isDeleted:true});
+    await AuthModel.findOneAndUpdate({ user: user._doc.profile }, { isDeleted: true });
     // await UserModel.find({ _id: user._doc.profile });
 
     session.commitTransaction()
@@ -39,10 +36,31 @@ const deleteaccount = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 }
+const getMyProfile = async (req, res,next) => {
+  try {
+    const { id } = req.params
+    const data = await subAccountModel.findOne({
+      auth:req.user._id,
+      _id:id
+    })
+    if(!data){
+      return next(CustomError.createError("Invalid id", 200));
+      
+    }else{
+
+      return next(CustomSuccess.createSuccess(data, "User Account information get Successfully", 201));
+    }
+  } catch (error) {
+
+
+    return next(CustomError.badRequest(error.message));
+  }
+}
 const UserController = {
 
   getNotification,
-  deleteaccount
+  deleteaccount,
+  getMyProfile
 
 };
 export default UserController;

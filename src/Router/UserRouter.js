@@ -21,6 +21,8 @@ UserRouters.prefix("/user", AuthMiddleware, async function () {
   UserRouters.route("/terms").get(AdminController.getTerms);
   UserRouters.route("/notification").get(UserController.getNotification);
   UserRouters.route("/delete").delete(UserController.deleteaccount);
+  UserRouters.route("/me/:id").get(UserController.getMyProfile);
+
   
 
 
