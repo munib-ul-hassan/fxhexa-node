@@ -36,18 +36,16 @@ const deleteaccount = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 }
-const getMyProfile = async (req, res,next) => {
+const getMyProfile = async (req, res) => {
   try {
     const { id } = req.params
     const data = await subAccountModel.findOne({
-      auth:req.user._id,
-      _id:id
-    })
-    if(!data){
+      auth: req.user._id,
+      _id: id
+    })  
+    if (!data) {
       return next(CustomError.createError("Invalid id", 200));
-      
-    }else{
-
+    } else {
       return next(CustomSuccess.createSuccess(data, "User Account information get Successfully", 201));
     }
   } catch (error) {

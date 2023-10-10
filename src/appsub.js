@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 // DB Connection
 import { connectDB } from "./DB/index.js";
 import { ResHandler } from "./Utils/ResponseHandler/ResHandler.js";
-
+import { StockRouters } from "./Router/StockRouters.js";
 import { AuthRouters } from "./Router/AuthRouter.js";
 
 
@@ -20,7 +20,6 @@ import { AdminRouters } from "./Router/AdminRouters.js";
 import {OrderRouters} from "./Router/OrderRouter.js";
 
 import { RequestRouters } from "./Router/requestRoutes.js";
-
 
 
 export const filename = fileURLToPath(import.meta.url);
@@ -89,6 +88,11 @@ app.use(API_Prefix, UserRouters);
 app.use(API_Prefix, AdminRouters);
 app.use(API_Prefix, OrderRouters)
 app.use(API_Prefix, RequestRouters)
+app.use(API_Prefix, StockRouters)
 
 app.use(ResHandler);
+
+
+
+
 
