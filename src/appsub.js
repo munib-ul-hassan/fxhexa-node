@@ -33,7 +33,6 @@ const API_Prefix = "/api/v1"
 
 
 
-
 app.use("/", express.static("./public/uploads"));
 
 app.use(function (req, res, next) {
