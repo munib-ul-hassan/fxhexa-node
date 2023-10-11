@@ -36,7 +36,7 @@ const deleteaccount = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 }
-const getMyProfile = async (req, res) => {
+const getMyProfile = async (req, res,next) => {
   try {
     const { id } = req.params
     const data = await subAccountModel.findOne({
