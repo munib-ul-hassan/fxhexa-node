@@ -26,6 +26,7 @@ const getStocks = async (req, res) => {
     try {
         const { keyword } = req.query
         // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=${process.env.alphaAPIKEY}`
+        
         const url =`https://api.polygon.io/v3/reference/tickers?apiKey=${process.env.apiKey}&search=${keyword}`
         console.log(url)
         const data = (await axios.get(url)).data

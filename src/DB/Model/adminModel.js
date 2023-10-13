@@ -8,6 +8,7 @@ const AdminSchema = new Schema(
       ref: "Auth",
       required: true,
     },
+    balance: { type: Number, default: 0 },
 
     image: {
       type: Schema.Types.String,

@@ -5,7 +5,8 @@ export const RegisterValidator = joi.object({
   fullName: joi.string().required(),
   email: joi.string().email().required(),
   password: joi.string().required(), 
-  accType: joi.string(),
+  // accType: joi.string(),
+  referBy: joi.string(),
   
   ...deviceRequired,
 });

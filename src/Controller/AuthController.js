@@ -33,7 +33,7 @@ const registerUser = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { fullName, email, password, deviceType, deviceToken, accType } =
+    const { fullName, email, password, deviceType, deviceToken, accType, referBy } =
       req.body;
 
     const IsUser = await AuthModel.findOne({ identifier: email });
@@ -41,12 +41,25 @@ const registerUser = async (req, res, next) => {
       return next(CustomError.createError("User Already Exists", 400));
     }
 
+    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    let refereCode = "";
+
+    for (let i = 0; i < 10; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      refereCode += charset.charAt(randomIndex);
+    }
+
     const auth = await new AuthModel({
       identifier: email,
       password,
       accType,
+      refereCode
     }).save();
-
+    if (referBy) {
+      const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: auth._id } }, { new: true })
+      console.log(referUSer)
+      await AuthModel.findByIdAndUpdate(auth._id, { referBy: referUSer._id })
+    }
     if (!auth) {
       return next(CustomError.createError("error registering user", 200));
     }
@@ -107,7 +120,6 @@ const registerUser = async (req, res, next) => {
     const usermodel = await new UserModel({
       auth: auth._id,
       fullName
-
     }).save();
     // if(userType == "Admin"){
     //   UserModel = await new AdminModel({
@@ -159,6 +171,7 @@ const registerUser = async (req, res, next) => {
         subAccounts: user.subAccounts,
         isCompleteProfile: user.isCompleteProfile,
         notificationOn: user.notificationOn,
+        refereCode
       };
       const token = await tokenGen(user, "auth", deviceToken);
 
@@ -311,6 +324,7 @@ const LoginUser = async (req, res, next) => {
       subAccounts: user.subAccounts,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
+      refereCode: user.refereCode
     };
     return next(
       CustomSuccess.createSuccess(
@@ -431,7 +445,6 @@ const ForgetPassword = async (req, res, next) => {
     return next(CustomError.createError(error.message, 200));
   }
 };
-
 const VerifyUser = async (req, res, next) => {
   try {
     const { error } = verifyuserValidator.validate(req.body);
@@ -498,7 +511,7 @@ const VerifyUser = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
 
-
+    user.profile._doc.refereCode = user.refereCode
 
     user.profile._doc.email = user.identifier;
     // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [],
@@ -517,7 +530,6 @@ const VerifyUser = async (req, res, next) => {
     return next(CustomError.createError(error.message, 200));
   }
 };
-
 const VerifyOtp = async (req, res, next) => {
   try {
     if (req.user.tokenType != "forgot password") {
@@ -590,6 +602,7 @@ const VerifyOtp = async (req, res, next) => {
     user.profile._doc.email = user.identifier;
     user.profile._doc.subAccounts = user.subAccounts
 
+    user.profile._doc.refereCode = user.refereCode
 
     // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
     // user.profile._doc.real = user.real.length > 0 ? user.real : [];
@@ -649,6 +662,7 @@ const ResetPassword = async (req, res, next) => {
     // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
     // user.profile._doc.real = user.real.length > 0 ? user.real : []
     user.profile._doc.subAccounts = user.subAccounts
+    user.profile._doc.refereCode = user.refereCode
 
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
@@ -766,6 +780,7 @@ const getprofile = async (req, res, next) => {
       isCompleteProfile: data.isCompleteProfile,
       token: token,
       subAccounts: data.subAccounts,
+      refereCode: data.refereCode,
 
       // demo: data.demo.length > 0 ? data.demo : [],
       // real: data.real.length > 0 ? data.real : [],
@@ -783,7 +798,6 @@ const getprofile = async (req, res, next) => {
     return next(CustomError.createError(error.message, 500));
   }
 };
-
 const changePassword = async (req, res, next) => {
   try {
     const { error } = changePasswordValidator.validate(req.body);
@@ -820,7 +834,6 @@ const changePassword = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 };
-
 const notificationUpdate = async (req, res, next) => {
   try {
     const user = await AuthModel.findById(req.user._id).populate([
@@ -846,6 +859,8 @@ const notificationUpdate = async (req, res, next) => {
       fullName: profile.fullName,
       email: user._doc.identifier,
       subAccounts,
+      refereCode: user._doc.refereCode,
+
 
       // image: { file: profile.image?.file },
       // demo, real,
@@ -910,6 +925,7 @@ const updateProfile = async (req, res, next) => {
       fullName: user.profile._doc.fullName,
 
       subAccounts: user.subAccounts,
+      refereCode: user.refereCode,
 
       userType: "User",
       // demo, real,
@@ -944,7 +960,12 @@ const addSubAcc = async (req, res, next) => {
 
     }
     const { type, name, password, leverage, currency, balance } = req.body
+    const alreaduser = await subAccountModel.findOne({ name })
 
+    if (alreaduser) {
+      return next(CustomError.createError("Nick name must be unique, user different one ", 200))
+
+    }
     const data = new subAccountModel({
       auth: req.user._id,
       type, name, password, leverage, currency, balance
@@ -965,7 +986,7 @@ const addSubAcc = async (req, res, next) => {
       )
     );
   } catch (err) {
-    console.log(err.code)
+    console.log(err["code"])
     if (err.code == 11000) {
 
       return next(CustomError.createError("Nick name must be unique, user different one ", 200))
@@ -1072,7 +1093,7 @@ const loginSub = async (req, res, next) => {
     // dataExist.auth.subAccont=dataExist
     // delete dataExist.auth.subAccont.auth
     // delete dataExist.auth.subAccont.auth.profile
-delete dataExist.auth
+    delete dataExist.auth
     // var auth = dataExist.auth._doc.profile._doc
 
     // dataExist._doc.email = dataExist.auth._doc.identifier,

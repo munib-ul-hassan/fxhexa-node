@@ -110,7 +110,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"type\":\"demo\",\r\n    \"name\":\"My demo Account\",\r\n    \"password\":\"123123\",\r\n    \"leverage\":150,\r\n    \"currency\":\"USD\"\r\n}",
+									"raw": "{\r\n    \"type\":\"demo\",\r\n    \"name\":\"My demo \",\r\n    \"password\":\"123123\",\r\n    \"leverage\":\"150\",\r\n    \"currency\":\"USD\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -852,7 +852,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new165835@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"accType\": \"demo\",\r\n    \"currency\": \"pkr\"\r\n}",
+							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new165@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"referBy\": \"OsNbu$J1OH\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -877,7 +877,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\":\"teasdasdstUser@yopmail.com\",\r\n    \"password\": \"123456\",   \r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"android\"\r\n}",
+									"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new165@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"referBy\": \"OsNbu$J1OH\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -885,9 +885,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{2}}auth/signup",
+									"raw": "{{1}}auth/signup",
 									"host": [
-										"{{2}}auth"
+										"{{1}}auth"
 									],
 									"path": [
 										"signup"
@@ -899,14 +899,6 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Server",
-									"value": "Cowboy"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
 									"key": "X-Powered-By",
 									"value": "Express"
 								},
@@ -915,28 +907,44 @@
 									"value": "*"
 								},
 								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "880"
+									"value": "932"
 								},
 								{
-									"key": "Etag",
-									"value": "W/\"370-SfFKGpQx1X52uu2Ty5Rge5cVfJM\""
+									"key": "ETag",
+									"value": "W/\"3a4-jgDgpa38PuOo+tFMAFrKHRfk0t0\""
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 24 Jul 2023 23:06:34 GMT"
+									"value": "Fri, 13 Oct 2023 20:41:01 GMT"
 								},
 								{
-									"key": "Via",
-									"value": "1.1 vegur"
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"User register succesfully\",\n    \"data\": {\n        \"_id\": \"64bf03fa9693817ea1560d0a\",\n        \"fullName\": \"Test\",\n        \"userType\": \"User\",\n        \"image\": {\n            \"file\": \"\"\n        },\n        \"otp\": 381381,\n        \"isCompleteProfile\": false,\n        \"notificationOn\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.ZifYos_OC-dZgqbjsq75dgpCoW6V_89MIlNOtUSJkH-j-rpnbu68oFB6_a5EMAN86q6B6ixqCzetx25MEAtMVX2KNU288x2Imtk8mPXuFIVa6w9lZabLqF0OP2rArxYGlHoTNLBPyQfyN0WSG5D5AEWOSR6eAEN00s-G2m2uexMVTA-XaBDPjMq7mIyPSM7ijEjJyAKj5UYfBXSMqKg5z9gBQaVjNcsymCURiOK3OO6ZNeCcVWiKAnpqDZBI5otxkCyhCPrhQvwCxvTwCROuuXCQgFawKYo3kV0ArgTGTdHzTcNz5Qgt6HmBFcfqBtjCiZZqu9aOwJao82lm7WwlEw.pTdQ3BDmxAqbhaxm.0KqB7mfx7WI979RNFuYnsbW0nEhihoy430qRlC6O1dy_iwcra8zoBE_ZO_y4P3cgU6O6hh8TP5Oz-V7NYXBDDVwiLZnyEYnA-p93u2uuf8D34lq-0yIpzC5nkS8CG4US62rLVIg0j57NfD_-DNx6H-k0BIbhQJDxcq8p6OfMZJogrxtfelEhjA1e55bSX0XFcbo2sIyCEB1cxpQvAcaSLHqP3PAYtw.sGel9J1XTZPqGud4wS3RCA\"\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"User register succesfully\",\n    \"data\": {\n        \"_id\": \"6529ab571f04b7875ccd6b02\",\n        \"email\": \"new16585@gmail.com\",\n        \"fullName\": \"Test\",\n        \"userType\": \"User\",\n        \"otp\": 164699,\n        \"subAccounts\": [],\n        \"isCompleteProfile\": false,\n        \"notificationOn\": true,\n        \"refereCode\": \"OsNbu$J1OH\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.YDfTOC--rgkIwyxk9GyTXalXrWRtXI07B4KMLiwGakgUFBNHEWd6bk_P-MkYpS9uz-p837Kakl29I-6RXyzOTpYXU9pqVkdQlmG4uN7UTc-GQC7F-zblKKbOnboudoJgsO6ASXw_uyF7aOcoO02ier89vm4ySRS21eacS1_OAW0EW3937nl3FtN6fNLZ1eTkFdf3OAlNIQRpsHAoc0f-LBX7dhVVKWg7SfOYwxjB96nb4TBTn03LNc_PQXl3mCFsbYtcOuu4LUxZVMxcQx7hBdH-AE9EPPtnouCqsfiCmTAymomrsimWQ1qGCRX92TPNmH01wOb1LldhfYxrireaCA.M4aW7y9E6LYAztOT.5uMBaX_SURt17zmsED-ZeceI2-HfkImqoZztxDw0s1mv2GWa2HRU-km2FPH0SAnBguA63JSnLFIJ-R5qPo6xyoGm5qWzWD_qlVkXc441kusOMiIPrk8lhqe6WQbzSQmbjZrMc3qbfolTLuqy5GVjbqkf16Nh1bRR-BtahU7QMDCnJfhquu-01rmGb5j6cKi0TTwCAHmC4QLq0Hee6elxZ-0UhrGUpw.fC6UB9bAfQQi54ITEhjd0w\"\n    },\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -966,7 +974,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"new165835@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+							"raw": "{\r\n     \"email\": \"new165@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -997,7 +1005,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"email\":\"abc@yopmail.com\",\r\n    \"password\": \"123456\",   \r\n    \"deviceToken\": \"abcd\",\r\n    \"deviceType\": \"postman\"\r\n}",
+									"raw": "{\r\n     \"email\": \"new165@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1027,20 +1035,32 @@
 									"value": "*"
 								},
 								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "857"
+									"value": "913"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"359-1zwD+KqiKraEfLq3D9Zwr9o+bXA\""
+									"value": "W/\"391-LgiHi0xBda//SopWuNpjSfOzdqM\""
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 17 Jul 2023 23:01:19 GMT"
+									"value": "Fri, 13 Oct 2023 21:05:08 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1052,7 +1072,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"64b5c7325c7b6a74df032319\",\n        \"fullName\": \"Test\",\n        \"userType\": \"User\",\n        \"image\": null,\n        \"isCompleteProfile\": true,\n        \"notificationOn\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.bkg41kQBEWcZfLkE4yFkpHRlnBybU5IdZiWct3OeYVwhypouYcow54rPluw8lmdFVPRxu36CC3FiSF3QLYEfAlrlS7laurGOWorcm3a8W6nV6zPYYfBlzh2kQMVSWzKzHl99fGRXp3x1MqxVXSZvKXfcPrX5I87aPKVDnx3WtNlaK0z4k02OqdN-H_wmiABkCxE0qiz40YxvzlBVIYfRdYicUfnrsTFH9yzkOHKb91ago7esTENCsfbQRmhzNNg37gO22lelrbDlYPKiDwppHWfadz9YTtDotBM-S69dshnGBq1_9WrThmLv9wITabNuEJATZvgEy8eJcK-xQByN5w.FGPSlCZHsiTR33c-.B_Ztj08NHTG81cey0SOpSWAgufcBTcgHJFxyl82VqSYxcN0MmLCJnbqKhd-5QY6wqxyrjYBLXZUWsCgaM-5WGP1ufdRkCTecfzLFHIsuq_VUA982xIxsnySIXXD3n_yTxL4cr9XIl2sYKxHXkf08-Mp6bL7Mxbo-y3F3WfNhKcX_JijSvnw1NjpbvZeFLmvT9BGU8EeUsJ1uVo1lc4KsDufdLspuABY.fOETNehrsPYnZwRE1Ka3Hw\"\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"6529b0be270bf376a888dc22\",\n        \"fullName\": \"Test\",\n        \"email\": \"new165@gmail.com\",\n        \"userType\": \"User\",\n        \"subAccounts\": [],\n        \"isCompleteProfile\": true,\n        \"notificationOn\": true,\n        \"refereCode\": \"Pnl5E26ksq\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.eH3EqU5kgHXR4f6nqgFcuW9Hr4O8Qb1DCvyvxdMbHdpuqT1yMGM7Wrn6ZiNfcKcHqA5fWC-W5djcZ2T_fUs9BlbZQzaFOl1GQUCRb9AyLbs9TS_czMUCQxRyZdsHwLYzPig5EWeKrVufw1viXOzy87xNWfd1EyN64LdQeKuHZFOkl8TL7SYmGQ36zG2x6F-Km0B3GNyteO6JBsUm4ApHO5dvuBCCNWn7fHyGd1KhC5-Kf0a4PIVVsYHxVrGyDHhQxxLb8e7g-SIAVp7Sx1GGaeNATowTTzjODfWott142qe6ahy2r-ofpbWcfNQ6-ifW0dpTYPOsEOSz9zeDrcAfRg.H3Fl7yllwi3YPK7W.GSQBPwGl0eiYAcaSmdBosbQqqou_WiQA3K8DwV1hSN9Rrgid0-SjRBN5y5M7VW2NkNGTiL3Szic3q1ht1qoZflwzYHj0oa0wHkX4UilhFVn4bCHhxt3QFZdUzfSC_w8H1y_K4nIyteH2EuXW0qY5qvgt7UeHrpZ060xseH-RuGZ6yq3D-UrmCpq3YYGQNt3cv7TO5IEtuqqThg6QaAC2f0P-Eq7RYw.44MG8wydLb813zZa3Mpwag\"\n    },\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -1824,7 +1844,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"subAccId\": \"651766c258010fb0e6928e77\",\n    \"unit\": 10,\n    \"stock\": \"Google\",\n    \"openAmount\": \"1000\",\n    \"orderType\": \"buy\",\n    \"stopLoss\":0.00025,\n    \"profitLimit\":0.35698\n}",
+							"raw": "{\n    \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"unit\": 0.1,\n    \"stock\": \"Google\",\n    \"openAmount\": \"1000\",\n    \"orderType\": \"sell\",\n    \"stopLoss\":0.00025,\n    \"profitLimit\":0.35698\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1927,7 +1947,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"closeAmount\": \"1300\",\n    \"subAccId\": \"651766c258010fb0e6928e77\",\n    \"orderId\": \"651ed858e20f69d98cd2e3ce\"\n}",
+							"raw": "{\n    \"closeAmount\": \"1300\",\n   \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"orderId\": \"6529bf9b72ee26e673f33669\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2029,7 +2049,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}order/getOrder?month=10&year=2023&page=1&limit=10&subAccId=64fba9d765f8bb2ac4a68df3",
+							"raw": "{{1}}order/getOrder?month=10&year=2023&page=1&limit=10&subAccId=6529bccdcf02d79d870415b1",
 							"host": [
 								"{{1}}order"
 							],
@@ -2065,7 +2085,7 @@
 								},
 								{
 									"key": "subAccId",
-									"value": "64fba9d765f8bb2ac4a68df3"
+									"value": "6529bccdcf02d79d870415b1"
 								}
 							]
 						}

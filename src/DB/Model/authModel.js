@@ -50,21 +50,33 @@ const AuthSchema = new Schema(
       default: true,
       required: false,
     },
-    acctype: {
-      type: String,
-      enum: ["demo", "real"],
-      default: "demo",
-    },
+    // acctype: {
+    //   type: String,
+    //   enum: ["demo", "real"],
+    //   default: "demo",
+    // },
     OTP: {
       type: Schema.Types.ObjectId,
       ref: "Otp",
     },
-    
-   
-   subAccounts: [
+    referBy: {
+      type: Schema.Types.ObjectId,
+      ref: "Auth",
+    },
+    refereCode: { type: String },
+    referer: [
       {
         type: Schema.Types.ObjectId,
-        ref: "subaccount",
+        ref: "Auth",
+      }
+    ],
+
+    balance: { type: Number, default: 0 },
+
+    subAccounts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "subAcc",
       }
     ],
     // isVerified: { not in the scope

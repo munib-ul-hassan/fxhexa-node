@@ -8,6 +8,7 @@ import {
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 import subAccountModel from "../DB/Model/subAccountModel.js";
+import AdminModel from "../DB/Model/adminModel.js";
 // Buy Coin API
 
 const open = async (req, res, next) => {
@@ -25,8 +26,21 @@ const open = async (req, res, next) => {
       return next(CustomError.badRequest("invalid Sub-Account Id"));
     }
 
-    if (accData.balance < openAmount) {
+    const balance = (openAmount * unit) + ((openAmount * unit) * 0.15)
+    if (accData.balance < balance) {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
+    }
+    if (req.user.referBy) {
+      await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+        $inc: { balance: ((openAmount * unit) * 0.10) }
+      })
+      await AuthModel.findOneAndUpdate({ _id: req.user.referBy }, {
+        $inc: { balance: ((openAmount * unit) * 0.05) }
+      })
+    } else {
+      await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+        $inc: { balance: ((openAmount * unit) * 0.15) }
+      })
     }
     // newBalance: parseInt(accData.balance) - parseInt(exchangeAmount), exchangeAmount, orderType: "buy"
 
@@ -38,7 +52,9 @@ const open = async (req, res, next) => {
       stopLoss, profitLimit
     })
     await Order.save()
-
+    await subAccountModel.findByIdAndUpdate(subAccId, {
+      $inc: { balance: -((openAmount * unit) + ((openAmount * unit) * 0.15)) }
+    })
     // const i = accData.stockData.findIndex((element) => element.stock == stock)
     // let stockdemodata = accData.stockData;
 
@@ -83,7 +99,7 @@ const close = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const {  closeAmount, subAccId, orderId } = req.body;
+    const { closeAmount, subAccId, orderId } = req.body;
 
     const accData = await subAccountModel.findById(subAccId, { password: 0 })
     if (!accData) {
@@ -94,15 +110,15 @@ const close = async (req, res, next) => {
     if (!orderData) {
       return next(CustomError.badRequest("invalid Order Id"));
     }
-    var newBalance=0;
+    var newBalance = 0;
     if (orderData.orderType == "buy") {
-      
+
       newBalance = (orderData.openAmount - closeAmount) * orderData.unit
     }
     if (orderData.orderType == "sell") {
-      newBalance = (closeAmount - orderData.openAmount )* orderData.unit
+      newBalance = (closeAmount - orderData.openAmount) * orderData.unit
     }
-console.log(newBalance)
+
     await subAccountModel.findByIdAndUpdate(subAccId,
       {
         $inc: { balance: newBalance },
