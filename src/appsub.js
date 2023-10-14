@@ -16,8 +16,9 @@ import { AuthRouters } from "./Router/AuthRouter.js";
 // import { ChatRouters } from "./Router/ChatRouters.js";
 import { UserRouters } from "./Router/UserRouter.js";
 import { AdminRouters } from "./Router/AdminRouters.js";
+import { ForexRouters } from "./Router/ForexRouters.js";
 
-import {OrderRouters} from "./Router/OrderRouter.js";
+import { OrderRouters } from "./Router/OrderRouter.js";
 
 import { RequestRouters } from "./Router/requestRoutes.js";
 
@@ -86,6 +87,7 @@ app.use(API_Prefix, AdminRouters);
 app.use(API_Prefix, OrderRouters)
 app.use(API_Prefix, RequestRouters)
 app.use(API_Prefix, StockRouters)
+app.use(API_Prefix, ForexRouters)
 
 app.use(ResHandler);
 
