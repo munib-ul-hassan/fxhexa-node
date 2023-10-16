@@ -13,7 +13,7 @@ const gettickers = async (req, res, next) => {
         })
 
     } catch (err) {
-        next(CustomError.createError(error.message, 500));
+        next(CustomError.createError(err.message, 500));
 
     }
 }
@@ -29,7 +29,7 @@ const getgraph = async (req, res, next) => {
         })
 
     } catch (error) {
-        console.log(error)
+        
         next(CustomError.createError(error.message, 500));
 
     }
