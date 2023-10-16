@@ -17,6 +17,14 @@ application.prefix = Router.prefix = function (path, middleware, configure) {
       ForexRouters.route("/graph").get(
         ForexController.getgraph
       );  
+      ForexRouters.route("/open").post(
+        ForexController.openforex
+      );  
+      ForexRouters.route("/close").post(
+        ForexController.closeforex
+      );  
+      
   })
+
 
 

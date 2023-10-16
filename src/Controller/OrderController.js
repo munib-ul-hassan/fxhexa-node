@@ -31,12 +31,13 @@ const open = async (req, res, next) => {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
-      
+
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
         $inc: { balance: ((openAmount * unit) * 0.10) }
       })
-      await AuthModel.findOneAndUpdate({ _id: req.user.referBy }, {
-        $inc: { balance: ((openAmount * unit) * 0.05) }
+      
+      await AuthModel.findOneAndUpdate({ _id: req.user.referBy,"referer.user":req.user._id }, {
+        $inc: { "referer.$.amount": ((openAmount * unit) * 0.05) }
       })
     } else {
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
@@ -106,8 +107,7 @@ const close = async (req, res, next) => {
     if (!accData) {
       return next(CustomError.badRequest("invalid Sub-Account Id"));
     }
-    const orderData = await OrderModel.findById(orderId)
-    console.log(orderData)
+    const orderData = await OrderModel.findById(orderId)    
     if (!orderData) {
       return next(CustomError.badRequest("invalid Order Id"));
     }

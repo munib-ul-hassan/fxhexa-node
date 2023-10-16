@@ -35,13 +35,22 @@ const OrderSchema = new Schema(
       enum: ["open", "close"],
       default: "open"
     },
-    stopLoss:{type:Number},
-    profitLimit:{type:Number},
+    stopLoss: { type: Number },
+    profitLimit: { type: Number },
+    
+    from: { type: String },
+    to: { type: String },
+
 
     orderType: {
       type: String,
       enum: ["buy", "sell"],
       required: true,
+    },
+    type: {
+      type: String,
+      enum: ["Stock", "Forex"],
+      default: "Stock"
     },
   },
   {

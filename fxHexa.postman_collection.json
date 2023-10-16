@@ -110,7 +110,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"type\":\"demo\",\r\n    \"name\":\"My demo \",\r\n    \"password\":\"123123\",\r\n    \"leverage\":\"150\",\r\n    \"currency\":\"USD\"\r\n}",
+									"raw": "{\r\n    \"type\":\"demo\",\r\n    \"name\":\"My mick\",\r\n    \"password\":\"123123\",\r\n    \"leverage\":\"150\",\r\n    \"currency\":\"USD\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -852,7 +852,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new165@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"referBy\": \"OsNbu$J1OH\"\r\n}",
+							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new123123@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -982,9 +982,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{1}}auth/login",
+							"raw": "{{2}}auth/login",
 							"host": [
-								"{{1}}auth"
+								"{{2}}auth"
 							],
 							"path": [
 								"login"
@@ -1822,9 +1822,195 @@
 					"name": "get my profile",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{1}}auth/profile",
+							"host": [
+								"{{1}}auth"
+							],
+							"path": [
+								"profile"
+							]
+						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "get my profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{1}}auth/profile",
+									"host": [
+										"{{1}}auth"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1030"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"406-YO3+DKCrH6I1qGEZ3G6efiNp/Kk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Oct 2023 22:29:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"profile get sucessfully\",\n    \"data\": {\n        \"_id\": \"6529b0be270bf376a888dc22\",\n        \"fullName\": \"Test\",\n        \"email\": \"new165@gmail.com\",\n        \"isCompleteProfile\": true,\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.Q8rdcJYMuHPXdhpQOUhklNrIfzRpTjcYjlZtb5jWhEHy_YDNOfygMcAfjKbN-RakCZvpxzRkIPqHU38eaHrapddcNKducY0ajEdwyDiP-YoSjjkNFqnn897Q-EC4lgSFCBrcvQA-uSZiT3bDB5vwzKV1MnNnb85RTX08s-qCupuZKY_UbT4A1m06ghd5B0lmY0LHq6Aak9EBf04SXquUuhO2fSWFLaHxFy9Tq_iTiRn5WKMGWXmksr2Ugl4gCJzeac4W4Dat2AtaXOqne6KKMbEdVE-u1PksE-eRzY45QsplkBUVz1-fHt1ZDGMukE9U0Rj5rU5JpYwMdP6uMH2V8g.kmlh0gsmf-OWiz2S._0Pzm5psA-mPHV_BYK96xfumx5hF_MWgSWnnsTYtgSeDOJPSTNhYb4vjV98R8Onm0r-IeEhOQB9BCKqLeHRVJyRM3anX55gKaJI8SP3X56DJepitntkhqMa4rtm0xEInKwyEipJhc0XLXBB34XHcmhCogbs1Y1ATSr_eyluVImuyhJbUfqxua7EvdyvPHKAYKDs.ZRx8rMrB_jrq5vnktQvYWw\",\n        \"subAccounts\": [\n            \"6529bb7055b7245cd115658c\",\n            \"6529bbba5a2ce2403e18550b\",\n            \"6529bbf57827ebfa31494660\",\n            \"6529bc4184a1f3914233ed5b\",\n            \"6529bc85fe05879546378586\",\n            \"6529bccdcf02d79d870415b1\"\n        ],\n        \"refereCode\": \"Pnl5E26ksq\",\n        \"notificationOn\": true\n    },\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "get refer list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{1}}auth/refer",
+							"host": [
+								"{{1}}auth"
+							],
+							"path": [
+								"refer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get refer list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{1}}auth/refer",
+									"host": [
+										"{{1}}auth"
+									],
+									"path": [
+										"refer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "287"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11f-89N3VMgP+DmTc5VwtKTYS48DdI4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Oct 2023 22:29:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Refer List get  sucessfully\",\n    \"data\": [\n        {\n            \"amount\": 0\n        },\n        {\n            \"amount\": 0\n        },\n        {\n            \"user\": {\n                \"_id\": \"652d8f1f636b66f371a1517a\",\n                \"fullName\": \"User123\",\n                \"auth\": \"652d8f1d636b66f371a15170\",\n                \"createdAt\": \"2023-10-16T19:29:35.955Z\",\n                \"updatedAt\": \"2023-10-16T19:33:59.787Z\",\n                \"__v\": 0\n            },\n            \"amount\": 25\n        }\n    ],\n    \"status\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1844,7 +2030,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"unit\": 0.1,\n    \"stock\": \"Google\",\n    \"openAmount\": \"1000\",\n    \"orderType\": \"sell\",\n    \"stopLoss\":0.00025,\n    \"profitLimit\":0.35698\n}",
+							"raw": "{\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\n    \"unit\": 0.5,\n    \"stock\": \"Google\",\n    \"openAmount\": \"1000\",\n    \"orderType\": \"sell\",\n    \"stopLoss\":0.00025,\n    \"profitLimit\":0.35698\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3026,9 +3212,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}forex/get",
+							"raw": "{{2}}forex/get",
 							"host": [
-								"{{1}}forex"
+								"{{2}}forex"
 							],
 							"path": [
 								"get"
@@ -3326,6 +3512,153 @@
 							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"ticker\": \"C:EURUSD\",\n        \"queryCount\": 12,\n        \"resultsCount\": 12,\n        \"adjusted\": true,\n        \"results\": [\n            {\n                \"v\": 4100,\n                \"vw\": 1.0562,\n                \"o\": 1.05664,\n                \"c\": 1.05639,\n                \"h\": 1.05741,\n                \"l\": 1.0557,\n                \"t\": 1696118400000,\n                \"n\": 4100\n            },\n            {\n                \"v\": 177930,\n                \"vw\": 1.0525,\n                \"o\": 1.05639,\n                \"c\": 1.04797,\n                \"h\": 1.0592,\n                \"l\": 1.0474,\n                \"t\": 1696204800000,\n                \"n\": 177930\n            },\n            {\n                \"v\": 212216,\n                \"vw\": 1.0471,\n                \"o\": 1.04798,\n                \"c\": 1.0468,\n                \"h\": 1.0494,\n                \"l\": 1.0447,\n                \"t\": 1696291200000,\n                \"n\": 212216\n            },\n            {\n                \"v\": 206080,\n                \"vw\": 1.0495,\n                \"o\": 1.04685,\n                \"c\": 1.05066,\n                \"h\": 1.05321,\n                \"l\": 1.045,\n                \"t\": 1696377600000,\n                \"n\": 206080\n            },\n            {\n                \"v\": 200340,\n                \"vw\": 1.0523,\n                \"o\": 1.05063,\n                \"c\": 1.0545,\n                \"h\": 1.0553,\n                \"l\": 1.0499,\n                \"t\": 1696464000000,\n                \"n\": 200340\n            },\n            {\n                \"v\": 207353,\n                \"vw\": 1.0551,\n                \"o\": 1.05461,\n                \"c\": 1.06,\n                \"h\": 1.0601,\n                \"l\": 1.0482,\n                \"t\": 1696550400000,\n                \"n\": 207353\n            },\n            {\n                \"v\": 7029,\n                \"vw\": 1.0558,\n                \"o\": 1.05624,\n                \"c\": 1.05659,\n                \"h\": 1.0569,\n                \"l\": 1.05488,\n                \"t\": 1696723200000,\n                \"n\": 7029\n            },\n            {\n                \"v\": 208480,\n                \"vw\": 1.0548,\n                \"o\": 1.05662,\n                \"c\": 1.05783,\n                \"h\": 1.0581,\n                \"l\": 1.0518,\n                \"t\": 1696809600000,\n                \"n\": 208480\n            },\n            {\n                \"v\": 227187,\n                \"vw\": 1.0588,\n                \"o\": 1.05783,\n                \"c\": 1.0604,\n                \"h\": 1.062,\n                \"l\": 1.0553,\n                \"t\": 1696896000000,\n                \"n\": 227187\n            },\n            {\n                \"v\": 201138,\n                \"vw\": 1.0609,\n                \"o\": 1.06043,\n                \"c\": 1.0623,\n                \"h\": 1.06347,\n                \"l\": 1.05773,\n                \"t\": 1696982400000,\n                \"n\": 201138\n            },\n            {\n                \"v\": 200442,\n                \"vw\": 1.0584,\n                \"o\": 1.06228,\n                \"c\": 1.05355,\n                \"h\": 1.06397,\n                \"l\": 1.0522,\n                \"t\": 1697068800000,\n                \"n\": 200442\n            },\n            {\n                \"v\": 205064,\n                \"vw\": 1.0527,\n                \"o\": 1.05356,\n                \"c\": 1.0511,\n                \"h\": 1.05586,\n                \"l\": 1.0494,\n                \"t\": 1697155200000,\n                \"n\": 205064\n            }\n        ],\n        \"status\": \"OK\",\n        \"request_id\": \"3c9e9377758ea2ba7cb67c570b3c7dc6\",\n        \"count\": 12\n    },\n    \"message\": \"data get successfully\"\n}"
 						}
 					]
+				},
+				{
+					"name": "order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\r\n    \"orderType\": \"sell\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{1}}forex/open",
+							"host": [
+								"{{1}}forex"
+							],
+							"path": [
+								"open"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "order open",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\r\n    \"orderType\": \"sell\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{1}}forex/open",
+									"host": [
+										"{{1}}forex"
+									],
+									"path": [
+										"open"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "364"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16c-aUzLY5IeYq+3lUU1ITWKiHd65JE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 16 Oct 2023 23:26:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order open successfully\",\n    \"data\": {\n        \"user\": \"652dc074b567595530ba9920\",\n        \"accountref\": \"652db8ec11a788ed67ca3e7b\",\n        \"prevBalance\": 9243.5875,\n        \"status\": \"open\",\n        \"amount\": 100,\n        \"from\": \"USD\",\n        \"to\": \"AUD\",\n        \"orderType\": \"sell\",\n        \"type\": \"Forex\",\n        \"_id\": \"652dc6c2b67bf4535afe2453\",\n        \"createdAt\": \"2023-10-16T23:26:58.039Z\",\n        \"updatedAt\": \"2023-10-16T23:26:58.039Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "order close",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\r\n    \"orderId\": \"652dc993538613bd1e9d2a39\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{1}}forex/close",
+							"host": [
+								"{{1}}forex"
+							],
+							"path": [
+								"close"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

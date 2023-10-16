@@ -6,8 +6,27 @@ export const openOrderValidator = joi.object({
   openAmount: joi.number().required(),
   orderType: joi.string().valid("buy", "sell"),
   subAccId: joi.string().required(),
-  stopLoss:joi.number(),
-  profitLimit:joi.number()
+  stopLoss: joi.number(),
+  profitLimit: joi.number()
+});
+
+
+export const forexOpenOrderValidator = joi.object({
+  amount: joi.number().required(),
+  from: joi.string(),
+  to: joi.string(),  
+  orderType: joi.string().valid("buy", "sell"),
+  subAccId: joi.string().required(),
+  stopLoss: joi.number(),
+  profitLimit: joi.number()
+});
+export const forexcloseOrderValidator =joi.object({
+  // unit: joi.number(),
+  // stock: joi.string(),
+  orderId: joi.string().required(),
+  // closeAmount: joi.number().required(),
+  // orderType: joi.string().valid("buy", "sell"),
+  subAccId: joi.string().required()
 });
 
 export const closeOrderValidator = joi.object({
