@@ -56,7 +56,7 @@ const registerUser = async (req, res, next) => {
       refereCode
     }).save();
     if (referBy) {
-      const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: auth._id } }, { new: true })
+      const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: { user: auth._id } } }, { new: true })
       console.log(referUSer)
       await AuthModel.findByIdAndUpdate(auth._id, { referBy: referUSer._id })
     }
@@ -1118,7 +1118,35 @@ const loginSub = async (req, res, next) => {
 
   } catch (err) { return next(CustomError.createError(err.message, 500)) }
 }
-
+const getreferlist = async (req, res, next) => {
+  try {
+    const referlist = await AuthModel.findById(req.user._id).populate({ path: "referer.user", populate: { path: "profile" } })
+    if (referlist.referer.length > 0) {
+      return next(
+        CustomSuccess.createSuccess(
+          referlist.referer.map((item) => {
+            return {
+              user: item.user?.profile,
+              amount: item.amount
+            }
+          }),
+          "Refer List get  sucessfully",
+          200
+        )
+      );
+    }
+    else {
+      return next(
+        CustomSuccess.createSuccess(
+          {},
+          "No any data yet",
+          200
+        )
+      );
+    }
+  }
+  catch (err) { return next(CustomError.createError(err.message, 500)) }
+}
 const AuthController = {
   registerUser,
   resendOTP,
@@ -1152,7 +1180,8 @@ const AuthController = {
   getSubAcc,
   updateSubAcc,
   deleteSubAc,
-  loginSub
+  loginSub,
+  getreferlist
 };
 
 export default AuthController;

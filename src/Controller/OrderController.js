@@ -31,6 +31,7 @@ const open = async (req, res, next) => {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
+      
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
         $inc: { balance: ((openAmount * unit) * 0.10) }
       })

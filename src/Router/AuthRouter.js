@@ -28,6 +28,9 @@ AuthRouters.prefix("/auth", AuthMiddleware, async function () {
   AuthRouters.route("/subacc").get(AuthController.getSubAcc);
   AuthRouters.route("/subacc/:id").put(AuthController.updateSubAcc);
   AuthRouters.route("/subacc/:id").delete(AuthController.deleteSubAc);
+  
+  AuthRouters.route("/refer").get(AuthController.getreferlist);
+
 
 
   // AuthRouters.route("/updateprofile").post(AuthController.UpdateProfile);

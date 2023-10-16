@@ -66,8 +66,10 @@ const AuthSchema = new Schema(
     refereCode: { type: String },
     referer: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Auth",
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: "Auth",
+        }, amount: { type: Number, default: 0 }
       }
     ],
 
