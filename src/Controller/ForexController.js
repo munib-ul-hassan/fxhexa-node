@@ -5,6 +5,7 @@ import subAccountModel from "../DB/Model/subAccountModel.js";
 import AdminModel from "../DB/Model/adminModel.js";
 import OrderModel from "../DB/Model/orderModel.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
+import AuthModel from "../DB/Model/authModel.js";
 
 const gettickers = async (req, res, next) => {
     try {
@@ -70,7 +71,7 @@ const openforex = async (req, res, next) => {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
                 $inc: { balance: (data.converted * 0.15) }
             })
-            
+
         }
         const Order = new OrderModel({
             user: req.user._doc.profile._id,
