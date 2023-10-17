@@ -70,6 +70,7 @@ const openforex = async (req, res, next) => {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
                 $inc: { balance: (data.converted * 0.15) }
             })
+            
         }
         const Order = new OrderModel({
             user: req.user._doc.profile._id,
