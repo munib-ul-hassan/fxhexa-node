@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "62a3d030-acf6-499b-b7b0-12e7dd0e8205",
 		"name": "fxHexa",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "13608973"
 	},
 	"item": [
@@ -23,15 +23,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/subacc",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"subacc"
-									]
-								}
+								"url": "{{1}}auth/subacc"
 							},
 							"response": [
 								{
@@ -45,15 +37,7 @@
 												"type": "text"
 											}
 										],
-										"url": {
-											"raw": "{{1}}auth/subacc",
-											"host": [
-												"{{1}}auth"
-											],
-											"path": [
-												"subacc"
-											]
-										}
+										"url": "{{1}}auth/subacc"
 									},
 									"status": "OK",
 									"code": 200,
@@ -117,15 +101,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/subacc",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"subacc"
-									]
-								}
+								"url": "{{1}}auth/subacc"
 							},
 							"response": [
 								{
@@ -148,15 +124,7 @@
 												}
 											}
 										},
-										"url": {
-											"raw": "{{1}}auth/subacc",
-											"host": [
-												"{{1}}auth"
-											],
-											"path": [
-												"subacc"
-											]
-										}
+										"url": "{{1}}auth/subacc"
 									},
 									"status": "OK",
 									"code": 200,
@@ -220,16 +188,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"subacc",
-										"64fb8c08c6087ac085c907ba"
-									]
-								}
+								"url": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba"
 							},
 							"response": [
 								{
@@ -252,16 +211,7 @@
 												}
 											}
 										},
-										"url": {
-											"raw": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba",
-											"host": [
-												"{{1}}auth"
-											],
-											"path": [
-												"subacc",
-												"64fb8c08c6087ac085c907ba"
-											]
-										}
+										"url": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba"
 									},
 									"status": "OK",
 									"code": 200,
@@ -316,16 +266,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"subacc",
-										"64fb8c08c6087ac085c907ba"
-									]
-								}
+								"url": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba"
 							},
 							"response": [
 								{
@@ -339,16 +280,7 @@
 												"type": "text"
 											}
 										],
-										"url": {
-											"raw": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba",
-											"host": [
-												"{{1}}auth"
-											],
-											"path": [
-												"subacc",
-												"64fb8c08c6087ac085c907ba"
-											]
-										}
+										"url": "{{1}}auth/subacc/64fb8c08c6087ac085c907ba"
 									},
 									"status": "OK",
 									"code": 200,
@@ -406,16 +338,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/subacc/login",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"subacc",
-										"login"
-									]
-								}
+								"url": "{{1}}auth/subacc/login"
 							},
 							"response": [
 								{
@@ -432,16 +355,7 @@
 												}
 											}
 										},
-										"url": {
-											"raw": "{{1}}auth/subacc/login",
-											"host": [
-												"{{1}}auth"
-											],
-											"path": [
-												"subacc",
-												"login"
-											]
-										}
+										"url": "{{1}}auth/subacc/login"
 									},
 									"status": "OK",
 									"code": 200,
@@ -520,15 +434,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{2}}auth/forgetpassword",
-							"host": [
-								"{{2}}auth"
-							],
-							"path": [
-								"forgetpassword"
-							]
-						}
+						"url": "{{2}}auth/forgetpassword"
 					},
 					"response": [
 						{
@@ -551,15 +457,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/forgetpassword",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"forgetpassword"
-									]
-								}
+								"url": "{{1}}auth/forgetpassword"
 							},
 							"status": "OK",
 							"code": 200,
@@ -636,15 +534,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}auth/verifyotp",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"verifyotp"
-							]
-						}
+						"url": "{{1}}auth/verifyotp"
 					},
 					"response": [
 						{
@@ -667,15 +557,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/verifyotp",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"verifyotp"
-									]
-								}
+								"url": "{{1}}auth/verifyotp"
 							},
 							"status": "OK",
 							"code": 200,
@@ -744,15 +626,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}auth/resetpassword",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"resetpassword"
-							]
-						}
+						"url": "{{1}}auth/resetpassword"
 					},
 					"response": [
 						{
@@ -780,15 +654,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/resetpassword",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"resetpassword"
-									]
-								}
+								"url": "{{1}}auth/resetpassword"
 							},
 							"status": "OK",
 							"code": 200,
@@ -859,15 +725,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}auth/signup",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"signup"
-							]
-						}
+						"url": "{{1}}auth/signup"
 					},
 					"response": [
 						{
@@ -884,15 +742,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/signup",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"signup"
-									]
-								}
+								"url": "{{1}}auth/signup"
 							},
 							"status": "OK",
 							"code": 200,
@@ -981,15 +831,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{2}}auth/login",
-							"host": [
-								"{{2}}auth"
-							],
-							"path": [
-								"login"
-							]
-						}
+						"url": "{{2}}auth/login"
 					},
 					"response": [
 						{
@@ -1012,15 +854,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/login",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"login"
-									]
-								}
+								"url": "{{1}}auth/login"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1092,15 +926,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{1}}auth/logout",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"logout"
-							]
-						}
+						"url": "{{1}}auth/logout"
 					},
 					"response": [
 						{
@@ -1119,15 +945,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/logout",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"logout"
-									]
-								}
+								"url": "{{1}}auth/logout"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1182,15 +1000,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{1}}auth/profile",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"profile"
-							]
-						}
+						"url": "{{1}}auth/profile"
 					},
 					"response": [
 						{
@@ -1204,15 +1014,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/profile",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"profile"
-									]
-								}
+								"url": "{{1}}auth/profile"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1276,15 +1078,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}auth/changePassword",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"changePassword"
-							]
-						}
+						"url": "{{1}}auth/changePassword"
 					},
 					"response": [
 						{
@@ -1307,15 +1101,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/changePassword",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"changePassword"
-									]
-								}
+								"url": "{{1}}auth/changePassword"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1370,15 +1156,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{2}}auth/notificationUpdate",
-							"host": [
-								"{{2}}auth"
-							],
-							"path": [
-								"notificationUpdate"
-							]
-						}
+						"url": "{{2}}auth/notificationUpdate"
 					},
 					"response": [
 						{
@@ -1392,15 +1170,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/notificationUpdate",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"notificationUpdate"
-									]
-								}
+								"url": "{{1}}auth/notificationUpdate"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1458,15 +1228,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}auth/VerifyUser",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"VerifyUser"
-							]
-						}
+						"url": "{{1}}auth/VerifyUser"
 					},
 					"response": [
 						{
@@ -1483,15 +1245,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/VerifyUser",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"VerifyUser"
-									]
-								}
+								"url": "{{1}}auth/VerifyUser"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1549,15 +1303,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}auth/resend",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"resend"
-							]
-						}
+						"url": "{{1}}auth/resend"
 					},
 					"response": [
 						{
@@ -1574,15 +1320,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}auth/resend",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"resend"
-									]
-								}
+								"url": "{{1}}auth/resend"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1646,16 +1384,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}/auth/profile",
-							"host": [
-								"{{1}}"
-							],
-							"path": [
-								"auth",
-								"profile"
-							]
-						}
+						"url": "{{1}}/auth/profile"
 					},
 					"response": [
 						{
@@ -1678,16 +1407,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}/auth/profile",
-									"host": [
-										"{{1}}"
-									],
-									"path": [
-										"auth",
-										"profile"
-									]
-								}
+								"url": "{{1}}/auth/profile"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1742,16 +1462,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{1}}/user/delete",
-							"host": [
-								"{{1}}"
-							],
-							"path": [
-								"user",
-								"delete"
-							]
-						}
+						"url": "{{1}}/user/delete"
 					},
 					"response": [
 						{
@@ -1765,16 +1476,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}/user/delete",
-									"host": [
-										"{{1}}"
-									],
-									"path": [
-										"user",
-										"delete"
-									]
-								}
+								"url": "{{1}}/user/delete"
 							},
 							"status": "Created",
 							"code": 201,
@@ -1829,15 +1531,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{1}}auth/profile",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"profile"
-							]
-						}
+						"url": "{{1}}auth/profile"
 					},
 					"response": [
 						{
@@ -1851,15 +1545,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/profile",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"profile"
-									]
-								}
+								"url": "{{1}}auth/profile"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1926,15 +1612,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{1}}auth/refer",
-							"host": [
-								"{{1}}auth"
-							],
-							"path": [
-								"refer"
-							]
-						}
+						"url": "{{1}}auth/refer"
 					},
 					"response": [
 						{
@@ -1948,15 +1626,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}auth/refer",
-									"host": [
-										"{{1}}auth"
-									],
-									"path": [
-										"refer"
-									]
-								}
+								"url": "{{1}}auth/refer"
 							},
 							"status": "OK",
 							"code": 200,
@@ -2037,15 +1707,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}order/open",
-							"host": [
-								"{{1}}order"
-							],
-							"path": [
-								"open"
-							]
-						}
+						"url": "{{1}}order/open"
 					},
 					"response": [
 						{
@@ -2068,15 +1730,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}transaction/buy",
-									"host": [
-										"{{1}}transaction"
-									],
-									"path": [
-										"buy"
-									]
-								}
+								"url": "{{1}}transaction/buy"
 							},
 							"status": "OK",
 							"code": 200,
@@ -2140,15 +1794,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}order/close",
-							"host": [
-								"{{1}}order"
-							],
-							"path": [
-								"close"
-							]
-						}
+						"url": "{{1}}order/close"
 					},
 					"response": [
 						{
@@ -2171,15 +1817,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}transaction/sell",
-									"host": [
-										"{{1}}transaction"
-									],
-									"path": [
-										"sell"
-									]
-								}
+								"url": "{{1}}transaction/sell"
 							},
 							"status": "OK",
 							"code": 200,
@@ -2545,15 +2183,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{1}}user/request",
-							"host": [
-								"{{1}}user"
-							],
-							"path": [
-								"request"
-							]
-						}
+						"url": "{{1}}user/request"
 					},
 					"response": [
 						{
@@ -2597,15 +2227,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{1}}user/request",
-									"host": [
-										"{{1}}user"
-									],
-									"path": [
-										"request"
-									]
-								}
+								"url": "{{1}}user/request"
 							},
 							"status": "OK",
 							"code": 200,
@@ -2668,16 +2290,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}admin/request/64e14c27442c5c91b263d658",
-									"host": [
-										"{{1}}admin"
-									],
-									"path": [
-										"request",
-										"64e14c27442c5c91b263d658"
-									]
-								}
+								"url": "{{1}}admin/request/64e14c27442c5c91b263d658"
 							},
 							"response": [
 								{
@@ -2691,16 +2304,7 @@
 												"type": "text"
 											}
 										],
-										"url": {
-											"raw": "{{1}}admin/request/64e14c27442c5c91b263d658",
-											"host": [
-												"{{1}}admin"
-											],
-											"path": [
-												"request",
-												"64e14c27442c5c91b263d658"
-											]
-										}
+										"url": "{{1}}admin/request/64e14c27442c5c91b263d658"
 									},
 									"status": "OK",
 									"code": 200,
@@ -2764,16 +2368,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}admin/request/64fbc1d27e69a58fff0e519b",
-									"host": [
-										"{{1}}admin"
-									],
-									"path": [
-										"request",
-										"64fbc1d27e69a58fff0e519b"
-									]
-								}
+								"url": "{{1}}admin/request/64fbc1d27e69a58fff0e519b"
 							},
 							"response": [
 								{
@@ -2796,16 +2391,7 @@
 												}
 											}
 										},
-										"url": {
-											"raw": "{{1}}admin/request/64fbafc72e57190e9f1486b0",
-											"host": [
-												"{{1}}admin"
-											],
-											"path": [
-												"request",
-												"64fbafc72e57190e9f1486b0"
-											]
-										}
+										"url": "{{1}}admin/request/64fbafc72e57190e9f1486b0"
 									},
 									"status": "OK",
 									"code": 200,
@@ -2962,6 +2548,446 @@
 									"body": "{\n    \"message\": \"Request get Successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64e1423594afcd2dd438bd60\",\n            \"userId\": \"64d28fccb6bffbb1787205fd\",\n            \"status\": \"pending\",\n            \"amount\": 100,\n            \"stock\": \"AML\",\n            \"requestType\": \"Buy\",\n            \"image\": \"1images-1692484149293.jpg\",\n            \"createdAt\": \"2023-08-19T22:29:09.621Z\",\n            \"updatedAt\": \"2023-08-19T22:29:09.621Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
 								}
 							]
+						}
+					]
+				},
+				{
+					"name": "get stock tradings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": "{{1}}admin/stocks"
+					},
+					"response": [
+						{
+							"name": "get stock tradings",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{1}}admin/stocks"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14949"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a65-Nmuw8wG2KG8wMfeI2Qu7DugphE0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 19 Oct 2023 19:49:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Stocks data found\",\n    \"data\": [\n        {\n            \"_id\": \"652f2a1dca0c85dcdc024d26\",\n            \"user\": {\n                \"fullName\": \"Test\",\n                \"_id\": \"64d28fccb6bffbb1787205fd\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 44,\n            \"openAmount\": 179.5,\n            \"stock\": \"0QZI.LON\",\n            \"prevBalance\": 115369.30996199997,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T00:43:09.352Z\",\n            \"updatedAt\": \"2023-10-18T00:43:33.611Z\",\n            \"__v\": 0,\n            \"closeAmount\": 0\n        },\n        {\n            \"_id\": \"652f2c95a9a11ec938369830\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 10000,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 500,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T00:53:41.965Z\",\n            \"updatedAt\": \"2023-10-19T01:02:16.717Z\",\n            \"__v\": 0,\n            \"closeAmount\": 180\n        },\n        {\n            \"_id\": \"652f2d14a9a11ec938369850\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 9793.575,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 500,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T00:55:48.677Z\",\n            \"updatedAt\": \"2023-10-18T23:45:17.382Z\",\n            \"__v\": 0,\n            \"closeAmount\": 11\n        },\n        {\n            \"_id\": \"652f2d24a9a11ec938369870\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 9587.150000000001,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 500,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T00:56:04.820Z\",\n            \"updatedAt\": \"2023-10-18T23:44:59.944Z\",\n            \"__v\": 0,\n            \"closeAmount\": 11\n        },\n        {\n            \"_id\": \"652f2d3ca9a11ec938369881\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 9380.725000000002,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 500,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T00:56:28.118Z\",\n            \"updatedAt\": \"2023-10-18T23:44:39.779Z\",\n            \"__v\": 0,\n            \"closeAmount\": 11\n        },\n        {\n            \"_id\": \"652f2d81a9a11ec938369897\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 0.01,\n            \"openAmount\": 179.5,\n            \"stock\": \"GOOG\",\n            \"prevBalance\": 9174.300000000003,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T00:57:37.058Z\",\n            \"updatedAt\": \"2023-10-18T00:58:13.665Z\",\n            \"__v\": 0,\n            \"closeAmount\": 0\n        },\n        {\n            \"_id\": \"652f2ddba9a11ec9383698c2\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"GOOG\",\n            \"prevBalance\": 9174.030750000004,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T00:59:07.422Z\",\n            \"updatedAt\": \"2023-10-18T00:59:07.422Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f2de6a9a11ec9383698d3\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"GOOG\",\n            \"prevBalance\": 8967.605750000004,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T00:59:18.719Z\",\n            \"updatedAt\": \"2023-10-18T00:59:18.719Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f2deca9a11ec9383698e4\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 179.5,\n            \"stock\": \"GOOG\",\n            \"prevBalance\": 8761.180750000005,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T00:59:24.783Z\",\n            \"updatedAt\": \"2023-10-18T00:59:24.783Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f3094a9a11ec938369966\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 3.01,\n            \"openAmount\": 139.51,\n            \"stock\": \"GOOG\",\n            \"prevBalance\": 8554.755750000006,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T01:10:44.239Z\",\n            \"updatedAt\": \"2023-10-18T01:10:44.239Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f309fa9a11ec93836997c\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 6.01,\n            \"openAmount\": 142.16,\n            \"stock\": \"GOOG\",\n            \"prevBalance\": 8071.841885000006,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T01:10:55.319Z\",\n            \"updatedAt\": \"2023-10-18T01:10:55.319Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6530690ba9a11ec938369c6a\",\n            \"user\": {\n                \"fullName\": \"Test\",\n                \"_id\": \"64d28fccb6bffbb1787205fd\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 4.01,\n            \"openAmount\": 260,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 108682.17193399998,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T23:23:55.865Z\",\n            \"updatedAt\": \"2023-10-18T23:24:30.512Z\",\n            \"__v\": 0,\n            \"closeAmount\": 0\n        },\n        {\n            \"_id\": \"65306e20a9a11ec938369d76\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 172.255,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 6583.803045000006,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:45:36.100Z\",\n            \"updatedAt\": \"2023-10-18T23:45:36.100Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65306ec7a9a11ec938369da0\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 172.255,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 6385.709795000006,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:48:23.874Z\",\n            \"updatedAt\": \"2023-10-18T23:48:23.874Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65306ed3a9a11ec938369db1\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 180.07,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 6187.616545000006,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:48:35.786Z\",\n            \"updatedAt\": \"2023-10-18T23:48:35.786Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65306eeaa9a11ec938369dc6\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 181.42,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 3909.7310450000064,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:48:58.134Z\",\n            \"updatedAt\": \"2023-10-18T23:48:58.134Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65306ef7a9a11ec938369ddb\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 5,\n            \"openAmount\": 176.81,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 1614.7680450000066,\n            \"status\": \"close\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:49:11.938Z\",\n            \"updatedAt\": \"2023-10-19T01:02:27.310Z\",\n            \"__v\": 0,\n            \"closeAmount\": 180000000\n        },\n        {\n            \"_id\": \"65306f56a9a11ec938369e08\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 1,\n            \"openAmount\": 176.81,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 598.1105450000067,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:50:46.205Z\",\n            \"updatedAt\": \"2023-10-18T23:50:46.205Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65306f6ca9a11ec938369e25\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 2,\n            \"openAmount\": 171.09,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 394.7790450000067,\n            \"status\": \"close\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:51:08.716Z\",\n            \"updatedAt\": \"2023-10-18T23:51:39.432Z\",\n            \"__v\": 0,\n            \"closeAmount\": 1120000\n        },\n        {\n            \"_id\": \"6530713aa9a11ec938369e63\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 176.81,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 2239338.9120449997,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:58:50.282Z\",\n            \"updatedAt\": \"2023-10-18T23:58:50.282Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65307142a9a11ec938369e74\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 178.1,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 2237102.265545,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:58:58.405Z\",\n            \"updatedAt\": \"2023-10-18T23:58:58.405Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6530715aa9a11ec938369e85\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 173.8,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 2234849.300545,\n            \"status\": \"open\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:59:22.869Z\",\n            \"updatedAt\": \"2023-10-18T23:59:22.869Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6530715ea9a11ec938369e96\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 181.42,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 2232650.730545,\n            \"status\": \"close\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:59:26.540Z\",\n            \"updatedAt\": \"2023-10-19T00:06:37.144Z\",\n            \"__v\": 0,\n            \"closeAmount\": 999999999999999\n        },\n        {\n            \"_id\": \"65307162a9a11ec938369ea7\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"652f2c3da9a11ec938369805\",\n                \"currency\": \"USD\",\n                \"balance\": 208999994759130850\n            },\n            \"unit\": 11,\n            \"openAmount\": 175.58,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 2230355.767545,\n            \"status\": \"close\",\n            \"stopLoss\": 5,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-18T23:59:30.672Z\",\n            \"updatedAt\": \"2023-10-18T23:59:56.360Z\",\n            \"__v\": 0,\n            \"closeAmount\": 1120000\n        },\n        {\n            \"_id\": \"65307771a9a11ec93836a0d0\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"653074baa9a11ec93836a04d\",\n                \"currency\": \"USD\",\n                \"balance\": -1999999999998810.5\n            },\n            \"unit\": 10,\n            \"openAmount\": 244.81,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 10000,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T00:25:21.152Z\",\n            \"updatedAt\": \"2023-10-19T00:27:05.618Z\",\n            \"__v\": 0,\n            \"closeAmount\": 99999999999999\n        },\n        {\n            \"_id\": \"653077a0a9a11ec93836a0e6\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"653074baa9a11ec93836a04d\",\n                \"currency\": \"USD\",\n                \"balance\": -1999999999998810.5\n            },\n            \"unit\": 10,\n            \"openAmount\": 262.92,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 7184.6849999999995,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-19T00:26:08.633Z\",\n            \"updatedAt\": \"2023-10-19T00:27:41.222Z\",\n            \"__v\": 0,\n            \"closeAmount\": 0\n        },\n        {\n            \"_id\": \"653078bba9a11ec93836a19a\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307854a9a11ec93836a15d\",\n                \"currency\": \"USD\",\n                \"balance\": -999999999954293.4\n            },\n            \"unit\": 10,\n            \"openAmount\": 240.02,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 10000,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T00:30:51.236Z\",\n            \"updatedAt\": \"2023-10-19T00:31:49.245Z\",\n            \"__v\": 0,\n            \"closeAmount\": 99999999999999\n        },\n        {\n            \"_id\": \"653078c2a9a11ec93836a1b0\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307854a9a11ec93836a15d\",\n                \"currency\": \"USD\",\n                \"balance\": -999999999954293.4\n            },\n            \"unit\": 10,\n            \"openAmount\": 266.2,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 7239.7699999999995,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-19T00:30:58.466Z\",\n            \"updatedAt\": \"2023-10-19T00:31:28.250Z\",\n            \"__v\": 0,\n            \"closeAmount\": 4178\n        },\n        {\n            \"_id\": \"65307e22a9a11ec93836a274\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307d81a9a11ec93836a20f\",\n                \"currency\": \"USD\",\n                \"balance\": 899954566.315\n            },\n            \"unit\": 10,\n            \"openAmount\": 248.61,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 100000000,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-19T00:53:54.977Z\",\n            \"updatedAt\": \"2023-10-19T00:56:35.674Z\",\n            \"__v\": 0,\n            \"closeAmount\": 9999999999999\n        },\n        {\n            \"_id\": \"65307f4ba9a11ec93836a2e3\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307d81a9a11ec93836a20f\",\n                \"currency\": \"USD\",\n                \"balance\": 899954566.315\n            },\n            \"unit\": 1000,\n            \"openAmount\": 257.75,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 300000496380680.5,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-19T00:58:51.490Z\",\n            \"updatedAt\": \"2023-10-19T00:59:25.309Z\",\n            \"__v\": 0,\n            \"closeAmount\": 999999999999\n        },\n        {\n            \"_id\": \"65307f7fa9a11ec93836a344\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307d81a9a11ec93836a20f\",\n                \"currency\": \"USD\",\n                \"balance\": 899954566.315\n            },\n            \"unit\": 1,\n            \"openAmount\": 250.05,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 5300000494790518,\n            \"status\": \"close\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-19T00:59:43.902Z\",\n            \"updatedAt\": \"2023-10-19T01:00:08.420Z\",\n            \"__v\": 0,\n            \"closeAmount\": 4231650\n        },\n        {\n            \"_id\": \"65308061a9a11ec93836a3c6\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307d81a9a11ec93836a20f\",\n                \"currency\": \"USD\",\n                \"balance\": 899954566.315\n            },\n            \"unit\": 20,\n            \"openAmount\": 176.645,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 899999295.45,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T01:03:29.477Z\",\n            \"updatedAt\": \"2023-10-19T01:03:29.477Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6530806ea9a11ec93836a3dc\",\n            \"user\": {\n                \"fullName\": \"mirth\",\n                \"_id\": \"652f2b99a9a11ec9383697ba\"\n            },\n            \"accountref\": {\n                \"_id\": \"65307d81a9a11ec93836a20f\",\n                \"currency\": \"USD\",\n                \"balance\": 899954566.315\n            },\n            \"unit\": 200,\n            \"openAmount\": 176.81,\n            \"stock\": \"AAPL\",\n            \"prevBalance\": 899995232.615,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T01:03:42.754Z\",\n            \"updatedAt\": \"2023-10-19T01:03:42.754Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6531657c4642945a63d58d66\",\n            \"user\": {\n                \"fullName\": \"HadiAli\",\n                \"_id\": \"653150a14642945a63d58b5f\"\n            },\n            \"accountref\": {\n                \"_id\": \"653153fa4642945a63d58bc6\",\n                \"currency\": \"USD\",\n                \"balance\": 9989.194830000002\n            },\n            \"unit\": 0.01,\n            \"openAmount\": 15.58,\n            \"stock\": \"GOLD\",\n            \"prevBalance\": 9989.374000000002,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T17:21:00.727Z\",\n            \"updatedAt\": \"2023-10-19T17:21:00.727Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653180354642945a63d590cd\",\n            \"user\": {\n                \"fullName\": \"Test\",\n                \"_id\": \"64d28fccb6bffbb1787205fd\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 2.01,\n            \"openAmount\": 258.9,\n            \"stock\": \"TSLA\",\n            \"prevBalance\": 108289.13143399998,\n            \"status\": \"open\",\n            \"stopLoss\": 0,\n            \"profitLimit\": 0,\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T19:15:01.064Z\",\n            \"updatedAt\": \"2023-10-19T19:15:01.064Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "get forex tradings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": "{{1}}admin/forex"
+					},
+					"response": [
+						{
+							"name": "get forex tradings",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{1}}admin/forex"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9570"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2562-56gny0BLaKM7nyA3B8A/1oraa8U\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 19 Oct 2023 19:50:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Forex data found\",\n    \"data\": [\n        {\n            \"_id\": \"652dc62cea5a7840423d14fc\",\n            \"user\": {\n                \"_id\": \"652dc074b567595530ba9920\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"652db8ec11a788ed67ca3e7b\",\n                \"currency\": \"USD\",\n                \"balance\": 7792.5725\n            },\n            \"prevBalance\": 9425,\n            \"status\": \"open\",\n            \"amount\": 100,\n            \"from\": \"USD\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-16T23:24:28.583Z\",\n            \"updatedAt\": \"2023-10-16T23:24:28.583Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652dc993538613bd1e9d2a39\",\n            \"user\": {\n                \"_id\": \"652dc074b567595530ba9920\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"652db8ec11a788ed67ca3e7b\",\n                \"currency\": \"USD\",\n                \"balance\": 7792.5725\n            },\n            \"unit\": 100,\n            \"openAmount\": 157.74,\n            \"prevBalance\": 9062.1405,\n            \"status\": \"close\",\n            \"from\": \"USD\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-16T23:38:59.591Z\",\n            \"updatedAt\": \"2023-10-16T23:39:12.905Z\",\n            \"__v\": 0,\n            \"closeAmount\": 157.68\n        },\n        {\n            \"_id\": \"652dce1980437e46e3515af3\",\n            \"user\": {\n                \"_id\": \"652dc074b567595530ba9920\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"652db8ec11a788ed67ca3e7b\",\n                \"currency\": \"USD\",\n                \"balance\": 7792.5725\n            },\n            \"unit\": 100,\n            \"openAmount\": 157.77,\n            \"prevBalance\": 8880.6795,\n            \"status\": \"open\",\n            \"from\": \"USD\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-16T23:58:17.403Z\",\n            \"updatedAt\": \"2023-10-16T23:58:17.403Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652dcfae80437e46e3515afa\",\n            \"user\": {\n                \"_id\": \"652dc074b567595530ba9920\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"652db8ec11a788ed67ca3e7b\",\n                \"currency\": \"USD\",\n                \"balance\": 7792.5725\n            },\n            \"unit\": 100,\n            \"openAmount\": 157.76,\n            \"prevBalance\": 8699.244,\n            \"status\": \"open\",\n            \"from\": \"USD\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T00:05:02.456Z\",\n            \"updatedAt\": \"2023-10-17T00:05:02.456Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652dd12797447799deffb04d\",\n            \"user\": {\n                \"_id\": \"652dc074b567595530ba9920\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"652db8ec11a788ed67ca3e7b\",\n                \"currency\": \"USD\",\n                \"balance\": 7792.5725\n            },\n            \"unit\": 100,\n            \"openAmount\": 157.65,\n            \"prevBalance\": 8155.1675,\n            \"status\": \"open\",\n            \"from\": \"USD\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T00:11:19.237Z\",\n            \"updatedAt\": \"2023-10-17T00:11:19.237Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652dd20aca0c85dcdc024660\",\n            \"user\": {\n                \"_id\": \"6529b0be270bf376a888dc22\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"652db8ec11a788ed67ca3e7b\",\n                \"currency\": \"USD\",\n                \"balance\": 7792.5725\n            },\n            \"unit\": 100,\n            \"openAmount\": 157.65,\n            \"prevBalance\": 7973.87,\n            \"status\": \"open\",\n            \"from\": \"USD\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T00:15:06.867Z\",\n            \"updatedAt\": \"2023-10-17T00:15:06.867Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652ed772ca0c85dcdc0246de\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 12,\n            \"openAmount\": 1143.4,\n            \"prevBalance\": 116660.35046199999,\n            \"status\": \"open\",\n            \"from\": \"AUD\",\n            \"to\": \"JPY\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-17T18:50:26.719Z\",\n            \"updatedAt\": \"2023-10-17T18:50:26.719Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f0bdfca0c85dcdc024874\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 14,\n            \"openAmount\": 8.91,\n            \"prevBalance\": 115345.44046199998,\n            \"status\": \"close\",\n            \"from\": \"AUD\",\n            \"to\": \"USD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-17T22:34:07.222Z\",\n            \"updatedAt\": \"2023-10-17T22:53:40.111Z\",\n            \"__v\": 0,\n            \"closeAmount\": 63.64\n        },\n        {\n            \"_id\": \"652f1156ca0c85dcdc0248ba\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 1,\n            \"openAmount\": 0.64,\n            \"prevBalance\": 115289.37396199998,\n            \"status\": \"close\",\n            \"from\": \"AUD\",\n            \"to\": \"USD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T22:57:26.794Z\",\n            \"updatedAt\": \"2023-10-17T22:58:20.013Z\",\n            \"__v\": 0,\n            \"closeAmount\": 63.66\n        },\n        {\n            \"_id\": \"652f1297ca0c85dcdc02492a\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 10,\n            \"openAmount\": 9.52,\n            \"prevBalance\": 115352.29796199998,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"CHF\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-17T23:02:47.085Z\",\n            \"updatedAt\": \"2023-10-17T23:02:47.085Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f1297ca0c85dcdc024932\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 10,\n            \"openAmount\": 9.52,\n            \"prevBalance\": 115341.34996199998,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"CHF\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-17T23:02:47.632Z\",\n            \"updatedAt\": \"2023-10-17T23:02:47.632Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f12c0ca0c85dcdc024963\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 10,\n            \"openAmount\": 10.8,\n            \"prevBalance\": 115330.40196199997,\n            \"status\": \"open\",\n            \"from\": \"AUD\",\n            \"to\": \"NZD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T23:03:28.105Z\",\n            \"updatedAt\": \"2023-10-17T23:03:28.105Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f14a8ca0c85dcdc0249be\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 4,\n            \"openAmount\": 6.64,\n            \"prevBalance\": 115317.98196199998,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T23:11:36.987Z\",\n            \"updatedAt\": \"2023-10-17T23:11:36.987Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f1533ca0c85dcdc0249e1\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 7,\n            \"openAmount\": 11.63,\n            \"prevBalance\": 115310.34596199998,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T23:13:55.075Z\",\n            \"updatedAt\": \"2023-10-17T23:13:55.075Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"652f1713ca0c85dcdc024a19\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 2,\n            \"openAmount\": 3.32,\n            \"prevBalance\": 115296.97146199997,\n            \"status\": \"close\",\n            \"from\": \"EUR\",\n            \"to\": \"AUD\",\n            \"orderType\": \"sell\",\n            \"createdAt\": \"2023-10-17T23:21:55.857Z\",\n            \"updatedAt\": \"2023-10-17T23:22:42.907Z\",\n            \"__v\": 0,\n            \"closeAmount\": 166.12\n        },\n        {\n            \"_id\": \"652f1720ca0c85dcdc024a2a\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 5,\n            \"openAmount\": 8.31,\n            \"prevBalance\": 115293.15346199997,\n            \"status\": \"close\",\n            \"from\": \"EUR\",\n            \"to\": \"AUD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-17T23:22:08.087Z\",\n            \"updatedAt\": \"2023-10-19T19:13:37.388Z\",\n            \"__v\": 0,\n            \"closeAmount\": 167.17\n        },\n        {\n            \"_id\": \"652f18edca0c85dcdc024b01\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 30,\n            \"openAmount\": 32.38,\n            \"prevBalance\": 115449.71696199996,\n            \"status\": \"close\",\n            \"from\": \"AUD\",\n            \"to\": \"NZD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-17T23:29:49.411Z\",\n            \"updatedAt\": \"2023-10-17T23:30:25.333Z\",\n            \"__v\": 0,\n            \"closeAmount\": 107.93\n        },\n        {\n            \"_id\": \"653067e3a9a11ec938369bf3\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 12,\n            \"openAmount\": 1138.57,\n            \"prevBalance\": 117305.42843399999,\n            \"status\": \"close\",\n            \"from\": \"AUD\",\n            \"to\": \"JPY\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T23:18:59.813Z\",\n            \"updatedAt\": \"2023-10-18T23:19:21.857Z\",\n            \"__v\": 0,\n            \"closeAmount\": 9488.3\n        },\n        {\n            \"_id\": \"65306816a9a11ec938369c35\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 34,\n            \"openAmount\": 49.14,\n            \"prevBalance\": 108784.91293399998,\n            \"status\": \"close\",\n            \"from\": \"EUR\",\n            \"to\": \"CAD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-18T23:19:50.656Z\",\n            \"updatedAt\": \"2023-10-18T23:20:16.566Z\",\n            \"__v\": 0,\n            \"closeAmount\": 144.51\n        },\n        {\n            \"_id\": \"653154874642945a63d58bfb\",\n            \"user\": {\n                \"_id\": \"653150a14642945a63d58b5f\",\n                \"fullName\": \"HadiAli\"\n            },\n            \"accountref\": {\n                \"_id\": \"653153fa4642945a63d58bc6\",\n                \"currency\": \"USD\",\n                \"balance\": 9989.194830000002\n            },\n            \"unit\": 2,\n            \"openAmount\": 2.9,\n            \"prevBalance\": 10000,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"CAD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T16:08:39.530Z\",\n            \"updatedAt\": \"2023-10-19T16:08:39.530Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"653154b64642945a63d58c19\",\n            \"user\": {\n                \"_id\": \"653150a14642945a63d58b5f\",\n                \"fullName\": \"HadiAli\"\n            },\n            \"accountref\": {\n                \"_id\": \"653153fa4642945a63d58bc6\",\n                \"currency\": \"USD\",\n                \"balance\": 9989.194830000002\n            },\n            \"unit\": 2,\n            \"openAmount\": 2.12,\n            \"prevBalance\": 9996.665,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"USD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T16:09:26.884Z\",\n            \"updatedAt\": \"2023-10-19T16:09:26.884Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65315bf64642945a63d58c7f\",\n            \"user\": {\n                \"_id\": \"653150a14642945a63d58b5f\",\n                \"fullName\": \"HadiAli\"\n            },\n            \"accountref\": {\n                \"_id\": \"653153fa4642945a63d58bc6\",\n                \"currency\": \"USD\",\n                \"balance\": 9989.194830000002\n            },\n            \"unit\": 2,\n            \"openAmount\": 2.11,\n            \"prevBalance\": 9994.227,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"USD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T16:40:22.089Z\",\n            \"updatedAt\": \"2023-10-19T16:40:22.089Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65315bfc4642945a63d58c90\",\n            \"user\": {\n                \"_id\": \"653150a14642945a63d58b5f\",\n                \"fullName\": \"HadiAli\"\n            },\n            \"accountref\": {\n                \"_id\": \"653153fa4642945a63d58bc6\",\n                \"currency\": \"USD\",\n                \"balance\": 9989.194830000002\n            },\n            \"unit\": 2,\n            \"openAmount\": 2.11,\n            \"prevBalance\": 9991.800500000001,\n            \"status\": \"open\",\n            \"from\": \"EUR\",\n            \"to\": \"USD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T16:40:28.989Z\",\n            \"updatedAt\": \"2023-10-19T16:40:28.989Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"65317f854642945a63d59038\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\"\n            },\n            \"accountref\": {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"currency\": \"USD\",\n                \"balance\": 107690.68408399998\n            },\n            \"unit\": 1,\n            \"openAmount\": 0.87,\n            \"prevBalance\": 108525.78193399998,\n            \"status\": \"close\",\n            \"from\": \"AUD\",\n            \"to\": \"CAD\",\n            \"orderType\": \"buy\",\n            \"createdAt\": \"2023-10-19T19:12:05.827Z\",\n            \"updatedAt\": \"2023-10-19T19:12:49.990Z\",\n            \"__v\": 0,\n            \"closeAmount\": 86.84\n        }\n    ],\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "get users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": "{{1}}admin/user"
+					},
+					"response": [
+						{
+							"name": "get users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{1}}admin/user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3767-LESG38YCtwHZRyPIf4nOs3bdQPQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 19 Oct 2023 20:06:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You have get Users successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64d28fcbb6bffbb1787205f9\",\n            \"identifier\": \"new165835@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"demo\": [\n                {\n                    \"stock\": \"apple\",\n                    \"amount\": 20,\n                    \"_id\": \"64f64a3f2d6bd2eeddbf23a0\"\n                },\n                {\n                    \"stock\": \"Google\",\n                    \"amount\": 0,\n                    \"_id\": \"64f6504fc801b6fcce96725c\"\n                }\n            ],\n            \"real\": [\n                {\n                    \"stock\": \"AML\",\n                    \"amount\": 270,\n                    \"_id\": \"64e7cd020d2175332e7716cb\"\n                },\n                {\n                    \"stock\": \"GOOG\",\n                    \"amount\": 200,\n                    \"_id\": \"64f62fa8be5e6937953783a0\"\n                }\n            ],\n            \"createdAt\": \"2023-08-08T18:56:11.432Z\",\n            \"updatedAt\": \"2023-10-19T19:14:31.041Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"balance\": 545,\n            \"demobalance\": 10600,\n            \"subAccounts\": [\n                \"64fb8c08c6087ac085c907ba\",\n                \"64fb8e8ae43f6f53abc63264\",\n                \"64fba05269b33258cd0b3330\",\n                \"64fba0a924de6d715283db73\",\n                \"64fba9d765f8bb2ac4a68df3\",\n                \"64fbc44f0a8cc8851d386e88\",\n                \"64fbc6460a8cc8851d386eb1\",\n                \"64fbc66d0a8cc8851d386ed5\",\n                \"64fbc67e0a8cc8851d386edb\",\n                \"64fbc697004bcb792eb059f9\",\n                \"6500f83818117725987a094f\",\n                \"650103c63488fb71703c5f39\",\n                \"650104003488fb71703c5f3f\",\n                \"650104c4d27610486012fcc7\",\n                \"6502438ee80659d72eab816a\",\n                \"65034b7c53017be90cbcefdf\",\n                \"65034b94e517cf5a3490c181\",\n                \"650f23c1b4c9657c1f237dce\",\n                \"650f23cc54ba377c2b6cc341\",\n                \"6515ca504868e31ae730d8d1\",\n                \"6515ca5a2f5316d84b13386a\",\n                \"6515e7cda6d934aeff8efae9\",\n                \"6515e80bc6e2b1b37f0883aa\",\n                \"6515fa18325378f34826254c\",\n                \"65160027936a8e2f54f7aeb6\",\n                \"65160299668928fb2636ab80\",\n                \"65170d808d33a807b36274a7\",\n                \"651766c258010fb0e6928e77\"\n            ],\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64dcf58d6d21914df13b6f72\",\n            \"identifier\": \"salmanlakhani321@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64dcf58d6d21914df13b6f79\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-16T16:13:01.408Z\",\n            \"updatedAt\": \"2023-09-07T16:17:12.924Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64dcf58d6d21914df13b6f76\",\n                \"fullName\": \"salman\",\n                \"auth\": \"64dcf58d6d21914df13b6f72\",\n                \"createdAt\": \"2023-08-16T16:13:01.940Z\",\n                \"updatedAt\": \"2023-08-16T16:13:01.940Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64e15c7da0b80d227bc37cc2\",\n            \"identifier\": \"jzb0313@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64e15c7ea0b80d227bc37cc9\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-20T00:21:17.596Z\",\n            \"updatedAt\": \"2023-10-14T17:46:32.254Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64e15c7ea0b80d227bc37cc6\",\n                \"fullName\": \"sdszdszd\",\n                \"auth\": \"64e15c7da0b80d227bc37cc2\",\n                \"createdAt\": \"2023-08-20T00:21:18.093Z\",\n                \"updatedAt\": \"2023-08-20T00:21:18.093Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64e3aec3d04fa9e68e8ec1dc\",\n            \"identifier\": \"newuser@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": false,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64e3aec3d04fa9e68e8ec1e3\"\n                },\n                {\n                    \"coin\": \"64d155644c1986b8a4094405\",\n                    \"ammount\": 0,\n                    \"_id\": \"64e65e82901df7761c487995\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-21T18:36:51.476Z\",\n            \"updatedAt\": \"2023-08-23T21:48:20.566Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64e3aec3d04fa9e68e8ec1e0\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64e3aec3d04fa9e68e8ec1dc\",\n                \"createdAt\": \"2023-08-21T18:36:51.975Z\",\n                \"updatedAt\": \"2023-08-21T18:36:51.975Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64e3b0ced04fa9e68e8ec1f2\",\n            \"identifier\": \"masterdot707@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64e3b0ced04fa9e68e8ec1f9\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-21T18:45:34.011Z\",\n            \"updatedAt\": \"2023-09-13T00:55:46.189Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64e3b0ced04fa9e68e8ec1f6\",\n                \"fullName\": \"Faraz Ahmed\",\n                \"auth\": \"64e3b0ced04fa9e68e8ec1f2\",\n                \"createdAt\": \"2023-08-21T18:45:34.493Z\",\n                \"updatedAt\": \"2023-08-21T18:45:34.493Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64e484ab5635062f4ba3cc2f\",\n            \"identifier\": \"fxgold0313@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64e484ab5635062f4ba3cc36\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-22T09:49:31.126Z\",\n            \"updatedAt\": \"2023-08-29T21:18:38.778Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64e484ab5635062f4ba3cc33\",\n                \"fullName\": \"Ali Khan\",\n                \"auth\": \"64e484ab5635062f4ba3cc2f\",\n                \"createdAt\": \"2023-08-22T09:49:31.664Z\",\n                \"updatedAt\": \"2023-08-22T09:49:31.664Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64ee60ae7e7d80f51a08145d\",\n            \"identifier\": \"projectmanageratgeek@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64ee60ae7e7d80f51a081464\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-29T21:18:38.246Z\",\n            \"updatedAt\": \"2023-10-02T05:55:43.204Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64ee60ae7e7d80f51a081461\",\n                \"fullName\": \"salman lakhani\",\n                \"auth\": \"64ee60ae7e7d80f51a08145d\",\n                \"createdAt\": \"2023-08-29T21:18:38.744Z\",\n                \"updatedAt\": \"2023-08-29T21:18:38.744Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64ee60de7e7d80f51a08147d\",\n            \"identifier\": \"masterdot70@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"isDeleted\": false,\n            \"isCompleteProfile\": false,\n            \"demo\": [\n                {\n                    \"coin\": \"64d1552b4c1986b8a40943ff\",\n                    \"ammount\": 1000,\n                    \"_id\": \"64ee60de7e7d80f51a081484\"\n                }\n            ],\n            \"real\": [],\n            \"createdAt\": \"2023-08-29T21:19:26.516Z\",\n            \"updatedAt\": \"2023-08-29T21:19:50.115Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64ee60de7e7d80f51a081481\",\n                \"fullName\": \"faraz ahmed\",\n                \"auth\": \"64ee60de7e7d80f51a08147d\",\n                \"createdAt\": \"2023-08-29T21:19:26.989Z\",\n                \"updatedAt\": \"2023-08-29T21:19:26.989Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"_id\": \"64f82e464513ad2d672566cb\",\n            \"identifier\": \"new1658355@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"acctype\": \"demo\",\n            \"realbalance\": 0,\n            \"demobalance\": 10000,\n            \"isDeleted\": false,\n            \"isCompleteProfile\": false,\n            \"demo\": [],\n            \"real\": [],\n            \"createdAt\": \"2023-09-06T07:46:14.252Z\",\n            \"updatedAt\": \"2023-09-08T20:53:19.747Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"64f82e464513ad2d672566cf\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64f82e464513ad2d672566cb\",\n                \"createdAt\": \"2023-09-06T07:46:14.761Z\",\n                \"updatedAt\": \"2023-09-06T07:46:14.761Z\",\n                \"__v\": 0\n            },\n            \"referer\": []\n        },\n        {\n            \"_id\": \"6529ab541f04b7875ccd6afe\",\n            \"identifier\": \"new16585@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"OsNbu$J1OH\",\n            \"referer\": [\n                {\n                    \"amount\": 0,\n                    \"_id\": \"65318c362a4e4f669792d71c\"\n                }\n            ],\n            \"subAccounts\": [],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": false,\n            \"createdAt\": \"2023-10-13T20:40:52.754Z\",\n            \"updatedAt\": \"2023-10-13T22:07:23.710Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"6529ab571f04b7875ccd6b02\",\n                \"fullName\": \"Test\",\n                \"auth\": \"6529ab541f04b7875ccd6afe\",\n                \"createdAt\": \"2023-10-13T20:40:55.085Z\",\n                \"updatedAt\": \"2023-10-13T20:40:55.085Z\",\n                \"__v\": 0\n            },\n            \"balance\": 5\n        },\n        {\n            \"balance\": 0,\n            \"_id\": \"6529b0bc270bf376a888dc1c\",\n            \"identifier\": \"new165@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"Pnl5E26ksq\",\n            \"referer\": [\n                {\n                    \"amount\": 0,\n                    \"_id\": \"65318c362a4e4f669792d71d\"\n                },\n                {\n                    \"amount\": 0,\n                    \"_id\": \"65318c362a4e4f669792d71e\"\n                },\n                {\n                    \"user\": \"652d8f1d636b66f371a15170\",\n                    \"amount\": 25,\n                    \"_id\": \"652d8f1e636b66f371a15172\"\n                }\n            ],\n            \"subAccounts\": [\n                \"6529bb7055b7245cd115658c\",\n                \"6529bbba5a2ce2403e18550b\",\n                \"6529bbf57827ebfa31494660\",\n                \"6529bc4184a1f3914233ed5b\",\n                \"6529bc85fe05879546378586\",\n                \"6529bccdcf02d79d870415b1\"\n            ],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"createdAt\": \"2023-10-13T21:03:56.855Z\",\n            \"updatedAt\": \"2023-10-17T16:54:15.310Z\",\n            \"__v\": 0,\n            \"referBy\": {\n                \"_id\": \"6529ab541f04b7875ccd6afe\",\n                \"identifier\": \"new16585@gmail.com\",\n                \"password\": \"$2b$12$.t38XJON6xdvPdlEsvy.Huw3O/A3M2xU5q5wqWG7RPtyjorwITrsK\",\n                \"userType\": \"User\",\n                \"devices\": [],\n                \"loggedOutDevices\": [\n                    \"64bee72580d0f2a995759e22\"\n                ],\n                \"notificationOn\": true,\n                \"refereCode\": \"OsNbu$J1OH\",\n                \"referer\": [\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d722\"\n                    }\n                ],\n                \"subAccounts\": [],\n                \"isDeleted\": false,\n                \"isCompleteProfile\": false,\n                \"createdAt\": \"2023-10-13T20:40:52.754Z\",\n                \"updatedAt\": \"2023-10-13T22:07:23.710Z\",\n                \"__v\": 0,\n                \"OTP\": \"6529ab561f04b7875ccd6b00\",\n                \"profile\": \"6529ab571f04b7875ccd6b02\",\n                \"balance\": 5\n            },\n            \"profile\": {\n                \"_id\": \"6529b0be270bf376a888dc22\",\n                \"fullName\": \"Test\",\n                \"auth\": \"6529b0bc270bf376a888dc1c\",\n                \"createdAt\": \"2023-10-13T21:03:58.959Z\",\n                \"updatedAt\": \"2023-10-13T21:03:58.959Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"_id\": \"652adf15eb72dbc6127966ac\",\n            \"identifier\": \"faraz@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"$OGPyh!&F4\",\n            \"referer\": [],\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": false,\n            \"createdAt\": \"2023-10-14T18:33:57.231Z\",\n            \"updatedAt\": \"2023-10-14T18:35:17.546Z\",\n            \"__v\": 0,\n            \"referBy\": {\n                \"balance\": 0,\n                \"_id\": \"6529b0bc270bf376a888dc1c\",\n                \"identifier\": \"new165@gmail.com\",\n                \"password\": \"$2b$12$.t38XJON6xdvPdlEsvy.Huw3O/A3M2xU5q5wqWG7RPtyjorwITrsK\",\n                \"userType\": \"User\",\n                \"devices\": [\n                    \"64bee72580d0f2a995759e22\"\n                ],\n                \"loggedOutDevices\": [\n                    \"64befc8980d0f2a995ddf3b9\"\n                ],\n                \"notificationOn\": true,\n                \"refereCode\": \"Pnl5E26ksq\",\n                \"referer\": [\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d723\"\n                    },\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d724\"\n                    },\n                    {\n                        \"user\": \"652d8f1d636b66f371a15170\",\n                        \"amount\": 25,\n                        \"_id\": \"652d8f1e636b66f371a15172\"\n                    }\n                ],\n                \"subAccounts\": [\n                    \"6529bb7055b7245cd115658c\",\n                    \"6529bbba5a2ce2403e18550b\",\n                    \"6529bbf57827ebfa31494660\",\n                    \"6529bc4184a1f3914233ed5b\",\n                    \"6529bc85fe05879546378586\",\n                    \"6529bccdcf02d79d870415b1\"\n                ],\n                \"isDeleted\": false,\n                \"isCompleteProfile\": true,\n                \"createdAt\": \"2023-10-13T21:03:56.855Z\",\n                \"updatedAt\": \"2023-10-17T16:54:15.310Z\",\n                \"__v\": 0,\n                \"referBy\": \"6529ab541f04b7875ccd6afe\",\n                \"OTP\": \"6529b0be270bf376a888dc20\",\n                \"profile\": \"6529b0be270bf376a888dc22\"\n            },\n            \"profile\": {\n                \"_id\": \"652adf15eb72dbc6127966b2\",\n                \"fullName\": \"faraz\",\n                \"auth\": \"652adf15eb72dbc6127966ac\",\n                \"createdAt\": \"2023-10-14T18:33:57.743Z\",\n                \"updatedAt\": \"2023-10-14T18:33:57.743Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"_id\": \"652adf65eb72dbc6127966bc\",\n            \"identifier\": \"109taha@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"Ao!JFZVNem\",\n            \"referer\": [],\n            \"balance\": 0,\n            \"subAccounts\": [\n                \"652d654dff0da45cda0f83fe\"\n            ],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"createdAt\": \"2023-10-14T18:35:17.039Z\",\n            \"updatedAt\": \"2023-10-18T23:40:51.625Z\",\n            \"__v\": 0,\n            \"referBy\": {\n                \"balance\": 0,\n                \"_id\": \"6529b0bc270bf376a888dc1c\",\n                \"identifier\": \"new165@gmail.com\",\n                \"password\": \"$2b$12$.t38XJON6xdvPdlEsvy.Huw3O/A3M2xU5q5wqWG7RPtyjorwITrsK\",\n                \"userType\": \"User\",\n                \"devices\": [\n                    \"64bee72580d0f2a995759e22\"\n                ],\n                \"loggedOutDevices\": [\n                    \"64befc8980d0f2a995ddf3b9\"\n                ],\n                \"notificationOn\": true,\n                \"refereCode\": \"Pnl5E26ksq\",\n                \"referer\": [\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d723\"\n                    },\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d724\"\n                    },\n                    {\n                        \"user\": \"652d8f1d636b66f371a15170\",\n                        \"amount\": 25,\n                        \"_id\": \"652d8f1e636b66f371a15172\"\n                    }\n                ],\n                \"subAccounts\": [\n                    \"6529bb7055b7245cd115658c\",\n                    \"6529bbba5a2ce2403e18550b\",\n                    \"6529bbf57827ebfa31494660\",\n                    \"6529bc4184a1f3914233ed5b\",\n                    \"6529bc85fe05879546378586\",\n                    \"6529bccdcf02d79d870415b1\"\n                ],\n                \"isDeleted\": false,\n                \"isCompleteProfile\": true,\n                \"createdAt\": \"2023-10-13T21:03:56.855Z\",\n                \"updatedAt\": \"2023-10-17T16:54:15.310Z\",\n                \"__v\": 0,\n                \"referBy\": \"6529ab541f04b7875ccd6afe\",\n                \"OTP\": \"6529b0be270bf376a888dc20\",\n                \"profile\": \"6529b0be270bf376a888dc22\"\n            },\n            \"profile\": {\n                \"_id\": \"652adf65eb72dbc6127966c2\",\n                \"fullName\": \"taha\",\n                \"auth\": \"652adf65eb72dbc6127966bc\",\n                \"createdAt\": \"2023-10-14T18:35:17.532Z\",\n                \"updatedAt\": \"2023-10-14T18:35:17.532Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"_id\": \"652d8f1d636b66f371a15170\",\n            \"identifier\": \"new15@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"x3ZcqzWdSZ\",\n            \"balance\": 0,\n            \"subAccounts\": [\n                \"652db8ec11a788ed67ca3e7b\"\n            ],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"referer\": [],\n            \"createdAt\": \"2023-10-16T19:29:33.754Z\",\n            \"updatedAt\": \"2023-10-16T22:29:03.206Z\",\n            \"__v\": 0,\n            \"referBy\": {\n                \"balance\": 0,\n                \"_id\": \"6529b0bc270bf376a888dc1c\",\n                \"identifier\": \"new165@gmail.com\",\n                \"password\": \"$2b$12$.t38XJON6xdvPdlEsvy.Huw3O/A3M2xU5q5wqWG7RPtyjorwITrsK\",\n                \"userType\": \"User\",\n                \"devices\": [\n                    \"64bee72580d0f2a995759e22\"\n                ],\n                \"loggedOutDevices\": [\n                    \"64befc8980d0f2a995ddf3b9\"\n                ],\n                \"notificationOn\": true,\n                \"refereCode\": \"Pnl5E26ksq\",\n                \"referer\": [\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d723\"\n                    },\n                    {\n                        \"amount\": 0,\n                        \"_id\": \"65318c362a4e4f669792d724\"\n                    },\n                    {\n                        \"user\": \"652d8f1d636b66f371a15170\",\n                        \"amount\": 25,\n                        \"_id\": \"652d8f1e636b66f371a15172\"\n                    }\n                ],\n                \"subAccounts\": [\n                    \"6529bb7055b7245cd115658c\",\n                    \"6529bbba5a2ce2403e18550b\",\n                    \"6529bbf57827ebfa31494660\",\n                    \"6529bc4184a1f3914233ed5b\",\n                    \"6529bc85fe05879546378586\",\n                    \"6529bccdcf02d79d870415b1\"\n                ],\n                \"isDeleted\": false,\n                \"isCompleteProfile\": true,\n                \"createdAt\": \"2023-10-13T21:03:56.855Z\",\n                \"updatedAt\": \"2023-10-17T16:54:15.310Z\",\n                \"__v\": 0,\n                \"referBy\": \"6529ab541f04b7875ccd6afe\",\n                \"OTP\": \"6529b0be270bf376a888dc20\",\n                \"profile\": \"6529b0be270bf376a888dc22\"\n            },\n            \"profile\": {\n                \"_id\": \"652d8f1f636b66f371a1517a\",\n                \"fullName\": \"User123\",\n                \"auth\": \"652d8f1d636b66f371a15170\",\n                \"createdAt\": \"2023-10-16T19:29:35.955Z\",\n                \"updatedAt\": \"2023-10-16T19:33:59.787Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"_id\": \"652dc073b567595530ba991c\",\n            \"identifier\": \"new123123@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"wj3HyciZb8\",\n            \"balance\": 0,\n            \"subAccounts\": [],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": false,\n            \"referer\": [],\n            \"createdAt\": \"2023-10-16T23:00:03.254Z\",\n            \"updatedAt\": \"2023-10-16T23:51:46.419Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"652dc074b567595530ba9920\",\n                \"fullName\": \"Test\",\n                \"auth\": \"652dc073b567595530ba991c\",\n                \"createdAt\": \"2023-10-16T23:00:04.656Z\",\n                \"updatedAt\": \"2023-10-16T23:00:04.656Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"_id\": \"652f2b98a9a11ec9383697b6\",\n            \"identifier\": \"tahaali333832@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"4pOPSOPQM8\",\n            \"balance\": 0,\n            \"subAccounts\": [\n                \"652f2beea9a11ec9383697ee\",\n                \"652f2c3da9a11ec938369805\",\n                \"653074baa9a11ec93836a04d\",\n                \"65307854a9a11ec93836a15d\",\n                \"65307d81a9a11ec93836a20f\"\n            ],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"referer\": [],\n            \"createdAt\": \"2023-10-18T00:49:28.911Z\",\n            \"updatedAt\": \"2023-10-19T17:29:22.411Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"652f2b99a9a11ec9383697ba\",\n                \"fullName\": \"mirth\",\n                \"auth\": \"652f2b98a9a11ec9383697b6\",\n                \"createdAt\": \"2023-10-18T00:49:29.404Z\",\n                \"updatedAt\": \"2023-10-18T00:49:29.404Z\",\n                \"__v\": 0\n            }\n        },\n        {\n            \"_id\": \"653150a04642945a63d58b5b\",\n            \"identifier\": \"jazyfx0313@gmail.com\",\n            \"userType\": \"User\",\n            \"notificationOn\": true,\n            \"refereCode\": \"imQSVC%xx&\",\n            \"balance\": 0,\n            \"subAccounts\": [\n                \"653153fa4642945a63d58bc6\"\n            ],\n            \"isDeleted\": false,\n            \"isCompleteProfile\": true,\n            \"referer\": [],\n            \"createdAt\": \"2023-10-19T15:52:00.865Z\",\n            \"updatedAt\": \"2023-10-19T16:23:42.555Z\",\n            \"__v\": 0,\n            \"profile\": {\n                \"_id\": \"653150a14642945a63d58b5f\",\n                \"fullName\": \"HadiAli\",\n                \"auth\": \"653150a04642945a63d58b5b\",\n                \"createdAt\": \"2023-10-19T15:52:01.401Z\",\n                \"updatedAt\": \"2023-10-19T15:52:01.401Z\",\n                \"__v\": 0\n            }\n        }\n    ],\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{1}}admin/userbyid?id=64d28fccb6bffbb1787205fd",
+							"host": [
+								"{{1}}admin"
+							],
+							"path": [
+								"userbyid"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "64d28fccb6bffbb1787205fd"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get user by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AdminToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{1}}admin/userbyid?id=64d28fccb6bffbb1787205fd",
+									"host": [
+										"{{1}}admin"
+									],
+									"path": [
+										"userbyid"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "64d28fccb6bffbb1787205fd"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3209"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c89-6Nomtw5yIhjpOp+xzPnq0nmXwCQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 19 Oct 2023 20:06:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You have get User successfully\",\n    \"data\": {\n        \"_id\": \"64d28fcbb6bffbb1787205f9\",\n        \"identifier\": \"new165835@gmail.com\",\n        \"userType\": \"User\",\n        \"notificationOn\": true,\n        \"acctype\": \"demo\",\n        \"isDeleted\": false,\n        \"isCompleteProfile\": true,\n        \"demo\": [\n            {\n                \"stock\": \"apple\",\n                \"amount\": 20,\n                \"_id\": \"64f64a3f2d6bd2eeddbf23a0\"\n            },\n            {\n                \"stock\": \"Google\",\n                \"amount\": 0,\n                \"_id\": \"64f6504fc801b6fcce96725c\"\n            }\n        ],\n        \"real\": [\n            {\n                \"stock\": \"AML\",\n                \"amount\": 270,\n                \"_id\": \"64e7cd020d2175332e7716cb\"\n            },\n            {\n                \"stock\": \"GOOG\",\n                \"amount\": 200,\n                \"_id\": \"64f62fa8be5e6937953783a0\"\n            }\n        ],\n        \"createdAt\": \"2023-08-08T18:56:11.432Z\",\n        \"updatedAt\": \"2023-10-19T19:14:31.041Z\",\n        \"__v\": 0,\n        \"profile\": {\n            \"_id\": \"64d28fccb6bffbb1787205fd\",\n            \"fullName\": \"Test\",\n            \"auth\": \"64d28fcbb6bffbb1787205f9\",\n            \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n            \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n            \"__v\": 0\n        },\n        \"balance\": 545,\n        \"demobalance\": 10600,\n        \"subAccounts\": [\n            {\n                \"_id\": \"64fba9d765f8bb2ac4a68df3\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"name\": \"My demo Account\",\n                \"type\": \"real\",\n                \"leverage\": \"150\",\n                \"currency\": \"USD\",\n                \"password\": \"123123\",\n                \"balance\": 1134,\n                \"stockData\": [\n                    {\n                        \"stock\": \"Google\",\n                        \"amount\": 50,\n                        \"_id\": \"64fbaa5ca3798cd6b333f1b7\"\n                    },\n                    {\n                        \"stock\": \"CPPWF\",\n                        \"amount\": 22,\n                        \"_id\": \"650f32d6111f7f9bc562c054\"\n                    },\n                    {\n                        \"stock\": \"0QZI.LON\",\n                        \"amount\": 0,\n                        \"_id\": \"650f40d1111f7f9bc562c116\"\n                    },\n                    {\n                        \"stock\": \"SILVERPRL.BSE\",\n                        \"amount\": 10,\n                        \"_id\": \"650f427d111f7f9bc562c165\"\n                    },\n                    {\n                        \"stock\": \"GOLD\",\n                        \"amount\": 34,\n                        \"_id\": \"6515c7e84868e31ae730d890\"\n                    }\n                ],\n                \"createdAt\": \"2023-09-08T23:10:15.370Z\",\n                \"updatedAt\": \"2023-09-29T19:46:40.597Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"64fbc44f0a8cc8851d386e88\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"name\": \"My demo 123 Account\",\n                \"type\": \"demo\",\n                \"leverage\": \"150\",\n                \"currency\": \"USD\",\n                \"password\": \"123123\",\n                \"balance\": 10000,\n                \"stockData\": [],\n                \"createdAt\": \"2023-09-09T01:03:11.693Z\",\n                \"updatedAt\": \"2023-09-09T01:03:11.693Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"64fbc697004bcb792eb059f9\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"name\": \"My real aa Account\",\n                \"type\": \"real\",\n                \"leverage\": \"150\",\n                \"currency\": \"USD\",\n                \"password\": \"123123\",\n                \"balance\": 0,\n                \"stockData\": [],\n                \"createdAt\": \"2023-09-09T01:12:55.080Z\",\n                \"updatedAt\": \"2023-09-09T01:12:55.080Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"650103c63488fb71703c5f39\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"balance\": 0,\n                \"stockData\": [],\n                \"createdAt\": \"2023-09-13T00:35:18.937Z\",\n                \"updatedAt\": \"2023-09-13T00:35:18.937Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"65160027936a8e2f54f7aeb6\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"name\": \"faraz demo\",\n                \"type\": \"demo\",\n                \"leverage\": \"1:2\",\n                \"currency\": \"USD\",\n                \"password\": \"12345678\",\n                \"balance\": 9900,\n                \"stockData\": [\n                    {\n                        \"stock\": \"SILVERPRL.BSE\",\n                        \"amount\": 10,\n                        \"_id\": \"651615208d33a807b36272d9\"\n                    }\n                ],\n                \"createdAt\": \"2023-09-28T22:37:27.486Z\",\n                \"updatedAt\": \"2023-09-29T00:06:56.499Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"65170d808d33a807b36274a7\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"name\": \"geeks demo\",\n                \"type\": \"demo\",\n                \"leverage\": \"1:50\",\n                \"currency\": \"USD\",\n                \"password\": \"12345678\",\n                \"balance\": 9600,\n                \"stockData\": [\n                    {\n                        \"stock\": \"TSLA\",\n                        \"amount\": 22,\n                        \"_id\": \"65170e528d33a807b36274cc\"\n                    },\n                    {\n                        \"stock\": \"AAPL\",\n                        \"amount\": 12,\n                        \"_id\": \"65170f4b8d33a807b3627509\"\n                    }\n                ],\n                \"createdAt\": \"2023-09-29T17:46:40.017Z\",\n                \"updatedAt\": \"2023-09-29T18:10:48.577Z\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"651766c258010fb0e6928e77\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"name\": \"gamer\",\n                \"type\": \"real\",\n                \"leverage\": \"1:2\",\n                \"currency\": \"USD\",\n                \"password\": \"12345678\",\n                \"balance\": 107690.68408399998,\n                \"stockData\": [],\n                \"createdAt\": \"2023-09-30T00:07:30.027Z\",\n                \"updatedAt\": \"2023-10-19T19:15:01.072Z\",\n                \"__v\": 0\n            }\n        ],\n        \"referer\": []\n    },\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "admin login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"AdminToken\", pm.response.json().data.token);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"123123\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{1}}admin/login"
+					},
+					"response": [
+						{
+							"name": "admin login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"123123\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{1}}admin/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "756"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f4-XsysDEpjnLTSexQhpcU0Jf7wbds\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 19 Aug 2023 21:49:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"64e13633d3b9439cc603362b\",\n        \"fullName\": \"admin\",\n        \"userType\": \"Admin\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.fg2S12Ri4sulqlmiR24dSaxNw0xoECq7yLqYnfQlgXbZ3piC8KJtOwdGDcbaF9zeNgv3Z98bjsfM_5iq2KpPBpH3TR03b4dUo3dk4etp33DK5e7Ls_N39K65trOZkULVeZnY1qfLspDlGn4MhOH8nut9cByNrE5XzAa0TDP_VLKgFdqzxPaPl_elr9GgA8FT9zS2f7qzFsB5AVUygVeMjqi0ONuk8vinCKsfzhcKnO6G5fGjBaCZ-T9wAz55u6XhAy0CaSGemxpauCIr87Kb2JewAd-JYMm25XPGZ-O2kUc8A3CqaUiJV2-YKEMIl8FLSCgezgyMvu-DZQlJ8Lz8gw.BWZAnagGOQg-nX0i.IaY96UtRtvqDCg1_0yGR05AewbVOx2fKBKiIQmHDqIkSmfxpV6KuAs37XQvxk4SYDTqpMf3Kg-acr_I8-ws7qQdkTj536nzymZgRGiJc3epf8easEvyfi0OhSlJlLJqiTOP-JjJOaxbpv5tpdj-sZOusab0pvkCMBLbISR9bddPi73ACWjM1.dG3ASkhL9qOXajp-g2f-UQ\"\n    },\n    \"status\": true\n}"
 						}
 					]
 				}
@@ -3211,15 +3237,7 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{2}}forex/get",
-							"host": [
-								"{{2}}forex"
-							],
-							"path": [
-								"get"
-							]
-						}
+						"url": "{{1}}get"
 					},
 					"response": [
 						{
@@ -3233,15 +3251,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}forex/get",
-									"host": [
-										"{{1}}forex"
-									],
-									"path": [
-										"get"
-									]
-								}
+								"url": "{{1}}forex/get"
 							},
 							"status": "OK",
 							"code": 200,
@@ -3353,15 +3363,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{1}}forex/get",
-									"host": [
-										"{{1}}forex"
-									],
-									"path": [
-										"get"
-									]
-								}
+								"url": "{{1}}forex/get"
 							},
 							"status": "OK",
 							"code": 200,
@@ -3533,15 +3535,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}forex/open",
-							"host": [
-								"{{1}}forex"
-							],
-							"path": [
-								"open"
-							]
-						}
+						"url": "{{2}}forex/open"
 					},
 					"response": [
 						{
@@ -3564,15 +3558,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{1}}forex/open",
-									"host": [
-										"{{1}}forex"
-									],
-									"path": [
-										"open"
-									]
-								}
+								"url": "{{1}}forex/open"
 							},
 							"status": "OK",
 							"code": 200,
@@ -3648,121 +3634,9 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{1}}forex/close",
-							"host": [
-								"{{1}}forex"
-							],
-							"path": [
-								"close"
-							]
-						}
+						"url": "{{1}}forex/close"
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "admin login",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.collectionVariables.set(\"AdminToken\", pm.response.json().data.token);\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"123123\"\r\n    \r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{1}}admin/login",
-					"host": [
-						"{{1}}admin"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "admin login",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"123123\"\r\n    \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{1}}admin/login",
-							"host": [
-								"{{1}}admin"
-							],
-							"path": [
-								"login"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "756"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2f4-XsysDEpjnLTSexQhpcU0Jf7wbds\""
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 19 Aug 2023 21:49:11 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"64e13633d3b9439cc603362b\",\n        \"fullName\": \"admin\",\n        \"userType\": \"Admin\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.fg2S12Ri4sulqlmiR24dSaxNw0xoECq7yLqYnfQlgXbZ3piC8KJtOwdGDcbaF9zeNgv3Z98bjsfM_5iq2KpPBpH3TR03b4dUo3dk4etp33DK5e7Ls_N39K65trOZkULVeZnY1qfLspDlGn4MhOH8nut9cByNrE5XzAa0TDP_VLKgFdqzxPaPl_elr9GgA8FT9zS2f7qzFsB5AVUygVeMjqi0ONuk8vinCKsfzhcKnO6G5fGjBaCZ-T9wAz55u6XhAy0CaSGemxpauCIr87Kb2JewAd-JYMm25XPGZ-O2kUc8A3CqaUiJV2-YKEMIl8FLSCgezgyMvu-DZQlJ8Lz8gw.BWZAnagGOQg-nX0i.IaY96UtRtvqDCg1_0yGR05AewbVOx2fKBKiIQmHDqIkSmfxpV6KuAs37XQvxk4SYDTqpMf3Kg-acr_I8-ws7qQdkTj536nzymZgRGiJc3epf8easEvyfi0OhSlJlLJqiTOP-JjJOaxbpv5tpdj-sZOusab0pvkCMBLbISR9bddPi73ACWjM1.dG3ASkhL9qOXajp-g2f-UQ\"\n    },\n    \"status\": true\n}"
 				}
 			]
 		},
@@ -3771,17 +3645,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:9000/1images-1692484149293.jpg",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9000",
-					"path": [
-						"1images-1692484149293.jpg"
-					]
-				}
+				"url": "http://localhost:9000/1images-1692484149293.jpg"
 			},
 			"response": []
 		}

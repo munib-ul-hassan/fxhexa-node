@@ -26,6 +26,7 @@ RequestRouters.route("/user/request").get(AuthMiddleware,
 RequestRouters.prefix("/admin", AdminMiddleware, async function () {
     RequestRouters.route("/request").get(
         RequestController.getRequestByAdmin
+        
     );
 
     RequestRouters.route("/request/:id").put(

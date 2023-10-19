@@ -16,6 +16,7 @@ import { tokenGen } from "../Utils/jwt.js";
 import { connectDB } from "../DB/index.js";
 
 import AdminModel from "../DB/Model/adminModel.js";
+import OrderModel from "../DB/Model/orderModel.js";
 const registerAdmin = async () => {
 
   const auth = await new AuthModel({
@@ -107,15 +108,41 @@ const Adminlogin = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
   try {
-    let user = await AuthModel.find({ userType: { $ne: "Admin" } }).populate({
-      path: "profile",
-      populate: ["following", "follower", "image"],
-    });
+    let user = await AuthModel.find({ userType: { $ne: "Admin" } }, { password: 0,  devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+      ["profile", "referBy", "referer"]
+
+    );
 
     if (user.length > 0) {
       return next(CustomSuccess.createSuccess(user, "You have get Users successfully", 200));
     } else {
       return next(CustomError.notFound("No User found"));
+    }
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
+
+const getUserById = async (req, res, next) => {
+  try {
+    const { id } = req.query
+    let user = await AuthModel.findOne({
+      userType: { $ne: "Admin" }, $or: [
+        {
+          _id: id
+        }, {
+          profile: id
+        }
+      ]
+    }, { password: 0,  devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+      ["profile", "referBy", "referer","subAccounts"]
+
+    );
+
+    if (user) {
+      return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
+    } else {
+      return next(CustomError.notFound("Invalid User Id"));
     }
   } catch (error) {
     return next(CustomError.badRequest(error.message));
@@ -308,7 +335,7 @@ const deleteUser = async (req, res, next) => {
       },
       { new: true },
     );
-    
+
     // if (!deleteuser) {
     //   next(CustomError.createError("user not delete", 200));
     // } else {
@@ -371,11 +398,54 @@ const getdashboard = async (req, res, next) => {
 ///terms
 
 
+const getstocks = async (req, res, next) => {
+  try {
+    const data = await OrderModel.find({ type: "Stock" }, { type: 0 }).populate({ path: "user", select: ["fullName"] })
+      .populate({ path: "accountref", select: ["currency", "balance"] })
+      .sort({ creartedAt: -1 });
 
+
+
+    next(
+      CustomSuccess.createSuccess(
+        data,
+
+        "Stocks data found",
+        200,
+      ),
+    );
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
+const getforex = async (req, res, next) => {
+  try {
+    const data = await OrderModel.find({ type: "Forex" }, { type: 0 }).populate({ path: "user", select: ["fullName"] })
+      .populate({ path: "accountref", select: ["currency", "balance"] })
+      .sort({ creartedAt: -1 });
+
+
+
+
+    next(
+      CustomSuccess.createSuccess(
+
+
+        data,
+
+        "Forex data found",
+        200,
+      ),
+    );
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
 
 const AdminController = {
   Adminlogin,
   getUsers,
+  getUserById,
   createPrivacy,
   getPrivacy,
   updatePrivacy,
@@ -384,9 +454,12 @@ const AdminController = {
   getTerms,
   deleteTerms,
   updateTerms,
- 
+
   deleteUser,
-  getdashboard
+  getdashboard,
+  getstocks,
+  getforex
+
 
 };
 export default AdminController;
