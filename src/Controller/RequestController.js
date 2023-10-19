@@ -86,12 +86,13 @@ const getRequestByAdmin = async (req, res, next) => {
         const { page, limit } = req.query
         delete req.query.page
         delete req.query.limit
-        const data = await RequestModel.find(req.query).limit(limit).skip((page - 1) * limit)
 
+        const data = await RequestModel.find(req.query).limit(limit).skip((page - 1) * limit)
+        const count = await RequestModel.count({})
         if (data.length > 0) {
             return next(
                 CustomSuccess.createSuccess(
-                    data,
+                    {count,data},
                     "Request get Successfully",
                     200
                 )

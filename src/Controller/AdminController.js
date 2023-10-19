@@ -108,13 +108,18 @@ const Adminlogin = async (req, res, next) => {
 
 const getUsers = async (req, res, next) => {
   try {
-    let user = await AuthModel.find({ userType: { $ne: "Admin" } }, { password: 0,  devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
-      ["profile", "referBy", "referer"]
 
-    );
+    const { page, limit } = req.query
+    delete req.query.page
+    delete req.query.limit
+
+    let user = await AuthModel.find({ userType: { $ne: "Admin" } }, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+      ["profile", "referBy", "referer"]
+    ).limit(limit).skip((page - 1) * limit);
+    let count = await AuthModel.count({ userType: { $ne: "Admin" } })
 
     if (user.length > 0) {
-      return next(CustomSuccess.createSuccess(user, "You have get Users successfully", 200));
+      return next(CustomSuccess.createSuccess({ count, user }, "You have get Users successfully", 200));
     } else {
       return next(CustomError.notFound("No User found"));
     }
@@ -134,8 +139,8 @@ const getUserById = async (req, res, next) => {
           profile: id
         }
       ]
-    }, { password: 0,  devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
-      ["profile", "referBy", "referer","subAccounts"]
+    }, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+      ["profile", "referBy", "referer", "subAccounts"]
 
     );
 
@@ -400,15 +405,19 @@ const getdashboard = async (req, res, next) => {
 
 const getstocks = async (req, res, next) => {
   try {
+    const { page, limit } = req.query
+    delete req.query.page
+    delete req.query.limit
+
     const data = await OrderModel.find({ type: "Stock" }, { type: 0 }).populate({ path: "user", select: ["fullName"] })
       .populate({ path: "accountref", select: ["currency", "balance"] })
-      .sort({ creartedAt: -1 });
+      .sort({ creartedAt: -1 }).limit(limit).skip((page - 1) * limit);
 
-
+    const count = await OrderModel.count({ type: "Stock" })
 
     next(
       CustomSuccess.createSuccess(
-        data,
+        { count, data },
 
         "Stocks data found",
         200,
@@ -420,9 +429,15 @@ const getstocks = async (req, res, next) => {
 };
 const getforex = async (req, res, next) => {
   try {
+    const { page, limit } = req.query
+    delete req.query.page
+    delete req.query.limit
+
     const data = await OrderModel.find({ type: "Forex" }, { type: 0 }).populate({ path: "user", select: ["fullName"] })
       .populate({ path: "accountref", select: ["currency", "balance"] })
-      .sort({ creartedAt: -1 });
+      .sort({ creartedAt: -1 })
+      .limit(limit).skip((page - 1) * limit);
+    const count = await OrderModel.count({ type: "Forex" })
 
 
 
@@ -431,7 +446,7 @@ const getforex = async (req, res, next) => {
       CustomSuccess.createSuccess(
 
 
-        data,
+        { count, data },
 
         "Forex data found",
         200,
