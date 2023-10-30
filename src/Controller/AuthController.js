@@ -25,6 +25,8 @@ import { linkUserDevice } from "../Utils/linkUserDevice.js";
 import { randomInt } from "crypto";
 import AuthModel from "../DB/Model/authModel.js";
 import subAccountModel from "../DB/Model/subAccountModel.js";
+import axios from "axios";
+import OrderModel from "../DB/Model/orderModel.js";
 
 
 const registerUser = async (req, res, next) => {
@@ -33,7 +35,7 @@ const registerUser = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { fullName, email, password, deviceType, deviceToken, accType, referBy } =
+    const { fullName, email, password, deviceType, deviceToken, accType, referBy, phone } =
       req.body;
 
     const IsUser = await AuthModel.findOne({ identifier: email });
@@ -53,7 +55,8 @@ const registerUser = async (req, res, next) => {
       identifier: email,
       password,
       accType,
-      refereCode
+      refereCode,
+      phone
     }).save();
     if (referBy) {
       const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: { user: auth._id } } }, { new: true })
@@ -117,6 +120,7 @@ const registerUser = async (req, res, next) => {
       `,
     };
 
+
     const usermodel = await new UserModel({
       auth: auth._id,
       fullName
@@ -167,6 +171,7 @@ const registerUser = async (req, res, next) => {
         userType: "User",
         // image: { file: "" },
         otp,
+        phone,
 
         subAccounts: user.subAccounts,
         isCompleteProfile: user.isCompleteProfile,
@@ -321,6 +326,7 @@ const LoginUser = async (req, res, next) => {
       fullName: profile.fullName,
       email: user.identifier,
       userType: user.userType,
+      phone: user.phone,
       subAccounts: user.subAccounts,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
@@ -517,6 +523,7 @@ const VerifyUser = async (req, res, next) => {
     // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [],
     //   user.profile._doc.real = user.real.length > 0 ? user.real : []
     user.profile._doc.subAccounts = user.subAccounts
+
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
 
@@ -900,11 +907,14 @@ const updateProfile = async (req, res, next) => {
         }
       );
     }
-    if (body.accType) {
+    if (body.accType || body.phone) {
       await AuthModel.findByIdAndUpdate(req.user._id, {
-        accType: body.accType,
+        accType: body.accType ? body.accType : req.user.accType,
+        phone: body.phone ? body.phone : req.user.phone
       });
     }
+
+
 
 
     const user = await AuthModel.findById(req.user._id).populate([
@@ -926,6 +936,7 @@ const updateProfile = async (req, res, next) => {
 
       subAccounts: user.subAccounts,
       refereCode: user.refereCode,
+      phone: user.phone,
 
       userType: "User",
       // demo, real,
@@ -971,6 +982,53 @@ const addSubAcc = async (req, res, next) => {
       type, name, password, leverage, currency, balance
     })
     data.save()
+
+    const emailData = {
+      subject: "fx-hexa - Sub Account Creation",
+      html: `
+      <div
+        style = "padding:20px 20px 40px 20px; position: relative; overflow: hidden; width: 100%;"
+      >
+        <img
+              style="
+              top: 0;position: absolute;z-index: 0;width: 100%;height: 100vmax;object-fit: cover;"
+              src="cid:background" alt="background"
+        />
+        <div style="z-index:1; position: relative;">
+        <header style="padding-bottom: 20px">
+          <div class="logo" style="text-align:center;">
+            <img
+              style="width: 300px;"
+              src="cid:logo" alt="logo" />
+          </div>
+        </header>
+        <main
+          style= "padding: 20px; background-color: #f5f5f5; border-radius: 10px; width: 80%; margin: 0 auto; margin-bottom: 20px; font-family: 'Poppins', sans-serif;"
+        >
+          <h1
+            style="color: #fd6835; font-size: 30px; font-weight: 700;"
+          >Welcome To fx-hexa</h1>
+          <p
+            style="font-size: 24px; text-align: left; font-weight: 500; font-style: italic;"
+          >Hi ${req.user.profile.fullName},</p>
+          <p
+            style="font-size: 20px; text-align: left; font-weight: 500;"
+          >Thank you for Creeating Sub account. This is Acknowledge Email for sub account creation.</p>
+          
+          <p style = "font-size: 16px; font-style:italic; color: #343434">
+          UserName: ${name}
+          </p>
+          <p style = "font-size: 16px; font-style:italic; color: #343434">
+          Password: ${password}
+          </p>
+          <p style = "font-size: 20px;">Regards,</p>
+          <p style = "font-size: 20px;">Dev Team</p>
+        </main>
+        </div>
+      <div>
+      `,
+    };
+    sendEmails(req.user.identifier, emailData.subject, emailData.html);
     await AuthModel.findByIdAndUpdate(req.user._id, {
       $push: { subAccounts: data._id }
     })
@@ -1147,6 +1205,35 @@ const getreferlist = async (req, res, next) => {
   }
   catch (err) { return next(CustomError.createError(err.message, 500)) }
 }
+const subAccBalance = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const subAccData = await subAccountModel.findOne({ _id: id, auth: req.user._id })
+    if (!subAccData) {
+      return next(CustomError.createError("No any sub-Account Exist", 200));
+    }
+    const ordersData = await OrderModel.find({ accountref: id, status: "open" })
+    var balance = subAccData.balance, equity = 0
+    await Promise.all(ordersData.map(async (item) => {
+      let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${item.stock}&interval=1&apikey=${process.env.alphaAPIKEY}`
+
+      const data = await axios.get(url)
+      equity += (Object.values(Object.values(data.data["Time Series (Daily)"])[0])[3] * item.unit)
+
+
+    }))
+
+    return next(CustomSuccess.createSuccess(
+      { balance, equity:balance+equity },
+      "Balance and Equity get successfully",
+      200
+    ))
+
+
+  }
+  catch (err) { return next(CustomError.createError(err.message, 500)) }
+
+}
 const AuthController = {
   registerUser,
   resendOTP,
@@ -1181,7 +1268,8 @@ const AuthController = {
   updateSubAcc,
   deleteSubAc,
   loginSub,
-  getreferlist
+  getreferlist,
+  subAccBalance
 };
 
 export default AuthController;

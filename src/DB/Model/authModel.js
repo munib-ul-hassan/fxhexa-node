@@ -85,6 +85,7 @@ const AuthSchema = new Schema(
     //   type: Boolean,
     //   default: false,
     // },
+    phone:{type:String},
     isDeleted: {
       type: Boolean,
       default: false,

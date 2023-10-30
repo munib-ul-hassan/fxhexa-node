@@ -14,7 +14,7 @@ const postRequest = async (req, res, next) => {
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
-        req.body.userId = req.user.profile._id
+        req.body.user = req.user.profile._id
 
         const accData = await subAccountModel.findById(req.body.accountref)
         if (!accData) {
@@ -92,7 +92,7 @@ const getRequestByAdmin = async (req, res, next) => {
         if (data.length > 0) {
             return next(
                 CustomSuccess.createSuccess(
-                    {count,data},
+                    { count, data },
                     "Request get Successfully",
                     200
                 )
@@ -290,10 +290,30 @@ const deleteRequest = async (req, res, next) => {
 
 const getRequestByUser = async (req, res, next) => {
     try {
-        const { page, limit } = req.query
+        const { page, limit, from, to } = req.query
         delete req.query.page
         delete req.query.limit
-        const data = await RequestModel.find({ userId: req.user.profile._id, ...req.query }).limit(limit).skip((page - 1) * limit)
+
+
+        if (from && to) {
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (!datePattern.test(from) || !datePattern.test(to)) {
+                return next(CustomError.createError("Invalid date format", 200));
+            }
+            var fromDate = new Date(from)
+            fromDate.setHours(0, 0, 0, 0);
+            var toDate = new Date(to)
+
+            toDate.setHours(23, 59, 59, 999);
+
+
+            req.query.createdAt = {
+                $gte: fromDate, $lte: toDate
+            }
+            delete req.query.from
+            delete req.query.to
+        }
+        const data = await RequestModel.find({ user: req.user.profile._id, ...req.query }).limit(limit).skip((page - 1) * limit)
         if (data.length > 0) {
             return next(
                 CustomSuccess.createSuccess(

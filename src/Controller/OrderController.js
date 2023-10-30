@@ -35,8 +35,8 @@ const open = async (req, res, next) => {
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
         $inc: { balance: ((openAmount * unit) * 0.10) }
       })
-      
-      await AuthModel.findOneAndUpdate({ _id: req.user.referBy,"referer.user":req.user._id }, {
+
+      await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
         $inc: { "referer.$.amount": ((openAmount * unit) * 0.05) }
       })
     } else {
@@ -107,24 +107,30 @@ const close = async (req, res, next) => {
     if (!accData) {
       return next(CustomError.badRequest("invalid Sub-Account Id"));
     }
-    const orderData = await OrderModel.findById(orderId)    
-    if (!orderData) {
-      return next(CustomError.badRequest("invalid Order Id"));
-    }
-    var newBalance = 0;
-    if (orderData.orderType == "buy") {
+    var success = 0, failed = 0;
+    await Promise.all(orderId.map(async (item) => {
 
-      newBalance = (orderData.openAmount - closeAmount) * orderData.unit
-    }
-    if (orderData.orderType == "sell") {
-      newBalance = (closeAmount - orderData.openAmount) * orderData.unit
-    }
+      const orderData = await OrderModel.findOne({ _id: item })
+      if (!orderData) {
+        failed++;
+        return;
+      }
+      var newBalance = 0;
+      if (orderData.orderType == "buy") {
 
-    await subAccountModel.findByIdAndUpdate(subAccId,
-      {
-        $inc: { balance: newBalance },
-      })
-    const updatedData = await OrderModel.findByIdAndUpdate(orderId, { status: "close", closeAmount })
+        newBalance = (orderData.openAmount - closeAmount) * orderData.unit
+      }
+      if (orderData.orderType == "sell") {
+        newBalance = (closeAmount - orderData.openAmount) * orderData.unit
+      }
+      await subAccountModel.findByIdAndUpdate(subAccId,
+        {
+          $inc: { balance: newBalance },
+        })
+      const updatedData = await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount })
+      success++;
+    }))
+
 
 
     // const i = accData.stockData.findIndex((element) => element.stock == stock)
@@ -159,7 +165,8 @@ const close = async (req, res, next) => {
 
     return next(
       CustomSuccess.createSuccess(
-        updatedData,
+
+        { success, failed },
         "Order close successfully",
         200
       )
@@ -167,18 +174,16 @@ const close = async (req, res, next) => {
   } catch (error) {
     next(CustomError.createError(error.message, 500));
   }
-};
+}
 const getOrder = async (req, res, next) => {
   try {
     const {
       orderType,
-      month,
-      date,
-      year,
-      time,
       page,
       limit,
-      subAccId
+      subAccId,
+      from,
+      to
 
     } = req.query;
     const query = { user: req.user._doc.profile._id };
@@ -186,36 +191,55 @@ const getOrder = async (req, res, next) => {
     // Filter based on Order type (buy or sell)
     if (orderType) {
       query.orderType = orderType;
+      delete req.query.orderType
     }
 
+    if (subAccId) {
+      query.accountref = subAccId;
+      delete req.query.subAccId
+
+    }
+    if (from && to) {
+      const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+      if (!datePattern.test(from) || !datePattern.test(to)) {
+        return
+        next(CustomError.createError("Invalid date format", 200));
+      }
+      query.createdAt = {
+        $gte: from, $lte: to
+      }
+      delete req.query.from
+      delete req.query.to
+
+    }
 
     // Filter based on the specified month
-    if (month) {
-      const parsedMonth = parseInt(month);
-      if (!isNaN(parsedMonth) && parsedMonth >= 1 && parsedMonth <= 12) {
-        query.createdAt = {
-          $gte: new Date(`${year}-${month}-01`),
-          $lt: new Date(`${year}-${month}-31`),
-        };
-      }
-    }
+    // if (month) {
+    //   const parsedMonth = parseInt(month);
+    //   if (!isNaN(parsedMonth) && parsedMonth >= 1 && parsedMonth <= 12) {
+    //     query.createdAt = {
+    //       $gte: new Date(`${year}-${month}-01`),
+    //       $lt: new Date(`${year}-${month}-31`),
+    //     };
+    //   }
+    // }
 
     // Filter based on the specified date and year
-    if (date && year) {
-      const parsedDate = parseInt(date);
-      const parsedYear = parseInt(year);
-      if (!isNaN(parsedDate) && !isNaN(parsedYear)) {
-        query.createdAt = {
-          $gte: new Date(`${year}-${month}-${date}`),
-          $lt: new Date(`${year}-${month}-${parseInt(date) + 1}`),
-        };
-      }
-    }
+    // if (date && year) {
+    //   const parsedDate = parseInt(date);
+    //   const parsedYear = parseInt(year);
+    //   if (!isNaN(parsedDate) && !isNaN(parsedYear)) {
+    //     query.createdAt = {
+    //       $gte: new Date(`${year}-${month}-${date}`),
+    //       $lt: new Date(`${year}-${month}-${parseInt(date) + 1}`),
+    //     };
+    //   }
+    // }
 
     // Filter based on the specified time
-    if (time) {
-      query.createdAt = { $gte: new Date(`${year}-${month}-${date}T${time}`) };
-    }
+    // if (time) {
+    //   query.createdAt = { $gte: new Date(`${year}-${month}-${date}T${time}`) };
+    // }
 
     // Pagination
     const pageNumber = parseInt(page) || 1;
@@ -223,20 +247,31 @@ const getOrder = async (req, res, next) => {
     const skipCount = (pageNumber - 1) * itemsPerPage;
 
     // Fetch Orders from the database based on the constructed query and pagination
-    const Orders = await OrderModel.find(query)
+    const Orders = await OrderModel.find({ ...query, ...req.query })
       .populate("user")
       .skip(skipCount)
       .limit(itemsPerPage);
 
     // Send the Orders data as a JSON response
+    if (Orders.length > 0) {
 
-    return next(
-      CustomSuccess.createSuccess(
-        Orders,
-        "Orders get successfully",
-        200
-      )
-    );
+      return next(
+        CustomSuccess.createSuccess(
+          Orders,
+          "Orders get successfully",
+          200
+        )
+      );
+    } else {
+      return next(
+        CustomSuccess.createSuccess(
+          {},
+          "No any data yet",
+          200
+        )
+      );
+
+    }
   } catch (error) {
     next(CustomError.createError(error.message, 500));
   }

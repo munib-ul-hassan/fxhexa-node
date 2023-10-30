@@ -32,7 +32,7 @@ export const forexcloseOrderValidator =joi.object({
 export const closeOrderValidator = joi.object({
   // unit: joi.number(),
   // stock: joi.string(),
-  orderId: joi.string().required(),
+  orderId: joi.array(),
   closeAmount: joi.number().required(),
   // orderType: joi.string().valid("buy", "sell"),
   subAccId: joi.string().required()

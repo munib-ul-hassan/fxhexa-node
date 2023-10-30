@@ -94,7 +94,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"type\":\"demo\",\r\n    \"name\":\"My mick\",\r\n    \"password\":\"123123\",\r\n    \"leverage\":\"150\",\r\n    \"currency\":\"USD\"\r\n}",
+									"raw": "{\r\n    \"type\":\"demo\",\r\n    \"name\":\"Mysdfsdfsd\",\r\n    \"password\":\"123123\",\r\n    \"leverage\":\"150\",\r\n    \"currency\":\"USD\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -396,6 +396,87 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"message\": \"Sub Account login sucessfully\",\n    \"data\": {\n        \"balance\": 0,\n        \"_id\": \"64fb8e8ae43f6f53abc63264\",\n        \"auth\": \"64d28fcbb6bffbb1787205f9\",\n        \"name\": \"My demo Account\",\n        \"type\": \"demo\",\n        \"leverage\": 150,\n        \"currency\": \"USD\",\n        \"password\": \"123123\",\n        \"createdAt\": \"2023-09-08T21:13:46.118Z\",\n        \"updatedAt\": \"2023-09-08T21:13:46.118Z\",\n        \"__v\": 0,\n        \"stockData\": []\n    },\n    \"status\": true\n}"
+								}
+							]
+						},
+						{
+							"name": "get my balance",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{1}}auth/subacc/balance/65396b477dfe0cefa9428e92"
+							},
+							"response": [
+								{
+									"name": "get my balance",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{AuthToken}}",
+												"type": "text"
+											}
+										],
+										"url": "{{1}}auth/subacc/balance/65396b477dfe0cefa9428e92"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "X-Requested-With,content-type"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "113"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"71-7N5wAD0Ucs3TS0Z5YgFYEWtiuHo\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 30 Oct 2023 16:38:31 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Balance and Equity get successfully\",\n    \"data\": {\n        \"balance\": 9921.66775,\n        \"equity\": 9921.66775\n    },\n    \"status\": true\n}"
 								}
 							]
 						}
@@ -718,7 +799,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"new123123@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n    \r\n}",
+							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"munibkhatri123@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1377,7 +1458,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\":\"User123\"\r\n}",
+							"raw": "{\r\n    \"phone\":\"213134134\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1700,7 +1781,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\n    \"unit\": 0.5,\n    \"stock\": \"Google\",\n    \"openAmount\": \"1000\",\n    \"orderType\": \"sell\",\n    \"stopLoss\":0.00025,\n    \"profitLimit\":0.35698\n}",
+							"raw": "{\n    \"subAccId\": \"65396b477dfe0cefa9428e92\",\n    \"unit\": 0.5,\n    \"stock\": \"GOOG\",\n    \"openAmount\": \"136.2300\",\n    \"orderType\": \"sell\"\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1787,7 +1868,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"closeAmount\": \"1300\",\n   \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"orderId\": \"6529bf9b72ee26e673f33669\"\n}",
+							"raw": "{\n    \"closeAmount\": \"1300\",\n   \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"orderId\": [\"653973fca0ccb7d364e60a12\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1798,7 +1879,7 @@
 					},
 					"response": [
 						{
-							"name": "sell",
+							"name": "close order",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -1810,14 +1891,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"amount\": 20,\n    \"stock\": \"Google\",\n    \"exchangeAmount\":\"2000\",\n    \"subAccId\":\"64fba9d765f8bb2ac4a68df3\"\n    }",
+									"raw": "{\n    \"closeAmount\": \"1300\",\n   \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"orderId\": [\"653973fca0ccb7d364e60a12\"]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{1}}transaction/sell"
+								"url": "{{1}}order/close"
 							},
 							"status": "OK",
 							"code": 200,
@@ -1832,20 +1913,32 @@
 									"value": "*"
 								},
 								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "408"
+									"value": "84"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"198-tukDOMb0hfdEC0EHWbyeGYQ32Hs\""
+									"value": "W/\"54-j1ya1Y4lKvw3kIBi/NB/Dwh1iIE\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 08 Sep 2023 23:25:55 GMT"
+									"value": "Mon, 30 Oct 2023 16:38:11 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1857,7 +1950,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Transaction completed successfully\",\n    \"data\": {\n        \"_id\": \"64fba9d765f8bb2ac4a68df3\",\n        \"auth\": \"64d28fcbb6bffbb1787205f9\",\n        \"name\": \"My demo Account\",\n        \"type\": \"demo\",\n        \"leverage\": 150,\n        \"currency\": \"USD\",\n        \"password\": \"123123\",\n        \"balance\": 8000,\n        \"stockData\": [\n            {\n                \"stock\": \"Google\",\n                \"amount\": 20,\n                \"_id\": \"64fbaa5ca3798cd6b333f1b7\"\n            }\n        ],\n        \"createdAt\": \"2023-09-08T23:10:15.370Z\",\n        \"updatedAt\": \"2023-09-08T23:25:54.844Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Order close successfully\",\n    \"data\": {\n        \"success\": 1,\n        \"failed\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -1873,7 +1966,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}order/getOrder?month=10&year=2023&page=1&limit=10&subAccId=6529bccdcf02d79d870415b1",
+							"raw": "{{1}}order/getOrder?page=1&limit=10&subAccId=65396b477dfe0cefa9428e92&from=2023-10-15&to=2023-10-26&type=Stock",
 							"host": [
 								"{{1}}order"
 							],
@@ -1881,24 +1974,6 @@
 								"getOrder"
 							],
 							"query": [
-								{
-									"key": "transactionType",
-									"value": "buy",
-									"disabled": true
-								},
-								{
-									"key": "date",
-									"value": "02",
-									"disabled": true
-								},
-								{
-									"key": "month",
-									"value": "10"
-								},
-								{
-									"key": "year",
-									"value": "2023"
-								},
 								{
 									"key": "page",
 									"value": "1"
@@ -1909,7 +1984,26 @@
 								},
 								{
 									"key": "subAccId",
-									"value": "6529bccdcf02d79d870415b1"
+									"value": "65396b477dfe0cefa9428e92"
+								},
+								{
+									"key": "orderType",
+									"value": "open",
+									"description": "open | close",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "2023-10-15"
+								},
+								{
+									"key": "to",
+									"value": "2023-10-26"
+								},
+								{
+									"key": "type",
+									"value": "Stock",
+									"description": "Stock | Forex"
 								}
 							]
 						}
@@ -2027,7 +2121,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}user/request?page=1&limit=20&status=pending&accountref=64fba9d765f8bb2ac4a68df3",
+							"raw": "{{1}}user/request?page=1&limit=20&accountref=65307d81a9a11ec93836a20f&from=2023-10-26&to=2023-10-30&requestType=withdraw",
 							"host": [
 								"{{1}}user"
 							],
@@ -2045,11 +2139,25 @@
 								},
 								{
 									"key": "status",
-									"value": "pending"
+									"value": "pending",
+									"disabled": true
 								},
 								{
 									"key": "accountref",
-									"value": "64fba9d765f8bb2ac4a68df3"
+									"value": "65307d81a9a11ec93836a20f"
+								},
+								{
+									"key": "from",
+									"value": "2023-10-26"
+								},
+								{
+									"key": "to",
+									"value": "2023-10-30"
+								},
+								{
+									"key": "requestType",
+									"value": "withdraw",
+									"description": "withdraw | deposit"
 								}
 							]
 						}
@@ -2163,7 +2271,7 @@
 								},
 								{
 									"key": "accountref",
-									"value": "64fba9d765f8bb2ac4a68df3",
+									"value": "65307d81a9a11ec93836a20f",
 									"type": "text"
 								},
 								{

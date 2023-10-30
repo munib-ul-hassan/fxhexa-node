@@ -3,9 +3,10 @@ import axios from "axios"
 const getrealTimeData = async (req, res) => {
     try {
         const { series, min, ticket } = req.query
-        let url = `https://www.alphavantage.co/query?function=${series}&symbol=${ticket}&interval=${min}min&apikey=${process.env.alphaAPIKEY}`
         // const url =`https://api.polygon.io/v3/trades/${ticket}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ`
-        console.log(url)
+        
+        let url = `https://www.alphavantage.co/query?function=${series}&symbol=${ticket}&interval=${min}&apikey=${process.env.alphaAPIKEY}`
+        
 
         const data = (await axios.get(url)).data
         return res.json({

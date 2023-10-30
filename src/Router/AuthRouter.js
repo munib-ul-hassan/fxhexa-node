@@ -44,4 +44,6 @@ AuthRouters.prefix("/auth", AuthMiddleware, async function () {
   AuthRouters.route("/notificationUpdate").post(AuthController.notificationUpdate)
 
   AuthRouters.route("/profile").put(AuthController.updateProfile);
+  AuthRouters.route("/subacc/balance/:id").get(AuthController.subAccBalance);
+
 });

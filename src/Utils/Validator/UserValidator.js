@@ -4,10 +4,12 @@ import { deviceRequired } from "./commonValidation.js";
 export const RegisterValidator = joi.object({
   fullName: joi.string().required(),
   email: joi.string().email().required(),
-  password: joi.string().required(), 
+  password: joi.string().required(),
   // accType: joi.string(),
   referBy: joi.string(),
-  
+  phone: joi.string(),
+
+
   ...deviceRequired,
 });
 
@@ -38,7 +40,7 @@ export const verifyOTPValidator = joi.object({
   ...deviceRequired,
 });
 export const verifyuserValidator = joi.object({
-  email:joi.string().email().required(),
+  email: joi.string().email().required(),
   otp: joi.string().required(),
   ...deviceRequired,
 });
@@ -47,7 +49,7 @@ export const SocailLoginValidator = joi.object({
   accessToken: joi.string().required(),
   socialType: joi.string().required().equal("apple", "facebook", "google"),
   deviceToken: joi.string().required(),
-  deviceType: joi.string().required().equal("android", "ios", "postman"),  
+  deviceType: joi.string().required().equal("android", "ios", "postman"),
 });
 
 //forget password validator
@@ -75,9 +77,11 @@ export const changePasswordValidator = joi.object({
 //profile validator
 
 export const ProfileValidator = joi.object({
-  fullName: joi.string(),  
-  accType: joi.string(), 
-  
+  fullName: joi.string(),
+  accType: joi.string(),
+phone: joi.string(),
+
+
 });
 
 //logout validator
@@ -86,29 +90,29 @@ export const LogoutValidator = joi.object({
 });
 
 
-export const subAccValidator= joi.object({
-  type:joi.string().equal("demo","real").required(),
-  name:joi.string().required(),
-  password:joi.string().required(),
-  leverage:joi.string().required(),
-  currency:joi.string().required(),
+export const subAccValidator = joi.object({
+  type: joi.string().equal("demo", "real").required(),
+  name: joi.string().required(),
+  password: joi.string().required(),
+  leverage: joi.string().required(),
+  currency: joi.string().required(),
 
 })
 
-export const subAccupdateValidator =  joi.object({
-  
-  name:joi.string(),
-  password:joi.string(),
-  leverage:joi.string(),
-  currency:joi.string(),
+export const subAccupdateValidator = joi.object({
+
+  name: joi.string(),
+  password: joi.string(),
+  leverage: joi.string(),
+  currency: joi.string(),
 
 })
 
 
-export const loginsubAccValidator =  joi.object({
-  
-  name:joi.string().required(),
-  password:joi.string().required(),
-  
+export const loginsubAccValidator = joi.object({
+
+  name: joi.string().required(),
+  password: joi.string().required(),
+
 
 })
