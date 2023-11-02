@@ -2,16 +2,17 @@
 import axios from "axios"
 const getrealTimeData = async (req, res) => {
     try {
-        const { series, min, ticket } = req.query
+        const {  ticket } = req.query
         // const url =`https://api.polygon.io/v3/trades/${ticket}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ`
         
-        let url = `https://www.alphavantage.co/query?function=${series}&symbol=${ticket}&interval=${min}&apikey=${process.env.alphaAPIKEY}`
+        // let url = `https://www.alphavantage.co/query?function=${series}&symbol=${ticket}&interval=${min}&apikey=${process.env.alphaAPIKEY}`
+        const url = `https://marketdata.tradermade.com/api/v1/live?api_key=xuYX2HP4SlDR3nTwQGCD&currency=${ticket}`
         
 
         const data = (await axios.get(url)).data
         return res.json({
             status: true,
-            data, message: "data get successfully"
+            data:data.quotes[0], message: "data get successfully"
         })
 
     } catch (error) {

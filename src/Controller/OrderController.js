@@ -50,7 +50,7 @@ const open = async (req, res, next) => {
       user: req.user._doc.profile._id,
       accountref: accData._id,
       prevBalance: accData.balance, unit, stock,
-      orderType, openAmount,
+      orderType, openAmount:((openAmount * unit) - ((openAmount * unit) * 0.15)),
       stopLoss, profitLimit
     })
     await Order.save()
