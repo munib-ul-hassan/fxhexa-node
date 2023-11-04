@@ -2103,6 +2103,105 @@
 							"body": "{\n    \"message\": \"Transactions get successfully\",\n    \"data\": [\n        {\n            \"_id\": \"64f65154723651efc6a256e7\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"amount\": 30,\n            \"exchangeAmount\": 5000,\n            \"stock\": \"Google\",\n            \"prevBalance\": 10200,\n            \"newBalance\": 5200,\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-09-04T21:51:16.211Z\",\n            \"updatedAt\": \"2023-09-04T21:51:16.211Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64f65157723651efc6a256f7\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"amount\": 30,\n            \"exchangeAmount\": 5200,\n            \"stock\": \"Google\",\n            \"prevBalance\": 5200,\n            \"newBalance\": 10400,\n            \"transactionType\": \"sell\",\n            \"createdAt\": \"2023-09-04T21:51:19.950Z\",\n            \"updatedAt\": \"2023-09-04T21:51:19.950Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64f6584f2e22238755776769\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"amount\": 30,\n            \"exchangeAmount\": 2000,\n            \"stock\": \"Google\",\n            \"prevBalance\": 10400,\n            \"newBalance\": 8400,\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-09-04T22:21:03.699Z\",\n            \"updatedAt\": \"2023-09-04T22:21:03.699Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64f658a52e22238755776779\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"amount\": 30,\n            \"exchangeAmount\": 2200,\n            \"stock\": \"Google\",\n            \"prevBalance\": 8400,\n            \"newBalance\": 10600,\n            \"transactionType\": \"sell\",\n            \"createdAt\": \"2023-09-04T22:22:29.002Z\",\n            \"updatedAt\": \"2023-09-04T22:22:29.002Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64fbaa5ba3798cd6b333f1b5\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"accountType\": \"demo\",\n            \"accountref\": \"64fba9d765f8bb2ac4a68df3\",\n            \"amount\": 30,\n            \"exchangeAmount\": 3000,\n            \"stock\": \"Google\",\n            \"prevBalance\": 10000,\n            \"newBalance\": 7000,\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-09-08T23:12:27.952Z\",\n            \"updatedAt\": \"2023-09-08T23:12:27.952Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64fbac8665740f4cc3ac15a1\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"accountref\": \"64fba9d765f8bb2ac4a68df3\",\n            \"amount\": 10,\n            \"exchangeAmount\": 1000,\n            \"stock\": \"Google\",\n            \"prevBalance\": 7000,\n            \"newBalance\": 6000,\n            \"transactionType\": \"buy\",\n            \"createdAt\": \"2023-09-08T23:21:42.116Z\",\n            \"updatedAt\": \"2023-09-08T23:21:42.116Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64fbad82f0dc33cd46d917e7\",\n            \"user\": {\n                \"_id\": \"64d28fccb6bffbb1787205fd\",\n                \"fullName\": \"Test\",\n                \"auth\": \"64d28fcbb6bffbb1787205f9\",\n                \"createdAt\": \"2023-08-08T18:56:12.428Z\",\n                \"updatedAt\": \"2023-08-08T18:56:12.428Z\",\n                \"__v\": 0\n            },\n            \"accountref\": \"64fba9d765f8bb2ac4a68df3\",\n            \"amount\": 20,\n            \"exchangeAmount\": 2000,\n            \"stock\": \"Google\",\n            \"prevBalance\": 6000,\n            \"newBalance\": 8000,\n            \"transactionType\": \"sell\",\n            \"createdAt\": \"2023-09-08T23:25:54.560Z\",\n            \"updatedAt\": \"2023-09-08T23:25:54.560Z\",\n            \"__v\": 0\n        }\n    ],\n    \"status\": true\n}"
 						}
 					]
+				},
+				{
+					"name": "update order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stopLoss\": 12548,\r\n    \"profitLimit\": 125\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{1}}/order/653973fca0ccb7d364e60a12"
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stopLoss\": 12548,\r\n    \"profitLimit\": 125\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{1}}/order/653973fca0ccb7d364e60a12"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-I7FEqsOVIu4nCKXrQbTUg/NXV50\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 04 Nov 2023 14:13:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order updated successfully\",\n    \"data\": {},\n    \"status\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -3231,22 +3330,24 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{1}}stock?series=TIME_SERIES_DAILY&min=1&ticket=GOOG",
+							"raw": "{{1}}stock?ticket=GOOGL",
 							"host": [
 								"{{1}}stock"
 							],
 							"query": [
 								{
 									"key": "series",
-									"value": "TIME_SERIES_DAILY"
+									"value": "TIME_SERIES_DAILY",
+									"disabled": true
 								},
 								{
 									"key": "min",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "ticket",
-									"value": "GOOG"
+									"value": "GOOGL"
 								}
 							]
 						}
@@ -3343,6 +3444,15 @@
 							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"ask\": 1985.18,\n        \"base_currency\": \"XAU\",\n        \"bid\": 1985.06,\n        \"mid\": 1985.1201,\n        \"quote_currency\": \"USD\"\n    },\n    \"message\": \"data get successfully\"\n}"
 						}
 					]
+				},
+				{
+					"name": "get real time data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{1}}data"
+					},
+					"response": []
 				}
 			]
 		},

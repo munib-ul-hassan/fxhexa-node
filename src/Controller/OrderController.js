@@ -50,7 +50,7 @@ const open = async (req, res, next) => {
       user: req.user._doc.profile._id,
       accountref: accData._id,
       prevBalance: accData.balance, unit, stock,
-      orderType, openAmount:((openAmount * unit) - ((openAmount * unit) * 0.15)),
+      orderType, openAmount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
       stopLoss, profitLimit
     })
     await Order.save()
@@ -175,6 +175,7 @@ const close = async (req, res, next) => {
     next(CustomError.createError(error.message, 500));
   }
 }
+
 const getOrder = async (req, res, next) => {
   try {
     const {
@@ -276,11 +277,49 @@ const getOrder = async (req, res, next) => {
     next(CustomError.createError(error.message, 500));
   }
 };
+const updateorder = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    console.log(req.user)
+    const orderData = await OrderModel.findOne({ _id: id, user: req.user.profile._id })
+    if (!orderData) {
 
+      return next(CustomError.badRequest("invalid Id"));
+
+
+
+    }
+    const { stopLoss, profitLimit } = req.body
+    const updateorder = await OrderModel.findOneAndUpdate({ _id: id }, {
+      stopLoss, profitLimit
+    })
+    if (updateorder) {
+      return next(
+        CustomSuccess.createSuccess(
+          {},
+          "Order updated successfully",
+          200
+        )
+      );
+    } else {
+      return next(
+        CustomSuccess.createSuccess(
+          {},
+          "Order updation failed",
+          200
+        )
+      );
+    }
+
+  } catch (error) {
+    next(CustomError.createError(error.message, 500));
+  }
+};
 const OrderController = {
   open,
   close,
   getOrder,
+  updateorder
 };
 
 export default OrderController;

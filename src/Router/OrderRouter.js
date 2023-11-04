@@ -19,5 +19,8 @@ OrderRouters.prefix("/Order", AuthMiddleware, async function () {
   OrderRouters.route("/getOrder").get(
     OrderController.getOrder
   );
+  OrderRouters.route("/:id").put(
+    OrderController.updateorder
+  );
 
 })
