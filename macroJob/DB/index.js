@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import dbConfig from "../Config/dbConfig.js";
 
+
 export const connectDB = async () => {
   try {
     mongoose.set({
