@@ -19,7 +19,7 @@ const open = async (req, res, next) => {
       return next(CustomError.badRequest(error.details[0].message));
     }
 
-    const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit } = req.body;
+    const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status } = req.body;
 
     const accData = await subAccountModel.findById(subAccId)
     if (!accData) {
@@ -51,7 +51,8 @@ const open = async (req, res, next) => {
       accountref: accData._id,
       prevBalance: accData.balance, unit, stock,
       orderType, openAmount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
-      stopLoss, profitLimit
+      stopLoss, profitLimit,
+      status: status ? status : "open"
     })
     await Order.save()
     await subAccountModel.findByIdAndUpdate(subAccId, {
@@ -280,11 +281,11 @@ const getOrder = async (req, res, next) => {
 const updateorder = async (req, res, next) => {
   try {
     const { id } = req.params
-    console.log(req.user)
-    const orderData = await OrderModel.findOne({ _id: id, user: req.user.profile._id })
+
+    const orderData = await OrderModel.findOne({ _id: id, user: req.user.profile._id, status: "open" })
     if (!orderData) {
 
-      return next(CustomError.badRequest("invalid Id"));
+      return next(CustomError.badRequest("invalid Id or this order already be closed"));
 
 
 

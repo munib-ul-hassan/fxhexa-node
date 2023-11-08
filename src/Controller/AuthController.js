@@ -907,10 +907,16 @@ const updateProfile = async (req, res, next) => {
         }
       );
     }
-    if (body.accType || body.phone) {
+    if (body.accType || body.phone||body.identifier||body.password) {
       await AuthModel.findByIdAndUpdate(req.user._id, {
         accType: body.accType ? body.accType : req.user.accType,
-        phone: body.phone ? body.phone : req.user.phone
+        phone: body.phone ? body.phone : req.user.phone,
+        identifier: body.identifier ? body.identifier : req.user.identifier,
+        password: body.password ? 
+        await bcrypt.hash(body.password, genSalt)
+         : req.user.password,
+
+
       });
     }
 

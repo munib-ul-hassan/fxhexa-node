@@ -10,6 +10,7 @@ export const RegisterValidator = joi.object({
   phone: joi.string(),
 
 
+
   ...deviceRequired,
 });
 
@@ -80,6 +81,8 @@ export const ProfileValidator = joi.object({
   fullName: joi.string(),
   accType: joi.string(),
 phone: joi.string(),
+identifier: joi.string(),
+password: joi.string(),
 
 
 });

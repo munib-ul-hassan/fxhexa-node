@@ -799,7 +799,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"munibkhatri123@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n    \r\n}",
+							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"munibkhatri123@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"phone\":\"23124134\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1781,7 +1781,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"subAccId\": \"65396b477dfe0cefa9428e92\",\n    \"unit\": 0.5,\n    \"stock\": \"GOOG\",\n    \"openAmount\": \"136.2300\",\n    \"orderType\": \"sell\"\n    \n}",
+							"raw": "{\n    \"subAccId\": \"65396b477dfe0cefa9428e92\",\n    \"unit\": 0.5,\n    \"stock\": \"GOOG\",\n    \"openAmount\": \"136.2300\",\n    \"orderType\": \"sell\",\n    \"status\": \"pending\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3452,7 +3452,67 @@
 						"header": [],
 						"url": "{{1}}data"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "get real time data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{1}}data"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1697"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6a1-RzXi9B7gIf0gnUxJJT03gi7prPQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 Nov 2023 21:37:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"stock\": [\n            {\n                \"ask\": 182.99,\n                \"bid\": 182.98,\n                \"instrument\": \"AAPL\",\n                \"mid\": 182.985,\n                \"symbol\": \"NASDAQ:AAPL\"\n            },\n            {\n                \"ask\": 222.11,\n                \"bid\": 222.06,\n                \"instrument\": \"TSLA\",\n                \"mid\": 222.08499,\n                \"symbol\": \"NASDAQ:TSLA\"\n            },\n            {\n                \"ask\": 131.85,\n                \"bid\": 131.84,\n                \"instrument\": \"GOOGL\",\n                \"mid\": 131.845,\n                \"symbol\": \"NASDAQ:GOOG\"\n            },\n            {\n                \"ask\": 319.89,\n                \"bid\": 319.87,\n                \"instrument\": \"FB\",\n                \"mid\": 319.88,\n                \"symbol\": \"NASDAQ:META\"\n            },\n            {\n                \"ask\": 142.14,\n                \"bid\": 142.13,\n                \"instrument\": \"AMZN\",\n                \"mid\": 142.13501,\n                \"symbol\": \"NASDAQ:AMZN\"\n            }\n        ],\n        \"forex\": [\n            {\n                \"ask\": 105.399,\n                \"bid\": 105.361,\n                \"instrument\": \"USDX\",\n                \"mid\": 105.38\n            },\n            {\n                \"ask\": 7399.2,\n                \"bid\": 7398,\n                \"instrument\": \"UK100\",\n                \"mid\": 7398.6\n            },\n            {\n                \"ask\": 15230.8,\n                \"bid\": 15222.2,\n                \"instrument\": \"GER30\",\n                \"mid\": 15226.5\n            },\n            {\n                \"ask\": 4381.1,\n                \"bid\": 4380.6,\n                \"instrument\": \"SPX500\",\n                \"mid\": 4380.85\n            },\n            {\n                \"ask\": 7027.5,\n                \"bid\": 7019.5,\n                \"instrument\": \"FRA40\",\n                \"mid\": 7023.5\n            },\n            {\n                \"ask\": 32315,\n                \"bid\": 32309,\n                \"instrument\": \"JPN225\",\n                \"mid\": 32312\n            },\n            {\n                \"ask\": 9286.8,\n                \"bid\": 9282.5,\n                \"instrument\": \"ESP35\",\n                \"mid\": 9284.65\n            },\n            {\n                \"ask\": 15313.55,\n                \"bid\": 15312.65,\n                \"instrument\": \"NAS100\",\n                \"mid\": 15313.1\n            },\n            {\n                \"ask\": 34145.3,\n                \"bid\": 34142.7,\n                \"instrument\": \"USA30\",\n                \"mid\": 34144\n            },\n            {\n                \"ask\": 17608,\n                \"bid\": 17584,\n                \"instrument\": \"HKG33\",\n                \"mid\": 17596\n            },\n            {\n                \"ask\": 7031.3,\n                \"bid\": 7026.7,\n                \"instrument\": \"AUS200\",\n                \"mid\": 7029\n            }\n        ],\n        \"metals\": [\n            {\n                \"ask\": 1950.09,\n                \"base_currency\": \"XAU\",\n                \"bid\": 1949.97,\n                \"mid\": 1950.03,\n                \"quote_currency\": \"USD\",\n                \"symbol\": \"TVC%3AGOLD\"\n            },\n            {\n                \"ask\": 22.546,\n                \"base_currency\": \"XAG\",\n                \"bid\": 22.538,\n                \"mid\": 22.542,\n                \"quote_currency\": \"USD\",\n                \"symbol\": \"NASDAQ%3ASSIC\"\n            },\n            {\n                \"ask\": 871.91,\n                \"base_currency\": \"XPT\",\n                \"bid\": 869.9,\n                \"mid\": 870.905,\n                \"quote_currency\": \"USD\",\n                \"symbol\": \"CAPITALCOM:PLATINUM\"\n            },\n            {\n                \"error\": 400,\n                \"instrument\": \"NYMEX\",\n                \"message\": \"currency code is invalid\",\n                \"symbol\": \"TVC:USOIL\"\n            },\n            {\n                \"ask\": 3.308,\n                \"bid\": 3.301,\n                \"instrument\": \"NATGAS\",\n                \"mid\": 3.3045\n            }\n        ]\n    },\n    \"message\": \"data get successfully\"\n}"
+						}
+					]
 				}
 			]
 		},

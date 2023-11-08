@@ -5,6 +5,8 @@ export const openOrderValidator = joi.object({
   stock: joi.string(),
   openAmount: joi.number().required(),
   orderType: joi.string().valid("buy", "sell"),
+  status: joi.string().valid("pending", "open"),
+
   subAccId: joi.string().required(),
   stopLoss: joi.number(),
   profitLimit: joi.number()
@@ -14,13 +16,13 @@ export const openOrderValidator = joi.object({
 export const forexOpenOrderValidator = joi.object({
   amount: joi.number().required(),
   from: joi.string(),
-  to: joi.string(),  
+  to: joi.string(),
   orderType: joi.string().valid("buy", "sell"),
   subAccId: joi.string().required(),
   stopLoss: joi.number(),
   profitLimit: joi.number()
 });
-export const forexcloseOrderValidator =joi.object({
+export const forexcloseOrderValidator = joi.object({
   // unit: joi.number(),
   // stock: joi.string(),
   orderId: joi.string().required(),
@@ -44,6 +46,7 @@ export const RequestValidator = joi.object({
   amount: joi.number(),
   accountref: joi.string().required(),
   transactionID: joi.string(),
+  paymentCode: joi.string(),
   paymentType: joi.valid("perfect", "bank", "bitcoin"),
   requestType: joi.valid("deposit", "withdraw")
 })

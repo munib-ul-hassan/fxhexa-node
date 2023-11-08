@@ -31,13 +31,14 @@ const Requestschema = new Schema({
         type: String,
         enum: ["deposit", "withdraw"]
     },
+    paymentCode: { type: String },
     amount: {
         type: Number
     },
 
-    image: {
-        type: String
-    },
+    // image: {
+    //     type: String
+    // },
 }, {
     timestamps: true
 });

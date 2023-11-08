@@ -1,7 +1,7 @@
 
 
 import RequestModel from "../DB/Model/requestModel.js";
-import { handleMultipartData } from "../Utils/MultipartData.js";
+// import { handleMultipartData } from "../Utils/MultipartData.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 import fs from "fs"
@@ -9,7 +9,7 @@ import { RequestValidator, updaterequestValidator } from "../Utils/Validator/ord
 import subAccountModel from "../DB/Model/subAccountModel.js";
 const postRequest = async (req, res, next) => {
     try {
-        console.log(req.body)
+        
         const { error } = RequestValidator.validate(req.body);
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
@@ -24,9 +24,9 @@ const postRequest = async (req, res, next) => {
             return next(CustomError.badRequest("Deposit only valid for real account"));
         }
 
-        if (req.file) {
-            req.body.image = req.file?.filename
-        }
+        // if (req.file) {
+        //     req.body.image = req.file?.filename
+        // }
         if (req.body.paymentType == "perfect" && req.body.requestType == "deposit") {
             await subAccountModel.findByIdAndUpdate(req.body.accountref, {
                 $inc: { balance: req.body.amount }
@@ -70,11 +70,11 @@ const postRequest = async (req, res, next) => {
 
     } catch (error) {
 
-        if (req.file) {
-            fs.unlink("public/uploads/" + req.file?.filename, (err) => {
-                console.log(err)
-            })
-        }
+        // if (req.file) {
+        //     fs.unlink("public/uploads/" + req.file?.filename, (err) => {
+        //         console.log(err)
+        //     })
+        // }
 
         return next(CustomError.badRequest(error.message));
     }
@@ -341,7 +341,7 @@ const getRequestByUser = async (req, res, next) => {
 
 const RequestController = {
 
-    postRequest: [handleMultipartData.single("file"), postRequest]
+    postRequest
     , getRequestByAdmin, getRequestByUser, updateRequest, deleteRequest
 
 };

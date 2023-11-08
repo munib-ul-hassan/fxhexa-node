@@ -64,6 +64,8 @@ const AuthSchema = new Schema(
       ref: "Auth",
     },
     refereCode: { type: String },
+phone: { type: String },
+
     referer: [
       {
         user: {
@@ -85,7 +87,7 @@ const AuthSchema = new Schema(
     //   type: Boolean,
     //   default: false,
     // },
-    phone:{type:String},
+    
     isDeleted: {
       type: Boolean,
       default: false,
