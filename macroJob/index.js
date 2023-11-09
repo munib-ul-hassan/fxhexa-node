@@ -28,7 +28,7 @@ cron.schedule('* * * * *', async () => {
 
 
             var newBalance, closeAmount;
-            const url = `https://marketdata.tradermade.com/api/v1/live?api_key=HOUeS_8EtscpseQOOOtt&currency=${item.stock}`
+            const url = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=${item.stock}`
             try {
 
                 closeAmount = (await axios.get(url)).data.quotes[0].ask

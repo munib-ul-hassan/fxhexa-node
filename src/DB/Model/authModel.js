@@ -64,7 +64,7 @@ const AuthSchema = new Schema(
       ref: "Auth",
     },
     refereCode: { type: String },
-phone: { type: String },
+    phone: { type: String },
 
     referer: [
       {
@@ -74,7 +74,13 @@ phone: { type: String },
         }, amount: { type: Number, default: 0 }
       }
     ],
-
+    NIC: {
+      type: String
+    },
+    KYCstatus: {
+      type: Boolean,
+      default: false
+    },
     balance: { type: Number, default: 0 },
 
     subAccounts: [
@@ -87,7 +93,7 @@ phone: { type: String },
     //   type: Boolean,
     //   default: false,
     // },
-    
+
     isDeleted: {
       type: Boolean,
       default: false,

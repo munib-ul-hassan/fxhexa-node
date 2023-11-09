@@ -6,7 +6,7 @@ const getrealTimeData = async (req, res) => {
         // const url =`https://api.polygon.io/v3/trades/${ticket}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ`
 
         // let url = `https://www.alphavantage.co/query?function=${series}&symbol=${ticket}&interval=${min}&apikey=${process.env.alphaAPIKEY}`
-        const url = `https://marketdata.tradermade.com/api/v1/live?api_key=HOUeS_8EtscpseQOOOtt&currency=${ticket}`
+        const url = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=${ticket}`
 
 
         const data = (await axios.get(url)).data
@@ -70,8 +70,8 @@ const getrealTimeData = async (req, res) => {
 const getData = async (req, res) => {
     try {
 
-        const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=HOUeS_8EtscpseQOOOtt&currency=AAPL,TSLA,GOOGL,fb,AMZN`
-        // const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=HOUeS_8EtscpseQOOOtt&currency=NFLX,AAPL,TSLA,GOOGL,fb,AMZN`
+        const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=AAPL,TSLA,GOOGL,fb,AMZN`
+        // const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=NFLX,AAPL,TSLA,GOOGL,fb,AMZN`
 
         const stockdata = (await axios.get(stockurl)).data
         stockdata.quotes[0]["symbol"] = "NASDAQ:AAPL"
@@ -94,10 +94,10 @@ const getData = async (req, res) => {
 
         // TVC:USOIL
 
-        const forexurl = `https://marketdata.tradermade.com/api/v1/live?api_key=HOUeS_8EtscpseQOOOtt&currency=USDX,UK100,GER30,SPX500,FRA40,JPN225,ESP35,NAS100,USA30,HKG33,AUS200`
+        const forexurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=USDX,UK100,GER30,SPX500,FRA40,JPN225,ESP35,NAS100,USA30,HKG33,AUS200`
         const forexdata = (await axios.get(forexurl)).data
 
-        const metalsurl = `https://marketdata.tradermade.com/api/v1/live?api_key=HOUeS_8EtscpseQOOOtt&currency=XAUUSD,XAGUSD,XPTUSD,Nymex,NATGAS`
+        const metalsurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=XAUUSD,XAGUSD,XPTUSD,Nymex,NATGAS`
         const metalsdata = (await axios.get(metalsurl)).data
         metalsdata.quotes[0]["symbol"] = "TVC%3AGOLD"
         metalsdata.quotes[1]["symbol"] = "NASDAQ%3ASSIC"

@@ -25,6 +25,7 @@ AdminRouters.route("/user").get(AdminController.getUsers);
 
 
 AdminRouters.prefix("/admin", AdminMiddleware, async function () {
+  AdminRouters.route("/updateUser").post(AdminController.Updateuser);
 
   // AdminRouters.route("/sendNotification").post(AdminController.sendNotification);
   

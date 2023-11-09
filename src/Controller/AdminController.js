@@ -415,7 +415,7 @@ const getstocks = async (req, res, next) => {
 
     const count = await OrderModel.count({ type: "Stock" })
 
-    next(
+    return next(
       CustomSuccess.createSuccess(
         { count, data },
 
@@ -456,7 +456,23 @@ const getforex = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 };
+const Updateuser = async (req, res, next) => {
+  try {
+    const { userId } = req.body
+    await AuthModel.findOneAndUpdate({ profile: userId }, { KYCStatus: true })
 
+    return next(
+      CustomSuccess.createSuccess(
+        { count, data },
+
+        "User KYC Verification Done",
+        200,
+      ),
+    );
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+}
 const AdminController = {
   Adminlogin,
   getUsers,
@@ -473,7 +489,9 @@ const AdminController = {
   deleteUser,
   getdashboard,
   getstocks,
-  getforex
+  getforex,
+  Updateuser
+
 
 
 };

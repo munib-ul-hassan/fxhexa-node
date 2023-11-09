@@ -798,13 +798,44 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Test\",\r\n    \"email\": \"munibkhatri123@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\",\r\n    \"phone\":\"23124134\"\r\n    \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "absdef@yopmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "deviceToken",
+									"value": "abc",
+									"type": "text"
+								},
+								{
+									"key": "deviceType",
+									"value": "postman",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "23124134",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/images.png"
 								}
-							}
+							]
 						},
 						"url": "{{1}}auth/signup"
 					},
@@ -988,6 +1019,80 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"6529b0be270bf376a888dc22\",\n        \"fullName\": \"Test\",\n        \"email\": \"new165@gmail.com\",\n        \"userType\": \"User\",\n        \"subAccounts\": [],\n        \"isCompleteProfile\": true,\n        \"notificationOn\": true,\n        \"refereCode\": \"Pnl5E26ksq\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.eH3EqU5kgHXR4f6nqgFcuW9Hr4O8Qb1DCvyvxdMbHdpuqT1yMGM7Wrn6ZiNfcKcHqA5fWC-W5djcZ2T_fUs9BlbZQzaFOl1GQUCRb9AyLbs9TS_czMUCQxRyZdsHwLYzPig5EWeKrVufw1viXOzy87xNWfd1EyN64LdQeKuHZFOkl8TL7SYmGQ36zG2x6F-Km0B3GNyteO6JBsUm4ApHO5dvuBCCNWn7fHyGd1KhC5-Kf0a4PIVVsYHxVrGyDHhQxxLb8e7g-SIAVp7Sx1GGaeNATowTTzjODfWott142qe6ahy2r-ofpbWcfNQ6-ifW0dpTYPOsEOSz9zeDrcAfRg.H3Fl7yllwi3YPK7W.GSQBPwGl0eiYAcaSmdBosbQqqou_WiQA3K8DwV1hSN9Rrgid0-SjRBN5y5M7VW2NkNGTiL3Szic3q1ht1qoZflwzYHj0oa0wHkX4UilhFVn4bCHhxt3QFZdUzfSC_w8H1y_K4nIyteH2EuXW0qY5qvgt7UeHrpZ060xseH-RuGZ6yq3D-UrmCpq3YYGQNt3cv7TO5IEtuqqThg6QaAC2f0P-Eq7RYw.44MG8wydLb813zZa3Mpwag\"\n    },\n    \"status\": true\n}"
+						},
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "deviceToken",
+										"value": "abc",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"email\": \"absdef@yopmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"deviceToken\": \"abc\",\r\n    \"deviceType\": \"postman\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{1}}auth/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"38-zEa3/PwebjdVdbKbJKAOINkB6Z0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Nov 2023 20:45:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Wait for admin KYC approval\",\n    \"status\": false\n}"
 						}
 					]
 				},
@@ -2355,42 +2460,15 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "amount",
-									"value": "5000",
-									"type": "text"
-								},
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/E:/1images.jpg",
-									"disabled": true
-								},
-								{
-									"key": "accountref",
-									"value": "65307d81a9a11ec93836a20f",
-									"type": "text"
-								},
-								{
-									"key": "transactionID",
-									"value": "sdsadasd",
-									"type": "text"
-								},
-								{
-									"key": "paymentType",
-									"value": "bank",
-									"type": "text"
-								},
-								{
-									"key": "requestType",
-									"value": "withdraw",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": \"5000\",\r\n    \"accountref\": \"65307d81a9a11ec93836a20f\",\r\n    \"transactionID\": \"testtest\",\r\n    \"paymentType\": \"bank\",\r\n    \"requestType\": \"deposit\",\r\n    \"paymentCode\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"url": "{{1}}user/request"
+						"url": "{{2}}user/request"
 					},
 					"response": [
 						{
@@ -3017,7 +3095,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}admin/user?limit=10&page=1",
+							"raw": "{{1}}admin/user?limit=10&page=3",
 							"host": [
 								"{{1}}admin"
 							],
@@ -3031,7 +3109,7 @@
 								},
 								{
 									"key": "page",
-									"value": "1"
+									"value": "3"
 								}
 							]
 						}
@@ -3134,7 +3212,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}admin/userbyid?id=64d28fccb6bffbb1787205fd",
+							"raw": "{{1}}admin/userbyid?id=654d3fbb23246098b9bdfb05",
 							"host": [
 								"{{1}}admin"
 							],
@@ -3144,7 +3222,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "64d28fccb6bffbb1787205fd"
+									"value": "654d3fbb23246098b9bdfb05"
 								}
 							]
 						}
@@ -3318,6 +3396,30 @@
 							"body": "{\n    \"message\": \"User login succesfully\",\n    \"data\": {\n        \"_id\": \"64e13633d3b9439cc603362b\",\n        \"fullName\": \"admin\",\n        \"userType\": \"Admin\",\n        \"token\": \"eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIn0.fg2S12Ri4sulqlmiR24dSaxNw0xoECq7yLqYnfQlgXbZ3piC8KJtOwdGDcbaF9zeNgv3Z98bjsfM_5iq2KpPBpH3TR03b4dUo3dk4etp33DK5e7Ls_N39K65trOZkULVeZnY1qfLspDlGn4MhOH8nut9cByNrE5XzAa0TDP_VLKgFdqzxPaPl_elr9GgA8FT9zS2f7qzFsB5AVUygVeMjqi0ONuk8vinCKsfzhcKnO6G5fGjBaCZ-T9wAz55u6XhAy0CaSGemxpauCIr87Kb2JewAd-JYMm25XPGZ-O2kUc8A3CqaUiJV2-YKEMIl8FLSCgezgyMvu-DZQlJ8Lz8gw.BWZAnagGOQg-nX0i.IaY96UtRtvqDCg1_0yGR05AewbVOx2fKBKiIQmHDqIkSmfxpV6KuAs37XQvxk4SYDTqpMf3Kg-acr_I8-ws7qQdkTj536nzymZgRGiJc3epf8easEvyfi0OhSlJlLJqiTOP-JjJOaxbpv5tpdj-sZOusab0pvkCMBLbISR9bddPi73ACWjM1.dG3ASkhL9qOXajp-g2f-UQ\"\n    },\n    \"status\": true\n}"
 						}
 					]
+				},
+				{
+					"name": "update USer status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"654d3fbb23246098b9bdfb05\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{1}}admin/updateuser"
+					},
+					"response": []
 				}
 			]
 		},
@@ -3330,9 +3432,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{1}}stock?ticket=GOOGL",
+							"raw": "{{2}}stock?ticket=GOOGL",
 							"host": [
-								"{{1}}stock"
+								"{{2}}stock"
 							],
 							"query": [
 								{

@@ -27,6 +27,8 @@ import AuthModel from "../DB/Model/authModel.js";
 import subAccountModel from "../DB/Model/subAccountModel.js";
 import axios from "axios";
 import OrderModel from "../DB/Model/orderModel.js";
+import { handleMultipartData } from "../Utils/MultipartData.js";
+import cloudinary from "../Config/cloudnaryconfig.js";
 
 
 const registerUser = async (req, res, next) => {
@@ -37,7 +39,9 @@ const registerUser = async (req, res, next) => {
     }
     const { fullName, email, password, deviceType, deviceToken, accType, referBy, phone } =
       req.body;
-
+    if (!req.file) {
+      return next(CustomError.createError("Must have to upload NIC", 400));
+    }
     const IsUser = await AuthModel.findOne({ identifier: email });
     if (IsUser) {
       return next(CustomError.createError("User Already Exists", 400));
@@ -50,13 +54,23 @@ const registerUser = async (req, res, next) => {
       const randomIndex = Math.floor(Math.random() * charset.length);
       refereCode += charset.charAt(randomIndex);
     }
+    await cloudinary.uploader.upload("public/uploads/" + req.file.filename, (err, result) => {
+      if (err) {
+        return next(CustomError.badRequest(err.message));
+      }
+      req.body.image = result.url
+      // fs.unlink(item.path, (err) => {
+      //   
+      // })
+    });
 
     const auth = await new AuthModel({
       identifier: email,
       password,
       accType,
       refereCode,
-      phone
+      phone,
+      NIC: req.body.image
     }).save();
     if (referBy) {
       const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: { user: auth._id } } }, { new: true })
@@ -301,6 +315,9 @@ const LoginUser = async (req, res, next) => {
     }
     if (!user.isCompleteProfile) {
       return next(CustomError.createError("First Verify account", 200));
+    }
+    if (!user.KYCstatus) {
+      return next(CustomError.createError("Wait for admin KYC approval", 200));
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -782,7 +799,7 @@ const getprofile = async (req, res, next) => {
       _id: data.profile._id,
       fullName: data.profile.fullName,
       email: data.identifier,
-
+      NIC: data.NIC,
       // image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
@@ -907,14 +924,14 @@ const updateProfile = async (req, res, next) => {
         }
       );
     }
-    if (body.accType || body.phone||body.identifier||body.password) {
+    if (body.accType || body.phone || body.identifier || body.password) {
       await AuthModel.findByIdAndUpdate(req.user._id, {
         accType: body.accType ? body.accType : req.user.accType,
         phone: body.phone ? body.phone : req.user.phone,
         identifier: body.identifier ? body.identifier : req.user.identifier,
-        password: body.password ? 
-        await bcrypt.hash(body.password, genSalt)
-         : req.user.password,
+        password: body.password ?
+          await bcrypt.hash(body.password, genSalt)
+          : req.user.password,
 
 
       });
@@ -1230,7 +1247,7 @@ const subAccBalance = async (req, res, next) => {
     }))
 
     return next(CustomSuccess.createSuccess(
-      { balance, equity:balance+equity },
+      { balance, equity: balance + equity },
       "Balance and Equity get successfully",
       200
     ))
@@ -1240,8 +1257,9 @@ const subAccBalance = async (req, res, next) => {
   catch (err) { return next(CustomError.createError(err.message, 500)) }
 
 }
+
 const AuthController = {
-  registerUser,
+  registerUser: [handleMultipartData.single("file"), registerUser],
   resendOTP,
   LoginUser,
 
@@ -1275,7 +1293,7 @@ const AuthController = {
   deleteSubAc,
   loginSub,
   getreferlist,
-  subAccBalance
+  subAccBalance,
 };
 
 export default AuthController;
