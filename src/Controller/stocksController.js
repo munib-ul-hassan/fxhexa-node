@@ -74,12 +74,12 @@ const getData = async (req, res) => {
         // const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=NFLX,AAPL,TSLA,GOOGL,fb,AMZN`
 
         const stockdata = (await axios.get(stockurl)).data
-        stockdata.quotes[0]["symbol"] = "NASDAQ:AAPL"
-        stockdata.quotes[1]["symbol"] = "NASDAQ:TSLA"
-        stockdata.quotes[2]["symbol"] = "NASDAQ:GOOG"
-        stockdata.quotes[3]["symbol"] = "NASDAQ:META"
-        stockdata.quotes[4]["symbol"] = "NASDAQ:AMZN"
-
+        stockdata.quotes[0] = {...stockdata.quotes[0], "label": "APPLE", "value": "NASDAQ:AAPL", "ticket": "AAPL"}
+        stockdata.quotes[1] = {...stockdata.quotes[10], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
+        stockdata.quotes[2] = {...stockdata.quotes[2],label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
+        stockdata.quotes[3] = {...stockdata.quotes[3], label: "FACEBOOK", value: "NASDAQ:META", ticket: "FB"}
+        stockdata.quotes[4] = {...stockdata.quotes[4],  label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN"}
+        
         // NYSE:IBM
         // NASDAQ:AAPL
         // NASDAQ:TSLA
@@ -99,10 +99,15 @@ const getData = async (req, res) => {
 
         const metalsurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=XAUUSD,XAGUSD,XPTUSD,Nymex,NATGAS`
         const metalsdata = (await axios.get(metalsurl)).data
-        metalsdata.quotes[0]["symbol"] = "TVC%3AGOLD"
-        metalsdata.quotes[1]["symbol"] = "NASDAQ%3ASSIC"
-        metalsdata.quotes[2]["symbol"] = "CAPITALCOM:PLATINUM"
-        metalsdata.quotes[3]["symbol"] = "TVC:USOIL"
+        metalsdata.quotes[0] = {...metalsdata.quotes[0],label: "GOLD", value: "TVC%3AGOLD", ticket: "XAUUSD"}
+        metalsdata.quotes[1] = {...metalsdata.quotes[10], label: "SILVER", value: "NASDAQ%3ASSIC", ticket: "XAGUSD"  }
+        metalsdata.quotes[2] = {...metalsdata.quotes[2],label: "PLATINUM", value: "CAPITALCOM:PLATINUM", ticket: "XPTUSD"}
+        metalsdata.quotes[3] = {...metalsdata.quotes[3],  label: "US OIL", value: "TVC:USOIL", ticket: "OIL" }
+
+        // metalsdata.quotes[0]["symbol"] = "TVC%3AGOLD"
+        // metalsdata.quotes[1]["symbol"] = "NASDAQ%3ASSIC"
+        // metalsdata.quotes[2]["symbol"] = "CAPITALCOM:PLATINUM"
+        // metalsdata.quotes[3]["symbol"] = "TVC:USOIL"
 
 
         return res.json({
