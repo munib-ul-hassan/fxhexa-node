@@ -316,9 +316,7 @@ const LoginUser = async (req, res, next) => {
     if (!user.isCompleteProfile) {
       return next(CustomError.createError("First Verify account", 200));
     }
-    if (!user.KYCstatus) {
-      return next(CustomError.createError("Wait for admin KYC approval", 200));
-    }
+   
 
     const isMatch = await bcrypt.compare(password, user.password);
 
