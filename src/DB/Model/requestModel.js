@@ -36,9 +36,9 @@ const Requestschema = new Schema({
         type: Number
     },
 
-    // image: {
-    //     type: String
-    // },
+    image: {
+        type: String
+    },
 }, {
     timestamps: true
 });

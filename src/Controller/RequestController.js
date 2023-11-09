@@ -1,17 +1,18 @@
 
 
 import RequestModel from "../DB/Model/requestModel.js";
-// import { handleMultipartData } from "../Utils/MultipartData.js";
+import { handleMultipartData } from "../Utils/MultipartData.js";
 import CustomError from "../Utils/ResponseHandler/CustomError.js";
 import CustomSuccess from "../Utils/ResponseHandler/CustomSuccess.js";
 import fs from "fs"
 import { RequestValidator, updaterequestValidator } from "../Utils/Validator/orderValidation.js";
 import subAccountModel from "../DB/Model/subAccountModel.js";
+import cloudinary from "../Config/cloudnaryconfig.js";
 const postRequest = async (req, res, next) => {
     try {
-        if (!req.user.KYCstatus) {
-            return next(CustomError.createError("Wait for admin KYC approval, then you can start your trade", 200));
-          }
+        // if (!req.user.KYCstatus) {
+        //     return next(CustomError.createError("Wait for admin KYC approval, then you can start your trade", 200));
+        // }
         const { error } = RequestValidator.validate(req.body);
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
@@ -26,9 +27,19 @@ const postRequest = async (req, res, next) => {
             return next(CustomError.badRequest("Deposit only valid for real account"));
         }
 
-        // if (req.file) {
-        //     req.body.image = req.file?.filename
-        // }
+        if (req.file) {
+            await cloudinary.uploader.upload("public/uploads/" + req.file.filename, (err, result) => {
+                if (err) {
+                    return next(CustomError.badRequest(err.message));
+                }
+                req.body.image = result.url
+                // fs.unlink(item.path, (err) => {
+                //   
+                // })
+            });
+
+
+        }
         if (req.body.paymentType == "perfect" && req.body.requestType == "deposit") {
             await subAccountModel.findByIdAndUpdate(req.body.accountref, {
                 $inc: { balance: req.body.amount }
@@ -343,7 +354,7 @@ const getRequestByUser = async (req, res, next) => {
 
 const RequestController = {
 
-    postRequest
+    postRequest: [handleMultipartData.single("file"), postRequest]
     , getRequestByAdmin, getRequestByUser, updateRequest, deleteRequest
 
 };
