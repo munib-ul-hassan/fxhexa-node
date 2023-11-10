@@ -42,10 +42,7 @@ const getgraph = async (req, res, next) => {
 }
 const openforex = async (req, res, next) => {
     try {
-        if (!req.user.KYCstatus) {
-            return next(CustomError.createError("Wait for admin KYC approval, then you can start your trade", 200));
-          }
-        const { error } = forexOpenOrderValidator.validate(req.body);
+            const { error } = forexOpenOrderValidator.validate(req.body);
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }

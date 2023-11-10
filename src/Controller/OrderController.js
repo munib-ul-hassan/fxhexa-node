@@ -18,10 +18,7 @@ const open = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    if (!req.user.KYCstatus) {
-      return next(CustomError.createError("Wait for admin KYC approval, then you can start your trade", 200));
-    }
-    const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status } = req.body;
+        const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status } = req.body;
 
     const accData = await subAccountModel.findById(subAccId)
     if (!accData) {

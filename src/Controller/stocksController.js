@@ -71,52 +71,72 @@ const getData = async (req, res) => {
     try {
 
         const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=AAPL,TSLA,GOOGL,fb,AMZN`
-        // const stockurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=NFLX,AAPL,TSLA,GOOGL,fb,AMZN`
-
         const stockdata = (await axios.get(stockurl)).data
-        stockdata.quotes[0] = {...stockdata.quotes[0], "label": "APPLE", "value": "NASDAQ:AAPL", "ticket": "AAPL"}
-        stockdata.quotes[1] = {...stockdata.quotes[10], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
-        stockdata.quotes[2] = {...stockdata.quotes[2],label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
-        stockdata.quotes[3] = {...stockdata.quotes[3], label: "FACEBOOK", value: "NASDAQ:META", ticket: "FB"}
-        stockdata.quotes[4] = {...stockdata.quotes[4],  label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN"}
-        
-        // NYSE:IBM
-        // NASDAQ:AAPL
-        // NASDAQ:TSLA
-        // NASDAQ:GOOG
-        // NASDAQ:META
-        // NASDAQ:AMZN
+        stockdata.quotes[0] = { ...stockdata.quotes[0], "label": "APPLE", "value": "NASDAQ:AAPL", "ticket": "AAPL" }
+        stockdata.quotes[1] = { ...stockdata.quotes[1], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
+        stockdata.quotes[2] = { ...stockdata.quotes[2], label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
+        stockdata.quotes[3] = { ...stockdata.quotes[3], label: "FACEBOOK", value: "NASDAQ:META", ticket: "FB" }
+        stockdata.quotes[4] = { ...stockdata.quotes[4], label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN" }
 
-        // TVC%3AGOLD
-        // NASDAQ%3ASSIC
-        // CAPITALCOM:COPPER
-        // CAPITALCOM:PLATINUM
-
-        // TVC:USOIL
-
-        const forexurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=USDX,UK100,GER30,SPX500,FRA40,JPN225,ESP35,NAS100,USA30,HKG33,AUS200`
+        const forex = [
+            "C:EURUSD",
+            "C:EURCAD",
+            "C:EURJPY",
+            "C:EURGBP",
+            "C:EURAUD",
+            "C:EURNZD",
+            "C:EURCHF",
+            "C:EURXAU",
+            "C:EURXAG",
+            "C:GBPJPY",
+            "C:GBPUSD",
+            "C:GBPCHF",
+            "C:GBPAUD",
+            "C:GBPCAD",
+            "C:GBPNZD",
+            "C:GBPXAU",
+            "C:GBPXAG",
+            "C:AUDUSD",
+            "C:AUDJPY",
+            "C:AUDCAD",
+            "C:AUDNZD",
+            "C:AUDXAU",
+            "C:AUDXAG",
+            "C:USDJPY",
+            "C:USDCAD",
+            "C:USDCHF",
+            "C:XNGUSD",
+            "C:XAUUSD",
+            "C:XAGUSD"
+        ]
+        const forexurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=${forex.map((item)=>{return item.split(':')[1]}).join(",")}`
         const forexdata = (await axios.get(forexurl)).data
+        forexdata.map((item,i)=>{
+            return {...item.quotes[0],symbol:forex[i]}
+        })
+        
+
 
         const metalsurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=XAUUSD,XAGUSD,XPTUSD,Nymex,NATGAS`
         const metalsdata = (await axios.get(metalsurl)).data
-        metalsdata.quotes[0] = {...metalsdata.quotes[0],label: "GOLD", value: "TVC%3AGOLD", ticket: "XAUUSD"}
-        metalsdata.quotes[1] = {...metalsdata.quotes[10], label: "SILVER", value: "NASDAQ%3ASSIC", ticket: "XAGUSD"  }
-        metalsdata.quotes[2] = {...metalsdata.quotes[2],label: "PLATINUM", value: "CAPITALCOM:PLATINUM", ticket: "XPTUSD"}
-        metalsdata.quotes[3] = {...metalsdata.quotes[3],  label: "US OIL", value: "TVC:USOIL", ticket: "OIL" }
+        metalsdata.quotes[0] = { ...metalsdata.quotes[0], label: "GOLD", value: "TVC%3AGOLD", ticket: "XAUUSD" }
+        metalsdata.quotes[1] = { ...metalsdata.quotes[10], label: "SILVER", value: "NASDAQ%3ASSIC", ticket: "XAGUSD" }
+        metalsdata.quotes[2] = { ...metalsdata.quotes[2], label: "PLATINUM", value: "CAPITALCOM:PLATINUM", ticket: "XPTUSD" }
 
-        // metalsdata.quotes[0]["symbol"] = "TVC%3AGOLD"
-        // metalsdata.quotes[1]["symbol"] = "NASDAQ%3ASSIC"
-        // metalsdata.quotes[2]["symbol"] = "CAPITALCOM:PLATINUM"
-        // metalsdata.quotes[3]["symbol"] = "TVC:USOIL"
+        const oilurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=Nymex,NATGAS`
+        const oildata = (await axios.get(oilurl)).data
+        oildata.quotes[0] = { ...oildata.quotes[0], label: "US OIL", value: "TVC:USOIL", ticket: "OIL" }
+        oildata.quotes[1] = { ...oildata.quotes[1], label: "UK OIL", value: "TVC:UKOIL", ticket: "OILD" }
+
 
 
         return res.json({
             status: true,
             data: {
                 "stock": stockdata.quotes,
-                "forex": forexdata.quotes,
+                "forex": forexdata,
                 "metals": metalsdata.quotes,
-
+                "oil": oildata.quotes
             }, message: "data get successfully"
         })
     } catch (error) {
