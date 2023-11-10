@@ -33,6 +33,9 @@ import cloudinary from "../Config/cloudnaryconfig.js";
 
 const registerUser = async (req, res, next) => {
   try {
+    console.log(req.body)
+    console.log(req.file)
+
     const { error } = RegisterValidator.validate(req.body);
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
