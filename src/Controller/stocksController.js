@@ -111,7 +111,7 @@ const getData = async (req, res) => {
         ]
         const forexurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=${forex.map((item)=>{return item.split(':')[1]}).join(",")}`
         const forexdata = (await axios.get(forexurl)).data
-        forexdata.quotes.map((item,i)=>{
+        forexdata.quotes= forexdata.quotes.map((item,i)=>{
             return {...item,symbol:forex[i]}
         })
         
