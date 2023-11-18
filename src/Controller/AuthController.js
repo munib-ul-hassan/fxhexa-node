@@ -33,8 +33,7 @@ import cloudinary from "../Config/cloudnaryconfig.js";
 
 const registerUser = async (req, res, next) => {
   try {
-    console.log(req.body)
-    console.log(req.file)
+
 
     const { error } = RegisterValidator.validate(req.body);
     if (error) {
@@ -42,9 +41,9 @@ const registerUser = async (req, res, next) => {
     }
     const { fullName, email, password, deviceType, deviceToken, accType, referBy, phone } =
       req.body;
-    if (!req.file) {
-      return next(CustomError.createError("Must have to upload NIC", 400));
-    }
+    // if (!req.file) {
+    //   return next(CustomError.createError("Must have to upload NIC", 400));
+    // }
     const IsUser = await AuthModel.findOne({ identifier: email });
     if (IsUser) {
       return next(CustomError.createError("User Already Exists", 400));
@@ -57,15 +56,15 @@ const registerUser = async (req, res, next) => {
       const randomIndex = Math.floor(Math.random() * charset.length);
       refereCode += charset.charAt(randomIndex);
     }
-    await cloudinary.uploader.upload("public/uploads/" + req.file.filename, (err, result) => {
-      if (err) {
-        return next(CustomError.badRequest(err.message));
-      }
-      req.body.image = result.url
-      // fs.unlink(item.path, (err) => {
-      //   
-      // })
-    });
+    // await cloudinary.uploader.upload("public/uploads/" + req.file.filename, (err, result) => {
+    //   if (err) {
+    //     return next(CustomError.badRequest(err.message));
+    //   }
+    //   req.body.image = result.url
+    //   // fs.unlink(item.path, (err) => {
+    //   //   
+    //   // })
+    // });
 
     const auth = await new AuthModel({
       identifier: email,
@@ -73,7 +72,7 @@ const registerUser = async (req, res, next) => {
       accType,
       refereCode,
       phone,
-      NIC: req.body.image
+      // NIC: req.body.image
     }).save();
     if (referBy) {
       const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: { user: auth._id } } }, { new: true })
@@ -319,7 +318,7 @@ const LoginUser = async (req, res, next) => {
     if (!user.isCompleteProfile) {
       return next(CustomError.createError("First Verify account", 200));
     }
-   
+
 
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -909,7 +908,14 @@ const updateProfile = async (req, res, next) => {
     let body = Object.fromEntries(
       Object.entries(req.body).filter(([_, v]) => v != null || v != "")
     );
-
+    if (req.file) {
+      await cloudinary.uploader.upload("public/uploads/" + req.file.filename, (err, result) => {
+        if (err) {
+          return next(CustomError.badRequest(err.message));
+        }
+        body.NIC = result.url
+      });
+    }
     const { error } = ProfileValidator.validate(body);
     if (error) {
       error.details.map((err) => {
@@ -924,19 +930,14 @@ const updateProfile = async (req, res, next) => {
           new: true,
         }
       );
+      delete body.fullName
     }
-    if (body.accType || body.phone || body.identifier || body.password) {
-      await AuthModel.findByIdAndUpdate(req.user._id, {
-        accType: body.accType ? body.accType : req.user.accType,
-        phone: body.phone ? body.phone : req.user.phone,
-        identifier: body.identifier ? body.identifier : req.user.identifier,
-        password: body.password ?
-          await bcrypt.hash(body.password, genSalt)
-          : req.user.password,
+    if (body.password) {
+      body.password = await bcrypt.hash(body.password, genSalt)
+    }
+    await AuthModel.findByIdAndUpdate(req.user._id, body)
 
 
-      });
-    }
 
 
 
@@ -1260,7 +1261,7 @@ const subAccBalance = async (req, res, next) => {
 }
 
 const AuthController = {
-  registerUser: [handleMultipartData.single("file"), registerUser],
+  registerUser,
   resendOTP,
   LoginUser,
 
@@ -1287,7 +1288,7 @@ const AuthController = {
   changePassword,
   notificationUpdate,
   VerifyUser,
-  updateProfile,
+  updateProfile: [handleMultipartData.single("file"), updateProfile],
   addSubAcc,
   getSubAcc,
   updateSubAcc,

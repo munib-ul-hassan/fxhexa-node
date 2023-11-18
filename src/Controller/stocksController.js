@@ -85,29 +85,22 @@ const getData = async (req, res) => {
             "C:EURGBP",
             "C:EURAUD",
             "C:EURNZD",
-            "C:EURCHF",
-            "C:EURXAU",
-            "C:EURXAG",
+            "C:EURCHF",         
             "C:GBPJPY",
             "C:GBPUSD",
             "C:GBPCHF",
             "C:GBPAUD",
             "C:GBPCAD",
             "C:GBPNZD",
-            "C:GBPXAU",
-            "C:GBPXAG",
             "C:AUDUSD",
             "C:AUDJPY",
             "C:AUDCAD",
             "C:AUDNZD",
-            "C:AUDXAU",
-            "C:AUDXAG",
             "C:USDJPY",
             "C:USDCAD",
             "C:USDCHF",
-            "C:XNGUSD",
-            "C:XAUUSD",
-            "C:XAGUSD"
+            
+            
         ]
         const forexurl = `https://marketdata.tradermade.com/api/v1/live?api_key=${process.env.apikey}&currency=${forex.map((item)=>{return item.split(':')[1]}).join(",")}`
         const forexdata = (await axios.get(forexurl)).data
