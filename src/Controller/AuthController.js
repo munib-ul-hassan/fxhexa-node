@@ -799,7 +799,9 @@ const getprofile = async (req, res, next) => {
       _id: data.profile._id,
       fullName: data.profile.fullName,
       email: data.identifier,
-      NIC: data.NIC,
+      NICF: data.NICF,
+      NICB: data.NICB,
+      POA: data.POA,
       // image: { file: data.profile.image?.file },
       isCompleteProfile: data.isCompleteProfile,
       token: token,
@@ -908,14 +910,27 @@ const updateProfile = async (req, res, next) => {
     let body = Object.fromEntries(
       Object.entries(req.body).filter(([_, v]) => v != null || v != "")
     );
-    if (req.file) {
-      await cloudinary.uploader.upload("public/uploads/" + req.file.filename, (err, result) => {
+    if (req.files.length > 0) {
+      await cloudinary.uploader.upload("public/uploads/" + req.files[0].filename, (err, result) => {
         if (err) {
           return next(CustomError.badRequest(err.message));
         }
-        body.NIC = result.url
+        body.NICF = result.url
+      });
+      await cloudinary.uploader.upload("public/uploads/" + req.files[1].filename, (err, result) => {
+        if (err) {
+          return next(CustomError.badRequest(err.message));
+        }
+        body.NICB = result.url
+      });
+      await cloudinary.uploader.upload("public/uploads/" + req.files[2].filename, (err, result) => {
+        if (err) {
+          return next(CustomError.badRequest(err.message));
+        }
+        body.POA = result.url
       });
     }
+    console.log(body)
     const { error } = ProfileValidator.validate(body);
     if (error) {
       error.details.map((err) => {
@@ -958,7 +973,9 @@ const updateProfile = async (req, res, next) => {
       _id: user.profile._doc._id,
       email: user.identifier,
       fullName: user.profile._doc.fullName,
-
+      NICF: user.NICF,
+      NICB: user.NICB,
+      POA: user.POA,
       subAccounts: user.subAccounts,
       refereCode: user.refereCode,
       phone: user.phone,
@@ -1288,7 +1305,7 @@ const AuthController = {
   changePassword,
   notificationUpdate,
   VerifyUser,
-  updateProfile: [handleMultipartData.single("file"), updateProfile],
+  updateProfile: [handleMultipartData.array("file"), updateProfile],
   addSubAcc,
   getSubAcc,
   updateSubAcc,

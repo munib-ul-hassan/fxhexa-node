@@ -80,9 +80,13 @@ export const changePasswordValidator = joi.object({
 export const ProfileValidator = joi.object({
   fullName: joi.string(),
   accType: joi.string(),
-phone: joi.string(),
-identifier: joi.string(),
-password: joi.string(),
+  phone: joi.string(),
+  identifier: joi.string(),
+  password: joi.string(),
+  NICF: joi.string(),
+  NICB: joi.string(),
+  POA: joi.string(),
+
 
 
 });

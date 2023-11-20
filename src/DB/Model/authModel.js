@@ -74,7 +74,13 @@ const AuthSchema = new Schema(
         }, amount: { type: Number, default: 0 }
       }
     ],
-    NIC: {
+    NICF: {
+      type: String
+    },
+    NICB: {
+      type: String
+    },
+    POA: {
       type: String
     },
     KYCstatus: {
