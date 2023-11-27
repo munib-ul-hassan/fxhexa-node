@@ -12,6 +12,9 @@ application.prefix = Router.prefix = function (path, middleware, configure) {
 StockRouters.route("/stock").get(
     StockController.getrealTimeData
 );
+StockRouters.route("/stocklist").get(
+    StockController.getstocklist
+);
 
 StockRouters.route("/data").get(
     StockController.getData
