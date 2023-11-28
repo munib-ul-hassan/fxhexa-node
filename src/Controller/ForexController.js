@@ -42,34 +42,38 @@ const getgraph = async (req, res, next) => {
 }
 const openforex = async (req, res, next) => {
     try {
-            const { error } = forexOpenOrderValidator.validate(req.body);
+        const { error } = forexOpenOrderValidator.validate(req.body);
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
         const { from, to, amount, subAccId, orderType, stopLoss, profitLimit } = req.body
-        const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
+
+        // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
+        const url = `https://live-rates.com/api/price?key=26ac8692be&rate=${from}_${to}`
+        
         const data = (await axios.get(url)).data
+        
 
         const accData = await subAccountModel.findById(subAccId)
         if (!accData) {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
-        const balance = data.converted + (data.converted * 0.15)
+        const balance = amount + (amount * 0.15)
         if (accData.balance < balance) {
             return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
         }
         if (req.user.referBy) {
 
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: (data.converted * 0.10) }
+                $inc: { balance: (amount * 0.10) }
             })
 
             await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-                $inc: { "referer.$.amount": (data.converted * 0.05) }
+                $inc: { "referer.$.amount": (amount * 0.05) }
             })
         } else {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: (data.converted * 0.15) }
+                $inc: { balance: (amount * 0.15) }
             })
 
         }
@@ -80,11 +84,11 @@ const openforex = async (req, res, next) => {
             orderType,
             stopLoss, profitLimit,
             unit: amount,
-            from, to, openAmount: data.converted, type: "Forex"
+            from, to, openAmount: data[0].ask, type: "Forex"
         })
         await Order.save()
         await subAccountModel.findByIdAndUpdate(subAccId, {
-            $inc: { balance: -(data.converted + (data.converted * 0.15)) }
+            $inc: { balance: -(amount+ (amount * 0.15)) }
         })
 
         return next(
@@ -95,6 +99,7 @@ const openforex = async (req, res, next) => {
             )
         );
     } catch (error) {
+        console.log(error)
         return next(CustomError.createError(error.message, 500));
     }
 }
@@ -115,16 +120,17 @@ const closeforex = async (req, res, next) => {
             return next(CustomError.badRequest("invalid Order Id"));
         }
         const { from, to, unit } = orderData
-        const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
+        // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
+        const url = `https://live-rates.com/api/price?key=26ac8692be&rate=${from}_${to}`
         const data = (await axios.get(url)).data
-
+        const stocks = orderData.unit / orderData.openAmount
         var newBalance = 0;
         if (orderData.orderType == "buy") {
 
-            newBalance = (orderData.openAmount - data.converted)+orderData.openAmount
+            newBalance = ((orderData.openAmount - data[0].ask)*stocks) + orderData.unit
         }
         if (orderData.orderType == "sell") {
-            newBalance = (data.converted - orderData.openAmount)+orderData.openAmount
+            newBalance = ((data[0].ask - orderData.openAmount)*stocks) + orderData.unit
         }
         console.log(newBalance)
         await subAccountModel.findByIdAndUpdate(subAccId,

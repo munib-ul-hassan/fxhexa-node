@@ -73,36 +73,35 @@ const getData = async (req, res) => {
         const stockurl = `https://live-rates.com/api/price?key=26ac8692be&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`
         let stockdata = (await axios.get(stockurl)).data
         stockdata[0] = { ...stockdata[0], "label": "APPLE", "value": "NASDAQ:AAPL", "ticket": "AAPL" }
-        stockdata[1] = { ...stockdata[1], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
-        stockdata[2] = { ...stockdata[2], label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
+        stockdata[4] = { ...stockdata[1], label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN" }
+        stockdata[1] = { ...stockdata[2], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
         stockdata[3] = { ...stockdata[3], label: "FACEBOOK", value: "NASDAQ:META", ticket: "FB" }
-        stockdata[4] = { ...stockdata[4], label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN" }
+        stockdata[2] = { ...stockdata[4], label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
 
         const forex = [
             "C:EURUSD,EUR_USD",
-            "C:EURCAD,EUR_CAD",
+            "C:GBPUSD,GBP_USD",
             "C:EURJPY,EUR_JPY",
+            "C:USDJPY,USD_JPY",
+            "C:EURCHF,EUR_CHF",         
+            "C:USDCHF,USD_CHF",           
+            "C:AUDUSD,AUD_USD",
+            "C:USDCAD,USD_CAD",
             "C:EURGBP,EUR_GBP",
             "C:EURAUD,EUR_AUD",
-            "C:EURNZD,EUR_NZD",
-            "C:EURCHF,EUR_CHF",         
-            "C:GBPJPY,GBP_JPY",
-            "C:GBPUSD,GBP_USD",
             "C:GBPCHF,GBP_CHF",
-            "C:GBPAUD,GBP_AUD",
-            "C:GBPCAD,GBP_CAD",
-            "C:GBPNZD,GBP_NZD",
-            "C:AUDUSD,AUD_USD",
-            "C:AUDJPY,AUD_JPY",
-            "C:AUDCAD,AUD_CAD",
+            "C:GBPJPY,GBP_JPY",
             "C:AUDNZD,AUD_NZD",
-            "C:USDJPY,USD_JPY",
-            "C:USDCAD,USD_CAD",
-            "C:USDCHF,USD_CHF",
-            
-            
+            "C:AUDCAD,AUD_CAD",
+            "C:AUDJPY,AUD_JPY",
+            "C:EURNZD,EUR_NZD",
+            "C:EURCAD,EUR_CAD",
+            "C:GBPCAD,GBP_CAD",
+            "C:GBPAUD,GBP_AUD",
+            "C:GBPNZD,GBP_NZD",
         ]
         const forexurl = `https://live-rates.com/api/price?key=26ac8692be&rate=${forex.map((item)=>{return item.split(':')[1].split(",")[1]}).join(",")}`
+        
         let forexdata = (await axios.get(forexurl)).data.map((item,i)=>{
             return {...item,symbol:forex[i].split(",")[0]}
         })
@@ -116,7 +115,7 @@ const getData = async (req, res) => {
         metalsdata[1] = { ...metalsdata[1], label: "SILVER", value: "NASDAQ%3ASSIC", ticket: "XAGUSD" }
         metalsdata[2] = { ...metalsdata[2], label: "PLATINUM", value: "CAPITALCOM:PLATINUM", ticket: "XPTUSD" }
 
-        const oilurl = `https://live-rates.com/api/price?key=26ac8692be&rate=USOIL,UKOIL`
+        const oilurl = `https://live-rates.com/api/price?key=26ac8692be&rate=USOil,UKOil`
         let oildata = (await axios.get(oilurl)).data
         oildata[0] = { ...oildata[0], label: "US OIL", value: "TVC:USOIL", ticket: "OIL" }
         oildata[1] = { ...oildata[1], label: "UK OIL", value: "TVC:UKOIL", ticket: "OILD" }
