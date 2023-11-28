@@ -58,22 +58,23 @@ const openforex = async (req, res, next) => {
         if (!accData) {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
-        const balance = amount + (amount * 0.15)
+        const balance = parseInt(amount) + parseInt(amount * 0.15)
+        
         if (accData.balance < balance) {
             return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
         }
         if (req.user.referBy) {
 
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: (amount * 0.10) }
+                $inc: { balance: parseInt(amount * 0.10) }
             })
 
             await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-                $inc: { "referer.$.amount": (amount * 0.05) }
+                $inc: { "referer.$.amount": parseInt(amount * 0.05) }
             })
         } else {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: (amount * 0.15) }
+                $inc: { balance: parseInt(amount * 0.15) }
             })
 
         }
@@ -88,7 +89,7 @@ const openforex = async (req, res, next) => {
         })
         await Order.save()
         await subAccountModel.findByIdAndUpdate(subAccId, {
-            $inc: { balance: -(amount+ (amount * 0.15)) }
+            $inc: { balance: -balance }
         })
 
         return next(
@@ -99,7 +100,7 @@ const openforex = async (req, res, next) => {
             )
         );
     } catch (error) {
-        console.log(error)
+        
         return next(CustomError.createError(error.message, 500));
     }
 }
@@ -127,12 +128,12 @@ const closeforex = async (req, res, next) => {
         var newBalance = 0;
         if (orderData.orderType == "buy") {
 
-            newBalance = ((orderData.openAmount - data[0].ask)*stocks) + orderData.unit
-        }
+            newBalance = Number((orderData.openAmount - data[0].ask)*stocks) + Number(orderData.unit
+)        }
         if (orderData.orderType == "sell") {
-            newBalance = ((data[0].ask - orderData.openAmount)*stocks) + orderData.unit
+            newBalance = Number((data[0].ask - orderData.openAmount)*stocks) + Number(orderData.unit)
         }
-        console.log(newBalance)
+        
         await subAccountModel.findByIdAndUpdate(subAccId,
             {
                 $inc: { balance: newBalance },
