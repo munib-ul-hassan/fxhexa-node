@@ -13,7 +13,7 @@ import AdminModel from "../DB/Model/adminModel.js";
 
 const open = async (req, res, next) => {
   try {
-
+    
     const { error } = openOrderValidator.validate(req.body);
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
@@ -49,7 +49,8 @@ const open = async (req, res, next) => {
       user: req.user._doc.profile._id,
       accountref: accData._id,
       prevBalance: accData.balance, unit, stock,
-      orderType, openAmount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
+      orderType, openStock:openAmount,
+      openAmount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
       stopLoss, profitLimit,
       status: status ? status : "open"
     })

@@ -41,7 +41,8 @@ const OrderSchema = new Schema(
     from: { type: String },
     to: { type: String },
 
-
+    openStock:{type:Number},
+    
     orderType: {
       type: String,
       enum: ["buy", "sell"],
