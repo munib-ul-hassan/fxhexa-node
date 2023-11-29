@@ -133,10 +133,10 @@ const closeforex = async (req, res, next) => {
         if (orderData.orderType == "sell") {
             newBalance = Number((data[0].ask - orderData.openAmount)*stocks) + Number(orderData.unit)
         }
-        
+
         await subAccountModel.findByIdAndUpdate(subAccId,
             {
-                $inc: { balance: newBalance },
+                $inc: { balance: Number(newBalance) },
             })
         const updatedData = await OrderModel.findByIdAndUpdate(orderId, { status: "close", closeAmount: data.converted })
         return next(
@@ -146,7 +146,7 @@ const closeforex = async (req, res, next) => {
                 200
             )
         );
-    } catch (err) {
+    } catch (err) {        
         return next(CustomError.createError(err.message, 500));
 
     }
