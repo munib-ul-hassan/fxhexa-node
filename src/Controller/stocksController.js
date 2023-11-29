@@ -72,11 +72,14 @@ const getData = async (req, res) => {
         
         const stockurl = `https://live-rates.com/api/price?key=26ac8692be&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`
         let stockdata = (await axios.get(stockurl)).data
-        stockdata[0] = { ...stockdata[0], "label": "APPLE", "value": "NASDAQ:AAPL", "ticket": "AAPL" }
-        stockdata[4] = { ...stockdata[1], label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN" }
-        stockdata[1] = { ...stockdata[2], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
+        stockdata.map((item)=>{
+
+        })
+        stockdata[0] = { ...stockdata[0], label: "APPLE", value: "NASDAQ:AAPL", "ticket": "AAPL" }
+        stockdata[1] = { ...stockdata[1], label: "AMAZON", value: "NASDAQ:AMZN", ticket: "AMZN" }
+        stockdata[2] = { ...stockdata[2], label: "TESLA", value: "NASDAQ:TSLA", ticket: "TSLA" }
         stockdata[3] = { ...stockdata[3], label: "FACEBOOK", value: "NASDAQ:META", ticket: "FB" }
-        stockdata[2] = { ...stockdata[4], label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
+        stockdata[4] = { ...stockdata[4], label: "GOOGLE", value: "NASDAQ:GOOG", ticket: "GOOGL" }
 
         const forex = [
             "C:EURUSD,EUR_USD",
