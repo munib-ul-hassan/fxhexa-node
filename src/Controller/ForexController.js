@@ -84,7 +84,7 @@ const openforex = async (req, res, next) => {
             prevBalance: accData.balance,
             orderType,
             stopLoss, profitLimit,
-            unit: amount,
+             amount,
             from, to, openAmount: data[0].ask, type: "Forex"
         })
         await Order.save()
@@ -120,25 +120,25 @@ const closeforex = async (req, res, next) => {
         if (!orderData) {
             return next(CustomError.badRequest("invalid Order Id"));
         }
-        const { from, to, unit } = orderData
+        const { from, to } = orderData
         // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
         const url = `https://live-rates.com/api/price?key=26ac8692be&rate=${from}_${to}`
         const data = (await axios.get(url)).data
-        const stocks = orderData.unit / orderData.openAmount
+        const stocks = orderData.amount / orderData.openAmount
         var newBalance = 0;
         if (orderData.orderType == "buy") {
 
-            newBalance = Number((orderData.openAmount - data[0].ask)*stocks) + Number(orderData.unit
+            newBalance = Number((orderData.openAmount - data[0].ask)*stocks) + Number(orderData.amount
 )        }
         if (orderData.orderType == "sell") {
-            newBalance = Number((data[0].ask - orderData.openAmount)*stocks) + Number(orderData.unit)
+            newBalance = Number((data[0].ask - orderData.openAmount)*stocks) + Number(orderData.amount)
         }
 
         await subAccountModel.findByIdAndUpdate(subAccId,
             {
                 $inc: { balance: Number(newBalance) },
             })
-        const updatedData = await OrderModel.findByIdAndUpdate(orderId, { status: "close", closeAmount: data.converted })
+        const updatedData = await OrderModel.findByIdAndUpdate(orderId, { status: "close", closeAmount: data[0].ask },{new:true})
         return next(
             CustomSuccess.createSuccess(
                 updatedData,

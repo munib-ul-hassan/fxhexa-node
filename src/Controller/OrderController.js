@@ -49,8 +49,8 @@ const open = async (req, res, next) => {
       user: req.user._doc.profile._id,
       accountref: accData._id,
       prevBalance: accData.balance, unit, stock,
-      orderType, openStock:openAmount,
-      openAmount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
+      orderType, openAmount,
+      amount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
       stopLoss, profitLimit,
       status: status ? status : "open"
     })
@@ -119,10 +119,10 @@ const close = async (req, res, next) => {
       var newBalance = 0;
       if (orderData.orderType == "buy") {
 
-        newBalance = Number(orderData.openAmount - closeAmount) * orderData.unit
+        newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit )+ orderData.amount
       }
       if (orderData.orderType == "sell") {
-        newBalance = Number(closeAmount - orderData.openAmount) * orderData.unit
+        newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+ orderData.amount
       }
       await subAccountModel.findByIdAndUpdate(subAccId,
         {

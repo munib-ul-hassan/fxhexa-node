@@ -14,6 +14,9 @@ const OrderSchema = new Schema(
     unit: {
       type: Number
     },
+    amount: {
+      type: Number
+    },
     openAmount: {
       type: Number
     },

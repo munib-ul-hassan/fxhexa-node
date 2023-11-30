@@ -798,46 +798,15 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "fullName",
-									"value": "Test",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "absdef@yopmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "12345678",
-									"type": "text"
-								},
-								{
-									"key": "deviceToken",
-									"value": "abc",
-									"type": "text"
-								},
-								{
-									"key": "deviceType",
-									"value": "postman",
-									"type": "text"
-								},
-								{
-									"key": "phone",
-									"value": "23124134",
-									"type": "text"
-								},
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/D:/images.png"
+							"mode": "raw",
+							"raw": "{\r\n \"fullName\":\"abc123\",\r\n \"email\":\"abc123@yopmail.com\",\r\n \"password\":\"123123\",\r\n \"deviceToken\":\"dfsdhflkjsdbskjfsidfjhsjkdfnsjdnfsd\",\r\n \"deviceType\":\"postman\",\r\n \"phone\":\"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"url": "{{1}}auth/signup"
+						"url": "{{2}}auth/signup"
 					},
 					"response": [
 						{
@@ -1897,7 +1866,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"subAccId\": \"65396b477dfe0cefa9428e92\",\n    \"unit\": 0.5,\n    \"stock\": \"GOOG\",\n    \"openAmount\": \"136.2300\",\n    \"orderType\": \"sell\",\n    \"status\": \"pending\"\n}",
+							"raw": "{\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\n    \"unit\": 0.5,\n    \"stock\": \"GOOGLE\",\n    \"openAmount\": 136.2300,\n    \"orderType\": \"sell\",\n    \"status\": \"open\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1984,7 +1953,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"closeAmount\": \"1300\",\n   \"subAccId\": \"6529bccdcf02d79d870415b1\",\n    \"orderId\": [\"653973fca0ccb7d364e60a12\"]\n}",
+							"raw": "{\n    \"closeAmount\": \"137\",\n   \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\n    \"orderId\": [\"6568f288932ffd2571758faa\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2082,7 +2051,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{1}}order/getOrder?page=1&limit=10&subAccId=65396b477dfe0cefa9428e92&from=2023-10-15&to=2023-10-26&type=Stock",
+							"raw": "{{1}}order/getOrder?page=1&limit=10&subAccId=64fbc44f0a8cc8851d386e88&from=2023-11-29&to=2023-11-30&type=Stock",
 							"host": [
 								"{{1}}order"
 							],
@@ -2100,7 +2069,7 @@
 								},
 								{
 									"key": "subAccId",
-									"value": "65396b477dfe0cefa9428e92"
+									"value": "64fbc44f0a8cc8851d386e88"
 								},
 								{
 									"key": "orderType",
@@ -2110,11 +2079,11 @@
 								},
 								{
 									"key": "from",
-									"value": "2023-10-15"
+									"value": "2023-11-29"
 								},
 								{
 									"key": "to",
-									"value": "2023-10-26"
+									"value": "2023-11-30"
 								},
 								{
 									"key": "type",
@@ -3548,7 +3517,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{1}}data"
+						"url": "{{2}}data"
 					},
 					"response": [
 						{
@@ -3616,7 +3585,8 @@
 					"name": "get all stocks",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{1}}/stocklist"
 					},
 					"response": [
 						{
@@ -3686,228 +3656,6 @@
 			"name": "forex",
 			"item": [
 				{
-					"name": "get forex (not used)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"url": "{{1}}get"
-					},
-					"response": [
-						{
-							"name": "get forex",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"url": "{{1}}get"
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Access-Control-Allow-Methods",
-									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-								},
-								{
-									"key": "Access-Control-Allow-Headers",
-									"value": "X-Requested-With,content-type"
-								},
-								{
-									"key": "Access-Control-Allow-Credentials",
-									"value": "true"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1630"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"65e-RSELurb6DzQ0SBK0rzvjxIyJW10\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Nov 2023 20:08:38 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"AED\": \"UAE Dirham\",\n        \"ALL\": \"Albanian Lek\",\n        \"AOA\": \"Angolan Kwanza\",\n        \"ARS\": \"Argentine Peso\",\n        \"AUD\": \"Australian Dollar\",\n        \"BDT\": \"Bangladeshi Taka\",\n        \"BGN\": \"Bulgaria Lev\",\n        \"BHD\": \"Bahraini Dinar\",\n        \"BRL\": \"Brazilian Real\",\n        \"CAD\": \"Canadian Dollar\",\n        \"CHF\": \"Swiss Franc\",\n        \"CLP\": \"Chilean Peso\",\n        \"CNH\": \"Chinese Yuan offshore\",\n        \"CNY\": \"Chinese Yuan onshore\",\n        \"COP\": \"Colombian Peso\",\n        \"CZK\": \"Czech Koruna\",\n        \"DKK\": \"Danish Krone\",\n        \"EGP\": \"Egyptian Pound\",\n        \"EUR\": \"Euro\",\n        \"GBP\": \"British Pound Sterling\",\n        \"GHS\": \"Ghanaian Cedi\",\n        \"HKD\": \"Hong Kong Dollar\",\n        \"HRK\": \"Croatian Kuna\",\n        \"HUF\": \"Hungarian Forint\",\n        \"IDR\": \"Indonesian Rupiah\",\n        \"ILS\": \"Israeli New Sheqel\",\n        \"INR\": \"Indian Rupee\",\n        \"ISK\": \"Icelandic Krona\",\n        \"JOD\": \"Jordanian Dinar\",\n        \"JPY\": \"Japanese Yen\",\n        \"KES\": \"Kenyan Shillings\",\n        \"KRW\": \"South Korean Won\",\n        \"KWD\": \"Kuwaiti Dinar\",\n        \"LBP\": \"Lebanese Pound\",\n        \"LKR\": \"Sri Lankan Rupee\",\n        \"MAD\": \"Moroccan Dirham\",\n        \"MUR\": \"Mauritian Rupee\",\n        \"MXN\": \"Mexican Peso\",\n        \"MYR\": \"Malaysian Ringgit\",\n        \"NGN\": \"Nigerean Naira\",\n        \"NOK\": \"Norwegian Krone\",\n        \"NZD\": \"New Zealand Dollar\",\n        \"OMR\": \"Omani Rial\",\n        \"PEN\": \"Peruvian Nuevo Sol\",\n        \"PHP\": \"Philippine Peso\",\n        \"PKR\": \"Pakistani Rupee\",\n        \"PLN\": \"Polish Zloty\",\n        \"QAR\": \"Qatari Rial\",\n        \"RON\": \"Romanian Leu\",\n        \"RUB\": \"Russian Ruble\",\n        \"SAR\": \"Saudi Arabian Riyal\",\n        \"SEK\": \"Swedish Krona\",\n        \"SGD\": \"Singapore Dollar\",\n        \"THB\": \"Thai Baht\",\n        \"TND\": \"Tunisian Dinar\",\n        \"TRY\": \"Turkish Lira\",\n        \"TWD\": \"Taiwanese Dollar\",\n        \"USD\": \"US Dollar\",\n        \"VND\": \"Vietnamese Dong\",\n        \"XAF\": \"Central African Francs\",\n        \"XAG\": \"Silver (troy ounce)\",\n        \"XAU\": \"Gold (troy ounce)\",\n        \"XOF\": \"West African CFA franc\",\n        \"XPD\": \"Palladium\",\n        \"XPT\": \"Platinum\",\n        \"ZAR\": \"South African Rand\",\n        \"ZWL\": \"Zimbabwean Dollar\"\n    },\n    \"message\": \"data get successfully\"\n}"
-						}
-					]
-				},
-				{
-					"name": "get forex data (not used)",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{AuthToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{1}}forex/graph?to=2023-10-30&range=1&series=day&from=2023-10-25&ticket=ETCUSD",
-							"host": [
-								"{{1}}forex"
-							],
-							"path": [
-								"graph"
-							],
-							"query": [
-								{
-									"key": "to",
-									"value": "2023-10-30"
-								},
-								{
-									"key": "range",
-									"value": "1"
-								},
-								{
-									"key": "series",
-									"value": "day"
-								},
-								{
-									"key": "from",
-									"value": "2023-10-25"
-								},
-								{
-									"key": "ticket",
-									"value": "ETCUSD"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "get forex data",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "{{AuthToken}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{1}}forex/graph?ticket=ETCUSD&from=2023-10-01&to=2023-10-30&range=1&series=day",
-									"host": [
-										"{{1}}forex"
-									],
-									"path": [
-										"graph"
-									],
-									"query": [
-										{
-											"key": "ticket",
-											"value": "ETCUSD"
-										},
-										{
-											"key": "from",
-											"value": "2023-10-01"
-										},
-										{
-											"key": "to",
-											"value": "2023-10-30"
-										},
-										{
-											"key": "range",
-											"value": "1"
-										},
-										{
-											"key": "series",
-											"value": "day"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Access-Control-Allow-Methods",
-									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-								},
-								{
-									"key": "Access-Control-Allow-Headers",
-									"value": "X-Requested-With,content-type"
-								},
-								{
-									"key": "Access-Control-Allow-Credentials",
-									"value": "true"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1589"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"635-QbXol9ho7yb5kbdlZoeckeXZXfs\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Nov 2023 20:15:34 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"base_currency\": \"ETC\",\n        \"end_date\": \"2023-10-30\",\n        \"endpoint\": \"timeseries\",\n        \"quote_currency\": \"USD\",\n        \"quotes\": [\n            {\n                \"close\": 16.1345,\n                \"date\": \"2023-10-02\",\n                \"high\": 16.8715,\n                \"low\": 15.82,\n                \"open\": 16.425\n            },\n            {\n                \"close\": 15.868,\n                \"date\": \"2023-10-03\",\n                \"high\": 16.642,\n                \"low\": 15.7805,\n                \"open\": 16.13\n            },\n            {\n                \"close\": 15.657,\n                \"date\": \"2023-10-04\",\n                \"high\": 15.8685,\n                \"low\": 15.1835,\n                \"open\": 15.8685\n            },\n            {\n                \"close\": 15.4835,\n                \"date\": \"2023-10-05\",\n                \"high\": 15.7885,\n                \"low\": 15.398,\n                \"open\": 15.6575\n            },\n            {\n                \"close\": 15.743,\n                \"date\": \"2023-10-06\",\n                \"high\": 15.768,\n                \"low\": 15.394,\n                \"open\": 15.4845\n            },\n            {\n                \"close\": 14.929,\n                \"date\": \"2023-10-13\",\n                \"high\": 14.994,\n                \"low\": 14.928,\n                \"open\": 14.991\n            },\n            {\n                \"close\": 15.2385,\n                \"date\": \"2023-10-16\",\n                \"high\": 15.8435,\n                \"low\": 14.8845,\n                \"open\": 14.93\n            },\n            {\n                \"close\": 14.928,\n                \"date\": \"2023-10-17\",\n                \"high\": 15.289,\n                \"low\": 14.751,\n                \"open\": 15.2395\n            },\n            {\n                \"close\": 14.82,\n                \"date\": \"2023-10-18\",\n                \"high\": 15.074,\n                \"low\": 14.7835,\n                \"open\": 14.922\n            },\n            {\n                \"close\": 14.733,\n                \"date\": \"2023-10-19\",\n                \"high\": 14.8775,\n                \"low\": 14.6345,\n                \"open\": 14.8185\n            },\n            {\n                \"close\": 15.5405,\n                \"date\": \"2023-10-20\",\n                \"high\": 15.5635,\n                \"low\": 14.7315,\n                \"open\": 14.7335\n            },\n            {\n                \"close\": 16.145,\n                \"date\": \"2023-10-23\",\n                \"high\": 16.1565,\n                \"low\": 15.5235,\n                \"open\": 15.541\n            },\n            {\n                \"close\": 16.486,\n                \"date\": \"2023-10-24\",\n                \"high\": 17.3335,\n                \"low\": 16.056,\n                \"open\": 16.149\n            },\n            {\n                \"close\": 16.338,\n                \"date\": \"2023-10-25\",\n                \"high\": 16.7685,\n                \"low\": 16.136,\n                \"open\": 16.478\n            },\n            {\n                \"close\": 16.553,\n                \"date\": \"2023-10-26\",\n                \"high\": 17.144,\n                \"low\": 15.8655,\n                \"open\": 16.3405\n            },\n            {\n                \"close\": 16.5345,\n                \"date\": \"2023-10-27\",\n                \"high\": 16.665,\n                \"low\": 15.827,\n                \"open\": 16.5555\n            },\n            {\n                \"close\": 16.8175,\n                \"date\": \"2023-10-30\",\n                \"high\": 16.9195,\n                \"low\": 16.288,\n                \"open\": 16.535\n            }\n        ],\n        \"request_time\": \"Thu, 02 Nov 2023 20:15:31 GMT\",\n        \"start_date\": \"2023-10-01\"\n    },\n    \"message\": \"data get successfully\"\n}"
-						}
-					]
-				},
-				{
 					"name": "order",
 					"request": {
 						"method": "POST",
@@ -3920,18 +3668,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\r\n    \"orderType\": \"sell\"\r\n}",
+							"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"orderType\": \"sell\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{2}}forex/open"
+						"url": "{{1}}forex/open"
 					},
 					"response": [
 						{
-							"name": "order open",
+							"name": "order",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -3943,7 +3691,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\r\n    \"orderType\": \"sell\"\r\n}",
+									"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"orderType\": \"sell\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3982,15 +3730,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "364"
+									"value": "383"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"16c-aUzLY5IeYq+3lUU1ITWKiHd65JE\""
+									"value": "W/\"17f-yPgXzXByuwQRCt+v4Xpjxa+AfBU\""
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 16 Oct 2023 23:26:58 GMT"
+									"value": "Thu, 30 Nov 2023 20:14:55 GMT"
 								},
 								{
 									"key": "Connection",
@@ -4002,7 +3750,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Order open successfully\",\n    \"data\": {\n        \"user\": \"652dc074b567595530ba9920\",\n        \"accountref\": \"652db8ec11a788ed67ca3e7b\",\n        \"prevBalance\": 9243.5875,\n        \"status\": \"open\",\n        \"amount\": 100,\n        \"from\": \"USD\",\n        \"to\": \"AUD\",\n        \"orderType\": \"sell\",\n        \"type\": \"Forex\",\n        \"_id\": \"652dc6c2b67bf4535afe2453\",\n        \"createdAt\": \"2023-10-16T23:26:58.039Z\",\n        \"updatedAt\": \"2023-10-16T23:26:58.039Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+							"body": "{\n    \"message\": \"Order open successfully\",\n    \"data\": {\n        \"user\": \"6567a8c220def34934da6677\",\n        \"accountref\": \"64fbc44f0a8cc8851d386e88\",\n        \"amount\": 100,\n        \"openAmount\": 1.5159236,\n        \"prevBalance\": 10000,\n        \"status\": \"open\",\n        \"from\": \"USD\",\n        \"to\": \"AUD\",\n        \"orderType\": \"sell\",\n        \"type\": \"Forex\",\n        \"_id\": \"6568ed3e7be487f3adb26e47\",\n        \"createdAt\": \"2023-11-30T20:14:54.922Z\",\n        \"updatedAt\": \"2023-11-30T20:14:54.922Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				},
@@ -4019,7 +3767,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"subAccId\": \"652db8ec11a788ed67ca3e7b\",\r\n    \"orderId\": \"652dc993538613bd1e9d2a39\"\r\n}",
+							"raw": "{\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"orderId\": \"6568ee75d53b9424f8e0eb50\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4028,7 +3776,82 @@
 						},
 						"url": "{{1}}forex/close"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "order close",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"orderId\": \"6568ee75d53b9424f8e0eb50\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{1}}forex/close"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "408"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"198-SAXEhTn4P1qwgEmu9IvXi12gbEo\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 20:20:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order close successfully\",\n    \"data\": {\n        \"_id\": \"6568ee75d53b9424f8e0eb50\",\n        \"user\": \"6567a8c220def34934da6677\",\n        \"accountref\": \"64fbc44f0a8cc8851d386e88\",\n        \"amount\": 100,\n        \"openAmount\": 1.5159236,\n        \"prevBalance\": 1000,\n        \"status\": \"close\",\n        \"from\": \"USD\",\n        \"to\": \"AUD\",\n        \"orderType\": \"sell\",\n        \"type\": \"Forex\",\n        \"createdAt\": \"2023-11-30T20:20:05.066Z\",\n        \"updatedAt\": \"2023-11-30T20:20:20.416Z\",\n        \"__v\": 0,\n        \"closeAmount\": 1.5159236\n    },\n    \"status\": true\n}"
+						}
+					]
 				}
 			]
 		},
