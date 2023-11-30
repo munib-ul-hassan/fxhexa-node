@@ -115,7 +115,7 @@ const getData = async (req, res) => {
         const metalsurl = `https://live-rates.com/api/price?key=26ac8692be&rate=GOLD,SILVER,PLATINUM`
         let metalsdata = (await axios.get(metalsurl)).data
         metalsdata[0] = { ...metalsdata[0], label: "GOLD", value: "TVC%3AGOLD", ticket: "XAUUSD" }
-        metalsdata[1] = { ...metalsdata[1], label: "SILVER", value: "NASDAQ%3ASSIC", ticket: "XAGUSD" }
+        metalsdata[1] = { ...metalsdata[1], label: "SILVER", value: "TVC:SILVER", ticket: "XAGUSD" }
         metalsdata[2] = { ...metalsdata[2], label: "PLATINUM", value: "CAPITALCOM:PLATINUM", ticket: "XPTUSD" }
 
         const oilurl = `https://live-rates.com/api/price?key=26ac8692be&rate=USOil,UKOil`
