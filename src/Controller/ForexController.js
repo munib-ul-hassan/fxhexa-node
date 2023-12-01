@@ -46,7 +46,7 @@ const openforex = async (req, res, next) => {
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
-        const { from, to, amount, subAccId, orderType, stopLoss, profitLimit } = req.body
+        const { from, to, amount, subAccId, orderType, stopLoss, profitLimit,status } = req.body
 
         // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
         const url = `https://live-rates.com/api/price?key=26ac8692be&rate=${from}_${to}`
@@ -85,7 +85,8 @@ const openforex = async (req, res, next) => {
             orderType,
             stopLoss, profitLimit,
              amount,
-            from, to, openAmount: data[0].ask, type: "Forex"
+            from, to, openAmount: data[0].ask, type: "Forex",
+            status:status?status:"open"
         })
         await Order.save()
         await subAccountModel.findByIdAndUpdate(subAccId, {

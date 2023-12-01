@@ -20,7 +20,9 @@ export const forexOpenOrderValidator = joi.object({
   orderType: joi.string().valid("buy", "sell"),
   subAccId: joi.string().required(),
   stopLoss: joi.number(),
-  profitLimit: joi.number()
+  profitLimit: joi.number(),
+  status: joi.string().valid("pending", "open"),
+
 });
 export const forexcloseOrderValidator = joi.object({
   // unit: joi.number(),
