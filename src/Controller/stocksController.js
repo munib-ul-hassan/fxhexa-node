@@ -6,7 +6,7 @@ const getrealTimeData = async (req, res) => {
         // const url =`https://api.polygon.io/v3/trades/${ticket}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ`
 
         // let url = `https://www.alphavantage.co/query?function=${series}&symbol=${ticket}&interval=${min}&apikey=${process.env.alphaAPIKEY}`
-        const url = `https://live-rates.com/api/price?key=26ac8692be&rate=${ticket.replace("#","%23")}`
+        const url = `https://live-rates.com/api/price?key=0de84abe68&rate=${ticket.replace("#","%23")}`
 
 
         const data = (await axios.get(url)).data
@@ -70,7 +70,7 @@ const getrealTimeData = async (req, res) => {
 const getData = async (req, res) => {
     try {
         
-        const stockurl = `https://live-rates.com/api/price?key=26ac8692be&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`
+        const stockurl = `https://live-rates.com/api/price?key=0de84abe68&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`
         let stockdata = (await axios.get(stockurl)).data
         stockdata.map((item)=>{
 
@@ -103,7 +103,7 @@ const getData = async (req, res) => {
             "C:GBPAUD,GBP_AUD",
             "C:GBPNZD,GBP_NZD",
         ]
-        const forexurl = `https://live-rates.com/api/price?key=26ac8692be&rate=${forex.map((item)=>{return item.split(':')[1].split(",")[1]}).join(",")}`
+        const forexurl = `https://live-rates.com/api/price?key=0de84abe68&rate=${forex.map((item)=>{return item.split(':')[1].split(",")[1]}).join(",")}`
         
         let forexdata = (await axios.get(forexurl)).data.map((item,i)=>{
             return {...item,symbol:forex[i].split(",")[0]}
@@ -112,13 +112,13 @@ const getData = async (req, res) => {
         
 
 
-        const metalsurl = `https://live-rates.com/api/price?key=26ac8692be&rate=GOLD,SILVER,PLATINUM`
+        const metalsurl = `https://live-rates.com/api/price?key=0de84abe68&rate=GOLD,SILVER,PLATINUM`
         let metalsdata = (await axios.get(metalsurl)).data
         metalsdata[0] = { ...metalsdata[0], label: "GOLD", value: "TVC%3AGOLD", ticket: "XAUUSD" }
         metalsdata[1] = { ...metalsdata[1], label: "SILVER", value: "TVC:SILVER", ticket: "XAGUSD" }
         metalsdata[2] = { ...metalsdata[2], label: "PLATINUM", value: "CAPITALCOM:PLATINUM", ticket: "XPTUSD" }
 
-        const oilurl = `https://live-rates.com/api/price?key=26ac8692be&rate=USOil,UKOil`
+        const oilurl = `https://live-rates.com/api/price?key=0de84abe68&rate=USOil,UKOil`
         let oildata = (await axios.get(oilurl)).data
         oildata[0] = { ...oildata[0], label: "US OIL", value: "TVC:USOIL", ticket: "OIL" }
         oildata[1] = { ...oildata[1], label: "UK OIL", value: "TVC:UKOIL", ticket: "OILD" }
@@ -144,7 +144,7 @@ const getData = async (req, res) => {
 }
 const getstocklist = async(req,res)=>{
     try{
-        const url = `https://live-rates.com/api/rates?key=26ac8692be`
+        const url = `https://live-rates.com/api/rates?key=0de84abe68`
 
 
         const data = (await axios.get(url)).data

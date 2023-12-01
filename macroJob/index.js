@@ -27,9 +27,9 @@ cron.schedule('* * * * *', async () => {
         data.map(async (item) => {
             var  url;
 if(item.type=="Stock"){
-    url =`https://live-rates.com/api/price?key=26ac8692be&rate=${item.stock}`
+    url =`https://live-rates.com/api/price?key=0de84abe68&rate=${item.stock}`
 }else{
-    url =`https://live-rates.com/api/price?key=26ac8692be&rate=${item.from}_${item.to}`
+    url =`https://live-rates.com/api/price?key=0de84abe68&rate=${item.from}_${item.to}`
 }
 
 
