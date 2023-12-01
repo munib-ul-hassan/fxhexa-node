@@ -18,12 +18,33 @@ const open = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-        const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status } = req.body;
-
+        const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status,amount } = req.body;
+        
     const accData = await subAccountModel.findById(subAccId)
     if (!accData) {
       return next(CustomError.badRequest("invalid Sub-Account Id"));
     }
+        if(status=="pending"){
+
+          const Order = new OrderModel({
+            user: req.user._doc.profile._id,
+            accountref: accData._id,
+            prevBalance: accData.balance, unit, stock,
+            orderType, openAmount,
+            amount,
+            stopLoss, profitLimit,
+            status:  "pending"
+          })
+          await Order.save()
+          return next(
+            CustomSuccess.createSuccess(
+              Order,
+              "Order open successfully",
+              200
+            )
+          );
+        }
+
 
     const balance = Number(openAmount * unit) + Number(Number(openAmount * unit) * 0.15)
     if (accData.balance < balance) {
@@ -52,7 +73,7 @@ const open = async (req, res, next) => {
       orderType, openAmount,
       amount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
       stopLoss, profitLimit,
-      status: status ? status : "open"
+      status: "open"
     })
     await Order.save()
     await subAccountModel.findByIdAndUpdate(subAccId, {

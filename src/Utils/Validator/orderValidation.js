@@ -3,10 +3,11 @@ import joi from "joi";
 export const openOrderValidator = joi.object({
   unit: joi.number().required(),
   stock: joi.string(),
+  amount: joi.number(),
+
   openAmount: joi.number().required(),
   orderType: joi.string().valid("buy", "sell"),
   status: joi.string().valid("pending", "open"),
-
   subAccId: joi.string().required(),
   stopLoss: joi.number(),
   profitLimit: joi.number()
@@ -15,6 +16,7 @@ export const openOrderValidator = joi.object({
 
 export const forexOpenOrderValidator = joi.object({
   amount: joi.number().required(),
+  openAmount: joi.number(),
   from: joi.string(),
   to: joi.string(),
   orderType: joi.string().valid("buy", "sell"),

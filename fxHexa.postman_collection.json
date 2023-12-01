@@ -2287,6 +2287,105 @@
 							"body": "{\n    \"message\": \"Order updated successfully\",\n    \"data\": {},\n    \"status\": true\n}"
 						}
 					]
+				},
+				{
+					"name": "pending stock order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"unit\": 0.5,\r\n    \"stock\": \"GOOGLE\",\r\n    \"openAmount\": 136.2300,\r\n    \"amount\":200,\r\n    \"orderType\": \"sell\",\r\n    \"status\": \"pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{1}}order/open"
+					},
+					"response": [
+						{
+							"name": "pending stock order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"unit\": 0.5,\r\n    \"stock\": \"GOOGLE\",\r\n    \"openAmount\": 136.2300,\r\n    \"amount\":200,\r\n    \"orderType\": \"sell\",\r\n    \"status\": \"pending\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{1}}order/open"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "390"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"186-v58cfF/hr0U1OZ+YkKj2kbvqXcU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 21:39:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order open successfully\",\n    \"data\": {\n        \"user\": \"6567a8c220def34934da6677\",\n        \"accountref\": \"64fbc44f0a8cc8851d386e88\",\n        \"unit\": 0.5,\n        \"amount\": 200,\n        \"openAmount\": 136.23,\n        \"stock\": \"GOOGLE\",\n        \"prevBalance\": 734.9505,\n        \"status\": \"pending\",\n        \"orderType\": \"sell\",\n        \"type\": \"Stock\",\n        \"_id\": \"656a52a2a1e8a8bdc60d94cb\",\n        \"createdAt\": \"2023-12-01T21:39:46.135Z\",\n        \"updatedAt\": \"2023-12-01T21:39:46.135Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -3656,7 +3755,7 @@
 			"name": "forex",
 			"item": [
 				{
-					"name": "order",
+					"name": "order open",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -3850,6 +3949,105 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Order close successfully\",\n    \"data\": {\n        \"_id\": \"6568ee75d53b9424f8e0eb50\",\n        \"user\": \"6567a8c220def34934da6677\",\n        \"accountref\": \"64fbc44f0a8cc8851d386e88\",\n        \"amount\": 100,\n        \"openAmount\": 1.5159236,\n        \"prevBalance\": 1000,\n        \"status\": \"close\",\n        \"from\": \"USD\",\n        \"to\": \"AUD\",\n        \"orderType\": \"sell\",\n        \"type\": \"Forex\",\n        \"createdAt\": \"2023-11-30T20:20:05.066Z\",\n        \"updatedAt\": \"2023-11-30T20:20:20.416Z\",\n        \"__v\": 0,\n        \"closeAmount\": 1.5159236\n    },\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "order pending",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": \"100\",\r\n    \"openAmount\":\"1.534291\",\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"orderType\": \"sell\",\r\n    \"status\":\"pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{2}}forex/close"
+					},
+					"response": [
+						{
+							"name": "order pending",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{AuthToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\": \"USD\", // it fixed because we have balance in our account is in USD \r\n    \"to\": \"AUD\",\r\n    \"amount\": 100,\r\n    \"openAmount\":1.534291,\r\n    \"subAccId\": \"64fbc44f0a8cc8851d386e88\",\r\n    \"orderType\": \"sell\",\r\n    \"status\":\"pending\",\r\n    \"profitLimit\":1,\r\n    \"stopLoss\":0.8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{1}}forex/open"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "X-Requested-With,content-type"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "419"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a3-0MY0BCgBgIpsqLfALRiD3DjRcYM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 21:00:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order open successfully\",\n    \"data\": {\n        \"user\": \"6567a8c220def34934da6677\",\n        \"accountref\": \"64fbc44f0a8cc8851d386e88\",\n        \"amount\": 100,\n        \"openAmount\": 1.534291,\n        \"prevBalance\": 734.9505,\n        \"status\": \"pending\",\n        \"stopLoss\": 0.8,\n        \"profitLimit\": 1,\n        \"from\": \"USD\",\n        \"to\": \"AUD\",\n        \"orderType\": \"sell\",\n        \"type\": \"Forex\",\n        \"_id\": \"656a496582ba2d9654fc96f3\",\n        \"createdAt\": \"2023-12-01T21:00:21.572Z\",\n        \"updatedAt\": \"2023-12-01T21:00:21.572Z\",\n        \"__v\": 0\n    },\n    \"status\": true\n}"
 						}
 					]
 				}

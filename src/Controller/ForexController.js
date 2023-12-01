@@ -46,20 +46,40 @@ const openforex = async (req, res, next) => {
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
-        const { from, to, amount, subAccId, orderType, stopLoss, profitLimit,status } = req.body
-
-        // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
-        const url = `https://live-rates.com/api/price?key=0de84abe68&rate=${from}_${to}`
+        const { from, to, amount, subAccId, orderType, stopLoss, profitLimit, status, openAmount } = req.body
         
-        const data = (await axios.get(url)).data
-        
-
         const accData = await subAccountModel.findById(subAccId)
         if (!accData) {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
+        if (status == "pending") {
+            const Order = new OrderModel({
+                user: req.user._doc.profile._id,
+                accountref: accData._id,
+                prevBalance: accData.balance,
+                orderType,
+                stopLoss, profitLimit,
+                amount,
+                from, to, openAmount, type: "Forex",
+                status: "pending"
+            })
+            await Order.save()
+            return next(
+                CustomSuccess.createSuccess(
+                    Order,
+                    "Order open successfully",
+                    200
+                )
+            );
+        }
+        // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
+        const url = `https://live-rates.com/api/price?key=0de84abe68&rate=${from}_${to}`
+
+        const data = (await axios.get(url)).data
+
+
         const balance = parseInt(amount) + parseInt(amount * 0.15)
-        
+
         if (accData.balance < balance) {
             return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
         }
@@ -84,9 +104,9 @@ const openforex = async (req, res, next) => {
             prevBalance: accData.balance,
             orderType,
             stopLoss, profitLimit,
-             amount,
+            amount,
             from, to, openAmount: data[0].ask, type: "Forex",
-            status:status?status:"open"
+            status: "open"
         })
         await Order.save()
         await subAccountModel.findByIdAndUpdate(subAccId, {
@@ -101,7 +121,7 @@ const openforex = async (req, res, next) => {
             )
         );
     } catch (error) {
-        
+
         return next(CustomError.createError(error.message, 500));
     }
 }
@@ -129,17 +149,18 @@ const closeforex = async (req, res, next) => {
         var newBalance = 0;
         if (orderData.orderType == "buy") {
 
-            newBalance = Number((orderData.openAmount - data[0].ask)*stocks) + Number(orderData.amount
-)        }
+            newBalance = Number((orderData.openAmount - data[0].ask) * stocks) + Number(orderData.amount
+            )
+        }
         if (orderData.orderType == "sell") {
-            newBalance = Number((data[0].ask - orderData.openAmount)*stocks) + Number(orderData.amount)
+            newBalance = Number((data[0].ask - orderData.openAmount) * stocks) + Number(orderData.amount)
         }
 
         await subAccountModel.findByIdAndUpdate(subAccId,
             {
                 $inc: { balance: Number(newBalance) },
             })
-        const updatedData = await OrderModel.findByIdAndUpdate(orderId, { status: "close", closeAmount: data[0].ask },{new:true})
+        const updatedData = await OrderModel.findByIdAndUpdate(orderId, { status: "close", closeAmount: data[0].ask }, { new: true })
         return next(
             CustomSuccess.createSuccess(
                 updatedData,
@@ -147,7 +168,7 @@ const closeforex = async (req, res, next) => {
                 200
             )
         );
-    } catch (err) {        
+    } catch (err) {
         return next(CustomError.createError(err.message, 500));
 
     }
