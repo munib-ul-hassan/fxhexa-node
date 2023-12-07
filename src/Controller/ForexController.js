@@ -73,7 +73,7 @@ const openforex = async (req, res, next) => {
             );
         }
         // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
-        const url = `https://live-rates.com/api/price?key=0de84abe68&rate=${from}_${to}`
+        const url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${from}_${to}`
 
         const data = (await axios.get(url)).data
 
@@ -143,7 +143,7 @@ const closeforex = async (req, res, next) => {
         }
         const { from, to } = orderData
         // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
-        const url = `https://live-rates.com/api/price?key=0de84abe68&rate=${from}_${to}`
+        const url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${from}_${to}`
         const data = (await axios.get(url)).data
         const stocks = orderData.amount / orderData.openAmount
         var newBalance = 0;

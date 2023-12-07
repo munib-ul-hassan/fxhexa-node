@@ -20,21 +20,28 @@ app.get('/', (req, res) => {
 
 cron.schedule('* * * * *', async () => {
     try {
-
-
-        const data = await OrderModel.find({ status: "pending" })
-
+        const data = await OrderModel.find({ status: "pending" }).populate({ path: "user", poplate: { path: "auth" } }).populate("accountref")
         data.map(async (item) => {
-            var  url;
-if(item.type=="Stock"){
-    url =`https://live-rates.com/api/price?key=0de84abe68&rate=${item.stock}`
-}else{
-    url =`https://live-rates.com/api/price?key=0de84abe68&rate=${item.from}_${item.to}`
-}
+
+            if (item.type == "Stock") {
+                const url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
+                try {
+
+                    const data = (await axios.get(url)).data[0].ask
+                    if (item.amount == data) {
+
+                        await OrderModel.findOneAndUpdate({ _id: item._id }, { status: "open" })
+                    }
+                } catch (e) {
+
+                }
+            } else {
+                url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.from}_${item.to}`
+            }
 
 
             var newBalance, closeAmount;
-            
+
             try {
 
                 closeAmount = (await axios.get(url)).data[0].ask
@@ -45,16 +52,16 @@ if(item.type=="Stock"){
 
             if (item.orderType == "buy") {
                 // newBalance = (item.openAmount - closeAmount) * item.unit
-            newBalance = Number((item.openAmount - closeAmount)*stocks) 
+                newBalance = Number((item.openAmount - closeAmount) * stocks)
 
             }
             if (item.orderType == "sell") {
-            newBalance = Number((closeAmount - item.openAmount)*stocks) 
+                newBalance = Number((closeAmount - item.openAmount) * stocks)
 
                 // newBalance = (closeAmount - item.openAmount) * item.unit
             }
             if (newBalance <= item.stopLoss && newBalance >= item.profitLimit) {
-                newBalance+=item.unit
+                newBalance += item.unit
                 await subAccountModel.findByIdAndUpdate(item.accountref,
                     {
                         $inc: { balance: newBalance },

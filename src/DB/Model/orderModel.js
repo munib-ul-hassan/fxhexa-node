@@ -40,10 +40,8 @@ const OrderSchema = new Schema(
     },
     stopLoss: { type: Number },
     profitLimit: { type: Number },
-
     from: { type: String },
     to: { type: String },
-
     openStock:{type:Number},
     
     orderType: {
