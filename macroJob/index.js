@@ -22,19 +22,18 @@ cron.schedule('* * * * *', async () => {
     try {
         const data = await OrderModel.find({ status: "pending" }).populate({ path: "user", poplate: { path: "auth" } }).populate("accountref")
         data.map(async (item) => {
-
+            let url ;
             if (item.type == "Stock") {
-                const url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
-                try {
+                url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
+                // try {
 
-                    const data = (await axios.get(url)).data[0].ask
-                    if (item.amount == data) {
+                //     const data = (await axios.get(url)).data[0].ask
+                //     // if (item.amount == data) {
+                //     //     await OrderModel.findOneAndUpdate({ _id: item._id }, { status: "open" })
+                //     // }
+                // } catch (e) {
 
-                        await OrderModel.findOneAndUpdate({ _id: item._id }, { status: "open" })
-                    }
-                } catch (e) {
-
-                }
+                // }
             } else {
                 url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.from}_${item.to}`
             }
@@ -48,20 +47,19 @@ cron.schedule('* * * * *', async () => {
             } catch (e) {
 
             }
-            const stocks = item.unit / item.openAmount
 
+            var newBalance = 0;
             if (item.orderType == "buy") {
-                // newBalance = (item.openAmount - closeAmount) * item.unit
-                newBalance = Number((item.openAmount - closeAmount) * stocks)
-
+                newBalance = Number((item.openAmount - closeAmount) * item.unit * 100)
             }
             if (item.orderType == "sell") {
-                newBalance = Number((closeAmount - item.openAmount) * stocks)
-
-                // newBalance = (closeAmount - item.openAmount) * item.unit
+                newBalance = Number((closeAmount - item.openAmount) * item.unit * 100)
             }
+
+
+
             if (newBalance <= item.stopLoss && newBalance >= item.profitLimit) {
-                newBalance += item.unit
+
                 await subAccountModel.findByIdAndUpdate(item.accountref,
                     {
                         $inc: { balance: newBalance },

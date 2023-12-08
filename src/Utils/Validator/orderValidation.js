@@ -2,9 +2,7 @@ import joi from "joi";
 
 export const openOrderValidator = joi.object({
   unit: joi.number().required(),
-  stock: joi.string(),
-  amount: joi.number(),
-
+  stock: joi.string(),  
   openAmount: joi.number().required(),
   orderType: joi.string().valid("buy", "sell"),
   status: joi.string().valid("pending", "open"),
@@ -15,7 +13,7 @@ export const openOrderValidator = joi.object({
 
 
 export const forexOpenOrderValidator = joi.object({
-  amount: joi.number().required(),
+  unit: joi.number().required(),
   openAmount: joi.number(),
   from: joi.string(),
   to: joi.string(),
@@ -26,12 +24,8 @@ export const forexOpenOrderValidator = joi.object({
   status: joi.string().valid("pending", "open"),
 
 });
-export const forexcloseOrderValidator = joi.object({
-  // unit: joi.number(),
-  // stock: joi.string(),
-  orderId: joi.string().required(),
-  // closeAmount: joi.number().required(),
-  // orderType: joi.string().valid("buy", "sell"),
+export const forexcloseOrderValidator = joi.object({  
+  orderId:  joi.array(),  
   subAccId: joi.string().required()
 });
 

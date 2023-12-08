@@ -13,57 +13,63 @@ import AdminModel from "../DB/Model/adminModel.js";
 
 const open = async (req, res, next) => {
   try {
-    
+
     const { error } = openOrderValidator.validate(req.body);
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-        const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status,amount } = req.body;
-        
+    const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status } = req.body;
+
     const accData = await subAccountModel.findById(subAccId)
     if (!accData) {
       return next(CustomError.badRequest("invalid Sub-Account Id"));
     }
-        if(status=="pending"){
-
-          const Order = new OrderModel({
-            user: req.user._doc.profile._id,
-            accountref: accData._id,
-            prevBalance: accData.balance, unit, stock,
-            orderType, openAmount,
-            amount,
-            stopLoss, profitLimit,
-            status:  "pending"
-          })
-          await Order.save()
-          return next(
-            CustomSuccess.createSuccess(
-              Order,
-              "Order open successfully",
-              200
-            )
-          );
-        }
 
 
-    const balance = Number(openAmount * unit) + Number(Number(openAmount * unit) * 0.15)
-    if (accData.balance < balance) {
+
+    const balance = Number(openAmount * unit * 100)
+    if (accData.balance < (balance + (balance * 0.15))) {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
 
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(Number(openAmount * unit) * 0.10) }
+        $inc: { balance: Number(balance * 0.10) }
       })
 
       await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-        $inc: { "referer.$.amount": Number(Number(openAmount * unit) * 0.05) }
+        $inc: { "referer.$.amount": Number(balance * 0.05) }
       })
     } else {
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(Number(openAmount * unit) * 0.15) }
+        $inc: { balance: Number(balance * 0.15) }
       })
     }
+
+    if (status == "pending") {
+
+      const Order = new OrderModel({
+        user: req.user._doc.profile._id,
+        accountref: accData._id,
+        prevBalance: accData.balance, unit, stock,
+        orderType, openAmount,
+        stopLoss, profitLimit,
+        status: "pending"
+      })
+      await Order.save()
+      await subAccountModel.findByIdAndUpdate(subAccId, {
+        $inc: { balance: -Number(balance * 0.15) }
+      })
+      return next(
+        CustomSuccess.createSuccess(
+          Order,
+          "Order open successfully",
+          200
+        )
+      );
+    }
+
+
     // newBalance: parseInt(accData.balance) - parseInt(exchangeAmount), exchangeAmount, orderType: "buy"
 
     const Order = new OrderModel({
@@ -71,37 +77,13 @@ const open = async (req, res, next) => {
       accountref: accData._id,
       prevBalance: accData.balance, unit, stock,
       orderType, openAmount,
-      amount: ((openAmount * unit) - ((openAmount * unit) * 0.15)),
       stopLoss, profitLimit,
       status: "open"
     })
     await Order.save()
     await subAccountModel.findByIdAndUpdate(subAccId, {
-      $inc: { balance: -(Number(openAmount * unit) + Number(Number(openAmount * unit) * 0.15)) }
+      $inc: { balance: -Number(balance * 0.15) }
     })
-    // const i = accData.stockData.findIndex((element) => element.stock == stock)
-    // let stockdemodata = accData.stockData;
-
-
-    // if (i != -1) {
-
-    //   stockdemodata[i].amount = stockdemodata[i].amount + amount
-
-    // } else {
-    //   stockdemodata = [...stockdemodata, {
-    //     stock, amount
-    //   }]
-    // }
-
-    // const updatedAuth = await subAccountModel.findOneAndUpdate({
-    //   _id: subAccId
-    // },
-    //   {
-    //     $inc: { balance: -exchangeAmount },
-    //     stockData: stockdemodata
-
-
-    //   }, { new: true });
 
     return next(
       CustomSuccess.createSuccess(
@@ -111,7 +93,7 @@ const open = async (req, res, next) => {
       )
     );
   } catch (error) {
-    console.log(error);
+    
     next(CustomError.createError(error.message, 500));
   }
 };
@@ -123,13 +105,14 @@ const close = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { closeAmount, subAccId, orderId } = req.body;
+    const { subAccId, orderId } = req.body;
 
     const accData = await subAccountModel.findById(subAccId, { password: 0 })
     if (!accData) {
       return next(CustomError.badRequest("invalid Sub-Account Id"));
     }
     var success = 0, failed = 0;
+
     await Promise.all(orderId.map(async (item) => {
 
       const orderData = await OrderModel.findOne({ _id: item })
@@ -138,52 +121,23 @@ const close = async (req, res, next) => {
         return;
       }
       var newBalance = 0;
+      const url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${orderData.stock}`
+      const closeAmount = (await axios.get(url)).data[0].ask
       if (orderData.orderType == "buy") {
 
-        newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit )+ orderData.amount
+        newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit*100)
       }
       if (orderData.orderType == "sell") {
-        newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+ orderData.amount
+        newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit*100) 
       }
+      
       await subAccountModel.findByIdAndUpdate(subAccId,
         {
           $inc: { balance: newBalance },
         })
-      const updatedData = await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount })
+      await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount })
       success++;
     }))
-
-
-
-    // const i = accData.stockData.findIndex((element) => element.stock == stock)
-
-    // if (i == -1) {
-    //   accData.stockData =
-    //   return next(CustomError.badRequest("You have No any unit of this stock"));
-
-    // }
-    // if (amount > accData.stockData[i].amount) {
-    //   return next(CustomError.badRequest("You have insufficient stock"));
-    // }
-
-    // const Order = new OrderModel({
-    //   user: req.user._doc.profile._id,
-    //   prevBalance: accData.balance, amount, stock,
-    //   accountref: subAccId,
-    //   newBalance: parseInt(accData.balance) + parseInt(exchangeAmount), exchangeAmount, orderType: "sell"
-    // })
-    // await Order.save()
-    // let stockdemodata = accData.stockData;
-    // stockdemodata[i].amount = stockdemodata[i].amount - amount
-
-    // const updatedAuth = await subAccountModel.findOneAndUpdate({
-    //   _id: subAccId
-    // },
-    //   {
-    //     $inc: { balance: exchangeAmount },
-    //     stockData: stockdemodata
-
-    //   }, { new: true });
 
     return next(
       CustomSuccess.createSuccess(
