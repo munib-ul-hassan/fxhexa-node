@@ -22,7 +22,7 @@ cron.schedule('* * * * *', async () => {
     try {
         const data = await OrderModel.find({ status: "pending" }).populate({ path: "user", poplate: { path: "auth" } }).populate("accountref")
         data.map(async (item) => {
-            let url ;
+            let url;
             if (item.type == "Stock") {
                 url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
                 // try {
@@ -55,10 +55,13 @@ cron.schedule('* * * * *', async () => {
             if (item.orderType == "sell") {
                 newBalance = Number((closeAmount - item.openAmount) * item.unit * 100)
             }
-
-
-
-            if (newBalance <= item.stopLoss && newBalance >= item.profitLimit) {
+            let blnc;
+            if (newBalance < 0) {
+                blnc = -newBalance
+            } else {
+                blnc = newBalance
+            }
+            if (blnc <= item.stopLoss && blnc >= item.profitLimit) {
 
                 await subAccountModel.findByIdAndUpdate(item.accountref,
                     {
