@@ -53,7 +53,7 @@ const openforex = async (req, res, next) => {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
 
-        let balance = parseFloat(openAmount) * unit * 100
+        let balance = Number(openAmount) * unit * 100
 
 
         if (accData.balance < (balance + (balance * 0.15))) {
@@ -62,15 +62,15 @@ const openforex = async (req, res, next) => {
         if (req.user.referBy) {
 
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: parseInt(balance * 0.10) }
+                $inc: { balance: Number(balance * 0.10) }
             })
 
             await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-                $inc: { "referer.$.amount": parseInt(balance * 0.05) }
+                $inc: { "referer.$.amount": Number(balance * 0.05) }
             })
         } else {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: parseInt(balance * 0.15) }
+                $inc: { balance: Number(balance * 0.15) }
             })
 
         }

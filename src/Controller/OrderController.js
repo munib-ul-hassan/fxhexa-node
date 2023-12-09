@@ -70,7 +70,7 @@ const open = async (req, res, next) => {
     }
 
 
-    // newBalance: parseInt(accData.balance) - parseInt(exchangeAmount), exchangeAmount, orderType: "buy"
+    // newBalance: Number(accData.balance) - Number(exchangeAmount), exchangeAmount, orderType: "buy"
 
     const Order = new OrderModel({
       user: req.user._doc.profile._id,
@@ -193,7 +193,7 @@ const getOrder = async (req, res, next) => {
 
     // Filter based on the specified month
     // if (month) {
-    //   const parsedMonth = parseInt(month);
+    //   const parsedMonth = Number(month);
     //   if (!isNaN(parsedMonth) && parsedMonth >= 1 && parsedMonth <= 12) {
     //     query.createdAt = {
     //       $gte: new Date(`${year}-${month}-01`),
@@ -204,12 +204,12 @@ const getOrder = async (req, res, next) => {
 
     // Filter based on the specified date and year
     // if (date && year) {
-    //   const parsedDate = parseInt(date);
-    //   const parsedYear = parseInt(year);
+    //   const parsedDate = Number(date);
+    //   const parsedYear = Number(year);
     //   if (!isNaN(parsedDate) && !isNaN(parsedYear)) {
     //     query.createdAt = {
     //       $gte: new Date(`${year}-${month}-${date}`),
-    //       $lt: new Date(`${year}-${month}-${parseInt(date) + 1}`),
+    //       $lt: new Date(`${year}-${month}-${Number(date) + 1}`),
     //     };
     //   }
     // }
@@ -220,8 +220,8 @@ const getOrder = async (req, res, next) => {
     // }
 
     // Pagination
-    const pageNumber = parseInt(page) || 1;
-    const itemsPerPage = parseInt(limit) || 10;
+    const pageNumber = Number(page) || 1;
+    const itemsPerPage = Number(limit) || 10;
     const skipCount = (pageNumber - 1) * itemsPerPage;
 
     // Fetch Orders from the database based on the constructed query and pagination
