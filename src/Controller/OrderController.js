@@ -53,6 +53,7 @@ const open = async (req, res, next) => {
         accountref: accData._id,
         prevBalance: accData.balance, unit, stock,
         orderType, openAmount,
+        unit,
         stopLoss, profitLimit,
         status: "pending"
       })
