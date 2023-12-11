@@ -82,7 +82,7 @@ const openforex = async (req, res, next) => {
                 user: req.user._doc.profile._id,
                 accountref: accData._id,
                 prevBalance: accData.balance,
-                orderType,
+                orderType,unit,
                 stopLoss, profitLimit,
                 from, to, openAmount, type: "Forex",
                 status: "pending"
@@ -108,7 +108,7 @@ const openforex = async (req, res, next) => {
             accountref: accData._id,
             prevBalance: accData.balance,
             orderType,
-            stopLoss, profitLimit,
+            stopLoss, profitLimit,unit,
             from, to, openAmount, type: "Forex",
             status: "open"
         })
