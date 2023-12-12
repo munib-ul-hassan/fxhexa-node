@@ -100,12 +100,12 @@ const postRequest = async (req, res, next) => {
 
 const getRequestByAdmin = async (req, res, next) => {
     try {
-
+        
         const { page, limit } = req.query
         delete req.query.page
         delete req.query.limit
 
-        const data = await RequestModel.find(req.query).limit(limit).skip((page - 1) * limit).populate({path:"accountref",select:["name","auth","currency","balance"]})
+        const data = await RequestModel.find(req.query).limit(limit).skip((page - 1) * limit).populate({ path: "accountref", select: ["name", "auth", "currency", "balance"] })
         const count = await RequestModel.count({})
         if (data.length > 0) {
             return next(

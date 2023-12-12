@@ -17,6 +17,8 @@ import { connectDB } from "../DB/index.js";
 
 import AdminModel from "../DB/Model/adminModel.js";
 import OrderModel from "../DB/Model/orderModel.js";
+import UserModel from "../DB/Model/userModel.js";
+import { ObjectId } from "mongodb";
 const registerAdmin = async () => {
 
   const auth = await new AuthModel({
@@ -130,24 +132,45 @@ const getUsers = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
   try {
-    const { id } = req.query
-    let user = await AuthModel.findOne({
-      userType: { $ne: "Admin" }, $or: [
-        {
-          _id: id
-        }, {
-          profile: id
-        }
-      ]
-    }, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
-      ["profile", "referBy", "referer", "subAccounts"]
+    const { id, fullName } = req.query
 
-    );
+    if (fullName) {
+      const regex = new RegExp(fullName, 'i');
+      let users = (await UserModel.find({
+        fullName: { $regex: regex }
+      },{auth:1})).map((item)=>{return ObjectId(item.auth)})
+              console.log(users)
+let user =  await AuthModel.find({
+  userType: { $ne: "Admin" }, _id:{$in: users}
+}, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+  ["profile", "referBy", "referer", "subAccounts"]
 
-    if (user) {
-      return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
+);
+      if (user) {
+        return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
+      } else {
+        console.log(user)
+        return next(CustomError.notFound("Invalid User Id"));
+      }
     } else {
-      return next(CustomError.notFound("Invalid User Id"));
+      let user = await AuthModel.find({
+        userType: { $ne: "Admin" }, $or: [
+          {
+            _id: id
+          }, {
+            profile: id
+          }
+        ]
+      }, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+        ["profile", "referBy", "referer", "subAccounts"]
+
+      );
+      if (user) {
+        return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
+      } else {
+        console.log(user)
+        return next(CustomError.notFound("Invalid User Id"));
+      }
     }
   } catch (error) {
     return next(CustomError.badRequest(error.message));
