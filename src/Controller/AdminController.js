@@ -483,7 +483,7 @@ const Updateuser = async (req, res, next) => {
   try {
 
     const { userId } = req.body
-    await AuthModel.updateMany({userType:"User"},{KYCstatus: false},{new:true})
+    
     
     const data = await AuthModel.findOneAndUpdate({ profile: userId }, { KYCstatus: true }, { new: true })
 
