@@ -117,7 +117,7 @@ const getRequestByAdmin = async (req, res, next) => {
             );
         } else {
             return next(
-                CustomError.createError("Error Occured", 200)
+                CustomError.createError("No any request found", 200)
             );
         }
 
