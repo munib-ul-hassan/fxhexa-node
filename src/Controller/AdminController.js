@@ -138,14 +138,14 @@ const getUserById = async (req, res, next) => {
       const regex = new RegExp(fullName, 'i');
       let users = (await UserModel.find({
         fullName: { $regex: regex }
-      },{auth:1})).map((item)=>{return ObjectId(item.auth)})
-              console.log(users)
-let user =  await AuthModel.find({
-  userType: { $ne: "Admin" }, _id:{$in: users}
-}, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
-  ["profile", "referBy", "referer", "subAccounts"]
+      }, { auth: 1 })).map((item) => { return ObjectId(item.auth) })
+      console.log(users)
+      let user = await AuthModel.find({
+        userType: { $ne: "Admin" }, _id: { $in: users }
+      }, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
+        ["profile", "referBy", "referer", "subAccounts"]
 
-);
+      );
       if (user) {
         return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
       } else {
@@ -481,13 +481,15 @@ const getforex = async (req, res, next) => {
 };
 const Updateuser = async (req, res, next) => {
   try {
+
     const { userId } = req.body
-    await AuthModel.findOneAndUpdate({ profile: userId }, { KYCStatus: true })
+    await AuthModel.updateMany({userType:"User"},{KYCstatus: false},{new:true})
+    
+    const data = await AuthModel.findOneAndUpdate({ profile: userId }, { KYCstatus: true }, { new: true })
 
     return next(
       CustomSuccess.createSuccess(
-        { },
-
+        data,
         "User KYC Verification Done",
         200,
       ),
