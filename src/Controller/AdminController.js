@@ -486,7 +486,7 @@ const Updateuser = async (req, res, next) => {
 
     return next(
       CustomSuccess.createSuccess(
-        { count, data },
+        { },
 
         "User KYC Verification Done",
         200,
