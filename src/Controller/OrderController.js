@@ -27,7 +27,7 @@ const open = async (req, res, next) => {
 
 
 
-    const balance = Number(openAmount * unit * 100)
+    const balance = Number(unit * 10)
     if (accData.balance < (balance + (balance * 0.15))) {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }

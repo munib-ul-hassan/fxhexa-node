@@ -53,7 +53,7 @@ const openforex = async (req, res, next) => {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
 
-        let balance = Number(openAmount) * unit * 100
+        let balance = Number(unit * 10)
 
 
         if (accData.balance < (balance + (balance * 0.15))) {
