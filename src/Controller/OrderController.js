@@ -228,17 +228,40 @@ const getOrder = async (req, res, next) => {
     const skipCount = (pageNumber - 1) * itemsPerPage;
 
     // Fetch Orders from the database based on the constructed query and pagination
-    const Orders = await OrderModel.find({ ...query, ...req.query })
-      .populate("user")
-      .skip(skipCount)
-      .limit(itemsPerPage);
+    const Orders = await OrderModel.find({ ...query, ...req.query })    
+      .populate("user")      
+      .sort({_id:-1})
 
-    // Send the Orders data as a JSON response
+    let ordersdata;
     if (Orders.length > 0) {
+      if(limit==0){
+  
+        ordersdata= {open:Orders.filter((item)=>{
+          return item.status=="open"
+        }),
+        close:Orders.filter((item)=>{
+          return item.status=="close"
+        }),
+        pending:Orders.filter((item)=>{
+          return item.status=="pending"
+        })}
+      }else{
+        ordersdata= {open:Orders.filter((item)=>{
+          return item.status=="open"
+        }).slice(0,limit),
+        close:Orders.filter((item)=>{
+          return item.status=="close"
+        }).slice(0,limit),
+        pending:Orders.filter((item)=>{
+          return item.status=="pending"
+        }).slice(0,limit)
+      }
+      }
+      
 
       return next(
         CustomSuccess.createSuccess(
-          Orders,
+          ordersdata,
           "Orders get successfully",
           200
         )
