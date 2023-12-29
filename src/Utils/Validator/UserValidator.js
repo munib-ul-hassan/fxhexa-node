@@ -8,6 +8,7 @@ export const RegisterValidator = joi.object({
   // accType: joi.string(),
   referBy: joi.string(),
   phone: joi.string(),
+ 
 
 
 
@@ -103,6 +104,7 @@ export const subAccValidator = joi.object({
   password: joi.string().required(),
   leverage: joi.string().required(),
   currency: joi.string().required(),
+  demoAmount:joi.number(),
 
 })
 

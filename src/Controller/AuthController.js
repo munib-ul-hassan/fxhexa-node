@@ -33,8 +33,6 @@ import cloudinary from "../Config/cloudnaryconfig.js";
 
 const registerUser = async (req, res, next) => {
   try {
-
-
     const { error } = RegisterValidator.validate(req.body);
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
@@ -1007,7 +1005,7 @@ const addSubAcc = async (req, res, next) => {
       });
     }
     if (req.body.type == "demo") {
-      req.body.balance = 10000
+      req.body.balance =  req.body.demoAmount
     } else {
       req.body.balance = 0
 

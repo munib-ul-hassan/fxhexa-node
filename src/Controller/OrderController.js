@@ -29,22 +29,24 @@ const open = async (req, res, next) => {
 
 
 
-    const balance = Number(unit * 10)
-    if (accData.balance < (balance + (balance * 0.15))) {
+
+    const balance = openAmount * unit 
+    const tax = Number(unit/0.01)*0.15
+    if (accData.balance < (balance + tax)) {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
 
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(balance * 0.10) }
+        $inc: { balance: Number(Number(unit/0.01) * 0.10) }
       })
 
       await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-        $inc: { "referer.$.amount": Number(balance * 0.05) }
+        $inc: { "referer.$.amount": Number(Number(unit/0.01) * 0.05) }
       })
     } else {
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(balance * 0.15) }
+        $inc: { balance: Number(Number(unit/0.01) * 0.15) }
       })
     }
 
@@ -61,7 +63,7 @@ const open = async (req, res, next) => {
       })
       await Order.save()
       await subAccountModel.findByIdAndUpdate(subAccId, {
-        $inc: { balance: -Number(balance * 0.15) }
+        $inc: { balance: -Number(balance +tax) }
       })
       return next(
         CustomSuccess.createSuccess(
@@ -85,7 +87,7 @@ const open = async (req, res, next) => {
     })
     await Order.save()
     await subAccountModel.findByIdAndUpdate(subAccId, {
-      $inc: { balance: -Number(balance * 0.15) }
+      $inc: { balance: -Number(balance +tax) }
     })
 
     return next(
@@ -108,7 +110,7 @@ const close = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { subAccId, orderId } = req.body;
+    const { subAccId, orderId,closeAmount } = req.body;
 
     const accData = await subAccountModel.findById(subAccId, { password: 0 })
     if (!accData) {
@@ -124,14 +126,14 @@ const close = async (req, res, next) => {
         return;
       }
       var newBalance = 0;
-      const url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${orderData.stock}`
-      const closeAmount = (await axios.get(url)).data[0].ask
+     
       if (orderData.orderType == "buy") {
 
-        newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit*100)
+
+        newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit)
       }
       if (orderData.orderType == "sell") {
-        newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit*100) 
+        newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit) 
       }
       
       await subAccountModel.findByIdAndUpdate(subAccId,

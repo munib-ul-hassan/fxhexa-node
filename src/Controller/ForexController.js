@@ -53,29 +53,29 @@ const openforex = async (req, res, next) => {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
 
-        let balance = Number(unit * 10)
+        const balance = openAmount * unit 
+        const tax = Number(unit/0.01)*0.15
 
-
-        if (accData.balance < (balance + (balance * 0.15))) {
+        if (accData.balance < (balance + tax)) {
             return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
         }
         if (req.user.referBy) {
 
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: Number(balance * 0.10) }
+                $inc: { balance: Number(Number(unit/0.01) * 0.10) }
             })
 
             await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-                $inc: { "referer.$.amount": Number(balance * 0.05) }
+                $inc: { "referer.$.amount": Number(Number(unit/0.01) * 0.05) }
             })
         } else {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: Number(balance * 0.15) }
+                $inc: { balance: Number(Number(unit/0.01) * 0.15) }
             })
 
         }
         await subAccountModel.findByIdAndUpdate(subAccId, {
-            $inc: { balance: -Number(balance * 0.15) }
+            $inc: { balance: -Number(balance +tax) }
         })
         if (status == "pending") {
             const Order = new OrderModel({
@@ -133,7 +133,7 @@ const closeforex = async (req, res, next) => {
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
-        const { subAccId, orderId } = req.body;
+        const { subAccId, orderId,closeAmount } = req.body;
 
         const accData = await subAccountModel.findById(subAccId, { password: 0 })
         if (!accData) {
@@ -153,22 +153,20 @@ const closeforex = async (req, res, next) => {
             }
             const { from, to, unit } = orderData
             // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
-            const url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${from}_${to}`
-            const data = (await axios.get(url)).data
-
+         
             var newBalance = 0;
             if (orderData.orderType == "buy") {
-                newBalance = Number((orderData.openAmount - data[0].ask) * unit * 100)
+                newBalance = Number((orderData.openAmount - closeAmount) * unit )+Number(orderData.openAmount * orderData.unit)
             }
             if (orderData.orderType == "sell") {
-                newBalance = Number((data[0].ask - orderData.openAmount) * unit * 100)
+                newBalance = Number((closeAmount - orderData.openAmount) * unit)+Number(orderData.openAmount * orderData.unit)
             }
 
             await subAccountModel.findByIdAndUpdate(subAccId,
                 {
                     $inc: { balance: Number(newBalance) },
                 })
-            await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount: data[0].ask }, { new: true })
+            await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount: closeAmount }, { new: true })
             success++;
         }))
         return next(
