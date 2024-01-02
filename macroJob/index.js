@@ -22,21 +22,7 @@ cron.schedule('* * * * *', async () => {
     try {
         const data = await OrderModel.find({ status: "pending" }).populate({ path: "user", poplate: { path: "auth" } }).populate("accountref")
         data.map(async (item) => {
-            let url;
-            if (item.type == "Stock") {
-                url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
-                // try {
-
-                //     const data = (await axios.get(url)).data[0].ask
-                //     // if (item.amount == data) {
-                //     //     await OrderModel.findOneAndUpdate({ _id: item._id }, { status: "open" })
-                //     // }
-                // } catch (e) {
-
-                // }
-            } else {
-                url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.from}_${item.to}`
-            }
+            let url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
 
 
             var newBalance, closeAmount;
@@ -50,10 +36,12 @@ cron.schedule('* * * * *', async () => {
 
             var newBalance = 0;
             if (item.orderType == "buy") {
-                newBalance = Number((item.openAmount - closeAmount) * item.unit * 100)
+                newBalance = (Number(item.openAmount - closeAmount) * item.unit) + Number(item.openAmount * item.unit)
+
+
             }
             if (item.orderType == "sell") {
-                newBalance = Number((closeAmount - item.openAmount) * item.unit * 100)
+                newBalance = (Number(closeAmount - item.openAmount) * item.unit) + Number(item.openAmount * item.unit)
             }
             let blnc;
             if (newBalance < 0) {

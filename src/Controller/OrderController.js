@@ -132,6 +132,7 @@ const close = async (req, res, next) => {
 
         newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit)
       }
+      
       if (orderData.orderType == "sell") {
         newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit) 
       }
