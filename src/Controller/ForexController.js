@@ -53,8 +53,8 @@ const openforex = async (req, res, next) => {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
 
-        const balance = openAmount * unit 
-        const tax = Number(unit/0.01)*0.15
+        const balance = openAmount * unit
+        const tax = Number(unit / 0.01) * 0.15
 
         if (accData.balance < (balance + tax)) {
             return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
@@ -62,27 +62,27 @@ const openforex = async (req, res, next) => {
         if (req.user.referBy) {
 
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: Number(Number(unit/0.01) * 0.10) }
+                $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
             })
 
             await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-                $inc: { "referer.$.amount": Number(Number(unit/0.01) * 0.05) }
+                $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
             })
         } else {
             await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                $inc: { balance: Number(Number(unit/0.01) * 0.15) }
+                $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
             })
 
         }
         await subAccountModel.findByIdAndUpdate(subAccId, {
-            $inc: { balance: -Number(balance +tax) }
+            $inc: { balance: -Number(balance + tax) }
         })
         if (status == "pending") {
             const Order = new OrderModel({
                 user: req.user._doc.profile._id,
                 accountref: accData._id,
                 prevBalance: accData.balance,
-                orderType,unit,
+                orderType, unit,
                 stopLoss, profitLimit,
                 from, to, openAmount, type: "Forex",
                 status: "pending"
@@ -108,7 +108,7 @@ const openforex = async (req, res, next) => {
             accountref: accData._id,
             prevBalance: accData.balance,
             orderType,
-            stopLoss, profitLimit,unit,
+            stopLoss, profitLimit, unit,
             from, to, openAmount, type: "Forex",
             status: "open"
         })
@@ -133,7 +133,7 @@ const closeforex = async (req, res, next) => {
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
         }
-        const { subAccId, orderId,closeAmount } = req.body;
+        const { subAccId, orderId, closeAmount, amount } = req.body;
 
         const accData = await subAccountModel.findById(subAccId, { password: 0 })
         if (!accData) {
@@ -148,23 +148,23 @@ const closeforex = async (req, res, next) => {
                 failed++;
                 return;
             }
-            if (!orderData) {
-                return next(CustomError.badRequest("invalid Order Id"));
-            }
-            const { from, to, unit } = orderData
-            // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
-         
-            var newBalance = 0;
-            if (orderData.orderType == "buy") {
-                newBalance = Number((orderData.openAmount - closeAmount) * unit )+Number(orderData.openAmount * orderData.unit)
-            }
-            if (orderData.orderType == "sell") {
-                newBalance = Number((closeAmount - orderData.openAmount) * unit)+Number(orderData.openAmount * orderData.unit)
-            }
+            // if (!orderData) {
+            //     return next(CustomError.badRequest("invalid Order Id"));
+            // }
+            // const { from, to, unit } = orderData
+            // // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=100&precision=2`
+
+            // var newBalance = 0;
+            // if (orderData.orderType == "buy") {
+            //     newBalance = Number((orderData.openAmount - closeAmount) * unit )+Number(orderData.openAmount * orderData.unit)
+            // }
+            // if (orderData.orderType == "sell") {
+            //     newBalance = Number((closeAmount - orderData.openAmount) * unit)+Number(orderData.openAmount * orderData.unit)
+            // }
 
             await subAccountModel.findByIdAndUpdate(subAccId,
                 {
-                    $inc: { balance: Number(newBalance) },
+                    $inc: { balance: amount },
                 })
             await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount: closeAmount }, { new: true })
             success++;

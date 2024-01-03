@@ -110,7 +110,7 @@ const close = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { subAccId, orderId,closeAmount } = req.body;
+    const { subAccId, orderId,closeAmount,amount } = req.body;
 
     const accData = await subAccountModel.findById(subAccId, { password: 0 })
     if (!accData) {
@@ -125,21 +125,21 @@ const close = async (req, res, next) => {
         failed++;
         return;
       }
-      var newBalance = 0;
+      // var newBalance = 0;
      
-      if (orderData.orderType == "buy") {
+      // if (orderData.orderType == "buy") {
 
 
-        newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit)
-      }
+      //   newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit)
+      // }
       
-      if (orderData.orderType == "sell") {
-        newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit) 
-      }
+      // if (orderData.orderType == "sell") {
+      //   newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit) 
+      // }
       
       await subAccountModel.findByIdAndUpdate(subAccId,
         {
-          $inc: { balance: newBalance },
+          $inc: { balance: amount },
         })
       await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount })
       success++;
@@ -147,7 +147,6 @@ const close = async (req, res, next) => {
 
     return next(
       CustomSuccess.createSuccess(
-
         { success, failed },
         "Order close successfully",
         200

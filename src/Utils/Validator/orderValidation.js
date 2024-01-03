@@ -24,10 +24,12 @@ export const forexOpenOrderValidator = joi.object({
   status: joi.string().valid("pending", "open"),
 
 });
+
 export const forexcloseOrderValidator = joi.object({  
   orderId:  joi.array(),  
   subAccId: joi.string().required(),
-  closeAmount:joi.number().required()
+  closeAmount:joi.number().required(),
+  amount:joi.number().required(),
 });
 
 export const closeOrderValidator = joi.object({
@@ -36,7 +38,10 @@ export const closeOrderValidator = joi.object({
   orderId: joi.array(),
   closeAmount: joi.number().required(),
   // orderType: joi.string().valid("buy", "sell"),
-  subAccId: joi.string().required()
+  subAccId: joi.string().required(),
+  amount:joi.number().required(),
+
+
 });
 
 
