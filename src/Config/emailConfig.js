@@ -3,12 +3,12 @@ config()
 
 export const emailConfig = {
 
-  host: "mail.geekslogicity.com",
+  host: process.env.MAIL_HOST,
   port: 587,
   secure: false,
   auth: {
-    user: "aurora@geekslogicity.com",
-    pass: "Mniaj786!!??"
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD
   },
   tls: {
     rejectUnauthorized: false, // Disable SSL/TLS verification
