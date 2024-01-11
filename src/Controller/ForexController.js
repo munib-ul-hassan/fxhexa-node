@@ -56,7 +56,7 @@ const openforex = async (req, res, next) => {
         const balance = openAmount * unit
         const tax = Number(unit / 0.01) * 0.15
 
-        if (accData.balance < (balance + tax)) {
+        if (accData.balance < tax) {
             return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
         }
         if (req.user.referBy) {
@@ -75,7 +75,7 @@ const openforex = async (req, res, next) => {
 
         }
         await subAccountModel.findByIdAndUpdate(subAccId, {
-            $inc: { balance: -Number(balance + tax) }
+            $inc: { balance: -Number(tax) }
         })
         if (status == "pending") {
             const Order = new OrderModel({

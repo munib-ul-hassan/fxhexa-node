@@ -30,23 +30,23 @@ const open = async (req, res, next) => {
 
 
 
-    const balance = openAmount * unit 
-    const tax = Number(unit/0.01)*0.15
-    if (accData.balance < (balance + tax)) {
+    const balance = openAmount * unit
+    const tax = Number(unit / 0.01) * 0.15
+    if (accData.balance < tax) {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
 
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(Number(unit/0.01) * 0.10) }
+        $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
       })
 
       await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-        $inc: { "referer.$.amount": Number(Number(unit/0.01) * 0.05) }
+        $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
       })
     } else {
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(Number(unit/0.01) * 0.15) }
+        $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
       })
     }
 
@@ -63,7 +63,7 @@ const open = async (req, res, next) => {
       })
       await Order.save()
       await subAccountModel.findByIdAndUpdate(subAccId, {
-        $inc: { balance: -Number(balance +tax) }
+        $inc: { balance: -Number(tax) }
       })
       return next(
         CustomSuccess.createSuccess(
@@ -87,7 +87,7 @@ const open = async (req, res, next) => {
     })
     await Order.save()
     await subAccountModel.findByIdAndUpdate(subAccId, {
-      $inc: { balance: -Number(balance +tax) }
+      $inc: { balance: -Number(tax) }
     })
 
     return next(
@@ -98,7 +98,7 @@ const open = async (req, res, next) => {
       )
     );
   } catch (error) {
-    
+
     next(CustomError.createError(error.message, 500));
   }
 };
@@ -110,7 +110,7 @@ const close = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { subAccId, orderId,closeAmount,amount } = req.body;
+    const { subAccId, orderId, closeAmount, amount } = req.body;
 
     const accData = await subAccountModel.findById(subAccId, { password: 0 })
     if (!accData) {
@@ -126,17 +126,17 @@ const close = async (req, res, next) => {
         return;
       }
       // var newBalance = 0;
-     
+
       // if (orderData.orderType == "buy") {
 
 
       //   newBalance = (Number(orderData.openAmount - closeAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit)
       // }
-      
+
       // if (orderData.orderType == "sell") {
       //   newBalance = (Number(closeAmount - orderData.openAmount) * orderData.unit)+Number(orderData.openAmount * orderData.unit) 
       // }
-      
+
       await subAccountModel.findByIdAndUpdate(subAccId,
         {
           $inc: { balance: amount },
@@ -230,36 +230,39 @@ const getOrder = async (req, res, next) => {
     const skipCount = (pageNumber - 1) * itemsPerPage;
 
     // Fetch Orders from the database based on the constructed query and pagination
-    const Orders = await OrderModel.find({ ...query, ...req.query })    
-      .populate("user")      
-      .sort({_id:-1})
+    const Orders = await OrderModel.find({ ...query, ...req.query })
+      .populate("user")
+      .sort({ _id: -1 })
 
     let ordersdata;
     if (Orders.length > 0) {
-      if(limit==0){
-  
-        ordersdata= {open:Orders.filter((item)=>{
-          return item.status=="open"
-        }),
-        close:Orders.filter((item)=>{
-          return item.status=="close"
-        }),
-        pending:Orders.filter((item)=>{
-          return item.status=="pending"
-        })}
-      }else{
-        ordersdata= {open:Orders.filter((item)=>{
-          return item.status=="open"
-        }).slice(0,limit),
-        close:Orders.filter((item)=>{
-          return item.status=="close"
-        }).slice(0,limit),
-        pending:Orders.filter((item)=>{
-          return item.status=="pending"
-        }).slice(0,limit)
+      if (limit == 0) {
+
+        ordersdata = {
+          open: Orders.filter((item) => {
+            return item.status == "open"
+          }),
+          close: Orders.filter((item) => {
+            return item.status == "close"
+          }),
+          pending: Orders.filter((item) => {
+            return item.status == "pending"
+          })
+        }
+      } else {
+        ordersdata = {
+          open: Orders.filter((item) => {
+            return item.status == "open"
+          }).slice(0, limit),
+          close: Orders.filter((item) => {
+            return item.status == "close"
+          }).slice(0, limit),
+          pending: Orders.filter((item) => {
+            return item.status == "pending"
+          }).slice(0, limit)
+        }
       }
-      }
-      
+
 
       return next(
         CustomSuccess.createSuccess(
