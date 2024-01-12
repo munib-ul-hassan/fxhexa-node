@@ -47,7 +47,7 @@ const registerUser = async (req, res, next) => {
       return next(CustomError.createError("User Already Exists", 400));
     }
 
-    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let refereCode = "";
 
     for (let i = 0; i < 10; i++) {
