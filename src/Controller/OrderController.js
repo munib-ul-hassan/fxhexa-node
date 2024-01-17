@@ -289,7 +289,8 @@ const updateorder = async (req, res, next) => {
   try {
     const { id } = req.params
 
-    const orderData = await OrderModel.findOne({ _id: id, user: req.user.profile._id, status: "open" })
+    const orderData = await OrderModel.findOne({ _id: id, user: req.user.profile._id, status: {$ne:"close"} })
+    
     if (!orderData) {
 
       return next(CustomError.badRequest("invalid Id or this order already be closed"));
