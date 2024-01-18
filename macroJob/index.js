@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 cron.schedule('* * * * *', async () => {
     try {
+        console.log("CRON Running")
         const data = await OrderModel.find({ status: "pending" }).populate({ path: "user", poplate: { path: "auth" } }).populate("accountref")
         data.map(async (item) => {
             let url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
@@ -62,7 +63,7 @@ cron.schedule('* * * * *', async () => {
 
         })
     } catch (err) {
-
+console.log("Error on CRON",err)
     }
 
 });
