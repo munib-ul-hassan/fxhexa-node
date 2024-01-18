@@ -53,7 +53,27 @@ const openforex = async (req, res, next) => {
             return next(CustomError.badRequest("invalid Sub-Account Id"));
         }
 
-        const balance = openAmount * unit
+        // const balance = openAmount * unit
+      
+        if (status == "pending") {
+            const Order = new OrderModel({
+                user: req.user._doc.profile._id,
+                accountref: accData._id,
+                prevBalance: accData.balance,
+                orderType, unit,
+                stopLoss, profitLimit,
+                from, to, openAmount, type: "Forex",
+                status: "pending"
+            })
+            await Order.save()
+            return next(
+                CustomSuccess.createSuccess(
+                    Order,
+                    "Order open successfully",
+                    200
+                )
+            );
+        }
         const tax = Number(unit / 0.01) * 0.15
 
         if (accData.balance < tax) {
@@ -77,31 +97,6 @@ const openforex = async (req, res, next) => {
         await subAccountModel.findByIdAndUpdate(subAccId, {
             $inc: { balance: -Number(tax) }
         })
-        if (status == "pending") {
-            const Order = new OrderModel({
-                user: req.user._doc.profile._id,
-                accountref: accData._id,
-                prevBalance: accData.balance,
-                orderType, unit,
-                stopLoss, profitLimit,
-                from, to, openAmount, type: "Forex",
-                status: "pending"
-            })
-            await Order.save()
-            return next(
-                CustomSuccess.createSuccess(
-                    Order,
-                    "Order open successfully",
-                    200
-                )
-            );
-        }
-        // const url = `https://api.polygon.io/v1/conversion/${from}/${to}?apiKey=x5Vm09UZQ8XJpEL0SIgpKJxaROq8jgeQ&amount=${amount}&precision=2`
-        // const url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${from}_${to}`
-
-        // const data = (await axios.get(url)).data
-
-
 
         const Order = new OrderModel({
             user: req.user._doc.profile._id,

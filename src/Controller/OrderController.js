@@ -30,25 +30,8 @@ const open = async (req, res, next) => {
 
 
 
-    const balance = openAmount * unit
-    const tax = Number(unit / 0.01) * 0.15
-    if (accData.balance < tax) {
-      return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
-    }
-    if (req.user.referBy) {
-
-      await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
-      })
-
-      await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
-        $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
-      })
-    } else {
-      await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-        $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
-      })
-    }
+    // const balance = openAmount * unit
+   
 
     if (status == "pending") {
 
@@ -73,7 +56,24 @@ const open = async (req, res, next) => {
         )
       );
     }
+    const tax = Number(unit / 0.01) * 0.15
+    if (accData.balance < tax) {
+      return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
+    }
+    if (req.user.referBy) {
 
+      await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+        $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
+      })
+
+      await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
+        $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
+      })
+    } else {
+      await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+        $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
+      })
+    }
 
     // newBalance: Number(accData.balance) - Number(exchangeAmount), exchangeAmount, orderType: "buy"
 

@@ -20,52 +20,101 @@ app.get('/', (req, res) => {
 
 cron.schedule('* * * * *', async () => {
     try {
-        const data = await OrderModel.find({ status: "pending" }).populate({ path: "user", poplate: { path: "auth" } }).populate("accountref")
+        const data = await OrderModel.aggregate([
+            { $match: { status: { $ne: "close" } } }
+            ,
+            {
+                $lookup: {
+                    from: "subaccs",
+                    localField: "accountref",
+                    foreignField: "_id",
+                    as: "accountref"
+                }
+            },
+            {
+                $unwind: "$accountref" // If "accountref" is an array (result of $lookup)
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "user",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: "$user" // If "user" is an array (result of $lookup)
+            },
+            {
+                $lookup: {
+                    from: "auths",
+                    localField: "accountref.auth",
+                    foreignField: "_id",
+                    as: "accountref.auth"
+                }
+            },
+
+        ]);
+        
         data.map(async (item) => {
-            let url = `htps://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
-
-
+            let url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
             var newBalance, closeAmount;
-
             try {
-
                 closeAmount = (await axios.get(url)).data[0].ask
             } catch (e) {
-
             }
 
-            var newBalance = 0;
-            if (item.orderType == "buy") {
-                newBalance = (Number(item.openAmount - closeAmount) * item.unit) + Number(item.openAmount * item.unit)
+            if (item.status == "pending" && closeAmount == item.openAmount) {
 
+                const accData = item.accountref
 
-            }
-            if (item.orderType == "sell") {
-                newBalance = (Number(closeAmount - item.openAmount) * item.unit) + Number(item.openAmount * item.unit)
-            }
-            let blnc;
-            if (newBalance < 0) {
-                blnc = -newBalance
-            } else {
-                blnc = newBalance
-            }
-            if (blnc <= item.stopLoss && blnc >= item.profitLimit) {
+                const tax = Number(item.unit / 0.01) * 0.15
+                if (accData.balance < tax) {
+                    //   return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"))
+                    return;
+                }
+                if (item.accountref.auth.referBy) {
 
-                await subAccountModel.findByIdAndUpdate(item.accountref,
-                    {
-                        $inc: { balance: newBalance },
+                    await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                        $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
                     })
-                await OrderModel.findByIdAndUpdate(item, { status: "close", closeAmount })
+
+                    await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
+                        $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
+                    })
+                } else {
+                    await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                        $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
+                    })
+                }
+                await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                    {
+                        $inc: { balance: -Number(tax) },
+                    })
+
+                await OrderModel.findByIdAndUpdate(item._id, { status: "open" })
             }
-
-
-
+            if (item.status == "open" && (item.profitLimit == closeAmount || item.stopLoss == closeAmount)) {
+                let amount;
+                if (item.accountref == "buy") {
+                    amount = (item.openAmount - closeAmount) * item.unit
+                }
+                if (item.accountref == "sell") {
+                    amount = (closeAmount - item.openAmount) * item.unit
+                }
+                await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                    {
+                        $inc: { balance: amount },
+                    })
+                await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
+            }
         })
     } catch (err) {
-
+        console.log(err.message)
     }
 
 });
 app.listen(port, () => {
+
     console.log(`Server 1 is running on port ${port}`);
 });
