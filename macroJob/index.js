@@ -55,7 +55,7 @@ cron.schedule('* * * * *', async () => {
             },
 
         ]);
-        
+
         data.map(async (item) => {
             let url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
             var newBalance, closeAmount;
@@ -110,7 +110,7 @@ cron.schedule('* * * * *', async () => {
             }
         })
     } catch (err) {
-        console.log(err.message)
+        console.log("Error on CRON", err)
     }
 
 });

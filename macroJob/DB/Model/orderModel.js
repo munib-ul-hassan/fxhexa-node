@@ -14,6 +14,9 @@ const OrderSchema = new Schema(
     unit: {
       type: Number
     },
+    amount: {
+      type: Number
+    },
     openAmount: {
       type: Number
     },
@@ -37,11 +40,10 @@ const OrderSchema = new Schema(
     },
     stopLoss: { type: Number },
     profitLimit: { type: Number },
-
     from: { type: String },
     to: { type: String },
-
-
+    openStock:{type:Number},
+    
     orderType: {
       type: String,
       enum: ["buy", "sell"],
