@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 cron.schedule('* * * * *', async () => {
     try {
         const data = await OrderModel.aggregate([
-            { $match: { status: { $ne: "close" } } }
+            { $match: { status: { $ne: "close" } ,profitLimit:{$ne:null},stopLoss:{$ne:null}} }
             ,
             {
                 $lookup: {
@@ -58,35 +58,40 @@ cron.schedule('* * * * *', async () => {
 
         data.map(async (item) => {
             let url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
-            var newBalance, closeAmount;
+            var  closeAmount;
             try {
                 closeAmount = (await axios.get(url)).data[0].ask
             } catch (e) {
+                return ;
             }
 
             if (item.status == "pending" && closeAmount == item.openAmount) {
 
                 const accData = item.accountref
+                
 
                 const tax = Number(item.unit / 0.01) * 0.15
-                if (accData.balance < tax) {
+
+                if (accData?.balance < tax) {
                     //   return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"))
                     return;
                 }
                 if (item.accountref.auth.referBy) {
-
+                    
                     await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
                         $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
                     })
-
+                    
                     await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
                         $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
                     })
                 } else {
+                    
                     await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
                         $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
                     })
                 }
+                
                 await subAccountModel.findByIdAndUpdate(item.accountref._id,
                     {
                         $inc: { balance: -Number(tax) },
@@ -96,21 +101,31 @@ cron.schedule('* * * * *', async () => {
             }
             if (item.status == "open" && (item.profitLimit == closeAmount || item.stopLoss == closeAmount)) {
                 let amount;
-                if (item.accountref == "buy") {
+                
+                
+                if (item.orderType == "buy") {
+                  
                     amount = (item.openAmount - closeAmount) * item.unit
+                  
+
                 }
-                if (item.accountref == "sell") {
+                if (item.orderType == "sell") {
+                  
+
                     amount = (closeAmount - item.openAmount) * item.unit
+                  
                 }
+                
                 await subAccountModel.findByIdAndUpdate(item.accountref._id,
                     {
-                        $inc: { balance: amount },
+                        $inc: { balance: Number(amount) },
                     })
                 await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
             }
         })
     } catch (err) {
         console.log("Error on CRON", err)
+        
     }
 
 });
