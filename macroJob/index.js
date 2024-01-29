@@ -58,7 +58,6 @@ cron.schedule('* * * * *', async () => {
         ]);
 
         data.map(async (item) => {
-        console.log("Job run ", item.stock)
 
             let url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
             var closeAmount;
