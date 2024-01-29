@@ -94,16 +94,16 @@ cron.schedule('* * * * *', async () => {
                     if (item.accountref.auth.referBy) {
 
                         await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
+                            $inc: { balance: Number(Number(item.unit / 0.01) * 0.10) }
                         })
 
                         await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
-                            $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
+                            $inc: { "referer.$.amount": Number(Number(item.unit / 0.01) * 0.05) }
                         })
                     } else {
 
                         await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
+                            $inc: { balance: Number(Number(item.unit / 0.01) * 0.15) }
                         })
                     }
 
@@ -126,16 +126,16 @@ cron.schedule('* * * * *', async () => {
                     if (item.accountref.auth.referBy) {
 
                         await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
+                            $inc: { balance: Number(Number(item.unit / 0.01) * 0.10) }
                         })
 
                         await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
-                            $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
+                            $inc: { "referer.$.amount": Number(Number(item.unit / 0.01) * 0.05) }
                         })
                     } else {
 
                         await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
+                            $inc: { balance: Number(Number(item.unit / 0.01) * 0.15) }
                         })
                     }
 
