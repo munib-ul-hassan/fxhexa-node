@@ -67,64 +67,81 @@ cron.schedule('* * * * *', async () => {
                 return;
             }
 
-            if (item.status == "pending" && closeAmount == item.openAmount) {
+            if (item.status == "pending") {
 
-                const accData = item.accountref
+  if (item.orderType == "buy" && closeAmount >= item.openAmount) {
 
+                console.log("pending buy hit")
+                
+                
+            }
+            if (item.orderType == "sell" && closeAmount <= item.openAmount) {
+                
+                console.log("pending sell hit")
 
-                const tax = Number(item.unit / 0.01) * 0.15
+            
 
-                if (accData?.balance < tax) {
-                    //   return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"))
-                    return;
-                }
-                if (item.accountref.auth.referBy) {
-
-                    await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                        $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
-                    })
-
-                    await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
-                        $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
-                    })
-                } else {
-
-                    await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                        $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
-                    })
                 }
 
-                await subAccountModel.findByIdAndUpdate(item.accountref._id,
-                    {
-                        $inc: { balance: -Number(tax) },
-                    })
 
-                await OrderModel.findByIdAndUpdate(item._id, { status: "open" })
-                console.log("order open for the user :", item.user.fullName)
+                // const accData = item.accountref
+
+
+                // const tax = Number(item.unit / 0.01) * 0.15
+
+                // if (accData?.balance < tax) {
+                //     //   return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"))
+                //     return;
+                // }
+                // if (item.accountref.auth.referBy) {
+
+                //     await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                //         $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
+                //     })
+
+                //     await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
+                //         $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
+                //     })
+                // } else {
+
+                //     await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                //         $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
+                //     })
+                // }
+
+                // await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                //     {
+                //         $inc: { balance: -Number(tax) },
+                //     })
+
+                // await OrderModel.findByIdAndUpdate(item._id, { status: "open" })
+                // console.log("order open for the user :", item.user.fullName)
             }
             if (item.status == "open" ) {
-                let amount;
+                // let amount;
 
 
-                if (item.orderType == "buy" && (item.profitLimit == closeAmount || item.stopLoss == closeAmount)) {
+                if (item.orderType == "buy" && (item.profitLimit >= closeAmount || item.stopLoss <= closeAmount)) {
 
-                    amount = (item.openAmount - closeAmount) * item.unit
+                   
+                console.log("open buy hit")
+                
+                
+                
+            }
+            if (item.orderType == "sell"  && (item.profitLimit <= closeAmount || item.stopLoss >= closeAmount)) {
+                
+                console.log("open sell hit")
 
 
                 }
-                if (item.orderType == "sell") {
 
-
-                    amount = (closeAmount - item.openAmount) * item.unit
-
-                }
-
-                await subAccountModel.findByIdAndUpdate(item.accountref._id,
-                    {
-                        $inc: { balance: Number(amount) },
-                    })
-                await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
-                console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
+                // await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                //     {
+                //         $inc: { balance: Number(amount) },
+                //     })
+                // await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
+                // console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
 
             }
         })
