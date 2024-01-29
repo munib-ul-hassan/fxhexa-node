@@ -44,6 +44,9 @@ const open = async (req, res, next) => {
         stopLoss, profitLimit,
         status: "pending"
       })
+
+
+      
       await Order.save()
       await subAccountModel.findByIdAndUpdate(subAccId, {
         $inc: { balance: -Number(tax) }
@@ -56,7 +59,7 @@ const open = async (req, res, next) => {
         )
       );
     }
-    const tax = Number(unit / 0.01) * 0.15
+  
     if (accData.balance < tax) {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
