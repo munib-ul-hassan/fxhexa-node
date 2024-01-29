@@ -58,6 +58,8 @@ cron.schedule('* * * * *', async () => {
         ]);
 
         data.map(async (item) => {
+        console.log("Job run ", item)
+
             let url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
             var closeAmount;
             try {
@@ -101,11 +103,11 @@ cron.schedule('* * * * *', async () => {
                 await OrderModel.findByIdAndUpdate(item._id, { status: "open" })
                 console.log("order open for the user :", item.user.fullName)
             }
-            if (item.status == "open" && (item.profitLimit == closeAmount || item.stopLoss == closeAmount)) {
+            if (item.status == "open" ) {
                 let amount;
 
 
-                if (item.orderType == "buy") {
+                if (item.orderType == "buy" && (item.profitLimit == closeAmount || item.stopLoss == closeAmount)) {
 
                     amount = (item.openAmount - closeAmount) * item.unit
 
