@@ -7,6 +7,8 @@ import { connectDB } from "./DB/index.js";
 import express from "express";
 import OrderModel from "./DB/Model/orderModel.js";
 import subAccountModel from "./DB/Model/subAccountModel.js";
+import AdminModel from "../src/DB/Model/adminModel.js";
+import AuthModel from "../src/DB/Model/authModel.js";
 connectDB()
 
 
