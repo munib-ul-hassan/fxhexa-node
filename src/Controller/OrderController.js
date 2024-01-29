@@ -44,10 +44,12 @@ const open = async (req, res, next) => {
         stopLoss, profitLimit,
         status: "pending"
       })
+      await Order.save()
 
+
+      const tax = Number(unit / 0.01) * 0.15
 
       
-      await Order.save()
       await subAccountModel.findByIdAndUpdate(subAccId, {
         $inc: { balance: -Number(tax) }
       })
