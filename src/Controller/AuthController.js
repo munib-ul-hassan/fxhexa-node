@@ -790,7 +790,7 @@ const getprofile = async (req, res, next) => {
 
     const data = await AuthModel.findById(user._id).populate({
       path: "profile",
-    });
+    }).populate("referer.user");  
     const token = await tokenGen(data, "auth", req.body.deviceToken);
 
     const respdata = {
@@ -805,6 +805,7 @@ const getprofile = async (req, res, next) => {
       token: token,
       subAccounts: data.subAccounts,
       refereCode: data.refereCode,
+      referer:data.referer,
 
       // demo: data.demo.length > 0 ? data.demo : [],
       // real: data.real.length > 0 ? data.real : [],

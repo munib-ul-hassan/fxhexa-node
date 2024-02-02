@@ -24,7 +24,7 @@ cron.schedule('* * * * *', async () => {
     try {
         console.log("Job run ")
         const data = await OrderModel.aggregate([
-            { $match: { status: { $ne: "close" }, profitLimit: { $ne: null }, stopLoss: { $ne: null } } }
+            { $match: { status: { $ne: "close" }, profitLimit: { $ne: null }, stopLoss: { $ne: null } ,openAmount: { $ne: null } ,unit: { $ne: null } } }
             ,
             {
                 $lookup: {
@@ -65,7 +65,7 @@ cron.schedule('* * * * *', async () => {
 
                 url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.stock}`
             } else {
-                 url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.from}_${item.to}`
+                url = `https://live-rates.com/api/price?key=${process.env.key}&rate=${item.from}_${item.to}`
 
             }
 
@@ -91,59 +91,61 @@ cron.schedule('* * * * *', async () => {
 
                     console.log("pending buy hit")
 
-                    if (item.accountref.auth.referBy) {
+                    if (item.accountref.type != "demo") {
+                        if (item.accountref.auth.referBy) {
 
-                        await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
-                        })
+                            await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                                $inc: { balance: Number(Number(item.unit / 0.01) * 0.10) }
+                            })
 
-                        await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
-                            $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
-                        })
-                    } else {
+                            await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
+                                $inc: { "referer.$.amount": Number(Number(item.unit / 0.01) * 0.05) }
+                            })
+                        } else {
 
-                        await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
-                        })
+                            await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                                $inc: { balance: Number(Number(item.unit / 0.01) * 0.15) }
+                            })
+                        }
+                        await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                            {
+                                $inc: { balance: -Number(tax) },
+                            })
                     }
-
-                    await subAccountModel.findByIdAndUpdate(item.accountref._id,
-                        {
-                            $inc: { balance: -Number(tax) },
-                        })
 
                     await OrderModel.findByIdAndUpdate(item._id, { status: "open" })
                     console.log("order open for the user :", item.user.fullName)
 
                 }
-                if (item.orderType == "sell" && closeAmount <= item.openAmount) {
+                if (item.orderType == "sell" && closeAmount <= item.openAmount ) {
 
                     console.log("pending sell hit")
 
 
 
+                    if (item.accountref.type != "demo") {
 
-                    if (item.accountref.auth.referBy) {
+                        if (item.accountref.auth.referBy) {
 
-                        await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
-                        })
+                            await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                                $inc: { balance: Number(Number(item.unit / 0.01) * 0.10) }
+                            })
 
-                        await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
-                            $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
-                        })
-                    } else {
+                            await AuthModel.findOneAndUpdate({ _id: item.accountref.auth.referBy, "referer.user": item.accountref.auth._id }, {
+                                $inc: { "referer.$.amount": Number(Number(item.unit / 0.01) * 0.05) }
+                            })
+                        } else {
 
-                        await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
-                            $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
-                        })
+                            await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
+                                $inc: { balance: Number(Number(item.unit / 0.01) * 0.15) }
+                            })
+                        }
+
+                        await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                            {
+                                $inc: { balance: -Number(tax) },
+                            })
                     }
-
-                    await subAccountModel.findByIdAndUpdate(item.accountref._id,
-                        {
-                            $inc: { balance: -Number(tax) },
-                        })
-
                     await OrderModel.findByIdAndUpdate(item._id, { status: "open" })
                     console.log("order open for the user :", item.user.fullName)
                 }
@@ -156,39 +158,39 @@ cron.schedule('* * * * *', async () => {
 
                 if (item.orderType == "buy" && (item.profitLimit >= closeAmount || item.stopLoss <= closeAmount)) {
                     amount = (item.openAmount - closeAmount) * item.unit
-
+                   
                     console.log("open buy hit")
+                    if (item.accountref.type != "demo") {
 
-                    await subAccountModel.findByIdAndUpdate(item.accountref._id,
-                        {
-                            $inc: { balance: Number(amount) },
-                        })
+                        await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                            {
+                                $inc: { balance: Number(amount) },
+                            })
+                    }
                     await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
                     console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
 
                 }
-                if (item.orderType == "sell" && (item.profitLimit <= closeAmount || item.stopLoss >= closeAmount)) {
+                if (item.orderType == "sell" && (item.profitLimit <= closeAmount || item.stopLoss >= closeAmount)&& item.openAmount) {
 
                     console.log("open sell hit")
 
                     amount = (closeAmount - item.openAmount) * item.unit
+                    if (item.accountref.type != "demo") {
 
-                    await subAccountModel.findByIdAndUpdate(item.accountref._id,
-                        {
-                            $inc: { balance: Number(amount) },
-                        })
+                        await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                            {
+                                $inc: { balance: Number(amount) },
+                            })
+                    }
                     await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
                     console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
                 }
-
-
             }
         })
     } catch (err) {
         console.log("Error on CRON", err)
-
     }
-
 });
 app.listen(port, () => {
 

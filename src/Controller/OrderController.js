@@ -32,6 +32,7 @@ const open = async (req, res, next) => {
 
     // const balance = openAmount * unit
    
+    const tax = Number(unit / 0.01) * 0.15
 
     if (status == "pending") {
 
@@ -47,7 +48,6 @@ const open = async (req, res, next) => {
       await Order.save()
 
 
-      const tax = Number(unit / 0.01) * 0.15
 
       
       await subAccountModel.findByIdAndUpdate(subAccId, {
@@ -103,7 +103,7 @@ const open = async (req, res, next) => {
       )
     );
   } catch (error) {
-
+console.log(error)
     next(CustomError.createError(error.message, 500));
   }
 };

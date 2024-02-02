@@ -8,11 +8,9 @@ import fs from "fs"
 import { RequestValidator, updaterequestValidator } from "../Utils/Validator/orderValidation.js";
 import subAccountModel from "../DB/Model/subAccountModel.js";
 import cloudinary from "../Config/cloudnaryconfig.js";
+import AuthModel from "../DB/Model/authModel.js";
 const postRequest = async (req, res, next) => {
     try {
-        // if (!req.user.KYCstatus) {
-        //     return next(CustomError.createError("Wait for admin KYC approval, then you can start your trade", 200));
-        // }
         const { error } = RequestValidator.validate(req.body);
         if (error) {
             return next(CustomError.badRequest(error.details[0].message));
@@ -57,7 +55,7 @@ const postRequest = async (req, res, next) => {
                 return next(
                     CustomSuccess.createSuccess(
                         requestData,
-                        "Ammount deposti Successfully",
+                        "Amount deposit Successfully",
                         200
                     )
                 );
@@ -100,7 +98,7 @@ const postRequest = async (req, res, next) => {
 
 const getRequestByAdmin = async (req, res, next) => {
     try {
-        
+
         const { page, limit } = req.query
         delete req.query.page
         delete req.query.limit
@@ -135,7 +133,7 @@ const updateRequest = async (req, res, next) => {
         if (!id) {
             return next(CustomError.badRequest("id is required"));
         }
-        const requestData = await RequestModel.findOne({ _id: id, status: "pending" }).populate("accountref");
+        const requestData = await RequestModel.findOne({ _id: id, status: "pending" }).populate(["accountref", "user"]);
 
         if (!requestData) {
             return next(CustomError.badRequest("Invalid Id or request already updated"));
@@ -149,14 +147,71 @@ const updateRequest = async (req, res, next) => {
         if (req.body.status == "accepted") {
             if (requestData.requestType == "deposit") {
 
-                await subAccountModel.findByIdAndUpdate(requestData.accountref, {
+                await subAccountModel.findByIdAndUpdate(requestData.accountref._id, {
                     $inc: { balance: requestData.amount }
                 })
-            } else {
-                await subAccountModel.findByIdAndUpdate(requestData.accountref, {
+            }
+            if (requestData.requestType == "withdraw") {
+
+
+                await subAccountModel.findByIdAndUpdate(requestData.accountref._id, {
                     $inc: { balance: -requestData.amount }
                 })
+            } else {
+                const { referer } = await AuthModel.findOne({ _id: requestData.user.auth })
+                let sum = 0
+                referer.forEach(async (item, i) => {
+                    if (sum != requestData.amount&& (sum+item.amount)>requestData.amount) {
+                        const newrefere = referer.map((item, j) => {
+                            const { user, amount } = item
+
+                            if (j < i) {
+                                return {
+                                    user, amount: 0
+                                }
+                            }else if(i==j){
+                                return {
+                                    user, amount: amount-(requestData-sum)
+                                }
+                            }
+                             else {
+                                return {
+                                    user, amount
+                                }
+                            }
+                        })
+
+                        await AuthModel.findByIdAndUpdate(requestData.user.auth
+                            , {
+                                referer:  newrefere
+                            })
+                        return 
+                    }   
+                    sum += item.amount
+                    if (sum == requestData.amount) {
+                        const newrefere = referer.map((item, j) => {
+                            const { user, amount } = item
+                            if (j <= i) {
+                                return {
+                                    user, amount: 0
+                                }
+                            } else {
+                                return {
+                                    user, amount
+                                }
+                            }
+                        })
+
+                        await AuthModel.findByIdAndUpdate(requestData.user.auth
+                            , {
+                                referer:  newrefere
+                            })
+                            return;
+                    }
+                    
+                })
             }
+
             const updateRequest = await RequestModel.findOneAndUpdate({ _id: id },
                 {
                     status: "accepted"

@@ -29,7 +29,7 @@ const Requestschema = new Schema({
     },
     requestType: {
         type: String,
-        enum: ["deposit", "withdraw"]
+        enum: ["deposit", "withdraw","referel"]
     },
     paymentCode: { type: String },
     amount: {
