@@ -48,11 +48,11 @@ export const closeOrderValidator = joi.object({
 
 export const RequestValidator = joi.object({
   amount: joi.number(),
-  accountref: joi.string().required(),
+  accountref: joi.string(),
   transactionID: joi.string(),
   paymentCode: joi.string(),
   paymentType: joi.valid("perfect", "bank", "bitcoin"),
-  requestType: joi.valid("deposit", "withdraw")
+  requestType: joi.valid("deposit", "withdraw","referel")
 })
 export const updaterequestValidator = joi.object({
 
