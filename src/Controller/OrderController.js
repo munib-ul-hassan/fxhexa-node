@@ -48,6 +48,7 @@ const open = async (req, res, next) => {
       await Order.save()
 
 
+      console.log(req.user);
 
       
       await subAccountModel.findByIdAndUpdate(subAccId, {
@@ -66,14 +67,16 @@ const open = async (req, res, next) => {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
-console.log(req.user);
+
+      if(accData.type != "demo" ){
+
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
         $inc: { balance: Number(Number(unit / 0.01) * 0.10) }
       })
 
       await AuthModel.findOneAndUpdate({ _id: req.user.referBy, "referer.user": req.user._id }, {
         $inc: { "referer.$.amount": Number(Number(unit / 0.01) * 0.05) }
-      })
+      })}
     } else {
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
         $inc: { balance: Number(Number(unit / 0.01) * 0.15) }
