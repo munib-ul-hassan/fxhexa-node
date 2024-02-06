@@ -71,7 +71,13 @@ cron.schedule('* * * * *', async () => {
 
             var closeAmount;
             try {
-                closeAmount = (await axios.get(url)).data[0].ask
+                if(item.orderType == "buy"){
+
+                    closeAmount = (await axios.get(url)).data[0].bid
+                }else{
+                    
+                    closeAmount = (await axios.get(url)).data[0].ask
+                }
             } catch (e) {
 
                 return;
