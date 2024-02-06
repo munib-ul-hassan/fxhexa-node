@@ -67,7 +67,7 @@ const open = async (req, res, next) => {
       return next(CustomError.badRequest("You have insufficient balance, kindly deposit and enjoying trading"));
     }
     if (req.user.referBy) {
-
+console.log("accData.type",accData.type)
       if(accData.type != "demo" ){
 
       await AdminModel.findOneAndUpdate({ fullName: "admin" }, {
