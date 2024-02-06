@@ -162,7 +162,7 @@ cron.schedule('* * * * *', async () => {
                 let amount;
 
 
-                if (item.orderType == "buy" && (item.profitLimit >= closeAmount || item.stopLoss <= closeAmount)) {
+                if (item.orderType == "buy" && ((item.profitLimit >= closeAmount && item.profitLimit != 0) || (item.stopLoss <= closeAmount && item.stopLoss != 0))) {
                     amount = (item.openAmount - closeAmount) * item.unit
                    
                     console.log("open buy hit")
@@ -177,7 +177,7 @@ cron.schedule('* * * * *', async () => {
                     console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
 
                 }
-                if (item.orderType == "sell" && (item.profitLimit <= closeAmount || item.stopLoss >= closeAmount)&& item.openAmount) {
+                if (item.orderType == "sell" && ((item.profitLimit <= closeAmount  && item.profitLimit != 0 )|| (item.stopLoss >= closeAmount && item.stopLoss != 0)) && item.openAmount) {
 
                     console.log("open sell hit")
 
