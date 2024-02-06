@@ -21,13 +21,16 @@ const postRequest = async (req, res, next) => {
             }
         }
         req.body.user = req.user.profile._id
+        
+        if (req.body.requestType != "referel") {
 
-        const accData = await subAccountModel.findById(req.body.accountref)
-        if (!accData) {
-            return next(CustomError.badRequest("invalid Sub-Account Id"));
-        }
-        if (accData.type != "real") {
-            return next(CustomError.badRequest("Deposit only valid for real account"));
+            const accData = await subAccountModel.findById(req.body.accountref)
+            if (!accData) {
+                return next(CustomError.badRequest("invalid Sub-Account Id"));
+            }
+            if (accData.type != "real") {
+                return next(CustomError.badRequest("Withdrawal only valid for real account"));
+            }
         }
 
         if (req.file) {
