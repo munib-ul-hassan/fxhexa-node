@@ -43,7 +43,8 @@ const registerUser = async (req, res, next) => {
     //   return next(CustomError.createError("Must have to upload NIC", 400));
     // }
     const IsUser = await AuthModel.findOne({ identifier: email });
-    if (IsUser) {
+    console.log(IsUser)
+    if (IsUser && IsUser.isDeleted) {
       return next(CustomError.createError("User Already Exists", 400));
     }
 
@@ -63,19 +64,23 @@ const registerUser = async (req, res, next) => {
     //   //   
     //   // })
     // });
-
-    const auth = await new AuthModel({
-      identifier: email,
-      password,
-      accType,
-      refereCode,
-      phone,
-      // NIC: req.body.image
-    }).save();
-    if (referBy) {
+    let auth;
+    if (!IsUser) {
+      auth = await new AuthModel({
+        identifier: email,
+        password,
+        accType,
+        refereCode,
+        phone,
+        // NIC: req.body.image
+      }).save()
       const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: { user: auth._id } } }, { new: true })
-      console.log(referUSer)
-      await AuthModel.findByIdAndUpdate(auth._id, { referBy: referUSer._id })
+      if (referBy) {
+
+        await AuthModel.findByIdAndUpdate(auth._id, { referBy: referUSer._id })
+      }
+    } else {
+      auth = await AuthModel.findOneAndUpdate({ _id: IsUser._id }, { isDeleted: true }, { new: true })
     }
     if (!auth) {
       return next(CustomError.createError("error registering user", 200));
@@ -790,7 +795,7 @@ const getprofile = async (req, res, next) => {
 
     const data = await AuthModel.findById(user._id).populate({
       path: "profile",
-    }).populate("referer.user");  
+    }).populate("referer.user");
     const token = await tokenGen(data, "auth", req.body.deviceToken);
 
     const respdata = {
@@ -805,7 +810,7 @@ const getprofile = async (req, res, next) => {
       token: token,
       subAccounts: data.subAccounts,
       refereCode: data.refereCode,
-      referer:data.referer,
+      referer: data.referer,
 
       // demo: data.demo.length > 0 ? data.demo : [],
       // real: data.real.length > 0 ? data.real : [],
@@ -1006,7 +1011,7 @@ const addSubAcc = async (req, res, next) => {
       });
     }
     if (req.body.type == "demo") {
-      req.body.balance =  req.body.demoAmount
+      req.body.balance = req.body.demoAmount
     } else {
       req.body.balance = 0
 

@@ -83,7 +83,7 @@ cron.schedule('* * * * *', async () => {
                 return;
             }
 
-            if (item.status == "pending") {
+            if (item.status == "pending"&& item.openAmount) {
                 const accData = item.accountref
 
 
@@ -158,7 +158,7 @@ cron.schedule('* * * * *', async () => {
 
 
             }
-            if (item.status == "open") {
+            if (item.status == "open" && item.openAmount) {
                 let amount;
 
 
@@ -177,7 +177,7 @@ cron.schedule('* * * * *', async () => {
                     console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
 
                 }
-                if (item.orderType == "sell" && ((item.profitLimit <= closeAmount  && item.profitLimit != 0 )|| (item.stopLoss >= closeAmount && item.stopLoss != 0)) && item.openAmount) {
+                if (item.orderType == "sell" && ((item.profitLimit <= closeAmount  && item.profitLimit != 0 )|| (item.stopLoss >= closeAmount && item.stopLoss != 0))) {
 
                     console.log("open sell hit")
 
