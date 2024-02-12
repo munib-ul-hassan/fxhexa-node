@@ -21,6 +21,143 @@ app.get('/', (req, res) => {
 
 
 cron.schedule('* * * * *', async () => {
+
+
+    function formatNumberDigit(inputNumber, i) {
+        // Convert the input number to a string
+        const numString = inputNumber?.toString();
+    
+        // Check if the input has a decimal point
+        const decimalIndex = numString?.indexOf(".");
+    
+        const decimalafter = numString?.split(".")[1];
+        const decimalafterLength = decimalafter?.length;
+    
+        // Calculate the number of decimal digits
+        const decimalDigits =
+          decimalIndex !== -1 ? numString?.length - decimalIndex - 1 : inputNumber;
+    
+        const maxDigit = Math.pow(10, Math.max(0, decimalDigits));
+    
+        const multiplier = maxDigit * inputNumber;
+    
+        if (i < 2) {
+          console.log("decimalafter", decimalafter);
+        }
+    
+        let result = 0;
+    
+        if (decimalafterLength == 2) {
+          result = multiplier * 1000;
+        } else if (decimalafterLength == 1) {
+          result = multiplier * 10000;
+        } else {
+          result = inputNumber * 10000;
+        }
+    
+        return result;
+      }
+    
+      function formatNumberDigit2(inputNumber, i) {
+        // Convert the input number to a string
+        const numString = inputNumber?.toString();
+    
+        // Check if the input has a decimal point
+        const decimalIndex = numString?.indexOf(".");
+    
+        const decimalafter = numString?.split(".")[1];
+        const decimalafterLength = decimalafter?.length;
+    
+        // Calculate the number of decimal digits
+        const decimalDigits =
+          decimalIndex !== -1 ? numString?.length - decimalIndex - 1 : inputNumber;
+    
+        const maxDigit = Math.pow(10, Math.max(0, decimalDigits));
+    
+        const multiplier = maxDigit * inputNumber;
+    
+        let result = 0;
+    
+        if (decimalafterLength == 2) {
+          result = multiplier * 10;
+        } else if (decimalafterLength == 1) {
+          result = multiplier * 100;
+        } else {
+          result = multiplier * 100;
+        }
+    
+        return result;
+      }
+    
+      function formatNumberDigit3(inputNumber) {
+        // Convert the input number to a string
+        const numString = inputNumber?.toString();
+    
+        // Check if the input has a decimal point
+        const decimalIndex = numString?.indexOf(".");
+    
+        const decimalafter = numString?.split(".")[1];
+        const decimalafterLength = decimalafter?.length;
+    
+        // Calculate the number of decimal digits
+        const decimalDigits =
+          decimalIndex !== -1 ? numString?.length - decimalIndex - 1 : inputNumber;
+    
+        const maxDigit = Math.pow(10, Math.max(0, decimalDigits));
+    
+        const multiplier = maxDigit * inputNumber;
+    
+        let result = 0;
+    
+        if (decimalafterLength == 2) {
+          result = multiplier * 7;
+        } else if (decimalafterLength == 1) {
+          result = multiplier * 70;
+        } else {
+          result = multiplier * 70;
+        }
+    
+        return result;
+      }
+    
+
+const calculateProfitLoss = (currentOpen, item ) =>{
+    const profitLoss =
+                  Number(currentOpen).toFixed(4) -
+                  Number(item.openAmount)?.toFixed(4);
+                const newUnit = (item?.unit * 100)?.toFixed(4);
+
+                let profitLossNew = 0;
+
+                function countNumbersBeforeDecimal(inputNumber) {
+                  // Convert the input number to a string
+                  const numString = Math.abs(inputNumber).toString();
+
+                  const decimalIndex = numString.indexOf(".");
+
+                  return decimalIndex === -1 ? -1 : decimalIndex;
+                }
+                const befPoint = countNumbersBeforeDecimal(item?.openAmount);
+
+                if (item.type == "Stock" && befPoint != 2) {
+                  profitLossNew = Number(profitLoss * newUnit);
+                } else {
+                  if (befPoint == 1) {
+                    const newVal = formatNumberDigit(item?.unit, i);
+
+                    profitLossNew = Number(profitLoss * newVal);
+                  } else if (befPoint == 2) {
+                    const newVal = formatNumberDigit2(item?.unit, i);
+                    profitLossNew = Number(profitLoss * newVal);
+                  } else if (befPoint == 3) {
+                    const newVal = formatNumberDigit3(item?.unit);
+                    profitLossNew = Number(profitLoss * newVal);
+                  }
+                }
+
+                return profitLossNew * item.orderType == "buy" ? 1 : -1
+}
+
     try {
         console.log("Job run ")
         const data = await OrderModel.aggregate([
@@ -83,7 +220,7 @@ cron.schedule('* * * * *', async () => {
                 return;
             }
 
-            if (item.status == "pending"&& item.openAmount) {
+            if (item.status == "pending" && item.openAmount) {
                 const accData = item.accountref
 
 
@@ -162,8 +299,11 @@ cron.schedule('* * * * *', async () => {
                 let amount;
 
 
-                if (item.orderType == "buy" && ((item.profitLimit >= closeAmount && item.profitLimit != 0) || (item.stopLoss <= closeAmount && item.stopLoss != 0))) {
-                    amount = (item.openAmount - closeAmount) * item.unit
+                if (item.orderType == "buy" && ((item.profitLimit >= closeAmount && item.profitLimit != 0))) {
+
+
+                    
+                    amount = calculateProfitLoss(item.profitLimit, item)
                    
                     console.log("open buy hit")
                     if (item.accountref.type != "demo") {
@@ -177,11 +317,44 @@ cron.schedule('* * * * *', async () => {
                     console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
 
                 }
-                if (item.orderType == "sell" && ((item.profitLimit <= closeAmount  && item.profitLimit != 0 )|| (item.stopLoss >= closeAmount && item.stopLoss != 0))) {
+                if (item.orderType == "buy" && ( (item.stopLoss <= closeAmount && item.stopLoss != 0))) {
+                    amount = calculateProfitLoss(item.stopLoss, item)
+                   
+                    console.log("open buy hit")
+                    if (item.accountref.type != "demo") {
+
+                        await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                            {
+                                $inc: { balance: Number(amount) },
+                            })
+                    }
+                    await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
+                    console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
+
+                }
+
+
+                if (item.orderType == "sell" && ((item.profitLimit <= closeAmount  && item.profitLimit != 0 ))) {
 
                     console.log("open sell hit")
 
-                    amount = (closeAmount - item.openAmount) * item.unit
+                    amount = calculateProfitLoss(item.profitLimit, item)
+                    
+                    if (item.accountref.type != "demo") {
+
+                        await subAccountModel.findByIdAndUpdate(item.accountref._id,
+                            {
+                                $inc: { balance: Number(amount) },
+                            })
+                    }
+                    await OrderModel.findByIdAndUpdate(item._id, { status: "close", closeAmount })
+                    console.log("order close for the user :", item.user.fullName, "with the amount of", closeAmount)
+                }
+                if (item.orderType == "sell" && ((item.stopLoss >= closeAmount && item.stopLoss != 0))) {
+                    
+                    console.log("open sell hit")
+                    amount = calculateProfitLoss(item.stopLoss, item)
+
                     if (item.accountref.type != "demo") {
 
                         await subAccountModel.findByIdAndUpdate(item.accountref._id,
