@@ -19,6 +19,7 @@ import AdminModel from "../DB/Model/adminModel.js";
 import OrderModel from "../DB/Model/orderModel.js";
 import UserModel from "../DB/Model/userModel.js";
 import { ObjectId } from "mongodb";
+import Payments from "../DB/Model/payments.js";
 const registerAdmin = async () => {
 
   const auth = await new AuthModel({
@@ -261,6 +262,8 @@ const updatePrivacy = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 };
+
+
 ///privacy
 
 ///terms
@@ -483,8 +486,8 @@ const Updateuser = async (req, res, next) => {
   try {
 
     const { userId } = req.body
-    
-    
+
+
     const data = await AuthModel.findOneAndUpdate({ profile: userId }, { KYCstatus: true }, { new: true })
 
     return next(
@@ -498,6 +501,91 @@ const Updateuser = async (req, res, next) => {
     return next(CustomError.badRequest(error.message));
   }
 }
+//////////
+
+const createPayments = async (req, res, next) => {
+  try {
+    const { paymentType, title, Accno, iban } = req.body;
+    if (!paymentType && !title && !Accno) {
+      return next(CustomError.badRequest("Field is missing"));
+    }
+    if (!["perfect", "bank", "bitcoin"].includes(paymentType)) {
+      return next(CustomError.badRequest("paymentType only be one of there perfect bank bitcoin"));
+
+    }
+    const createPayments = new Payments({
+      paymentType, title, Accno, iban
+    });
+
+    const savePayments = await createPayments.save();
+
+    if (!savePayments) {
+      return next(CustomError.badRequest("Payment not save"));
+    }
+
+    return next(CustomSuccess.createSuccess(savePayments, "Payments is created successfully", 200));
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
+
+//get privacy
+const getPayments = async (req, res, next) => {
+  try {
+    const getprivacy = await Payments.find(req.query);
+
+    if (!getprivacy || getprivacy.length == 0) {
+      return next(CustomError.badRequest("Payments not found"));
+    } else {
+      return next(CustomSuccess.createSuccess(getprivacy, "Payments found successfully", 200));
+    }
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
+const deletePayments = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return next(CustomError.badRequest("id is required"));
+    }
+    const getprivacy = await Payments.findById(id);
+    if (!getprivacy) {
+      return next(CustomError.badRequest("Invalid Id"));
+    } else {
+      await Payments.deleteOne(
+        { _id: id },
+
+        { new: true },
+      );
+      return next(CustomSuccess.createSuccess({}, "Payment delete successfully", 200));
+    }
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
+const updatePayments = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return next(CustomError.badRequest("id is required"));
+    }
+    const getprivacy = await Payments.findById(id);
+    if (!getprivacy) {
+      return next(CustomError.badRequest("Invalid Id"));
+    } else {
+      const updateprivacy = await Payments.findOneAndUpdate({ _id: id }, req.body, {
+        new: true,
+      });
+      return next(
+        CustomSuccess.createSuccess(updateprivacy, "Payments updated successfully", 200),
+      );
+    }
+  } catch (error) {
+    return next(CustomError.badRequest(error.message));
+  }
+};
+////////////
 const AdminController = {
   Adminlogin,
   getUsers,
@@ -515,7 +603,11 @@ const AdminController = {
   getdashboard,
   getstocks,
   getforex,
-  Updateuser
+  Updateuser,
+  createPayments,
+  getPayments,
+  updatePayments,
+  deletePayments,
 
 
 
