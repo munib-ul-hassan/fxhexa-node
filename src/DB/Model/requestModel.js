@@ -25,7 +25,7 @@ const Requestschema = new Schema({
 
     paymentType: {
         type: String,
-        enum: ["perfect", "bank", "bitcoin"]
+        // enum: ["perfect", "bank", "bitcoin"]
     },
     requestType: {
         type: String,

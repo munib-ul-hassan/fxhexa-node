@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const paymentsschema = new Schema({
   paymentType: {
     type: String,
-    enum: ["perfect", "bank", "bitcoin"]
+    // enum: ["perfect", "bank", "bitcoin"]
   },
   title: String,
   Accno: String,

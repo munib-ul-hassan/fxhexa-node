@@ -46,29 +46,29 @@ const postRequest = async (req, res, next) => {
 
 
         }
-        if (req.body.paymentType == "perfect" && req.body.requestType == "deposit") {
-            await subAccountModel.findByIdAndUpdate(req.body.accountref, {
-                $inc: { balance: req.body.amount }
-            })
-            req.body.status == "accepted"
-            const requestData = await (new RequestModel(
-                req.body
-            )).save()
-            if (requestData) {
-                return next(
-                    CustomSuccess.createSuccess(
-                        requestData,
-                        "Amount deposit Successfully",
-                        200
-                    )
-                );
-            } else {
-                return next(
-                    CustomError.createError("Error Occured", 200)
-                );
-            }
+        // if (req.body.paymentType == "perfect" && req.body.requestType == "deposit") {
+        //     await subAccountModel.findByIdAndUpdate(req.body.accountref, {
+        //         $inc: { balance: req.body.amount }
+        //     })
+        //     req.body.status == "accepted"
+        //     const requestData = await (new RequestModel(
+        //         req.body
+        //     )).save()
+        //     if (requestData) {
+        //         return next(
+        //             CustomSuccess.createSuccess(
+        //                 requestData,
+        //                 "Amount deposit Successfully",
+        //                 200
+        //             )
+        //         );
+        //     } else {
+        //         return next(
+        //             CustomError.createError("Error Occured", 200)
+        //         );
+        //     }
 
-        }
+        // }
         const requestData = await (new RequestModel(
             req.body
         )).save()
