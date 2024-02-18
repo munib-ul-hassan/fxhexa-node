@@ -509,6 +509,7 @@ const createPayments = async (req, res, next) => {
     if (!paymentType && !title && !Accno) {
       return next(CustomError.badRequest("Field is missing"));
     }
+    
     // if (!["perfect", "bank", "bitcoin"].includes(paymentType)) {
     //   return next(CustomError.badRequest("paymentType only be one of there perfect bank bitcoin"));
 
