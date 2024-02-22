@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('* * * * * *', async () => {
 
 
     function formatNumberDigit(inputNumber, i) {
@@ -143,11 +143,11 @@ const calculateProfitLoss = (currentOpen, item ) =>{
                   profitLossNew = Number(profitLoss * newUnit);
                 } else {
                   if (befPoint == 1) {
-                    const newVal = formatNumberDigit(item?.unit, i);
+                    const newVal = formatNumberDigit(item?.unit, 1);
 
                     profitLossNew = Number(profitLoss * newVal);
                   } else if (befPoint == 2) {
-                    const newVal = formatNumberDigit2(item?.unit, i);
+                    const newVal = formatNumberDigit2(item?.unit, 2);
                     profitLossNew = Number(profitLoss * newVal);
                   } else if (befPoint == 3) {
                     const newVal = formatNumberDigit3(item?.unit);
