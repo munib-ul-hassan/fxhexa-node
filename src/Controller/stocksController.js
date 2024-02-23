@@ -70,8 +70,9 @@ const getData = async (req, res) => {
     const stockurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`;
 
     try {
-      while (stockdata == undefined) {
+      while (stockdata == undefined|| stockdata == null) {
         stockdata = (await axios.get(stockurl)).data;
+        stockdata= stockdata?stockdata:null
       }
 
       stockdata[0] = {
@@ -129,7 +130,7 @@ const getData = async (req, res) => {
       "C:GBPNZD,GBP_NZD",
     ];
     try {
-      while(forexdata==undefined){
+      while(forexdata==undefined||forexdata==null){
 
         const forexurl = `https://live-rates.com/api/price?key=${
           process.env.key
@@ -142,14 +143,17 @@ const getData = async (req, res) => {
         forexdata = (await axios.get(forexurl)).data.map((item, i) => {
           return { ...item, symbol: forex[i].split(",")[0] };
         });
+        forexdata=forexdata?forexdata:null
       }
     } catch (err) {}
 
     try {
       const metalsurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=GOLD,SILVER,PLATINUM`;
-      while(metalsdata==undefined){
+      while(metalsdata==undefined||metalsdata==null){
         metalsdata = (await axios.get(metalsurl))?.data;
       }
+      metalsdata=metalsdata?metalsdata:null
+
       metalsdata[0] = {
         ...metalsdata[0],
         label: "GOLD",
@@ -171,9 +175,10 @@ const getData = async (req, res) => {
     } catch (err) {}
     try {
       const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
-      while(oildata==undefined){
+      while(oildata==undefined|| oildata==null){
         oildata = (await axios.get(oilurl))?.data;
       }
+      oildata=oildata?oildata:null
       oildata[0] = {
         ...oildata[0],
         label: "US OIL",
