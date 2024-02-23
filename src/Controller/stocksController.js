@@ -66,6 +66,7 @@ const getrealTimeData = async (req, res) => {
 const getData = async (req, res) => {
   try {
     let stockdata, forexdata, metalsdata, oildata;
+    console.log(process.env.key)
     const stockurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`;
 
     try {
