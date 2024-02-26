@@ -63,143 +63,262 @@ const getrealTimeData = async (req, res) => {
 //         })
 //     }
 // }
-const getData = async (req, res) => {
-  try {
-    let stockdata, forexdata, metalsdata, oildata;
-    console.log(process.env.key)
-    const stockurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`;
+const makeDelayedRequest = (url, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        const response = await axios.get(url);
+        resolve(response.data.response);
+      } catch (error) {
+        console.log(url)
+        // reject(error);
+        reject(error);
 
-    try {
-      while (stockdata == undefined|| stockdata == null) {
-        stockdata = (await axios.get(stockurl)).data;
-        stockdata= stockdata?stockdata:null
       }
+    }, delay);
+  });
+};
 
-      stockdata[0] = {
-        ...stockdata[0],
+const getData = async (req, res) => {
+// old work
+  // try {
+  //   const stockurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`;
+  //   let stockdata =await makeDelayedRequest(stockurl,1000)
+  //   //  (await axios.get(stockurl)).data;
+  //   if (stockdata) {
+  //     stockdata[0] = {
+  //       ...stockdata[0],
+  //       label: "APPLE",
+  //       value: "NASDAQ:AAPL",
+  //       ticket: "AAPL",
+  //     };
+  //     stockdata[1] = {
+  //       ...stockdata[1],
+  //       label: "AMAZON",
+  //       value: "NASDAQ:AMZN",
+  //       ticket: "AMZN",
+  //     };
+  //     stockdata[2] = {
+  //       ...stockdata[2],
+  //       label: "TESLA",
+  //       value: "NASDAQ:TSLA",
+  //       ticket: "TSLA",
+  //     };
+  //     stockdata[3] = {
+  //       ...stockdata[3],
+  //       label: "FACEBOOK",
+  //       value: "NASDAQ:META",
+  //       ticket: "FB",
+  //     };
+  //     stockdata[4] = {
+  //       ...stockdata[4],
+  //       label: "GOOGLE",
+  //       value: "NASDAQ:GOOG",
+  //       ticket: "GOOGL",
+  //     };
+  //   }
+  //   const forex = [
+  //     "C:EURUSD,EUR_USD",
+  //     "C:GBPUSD,GBP_USD",
+  //     "C:EURJPY,EUR_JPY",
+  //     "C:USDJPY,USD_JPY",
+  //     "C:EURCHF,EUR_CHF",
+  //     "C:USDCHF,USD_CHF",
+  //     "C:AUDUSD,AUD_USD",
+  //     "C:USDCAD,USD_CAD",
+  //     "C:EURGBP,EUR_GBP",
+  //     "C:EURAUD,EUR_AUD",
+  //     "C:GBPCHF,GBP_CHF",
+  //     "C:GBPJPY,GBP_JPY",
+  //     "C:AUDNZD,AUD_NZD",
+  //     "C:AUDCAD,AUD_CAD",
+  //     "C:AUDJPY,AUD_JPY",
+  //     "C:EURNZD,EUR_NZD",
+  //     "C:EURCAD,EUR_CAD",
+  //     "C:GBPCAD,GBP_CAD",
+  //     "C:GBPAUD,GBP_AUD",
+  //     "C:GBPNZD,GBP_NZD",
+  //   ];
+  //   const forexurl = `https://live-rates.com/api/price?key=${
+  //     process.env.key
+  //   }&rate=${forex
+  //     .map((item) => {
+  //       return item.split(":")[1].split(",")[1];
+  //     })
+  //     .join(",")}`;
+
+  //   let forexdata = [...(await makeDelayedRequest(forexurl,1000))].map((item, i) => {
+  //     return { ...item, symbol: forex[i].split(",")[0] };
+  //   });
+
+  //   const metalsurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=GOLD,SILVER,PLATINUM`;
+  //   let metalsdata = (await makeDelayedRequest(metalsurl,1000));
+  //   metalsdata[0] = {
+  //     ...metalsdata[0],
+  //     label: "GOLD",
+  //     value: "TVC%3AGOLD",
+  //     ticket: "XAUUSD",
+  //   };
+  //   metalsdata[1] = {
+  //     ...metalsdata[1],
+  //     label: "SILVER",
+  //     value: "TVC:SILVER",
+  //     ticket: "XAGUSD",
+  //   };
+  //   metalsdata[2] = {
+  //     ...metalsdata[2],
+  //     label: "PLATINUM",
+  //     value: "CAPITALCOM:PLATINUM",
+  //     ticket: "XPTUSD",
+  //   };
+
+  //   const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
+  //   let oildata = (await makeDelayedRequest(oilurl,1000));
+  //   oildata[0] = {
+  //     ...oildata[0],
+  //     label: "US OIL",
+  //     value: "TVC:USOIL",
+  //     ticket: "OIL",
+  //   };
+  //   oildata[1] = {
+  //     ...oildata[1],
+  //     label: "UK OIL",
+  //     value: "TVC:UKOIL",
+  //     ticket: "OILD",
+  //   };
+
+  //   return res.json({
+  //     status: true,
+  //     data: {
+  //       stock: stockdata,
+  //       forex: forexdata,
+  //       metals: metalsdata,
+  //       oil: oildata,
+  //     },
+  //     message: "data get successfully",
+  //   });
+  // } catch (error) {
+  //   return res.json({
+  //     status: false,
+  //     message: error.message,
+  //   });
+  // }
+
+
+   try {
+    const stockurl = `https://fcsapi.com/api-v3/stock/latest?id=15,101,38,112,56&access_key=${process.env.fcsapikey}`;
+    console.log(stockurl)
+    let stockdata =await makeDelayedRequest(stockurl,1000)
+    //  (await axios.get(stockurl)).data;
+    if (stockdata) {
+      stockdata[1] = {
+        ...stockdata[1],
         label: "APPLE",
         value: "NASDAQ:AAPL",
         ticket: "AAPL",
       };
-      stockdata[1] = {
-        ...stockdata[1],
+      stockdata[2] = {
+        ...stockdata[2],
         label: "AMAZON",
         value: "NASDAQ:AMZN",
         ticket: "AMZN",
       };
-      stockdata[2] = {
-        ...stockdata[2],
+      stockdata[3] = {
+        ...stockdata[3],
         label: "TESLA",
         value: "NASDAQ:TSLA",
         ticket: "TSLA",
       };
-      stockdata[3] = {
-        ...stockdata[3],
+      stockdata[4] = {
+        ...stockdata[4],
         label: "FACEBOOK",
         value: "NASDAQ:META",
         ticket: "FB",
       };
-      stockdata[4] = {
-        ...stockdata[4],
+      stockdata[0] = {
+        ...stockdata[0],
         label: "GOOGLE",
         value: "NASDAQ:GOOG",
         ticket: "GOOGL",
       };
-    } catch (err) {}
-
+    }
     const forex = [
-      "C:EURUSD,EUR_USD",
-      "C:GBPUSD,GBP_USD",
-      "C:EURJPY,EUR_JPY",
-      "C:USDJPY,USD_JPY",
-      "C:EURCHF,EUR_CHF",
-      "C:USDCHF,USD_CHF",
-      "C:AUDUSD,AUD_USD",
-      "C:USDCAD,USD_CAD",
-      "C:EURGBP,EUR_GBP",
-      "C:EURAUD,EUR_AUD",
-      "C:GBPCHF,GBP_CHF",
-      "C:GBPJPY,GBP_JPY",
-      "C:AUDNZD,AUD_NZD",
-      "C:AUDCAD,AUD_CAD",
-      "C:AUDJPY,AUD_JPY",
-      "C:EURNZD,EUR_NZD",
-      "C:EURCAD,EUR_CAD",
-      "C:GBPCAD,GBP_CAD",
-      "C:GBPAUD,GBP_AUD",
-      "C:GBPNZD,GBP_NZD",
+      ["C:EURUSD,EUR_USD",1],
+      ["C:GBPUSD,GBP_USD",39],
+      ["C:EURJPY,EUR_JPY",3],
+      ["C:USDJPY,USD_JPY",20],
+      ["C:EURCHF,EUR_CHF",2],
+      ["C:USDCHF,USD_CHF",19],
+      ["C:AUDUSD,AUD_USD",13],
+      ["C:USDCAD,USD_CAD",18],
+      ["C:EURGBP,EUR_GBP",4],
+      ["C:EURAUD,EUR_AUD",12],
+      ["C:GBPCHF,GBP_CHF",141],
+      ["C:GBPJPY,GBP_JPY",113],
+[      "C:AUDNZD,AUD_NZD",114],
+      ["C:AUDCAD,AUD_CAD",16],
+      ["C:AUDJPY,AUD_JPY",14],
+      ["C:EURNZD,EUR_NZD",5],
+      ["C:EURCAD,EUR_CAD",6],
+      ["C:GBPCAD,GBP_CAD",40],
+      ["C:GBPAUD,GBP_AUD",48],
+      ["C:GBPNZD,GBP_NZD",42]
     ];
-    try {
-      while(forexdata==undefined||forexdata==null){
+    const forexurl = `https://fcsapi.com/api-v3/forex/latest?access_key=${
+      process.env.fcsapikey
+    }&id=${forex
+      .map((item) => {
+        return item[1];
+      })
+      .join(",")}`;
 
-        const forexurl = `https://live-rates.com/api/price?key=${
-          process.env.key
-        }&rate=${forex
-          .map((item) => {
-            return item.split(":")[1].split(",")[1];
-          })
-          .join(",")}`;
-  
-        forexdata = (await axios.get(forexurl)).data.map((item, i) => {
-          return { ...item, symbol: forex[i].split(",")[0] };
-        });
-        forexdata=forexdata?forexdata:null
-      }
-    } catch (err) {}
+    let forexdata = [...(await makeDelayedRequest(forexurl,1000))].map((item, i) => {
+      return { ...item, symbol: forex[i][0].split(",")[0] };
+    });
 
-    try {
-      const metalsurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=GOLD,SILVER,PLATINUM`;
-      while(metalsdata==undefined||metalsdata==null){
-        metalsdata = (await axios.get(metalsurl))?.data;
-      }
-      metalsdata=metalsdata?metalsdata:null
+    // const metalsurl = `https://fcsapi.com/api-v3/stock/latest?id=&access_key=${process.env.fcsapikey}`;
+    // let metalsdata = (await makeDelayedRequest(metalsurl,1000));
+    // metalsdata[0] = {
+    //   ...metalsdata[0],
+    //   label: "GOLD",
+    //   value: "TVC%3AGOLD",
+    //   ticket: "XAUUSD",
+    // };
+    // metalsdata[1] = {
+    //   ...metalsdata[1],
+    //   label: "SILVER",
+    //   value: "TVC:SILVER",
+    //   ticket: "XAGUSD",
+    // };
+    // metalsdata[2] = {
+    //   ...metalsdata[2],
+    //   label: "PLATINUM",
+    //   value: "CAPITALCOM:PLATINUM",
+    //   ticket: "XPTUSD",
+    // };
 
-      metalsdata[0] = {
-        ...metalsdata[0],
-        label: "GOLD",
-        value: "TVC%3AGOLD",
-        ticket: "XAUUSD",
-      };
-      metalsdata[1] = {
-        ...metalsdata[1],
-        label: "SILVER",
-        value: "TVC:SILVER",
-        ticket: "XAGUSD",
-      };
-      metalsdata[2] = {
-        ...metalsdata[2],
-        label: "PLATINUM",
-        value: "CAPITALCOM:PLATINUM",
-        ticket: "XPTUSD",
-      };
-    } catch (err) {}
-    try {
-      const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
-      while(oildata==undefined|| oildata==null){
-        oildata = (await axios.get(oilurl))?.data;
-      }
-      oildata=oildata?oildata:null
-      oildata[0] = {
-        ...oildata[0],
-        label: "US OIL",
-        value: "TVC:USOIL",
-        ticket: "OIL",
-      };
-      oildata[1] = {
-        ...oildata[1],
-        label: "UK OIL",
-        value: "TVC:UKOIL",
-        ticket: "OILD",
-      };
-    } catch (err) {}
+    // const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
+    // let oildata = (await makeDelayedRequest(oilurl,1000));
+    // oildata[0] = {
+    //   ...oildata[0],
+    //   label: "US OIL",
+    //   value: "TVC:USOIL",
+    //   ticket: "OIL",
+    // };
+    // oildata[1] = {
+    //   ...oildata[1],
+    //   label: "UK OIL",
+    //   value: "TVC:UKOIL",
+    //   ticket: "OILD",
+    // };
 
     return res.json({
       status: true,
       data: {
-        stock: stockdata ? stockdata : null,
-        forex: forexdata ? forexdata : null,
-        metals: metalsdata ? metalsdata : null,
-        oil: oildata ? oildata : null,
+        stock: stockdata,
+        forex: forexdata,
+        metals: null,
+        oil: null,
       },
       message: "data get successfully",
     });

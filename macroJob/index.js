@@ -159,7 +159,7 @@ const calculateProfitLoss = (currentOpen, item ) =>{
 }
 
     try {
-        console.log("Job run ")
+        // console.log("Job run ")
         const data = await OrderModel.aggregate([
             { $match: { status: { $ne: "close" }, profitLimit: { $ne: null }, stopLoss: { $ne: null } ,openAmount: { $ne: null } ,unit: { $ne: null } } }
             ,
