@@ -68,19 +68,38 @@ const makeDelayedRequest = (url, delay) => {
     setTimeout(async () => {
       try {
         const response = await axios.get(url);
-        resolve(response.data.response);
+        if (!response.data?.response) {
+          console.log(response);
+        }
+        resolve(
+          response.data?.response?.map((i) => {
+            let { id, c, h, l, ch, cp, t, s, ccy, exch } = i;
+            return {
+              id,
+              currency: c,
+              rate: "",
+              bid: "",
+              ask: "",
+              high: h,
+              low: l,
+              open: "",
+              close: "",
+              timestamp: t,
+              exch,
+            };
+          })
+        );
       } catch (error) {
-        console.log(url)
+        console.log(url, error, "=================");
         // reject(error);
         reject(error);
-
       }
     }, delay);
   });
 };
 
 const getData = async (req, res) => {
-// old work
+  // old work
   // try {
   //   const stockurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=%23APPLE,%23TESLA,GOOG.us,%23FACEBOOK,%23AMAZON`;
   //   let stockdata =await makeDelayedRequest(stockurl,1000)
@@ -204,11 +223,10 @@ const getData = async (req, res) => {
   //   });
   // }
 
-
-   try {
+  try {
     const stockurl = `https://fcsapi.com/api-v3/stock/latest?id=15,101,38,112,56&access_key=${process.env.fcsapikey}`;
-    console.log(stockurl)
-    let stockdata =await makeDelayedRequest(stockurl,1000)
+    
+    let stockdata = await makeDelayedRequest(stockurl, 1000);
     //  (await axios.get(stockurl)).data;
     if (stockdata) {
       stockdata[1] = {
@@ -243,26 +261,26 @@ const getData = async (req, res) => {
       };
     }
     const forex = [
-      ["C:EURUSD,EUR_USD",1],
-      ["C:GBPUSD,GBP_USD",39],
-      ["C:EURJPY,EUR_JPY",3],
-      ["C:USDJPY,USD_JPY",20],
-      ["C:EURCHF,EUR_CHF",2],
-      ["C:USDCHF,USD_CHF",19],
-      ["C:AUDUSD,AUD_USD",13],
-      ["C:USDCAD,USD_CAD",18],
-      ["C:EURGBP,EUR_GBP",4],
-      ["C:EURAUD,EUR_AUD",12],
-      ["C:GBPCHF,GBP_CHF",141],
-      ["C:GBPJPY,GBP_JPY",113],
-[      "C:AUDNZD,AUD_NZD",114],
-      ["C:AUDCAD,AUD_CAD",16],
-      ["C:AUDJPY,AUD_JPY",14],
-      ["C:EURNZD,EUR_NZD",5],
-      ["C:EURCAD,EUR_CAD",6],
-      ["C:GBPCAD,GBP_CAD",40],
-      ["C:GBPAUD,GBP_AUD",48],
-      ["C:GBPNZD,GBP_NZD",42]
+      ["C:EURUSD,EUR_USD", 1],
+      ["C:GBPUSD,GBP_USD", 39],
+      ["C:EURJPY,EUR_JPY", 3],
+      ["C:USDJPY,USD_JPY", 20],
+      ["C:EURCHF,EUR_CHF", 2],
+      ["C:USDCHF,USD_CHF", 19],
+      ["C:AUDUSD,AUD_USD", 13],
+      ["C:USDCAD,USD_CAD", 18],
+      ["C:EURGBP,EUR_GBP", 4],
+      ["C:EURAUD,EUR_AUD", 12],
+      ["C:GBPCHF,GBP_CHF", 141],
+      ["C:GBPJPY,GBP_JPY", 113],
+      ["C:AUDNZD,AUD_NZD", 114],
+      ["C:AUDCAD,AUD_CAD", 16],
+      ["C:AUDJPY,AUD_JPY", 14],
+      ["C:EURNZD,EUR_NZD", 5],
+      ["C:EURCAD,EUR_CAD", 6],
+      ["C:GBPCAD,GBP_CAD", 40],
+      ["C:GBPAUD,GBP_AUD", 48],
+      ["C:GBPNZD,GBP_NZD", 42],
     ];
     const forexurl = `https://fcsapi.com/api-v3/forex/latest?access_key=${
       process.env.fcsapikey
@@ -271,58 +289,67 @@ const getData = async (req, res) => {
         return item[1];
       })
       .join(",")}`;
+    
+    let forexdata = [...(await makeDelayedRequest(forexurl, 1000))].map(
+      (item, i) => {
+        return { ...item, symbol: forex[i][0].split(",")[0] };
+      }
+    );
+    
+     const metalsurl = `https://fcsapi.com/api-v3/forex/latest?access_key=${
+      process.env.fcsapikey
+    }&id=1984,1975,1987`;
+    let metalsdata = (await makeDelayedRequest(metalsurl,1000));
+    console.log(metalsdata)
+    if(metalsdata?.length>0){
+    metalsdata[0] = {
+      ...metalsdata[0],
+      label: "GOLD",
+      value: "TVC%3AGOLD",
+      ticket: "XAUUSD",
+    };
+    metalsdata[1] = {
+      ...metalsdata[1],
+      label: "SILVER",
+      value: "TVC:SILVER",
+      ticket: "XAGUSD",
+    };
+    metalsdata[2] = {
+      ...metalsdata[2],
+      label: "PLATINUM",
+      value: "CAPITALCOM:PLATINUM",
+      ticket: "XPTUSD",
+    };
+}
 
-    let forexdata = [...(await makeDelayedRequest(forexurl,1000))].map((item, i) => {
-      return { ...item, symbol: forex[i][0].split(",")[0] };
-    });
-
-    // const metalsurl = `https://fcsapi.com/api-v3/stock/latest?id=&access_key=${process.env.fcsapikey}`;
-    // let metalsdata = (await makeDelayedRequest(metalsurl,1000));
-    // metalsdata[0] = {
-    //   ...metalsdata[0],
-    //   label: "GOLD",
-    //   value: "TVC%3AGOLD",
-    //   ticket: "XAUUSD",
-    // };
-    // metalsdata[1] = {
-    //   ...metalsdata[1],
-    //   label: "SILVER",
-    //   value: "TVC:SILVER",
-    //   ticket: "XAGUSD",
-    // };
-    // metalsdata[2] = {
-    //   ...metalsdata[2],
-    //   label: "PLATINUM",
-    //   value: "CAPITALCOM:PLATINUM",
-    //   ticket: "XPTUSD",
-    // };
-
-    // const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
-    // let oildata = (await makeDelayedRequest(oilurl,1000));
-    // oildata[0] = {
-    //   ...oildata[0],
-    //   label: "US OIL",
-    //   value: "TVC:USOIL",
-    //   ticket: "OIL",
-    // };
-    // oildata[1] = {
-    //   ...oildata[1],
-    //   label: "UK OIL",
-    //   value: "TVC:UKOIL",
-    //   ticket: "OILD",
-    // };
-
+    const oilurl = `https://fcsapi.com/api-v3/stock/latest?id=50,134&access_key=${process.env.fcsapikey}`;
+    let oildata = (await makeDelayedRequest(oilurl,1000));
+    if(oildata?.length>0){
+    oildata[0] = {
+      ...oildata[0],
+      label: "US OIL",
+      value: "TVC:USOIL",
+      ticket: "OIL",
+    };
+    oildata[1] = {
+      ...oildata[1],
+      label: "UK OIL",
+      value: "TVC:UKOIL",
+      ticket: "OILD",
+    };
+}
     return res.json({
       status: true,
       data: {
         stock: stockdata,
         forex: forexdata,
-        metals: null,
-        oil: null,
+        metals: metalsdata,
+        oil: oildata,
       },
       message: "data get successfully",
     });
   } catch (error) {
+    console.log(error);
     return res.json({
       status: false,
       message: error.message,
