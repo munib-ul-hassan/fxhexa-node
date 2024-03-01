@@ -20,7 +20,7 @@ const open = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status } = req.body;
+    const { unit, orderType, stock, subAccId, openAmount, stopLoss, profitLimit, status ,forex} = req.body;
 
     const accData = await subAccountModel.findById(subAccId)
     if (!accData) {
@@ -39,11 +39,12 @@ const open = async (req, res, next) => {
       const Order = new OrderModel({
         user: req.user._doc.profile._id,
         accountref: accData._id,
-        prevBalance: accData.balance, unit, stock,
+        prevBalance: accData.balance, unit, stock,forex,
         orderType, openAmount,
         unit,
         stopLoss, profitLimit,
-        status: "pending"
+        status: "pending",
+
       })
       await Order.save()
 
@@ -88,7 +89,7 @@ console.log("accData.type",accData.type)
     const Order = new OrderModel({
       user: req.user._doc.profile._id,
       accountref: accData._id,
-      prevBalance: accData.balance, unit, stock,
+      prevBalance: accData.balance, unit, stock,forex,
       orderType, openAmount,
       stopLoss, profitLimit,
       status: "open"

@@ -26,7 +26,9 @@ const OrderSchema = new Schema(
     stock: {
       type: String
     },
-
+    forex: {
+      type: String
+    },
     prevBalance: {
       type: Number
     },

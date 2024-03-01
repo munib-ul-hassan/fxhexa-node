@@ -3,6 +3,8 @@ import joi from "joi";
 export const openOrderValidator = joi.object({
   unit: joi.number().required(),
   stock: joi.string(),  
+  forex: joi.string(),  
+
   openAmount: joi.number().required(),
   orderType: joi.string().valid("buy", "sell"),
   status: joi.string().valid("pending", "open"),

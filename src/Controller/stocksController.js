@@ -1,4 +1,5 @@
 import axios from "axios";
+import { appendFile } from "fs";
 const getrealTimeData = async (req, res) => {
   try {
     const { ticket } = req.query;
@@ -65,11 +66,12 @@ const getrealTimeData = async (req, res) => {
 // }
 const makeDelayedRequest = (url, delay) => {
   return new Promise((resolve, reject) => {
+    console.log(url)
     setTimeout(async () => {
       try {
         const response = await axios.get(url);
         if (!response.data?.response) {
-          console.log(response);
+          console.log(response.data);
         }
         resolve(
           response.data?.response?.map((i) => {
@@ -90,7 +92,7 @@ const makeDelayedRequest = (url, delay) => {
           })
         );
       } catch (error) {
-        console.log(url, error, "=================");
+        // console.log(url, error, "=================");
         // reject(error);
         reject(error);
       }
@@ -170,49 +172,49 @@ const getData = async (req, res) => {
   //     return { ...item, symbol: forex[i].split(",")[0] };
   //   });
 
-  //   const metalsurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=GOLD,SILVER,PLATINUM`;
-  //   let metalsdata = (await makeDelayedRequest(metalsurl,1000));
-  //   metalsdata[0] = {
-  //     ...metalsdata[0],
-  //     label: "GOLD",
-  //     value: "TVC%3AGOLD",
-  //     ticket: "XAUUSD",
-  //   };
-  //   metalsdata[1] = {
-  //     ...metalsdata[1],
-  //     label: "SILVER",
-  //     value: "TVC:SILVER",
-  //     ticket: "XAGUSD",
-  //   };
-  //   metalsdata[2] = {
-  //     ...metalsdata[2],
-  //     label: "PLATINUM",
-  //     value: "CAPITALCOM:PLATINUM",
-  //     ticket: "XPTUSD",
-  //   };
+  //   // const metalsurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=GOLD,SILVER,PLATINUM`;
+  //   // let metalsdata = (await makeDelayedRequest(metalsurl,1000));
+  //   // metalsdata[0] = {
+  //   //   ...metalsdata[0],
+  //   //   label: "GOLD",
+  //   //   value: "TVC%3AGOLD",
+  //   //   ticket: "XAUUSD",
+  //   // };
+  //   // metalsdata[1] = {
+  //   //   ...metalsdata[1],
+  //   //   label: "SILVER",
+  //   //   value: "TVC:SILVER",
+  //   //   ticket: "XAGUSD",
+  //   // };
+  //   // metalsdata[2] = {
+  //   //   ...metalsdata[2],
+  //   //   label: "PLATINUM",
+  //   //   value: "CAPITALCOM:PLATINUM",
+  //   //   ticket: "XPTUSD",
+  //   // };
 
-  //   const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
-  //   let oildata = (await makeDelayedRequest(oilurl,1000));
-  //   oildata[0] = {
-  //     ...oildata[0],
-  //     label: "US OIL",
-  //     value: "TVC:USOIL",
-  //     ticket: "OIL",
-  //   };
-  //   oildata[1] = {
-  //     ...oildata[1],
-  //     label: "UK OIL",
-  //     value: "TVC:UKOIL",
-  //     ticket: "OILD",
-  //   };
+  //   // const oilurl = `https://live-rates.com/api/price?key=${process.env.key}&rate=USOil,UKOil`;
+  //   // let oildata = (await makeDelayedRequest(oilurl,1000));
+  //   // oildata[0] = {
+  //   //   ...oildata[0],
+  //   //   label: "US OIL",
+  //   //   value: "TVC:USOIL",
+  //   //   ticket: "OIL",
+  //   // };
+  //   // oildata[1] = {
+  //   //   ...oildata[1],
+  //   //   label: "UK OIL",
+  //   //   value: "TVC:UKOIL",
+  //   //   ticket: "OILD",
+  //   // };
 
   //   return res.json({
   //     status: true,
   //     data: {
   //       stock: stockdata,
   //       forex: forexdata,
-  //       metals: metalsdata,
-  //       oil: oildata,
+  //       // metals: metalsdata,
+  //       // oil: oildata,
   //     },
   //     message: "data get successfully",
   //   });
@@ -224,37 +226,41 @@ const getData = async (req, res) => {
   // }
 
   try {
-    const stockurl = `https://fcsapi.com/api-v3/stock/latest?id=15,101,38,112,56&access_key=${process.env.fcsapikey}`;
-    
+    const stockurl = `https://fcsapi.com/api-v3/stock/latest?id=15,101,38,112,56,50,134&access_key=${process.env.fcsapikey}`;
+
     let stockdata = await makeDelayedRequest(stockurl, 1000);
     //  (await axios.get(stockurl)).data;
+    let stocks=[];
     if (stockdata) {
-      stockdata[1] = {
-        ...stockdata[1],
+      stocks[1] = {
+        ...stockdata.filter((i)=>{return i.id == 15})[0],
         label: "APPLE",
         value: "NASDAQ:AAPL",
         ticket: "AAPL",
       };
-      stockdata[2] = {
-        ...stockdata[2],
+      stocks[2] = {
+        ...stockdata.filter((i)=>{return i.id == 56})[0],
         label: "AMAZON",
         value: "NASDAQ:AMZN",
         ticket: "AMZN",
       };
-      stockdata[3] = {
-        ...stockdata[3],
+      stocks[3] = {
+        ...stockdata.filter((i)=>{return i.id == 101})[0],
+
         label: "TESLA",
         value: "NASDAQ:TSLA",
         ticket: "TSLA",
       };
-      stockdata[4] = {
-        ...stockdata[4],
+      stocks[4] = {
+        ...stockdata.filter((i)=>{return i.id == 112})[0],
+
         label: "FACEBOOK",
         value: "NASDAQ:META",
         ticket: "FB",
       };
-      stockdata[0] = {
-        ...stockdata[0],
+      stocks[0] = {
+        ...stockdata.filter((i)=>{return i.id == 56})[0],
+
         label: "GOOGLE",
         value: "NASDAQ:GOOG",
         ticket: "GOOGL",
@@ -289,59 +295,61 @@ const getData = async (req, res) => {
         return item[1];
       })
       .join(",")}`;
-    
+
     let forexdata = [...(await makeDelayedRequest(forexurl, 1000))].map(
       (item, i) => {
         return { ...item, symbol: forex[i][0].split(",")[0] };
       }
     );
-    
-     const metalsurl = `https://fcsapi.com/api-v3/forex/latest?access_key=${
-      process.env.fcsapikey
-    }&id=1984,1975,1987`;
-    let metalsdata = (await makeDelayedRequest(metalsurl,1000));
-    console.log(metalsdata)
-    if(metalsdata?.length>0){
-    metalsdata[0] = {
-      ...metalsdata[0],
-      label: "GOLD",
-      value: "TVC%3AGOLD",
-      ticket: "XAUUSD",
-    };
-    metalsdata[1] = {
-      ...metalsdata[1],
-      label: "SILVER",
-      value: "TVC:SILVER",
-      ticket: "XAGUSD",
-    };
-    metalsdata[2] = {
-      ...metalsdata[2],
-      label: "PLATINUM",
-      value: "CAPITALCOM:PLATINUM",
-      ticket: "XPTUSD",
-    };
-}
 
-    const oilurl = `https://fcsapi.com/api-v3/stock/latest?id=50,134&access_key=${process.env.fcsapikey}`;
-    let oildata = (await makeDelayedRequest(oilurl,1000));
-    if(oildata?.length>0){
+    const metalsurl = `https://fcsapi.com/api-v3/forex/latest?access_key=${process.env.fcsapikey}&id=1984,1975,1987`;
+    let metalsdata = await makeDelayedRequest(metalsurl, 1000);
+    if (metalsdata?.length > 0) {
+      metalsdata[0] = {
+        ...metalsdata[0],
+        label: "GOLD",
+        value: "TVC%3AGOLD",
+        ticket: "XAUUSD",
+      };
+      metalsdata[1] = {
+        ...metalsdata[1],
+        label: "SILVER",
+        value: "TVC:SILVER",
+        ticket: "XAGUSD",
+      };
+      metalsdata[2] = {
+        ...metalsdata[2],
+        label: "PLATINUM",
+        value: "CAPITALCOM:PLATINUM",
+        ticket: "XPTUSD",
+      };
+    }
+
+    // const oilurl = `https://fcsapi.com/api-v3/stock/latest?id=50,134&access_key=${process.env.fcsapikey}`;
+    // let oildata = (await makeDelayedRequest(oilurl,1000));
+    // console.log(oildata)
+    let oildata = [];
     oildata[0] = {
-      ...oildata[0],
+      ...stockdata.filter((i)=>{return i.id == 50})[0],
+
+
       label: "US OIL",
       value: "TVC:USOIL",
       ticket: "OIL",
     };
     oildata[1] = {
-      ...oildata[1],
+      ...stockdata.filter((i)=>{return i.id == 134})[0],
+
+
       label: "UK OIL",
       value: "TVC:UKOIL",
       ticket: "OILD",
     };
-}
+
     return res.json({
       status: true,
       data: {
-        stock: stockdata,
+        stock: stocks,
         forex: forexdata,
         metals: metalsdata,
         oil: oildata,
