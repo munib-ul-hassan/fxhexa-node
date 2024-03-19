@@ -211,6 +211,16 @@ cron.schedule("* * * * * *", async () => {
     //   } else {
     //     url = `https://fcsapi.com/api-v3/forex/latest?access_key=${process.env.fcsapikey}&id=${item.forex}`;
     //   }
+    // var closeAmount;
+    // try {
+    //   if (item.orderType == "buy") {
+    //     closeAmount = (await axios.get(url)).data.response[0].c;
+    //   } else {
+    //     closeAmount = (await axios.get(url)).data.response[0].c;
+    //   }
+    // } catch (e) {
+    //   return;
+    // }
 
       var closeAmount;
       try {
