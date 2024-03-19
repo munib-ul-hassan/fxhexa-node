@@ -5,9 +5,9 @@ import { Server } from "socket.io";
 
 import { socketEventListner } from "./socketEventListener.js";
 const httpServer = createServer(app); // for local without https
-export const io = new Server(httpServer); // for local
+// export const io = new Server(httpServer); // for local
 
-io.addListener("connection", socketEventListner);
+// io.addListener("connection", socketEventListner);
 
 
 const port = process.env.PORT || 9000;

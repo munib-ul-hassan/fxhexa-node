@@ -1,7 +1,9 @@
 import { io } from "./app.js";
 import ios from "socket.io-client";
 
-var api_key = process.env.FSC_API_KEY;
+// var api_key = process.env.FSC_API_KEY;
+var api_key ="API_KEY";
+
 var currency_ids = "15,101,38,112,56,50,134";
 
 export const socketEventListner = (socket) => {
@@ -13,9 +15,11 @@ export const socketEventListner = (socket) => {
     });
     newSocket.emit("heartbeat", api_key);
     console.log(api_key);
+    
     newSocket.emit("real_time_join", currency_ids);
     newSocket.on("data_received", function (prices_data) {
       // get prices
+      
       console.log(prices_data);
       socket.emit("data",prices_data)
     });
