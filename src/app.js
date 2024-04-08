@@ -1,14 +1,20 @@
 
 import { createServer } from "http"; // for local server
 import { app } from "./appsub.js";
-import { Server } from "socket.io";
-
+// import   {Server} from "socket.io";
+// import * as socketIo from 'socket.io' 
 import { socketEventListner } from "./socketEventListener.js";
+// import { socket_connection } from "./server.js";
+import {Server, Socket} from 'socket.io'; 
+// const io = new Server(server);
 const httpServer = createServer(app); // for local without https
-// export const io = new Server(httpServer); // for local
+export const io = new Server(httpServer); // for local
+// io = socketIo(httpServer)
 
-// io.addListener("connection", socketEventListner);
-
+io.on("connection", (s)=>{
+s.emit("data","============")
+});
+// socket_connection()
 
 const port = process.env.PORT || 9000;
 httpServer.listen(port, async () => {

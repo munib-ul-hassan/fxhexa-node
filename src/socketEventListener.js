@@ -1,44 +1,67 @@
-import { io } from "./app.js";
-import ios from "socket.io-client";
+import * as io from "socket.io-client";
 
-// var api_key = process.env.FSC_API_KEY;
-var api_key ="API_KEY";
-
-var currency_ids = "15,101,38,112,56,50,134";
+// import { ios } from "./app";
+// var io = require('socket.io-client');
 
 export const socketEventListner = (socket) => {
-  function connectwithfscserver() {
-    var ws_url = "wss://fcsapi.com"; // web socket URL
-    let newSocket = ios.connect(ws_url, {
-      transports: ["websocket"],
-      path: "/v3/",
-    });
-    newSocket.emit("heartbeat", api_key);
-    console.log(api_key);
-    
-    newSocket.emit("real_time_join", currency_ids);
-    newSocket.on("data_received", function (prices_data) {
-      // get prices
-      
-      console.log(prices_data);
-      socket.emit("data",prices_data)
-    });
-    newSocket.on("disconnect", (message) => {
-      console.log(message);
+  var api_key = "LLX0sjT8Bq67o297GXAwcTxvW"; // get from https://fcsapi.com/dashboard
+  var currency_ids = "15,101,38,112,56,50,134";
 
-      // when you'r disconnect,  auto re-connection after 15 minute
-    });
-    newSocket.on("connect_error", function () {
-      // On error, socket will auto retry to connect, so we will wait 10 seconds before manully connect with backup
+  var client = io.connect("wss://fcsapi.com", {
+    transports: ["websocket"],
+    path: "/v3/",
+  });
 
-      console.log(
-        "Connection error. If you see this message for more then 15 minutes then contact us. "
-      );
-    });
-  }
-  setTimeout(function () {
-    connectwithfscserver();
-  }, 1500);
+  client.emit("heartbeat", api_key);
+  client.emit("real_time_join", currency_ids);
+  setTimeout(function () {}, 1500);
+  client.on("data_received", function (prices_data) {
+    // console.log(prices_data); // see full response
 
-  socket.on("disconnect", async () => {});
+    // get prices
+    console.log(" -------------- NEW ------------ " + prices_data.s);
+    var temp = {};
+    temp["Id"] = prices_data.id;
+    temp["Currency"] = prices_data.s; // Name, EUR/USD
+    temp["Decimal"] = prices_data.dp; // No of decimal in currency
+    temp["Ask"] = prices_data.a; // Ask price
+    temp["Bid"] = prices_data.b;
+    temp["Open"] = prices_data.lc; //Open price
+    temp["High"] = prices_data.h;
+    temp["Low"] = prices_data.l;
+    temp["Close"] = prices_data.c; // current or close price
+    temp["Spread"] = prices_data.sp;
+    temp["Change"] = prices_data.ch;
+    temp["Chg_per"] = prices_data.cp; // change percentage
+
+    if (typeof prices_data.v === "undefined") temp["Volume"] = 0;
+    else temp["Volume"] = prices_data.v;
+
+    temp["Time"] = prices_data.t;
+
+    console.log(temp);
+    socket.emit("data", temp);
+  });
+  client.on("successfully", (message) => {
+    console.log(message);
+  });
+  client.on("disconnect", (message) => {
+    console.log(message);
+  });
+  client.on("connect_error", function (e) {
+    // On error, socket will auto retry to connect, so we will wait 10 seconds before manully connect with backup
+
+    console.log(
+      "Connection error. If you see this message for more then 15 minutes then contact us. ",
+      e
+    );
+  });
+  client.emit("echo", "Hello World", function (message) {
+    console.log("Echo received: ", message);
+    client.disconnect();
+    server.close();
+  });
+  socket.on("disconnect", async (e) => {
+    console.log(e);
+  });
 };
