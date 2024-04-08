@@ -58,6 +58,7 @@
     "ws": "^8.16.0"
   },
   "devDependencies": {
+    "@types/socket.io": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
