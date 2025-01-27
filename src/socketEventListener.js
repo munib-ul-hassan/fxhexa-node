@@ -4,8 +4,9 @@ import * as io from "socket.io-client";
 // var io = require('socket.io-client');
 
 export const socketEventListner = (socket) => {
-  var api_key = "LLX0sjT8Bq67o297GXAwcTxvW"; // get from https://fcsapi.com/dashboard
-  var currency_ids = "15,101,38,112,56,50,134";
+  var api_key = "API_KEY"; // get from https://fcsapi.com/dashboard
+  var currency_ids 	= '1,1984,80,81,7774,7778';
+
 
   var client = io.connect("wss://fcsapi.com", {
     transports: ["websocket"],
@@ -19,7 +20,7 @@ export const socketEventListner = (socket) => {
     // console.log(prices_data); // see full response
 
     // get prices
-    console.log(" -------------- NEW ------------ " + prices_data.s);
+    //console.log(" -------------- NEW ------------ " + prices_data.s);
     var temp = {};
     temp["Id"] = prices_data.id;
     temp["Currency"] = prices_data.s; // Name, EUR/USD
@@ -39,29 +40,30 @@ export const socketEventListner = (socket) => {
 
     temp["Time"] = prices_data.t;
 
-    console.log(temp);
+    
     socket.emit("data", temp);
   });
   client.on("successfully", (message) => {
-    console.log(message);
+    
   });
   client.on("disconnect", (message) => {
-    console.log(message);
+    //console.log(message);
   });
   client.on("connect_error", function (e) {
     // On error, socket will auto retry to connect, so we will wait 10 seconds before manully connect with backup
 
-    console.log(
-      "Connection error. If you see this message for more then 15 minutes then contact us. ",
-      e
-    );
+    //console.log(
+    //   "Connection error. If you see this message for more then 15 minutes then contact us. ",
+    //   e
+    // );
+    
   });
   client.emit("echo", "Hello World", function (message) {
-    console.log("Echo received: ", message);
+    //console.log("Echo received: ", message);
     client.disconnect();
     server.close();
   });
   socket.on("disconnect", async (e) => {
-    console.log(e);
+    //console.log(e);
   });
 };

@@ -37,18 +37,27 @@ const registerUser = async (req, res, next) => {
     if (error) {
       return next(CustomError.badRequest(error.details[0].message));
     }
-    const { fullName, email, password, deviceType, deviceToken, accType, referBy, phone } =
-      req.body;
+    const {
+      fullName,
+      email,
+      password,
+      deviceType,
+      deviceToken,
+      accType,
+      referBy,
+      phone,
+    } = req.body;
     // if (!req.file) {
     //   return next(CustomError.createError("Must have to upload NIC", 400));
     // }
     const IsUser = await AuthModel.findOne({ identifier: email });
-    console.log(IsUser)
+
     if (IsUser && IsUser.isDeleted) {
       return next(CustomError.createError("User Already Exists", 400));
     }
 
-    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charset =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let refereCode = "";
 
     for (let i = 0; i < 10; i++) {
@@ -61,7 +70,7 @@ const registerUser = async (req, res, next) => {
     //   }
     //   req.body.image = result.url
     //   // fs.unlink(item.path, (err) => {
-    //   //   
+    //   //
     //   // })
     // });
     let auth;
@@ -73,14 +82,21 @@ const registerUser = async (req, res, next) => {
         refereCode,
         phone,
         // NIC: req.body.image
-      }).save()
-      const referUSer = await AuthModel.findOneAndUpdate({ refereCode: referBy }, { $push: { referer: { user: auth._id } } }, { new: true })
+      }).save();
+      const referUSer = await AuthModel.findOneAndUpdate(
+        { refereCode: referBy },
+        { $push: { referer: { user: auth._id } } },
+        { new: true }
+      );
       if (referBy) {
-
-        await AuthModel.findByIdAndUpdate(auth._id, { referBy: referUSer._id })
+        await AuthModel.findByIdAndUpdate(auth._id, { referBy: referUSer._id });
       }
     } else {
-      auth = await AuthModel.findOneAndUpdate({ _id: IsUser._id }, { isDeleted: true }, { new: true })
+      auth = await AuthModel.findOneAndUpdate(
+        { _id: IsUser._id },
+        { isDeleted: true },
+        { new: true }
+      );
     }
     if (!auth) {
       return next(CustomError.createError("error registering user", 200));
@@ -139,10 +155,9 @@ const registerUser = async (req, res, next) => {
       `,
     };
 
-
     const usermodel = await new UserModel({
       auth: auth._id,
-      fullName
+      fullName,
     }).save();
     // if(userType == "Admin"){
     //   UserModel = await new AdminModel({
@@ -155,7 +170,6 @@ const registerUser = async (req, res, next) => {
       return next(CustomError.createError("error creating user profile", 200));
     } else {
       const profile = usermodel._id;
-
 
       const updatedAuth = await AuthModel.findByIdAndUpdate(
         { _id: auth._id },
@@ -181,7 +195,10 @@ const registerUser = async (req, res, next) => {
       if (error) {
         return next(CustomError.createError(error, 200));
       }
-      const user = await AuthModel.findById(auth._id).populate(["profile", "subAccounts"]);
+      const user = await AuthModel.findById(auth._id).populate([
+        "profile",
+        "subAccounts",
+      ]);
 
       const respdata = {
         _id: user.profile._doc._id,
@@ -195,7 +212,7 @@ const registerUser = async (req, res, next) => {
         subAccounts: user.subAccounts,
         isCompleteProfile: user.isCompleteProfile,
         notificationOn: user.notificationOn,
-        refereCode
+        refereCode,
       };
       const token = await tokenGen(user, "auth", deviceToken);
 
@@ -219,7 +236,6 @@ const resendOTP = async (req, res, next) => {
     const auth = await AuthModel.findOne({
       identifier: email,
     }).populate(["profile", "subAccounts"]);
-
 
     if (!auth) {
       return next(CustomError.createError("Invalid user", 200));
@@ -322,7 +338,6 @@ const LoginUser = async (req, res, next) => {
       return next(CustomError.createError("First Verify account", 200));
     }
 
-
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -337,8 +352,6 @@ const LoginUser = async (req, res, next) => {
 
     const token = await tokenGen(user, "auth", deviceToken);
 
-
-
     const profile = user._doc.profile._doc;
 
     const respdata = {
@@ -350,7 +363,7 @@ const LoginUser = async (req, res, next) => {
       subAccounts: user.subAccounts,
       isCompleteProfile: user._doc.isCompleteProfile,
       notificationOn: user._doc.notificationOn,
-      refereCode: user.refereCode
+      refereCode: user.refereCode,
     };
     return next(
       CustomSuccess.createSuccess(
@@ -373,7 +386,10 @@ const ForgetPassword = async (req, res, next) => {
     }
     const identifier = req.body.email;
     // var UserDetail;
-    const isUser = await AuthModel.findOne({ identifier }).populate(["profile", "subAccounts"]);
+    const isUser = await AuthModel.findOne({ identifier }).populate([
+      "profile",
+      "subAccounts",
+    ]);
     if (!isUser) {
       next(CustomError.createError("Invalid Email", 200));
     }
@@ -577,8 +593,7 @@ const VerifyOtp = async (req, res, next) => {
 
     const user = await AuthModel.findOne({ identifier }).populate([
       "profile",
-      "OTP"
-
+      "OTP",
     ]);
     if (!user) {
       return next(CustomError.createError("User not found", 200));
@@ -627,9 +642,9 @@ const VerifyOtp = async (req, res, next) => {
     // AuthModel.updateOne({ identifier: user.identifier }, { $set: userUpdate });
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
-    user.profile._doc.subAccounts = user.subAccounts
+    user.profile._doc.subAccounts = user.subAccounts;
 
-    user.profile._doc.refereCode = user.refereCode
+    user.profile._doc.refereCode = user.refereCode;
 
     // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
     // user.profile._doc.real = user.real.length > 0 ? user.real : [];
@@ -681,15 +696,18 @@ const ResetPassword = async (req, res, next) => {
     //   return next(CustomError.createError("password not reset", 200));
     // }
 
-    const user = await AuthModel.findOne({ identifier }).populate(["profile", "subAccounts"]);
+    const user = await AuthModel.findOne({ identifier }).populate([
+      "profile",
+      "subAccounts",
+    ]);
     const token = await tokenGen(user, "auth", req.body.deviceToken);
     user.profile._doc.userType = user.userType;
     user.profile._doc.email = user.identifier;
 
     // user.profile._doc.demo = user.demo.length > 0 ? user.demo : [];
     // user.profile._doc.real = user.real.length > 0 ? user.real : []
-    user.profile._doc.subAccounts = user.subAccounts
-    user.profile._doc.refereCode = user.refereCode
+    user.profile._doc.subAccounts = user.subAccounts;
+    user.profile._doc.refereCode = user.refereCode;
 
     const profile = { ...user.profile._doc, token };
     delete profile.auth;
@@ -793,9 +811,11 @@ const getprofile = async (req, res, next) => {
   try {
     const { user } = req;
 
-    const data = await AuthModel.findById(user._id).populate({
-      path: "profile",
-    }).populate("referer.user");
+    const data = await AuthModel.findById(user._id)
+      .populate({
+        path: "profile",
+      })
+      .populate("referer.user");
     const token = await tokenGen(data, "auth", req.body.deviceToken);
 
     const respdata = {
@@ -860,7 +880,6 @@ const changePassword = async (req, res, next) => {
       }
     }
   } catch (error) {
-
     return next(CustomError.badRequest(error.message));
   }
 };
@@ -868,7 +887,7 @@ const notificationUpdate = async (req, res, next) => {
   try {
     const user = await AuthModel.findById(req.user._id).populate([
       {
-        path: "profile"
+        path: "profile",
         // populate: {
         //   select: { file: 1 },
         //   path: "image",
@@ -883,14 +902,13 @@ const notificationUpdate = async (req, res, next) => {
       // demo = user.demo.length > 0 ? user.demo : [],
       // real = user.real.length > 0
       //   ? user.real : [];
-      subAccounts = user._doc.subAccounts
+      subAccounts = user._doc.subAccounts;
     const respdata = {
       _id: profile._id,
       fullName: profile.fullName,
       email: user._doc.identifier,
       subAccounts,
       refereCode: user._doc.refereCode,
-
 
       // image: { file: profile.image?.file },
       // demo, real,
@@ -915,26 +933,35 @@ const updateProfile = async (req, res, next) => {
       Object.entries(req.body).filter(([_, v]) => v != null || v != "")
     );
     if (req.files.length > 0) {
-      await cloudinary.uploader.upload("public/uploads/" + req.files[0].filename, (err, result) => {
-        if (err) {
-          return next(CustomError.badRequest(err.message));
+      await cloudinary.uploader.upload(
+        "public/uploads/" + req.files[0].filename,
+        (err, result) => {
+          if (err) {
+            return next(CustomError.badRequest(err.message));
+          }
+          body.NICF = result.url;
         }
-        body.NICF = result.url
-      });
-      await cloudinary.uploader.upload("public/uploads/" + req.files[1].filename, (err, result) => {
-        if (err) {
-          return next(CustomError.badRequest(err.message));
+      );
+      await cloudinary.uploader.upload(
+        "public/uploads/" + req.files[1].filename,
+        (err, result) => {
+          if (err) {
+            return next(CustomError.badRequest(err.message));
+          }
+          body.NICB = result.url;
         }
-        body.NICB = result.url
-      });
-      await cloudinary.uploader.upload("public/uploads/" + req.files[2].filename, (err, result) => {
-        if (err) {
-          return next(CustomError.badRequest(err.message));
+      );
+      await cloudinary.uploader.upload(
+        "public/uploads/" + req.files[2].filename,
+        (err, result) => {
+          if (err) {
+            return next(CustomError.badRequest(err.message));
+          }
+          body.POA = result.url;
         }
-        body.POA = result.url
-      });
+      );
     }
-    console.log(body)
+    console.log(body);
     const { error } = ProfileValidator.validate(body);
     if (error) {
       error.details.map((err) => {
@@ -949,17 +976,12 @@ const updateProfile = async (req, res, next) => {
           new: true,
         }
       );
-      delete body.fullName
+      delete body.fullName;
     }
     if (body.password) {
-      body.password = await bcrypt.hash(body.password, genSalt)
+      body.password = await bcrypt.hash(body.password, genSalt);
     }
-    await AuthModel.findByIdAndUpdate(req.user._id, body)
-
-
-
-
-
+    await AuthModel.findByIdAndUpdate(req.user._id, body);
 
     const user = await AuthModel.findById(req.user._id).populate([
       "profile",
@@ -1004,30 +1026,38 @@ const updateProfile = async (req, res, next) => {
 
 const addSubAcc = async (req, res, next) => {
   try {
-    const { error } = subAccValidator.validate(req.body)
+    const { error } = subAccValidator.validate(req.body);
     if (error) {
       error.details.map((err) => {
         return next(CustomError.createError(err.message, 200));
       });
     }
     if (req.body.type == "demo") {
-      req.body.balance = req.body.demoAmount
+      req.body.balance = req.body.demoAmount;
     } else {
-      req.body.balance = 0
-
+      req.body.balance = 0;
     }
-    const { type, name, password, leverage, currency, balance } = req.body
-    const alreaduser = await subAccountModel.findOne({ name })
+    const { type, name, password, leverage, currency, balance } = req.body;
+    const alreaduser = await subAccountModel.findOne({ name });
 
     if (alreaduser) {
-      return next(CustomError.createError("Nick name must be unique, user different one ", 200))
-
+      return next(
+        CustomError.createError(
+          "Nick name must be unique, user different one ",
+          200
+        )
+      );
     }
     const data = new subAccountModel({
       auth: req.user._id,
-      type, name, password, leverage, currency, balance
-    })
-    data.save()
+      type,
+      name,
+      password,
+      leverage,
+      currency,
+      balance,
+    });
+    data.save();
 
     const emailData = {
       subject: "fx-hexa - Sub Account Creation",
@@ -1076,62 +1106,66 @@ const addSubAcc = async (req, res, next) => {
     };
     sendEmails(req.user.identifier, emailData.subject, emailData.html);
     await AuthModel.findByIdAndUpdate(req.user._id, {
-      $push: { subAccounts: data._id }
-    })
+      $push: { subAccounts: data._id },
+    });
     if (!data) {
       return next(CustomError.createError("Sub-Account creation failed", 200));
-
     }
     return next(
-      CustomSuccess.createSuccess(
-        data,
-        "Sub Account created sucessfully",
-        200
-      )
+      CustomSuccess.createSuccess(data, "Sub Account created sucessfully", 200)
     );
   } catch (err) {
-    console.log(err["code"])
+    console.log(err["code"]);
     if (err.code == 11000) {
-
-      return next(CustomError.createError("Nick name must be unique, user different one ", 200))
+      return next(
+        CustomError.createError(
+          "Nick name must be unique, user different one ",
+          200
+        )
+      );
     }
 
-    return next(CustomError.createError(err.message, 500))
+    return next(CustomError.createError(err.message, 500));
   }
-}
+};
 const getSubAcc = async (req, res, next) => {
   try {
-    const data = await subAccountModel.find({ auth: req.user._id }, { password: 0 })
+    const data = await subAccountModel.find(
+      { auth: req.user._id },
+      { password: 0 }
+    );
     if (data.length == 0) {
       return next(CustomError.createError("No any sub-Account Exist", 200));
     }
     return next(
-      CustomSuccess.createSuccess(
-        data,
-        "Sub Account get sucessfully",
-        200
-      )
+      CustomSuccess.createSuccess(data, "Sub Account get sucessfully", 200)
     );
-
-  } catch (err) { return next(CustomError.createError(err.message, 500)) }
-}
+  } catch (err) {
+    return next(CustomError.createError(err.message, 500));
+  }
+};
 const updateSubAcc = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const { error } = subAccupdateValidator.validate(req.body)
+    const { id } = req.params;
+    const { error } = subAccupdateValidator.validate(req.body);
     if (error) {
       error.details.map((err) => {
         return next(CustomError.createError(err.message, 200));
       });
     }
-    const dataExist = await subAccountModel.findOne({ _id: id, auth: req.user._id })
+    const dataExist = await subAccountModel.findOne({
+      _id: id,
+      auth: req.user._id,
+    });
     if (!dataExist) {
-
       return next(CustomError.createError("Invalid id of sub-Account", 200));
     }
-    const updatedData = await subAccountModel.findOneAndUpdate({ _id: id }, req.body, { new: true })
+    const updatedData = await subAccountModel.findOneAndUpdate(
+      { _id: id },
+      req.body,
+      { new: true }
+    );
     if (updatedData) {
-
       return next(
         CustomSuccess.createSuccess(
           updatedData,
@@ -1141,22 +1175,23 @@ const updateSubAcc = async (req, res, next) => {
       );
     }
     return next(CustomError.createError("Updation failed of sub-Account", 200));
-
-
-  } catch (err) { return next(CustomError.createError(err.message, 500)) }
-}
+  } catch (err) {
+    return next(CustomError.createError(err.message, 500));
+  }
+};
 const deleteSubAc = async (req, res, next) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
-    const dataExist = await subAccountModel.findOne({ _id: id, auth: req.user._id })
+    const dataExist = await subAccountModel.findOne({
+      _id: id,
+      auth: req.user._id,
+    });
     if (!dataExist) {
-
       return next(CustomError.createError("Invalid id of sub-Account", 200));
     }
-    const deletedData = await subAccountModel.findOneAndDelete({ _id: id })
+    const deletedData = await subAccountModel.findOneAndDelete({ _id: id });
     if (deletedData) {
-
       return next(
         CustomSuccess.createSuccess(
           deletedData,
@@ -1167,15 +1202,14 @@ const deleteSubAc = async (req, res, next) => {
     }
 
     return next(CustomError.createError("Deletion failed", 200));
-
-  } catch (err) { return next(CustomError.createError(err.message, 500)) }
-}
-
+  } catch (err) {
+    return next(CustomError.createError(err.message, 500));
+  }
+};
 
 const loginSub = async (req, res, next) => {
   try {
-
-    const { error } = loginsubAccValidator.validate(req.body)
+    const { error } = loginsubAccValidator.validate(req.body);
 
     if (error) {
       error.details.map((err) => {
@@ -1183,21 +1217,23 @@ const loginSub = async (req, res, next) => {
       });
     }
 
-    const dataExist = await subAccountModel.findOne({ name: req.body.name })
+    const dataExist = await subAccountModel.findOne({ name: req.body.name });
     // .populate({ path: "auth", populate: { path: "profile" } })
 
-
     if (!dataExist) {
-
-      return next(CustomError.createError("Invalid username of sub-Account", 200));
+      return next(
+        CustomError.createError("Invalid username of sub-Account", 200)
+      );
     }
     if (dataExist.password != req.body.password) {
-      return next(CustomError.createError("Invalid password of sub-Account", 200));
+      return next(
+        CustomError.createError("Invalid password of sub-Account", 200)
+      );
     }
     // dataExist.auth.subAccont=dataExist
     // delete dataExist.auth.subAccont.auth
     // delete dataExist.auth.subAccont.auth.profile
-    delete dataExist.auth
+    delete dataExist.auth;
     // var auth = dataExist.auth._doc.profile._doc
 
     // dataExist._doc.email = dataExist.auth._doc.identifier,
@@ -1208,7 +1244,6 @@ const loginSub = async (req, res, next) => {
     //   delete dataExist._doc.auth
     // delete auth.auth
 
-
     // dataExist = { ...dataExist._doc, ...auth }
     return next(
       CustomSuccess.createSuccess(
@@ -1217,69 +1252,74 @@ const loginSub = async (req, res, next) => {
         200
       )
     );
-
-
-
-  } catch (err) { return next(CustomError.createError(err.message, 500)) }
-}
+  } catch (err) {
+    return next(CustomError.createError(err.message, 500));
+  }
+};
 const getreferlist = async (req, res, next) => {
   try {
-    const referlist = await AuthModel.findById(req.user._id).populate({ path: "referer.user", populate: { path: "profile" } })
+    const referlist = await AuthModel.findById(req.user._id).populate({
+      path: "referer.user",
+      populate: { path: "profile" },
+    });
     if (referlist.referer.length > 0) {
       return next(
         CustomSuccess.createSuccess(
           referlist.referer.map((item) => {
             return {
               user: item.user?.profile,
-              amount: item.amount
-            }
+              amount: item.amount,
+            };
           }),
           "Refer List get  sucessfully",
           200
         )
       );
+    } else {
+      return next(CustomSuccess.createSuccess({}, "No any data yet", 200));
     }
-    else {
-      return next(
-        CustomSuccess.createSuccess(
-          {},
-          "No any data yet",
-          200
-        )
-      );
-    }
+  } catch (err) {
+    return next(CustomError.createError(err.message, 500));
   }
-  catch (err) { return next(CustomError.createError(err.message, 500)) }
-}
+};
 const subAccBalance = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const subAccData = await subAccountModel.findOne({ _id: id, auth: req.user._id })
+    const { id } = req.params;
+    const subAccData = await subAccountModel.findOne({
+      _id: id,
+      auth: req.user._id,
+    });
     if (!subAccData) {
       return next(CustomError.createError("No any sub-Account Exist", 200));
     }
-    const ordersData = await OrderModel.find({ accountref: id, status: "open" })
-    var balance = subAccData.balance, equity = 0
-    await Promise.all(ordersData.map(async (item) => {
-      let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${item.stock}&interval=1&apikey=${process.env.alphaAPIKEY}`
+    const ordersData = await OrderModel.find({
+      accountref: id,
+      status: "open",
+    });
+    var balance = subAccData.balance,
+      equity = 0;
+    await Promise.all(
+      ordersData.map(async (item) => {
+        let url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${item.stock}&interval=1&apikey=${process.env.alphaAPIKEY}`;
 
-      const data = await axios.get(url)
-      equity += (Object.values(Object.values(data.data["Time Series (Daily)"])[0])[3] * item.unit)
+        const data = await axios.get(url);
+        equity +=
+          Object.values(Object.values(data.data["Time Series (Daily)"])[0])[3] *
+          item.unit;
+      })
+    );
 
-
-    }))
-
-    return next(CustomSuccess.createSuccess(
-      { balance, equity: balance + equity },
-      "Balance and Equity get successfully",
-      200
-    ))
-
-
+    return next(
+      CustomSuccess.createSuccess(
+        { balance, equity: balance + equity },
+        "Balance and Equity get successfully",
+        200
+      )
+    );
+  } catch (err) {
+    return next(CustomError.createError(err.message, 500));
   }
-  catch (err) { return next(CustomError.createError(err.message, 500)) }
-
-}
+};
 
 const AuthController = {
   registerUser,
