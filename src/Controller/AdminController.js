@@ -73,7 +73,7 @@ const Adminlogin = async (req, res, next) => {
 
     const token = await tokenGen(user, "auth");
 
-    const profile = user._doc.profile._doc;
+    const profile = user._doc?.profile?._doc;
 
     const respdata = {
       _id: profile._id,
@@ -140,7 +140,7 @@ const getUserById = async (req, res, next) => {
       let users = (await UserModel.find({
         fullName: { $regex: regex }
       }, { auth: 1 })).map((item) => { return ObjectId(item.auth) })
-      console.log(users)
+      
       let user = await AuthModel.find({
         userType: { $ne: "Admin" }, _id: { $in: users }
       }, { password: 0, devices: 0, loggedOutDevices: 0, OTP: 0 }).populate(
@@ -150,7 +150,7 @@ const getUserById = async (req, res, next) => {
       if (user) {
         return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
       } else {
-        console.log(user)
+        
         return next(CustomError.notFound("Invalid User Id"));
       }
     } else {
@@ -169,7 +169,7 @@ const getUserById = async (req, res, next) => {
       if (user) {
         return next(CustomSuccess.createSuccess(user, "You have get User successfully", 200));
       } else {
-        console.log(user)
+        
         return next(CustomError.notFound("Invalid User Id"));
       }
     }

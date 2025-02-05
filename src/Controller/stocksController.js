@@ -66,7 +66,7 @@ const getrealTimeData = async (req, res) => {
 // }
 const makeDelayedRequest = (url, delay) => {
   return new Promise((resolve, reject) => {
-    console.log(url)
+    
     setTimeout(async () => {
       try {
         const response = await axios.get(url);
